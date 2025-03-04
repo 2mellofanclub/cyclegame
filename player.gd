@@ -58,7 +58,7 @@ func _process(delta):
 		
 	if not Input.is_action_pressed("superbrake"):
 		steering = Input.get_axis("steerright","steerleft") * MAX_STEER
-		engine_force = Input.get_axis("gasdown", "gasup") * ENGINE_POWER
+		engine_force = clamp(Input.get_axis("gasdown", "gasup") * ENGINE_POWER, -200, 500)
 		$lightcycle.global_rotation.z = Input.get_axis("steerright","steerleft") * 0.35
 		# Quickturn left with speed intact
 		if Input.is_action_just_pressed("ninleft"):
@@ -89,4 +89,3 @@ func _unhandled_input(event):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = -1 * event.relative.x * mouse_sens
 			pitch_input = -1 * event.relative.y * mouse_sens
-

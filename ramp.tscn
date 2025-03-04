@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvujyrv8j5jjh"]
 
-[ext_resource type="Script" path="res://ramp.gd" id="1_mqre5"]
+[ext_resource type="Script" uid="uid://dtsvxygmane5n" path="res://ramp.gd" id="1_mqre5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir5dj"]
 size = Vector3(110.033, 38.4749, 97.8193)
@@ -17,7 +17,6 @@ script = ExtResource("1_mqre5")
 transform = Transform3D(0.968366, 0.249535, 0, -0.249535, 0.968366, 0, 0, 0, 1, 20.4236, 36.7767, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ramparea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_ir5dj")
 
 [node name="rampmesh" type="MeshInstance3D" parent="."]

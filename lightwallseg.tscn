@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://chv4761a20kmb"]
 
-[ext_resource type="Script" path="res://lightwallseg.gd" id="1_8kgsn"]
+[ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://lightwallseg.gd" id="1_8kgsn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
 size = Vector3(0.144439, 1, 0.991921)
@@ -8,7 +8,6 @@ size = Vector3(0.144439, 1, 0.991921)
 [sub_resource type="PlaneMesh" id="PlaneMesh_38g7m"]
 
 [node name="lightwallseg" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886027, 0)
 script = ExtResource("1_8kgsn")
 
 [node name="lightarea" type="Area3D" parent="."]
@@ -34,24 +33,31 @@ mesh = SubResource("PlaneMesh_38g7m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.731, 0)
 light_color = Color(0.286275, 0.423529, 1, 1)
 light_energy = 3.963
-omni_range = 4.892
 
 [node name="bottom2" type="OmniLight3D" parent="ligths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.731, 0)
 light_color = Color(0.286275, 0.423529, 1, 1)
 light_energy = 3.963
-omni_range = 4.892
 
 [node name="upper2" type="OmniLight3D" parent="ligths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.619, 0)
 light_color = Color(0.286275, 0.423529, 1, 1)
 light_energy = 3.963
-omni_range = 4.892
 
 [node name="upper1" type="OmniLight3D" parent="ligths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.619, 0)
 light_color = Color(0.286275, 0.423529, 1, 1)
 light_energy = 3.963
-omni_range = 4.892
+
+[node name="deltimer" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+autostart = true
+
+[node name="lightosci" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
 
 [connection signal="body_entered" from="lightarea" to="." method="_on_lightarea_body_entered"]
+[connection signal="timeout" from="deltimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="lightosci" to="." method="_on_lightosci_timeout"]

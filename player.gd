@@ -47,7 +47,10 @@ func _process(delta):
 	twist_input = 0
 	pitch_input = 0
 	
-	# stuff below this is only for the living 
+	if Input.is_action_just_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	# stuff below is only for the living 
 	if not ALIVE:
 		return
 	

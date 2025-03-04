@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cyde73xt2w162"]
+[gd_scene load_steps=16 format=3 uid="uid://cyde73xt2w162"]
 
 [ext_resource type="Script" uid="uid://c1cmxcje2ud7c" path="res://grid.gd" id="1_2miq5"]
 [ext_resource type="PackedScene" uid="uid://d2cs66fu18gqv" path="res://player.tscn" id="1_fhnjh"]
 [ext_resource type="PackedScene" uid="uid://bvujyrv8j5jjh" path="res://ramp.tscn" id="2_iiu8i"]
+[ext_resource type="PackedScene" uid="uid://cerqag1g8lrav" path="res://solarsailor1.blend" id="4_bghhw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dujx"]
 albedo_color = Color(0.00392157, 0, 0.0784314, 1)
@@ -211,5 +212,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 1046.21)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="trails" type="Node3D" parent="."]
+
+[node name="solarsailor1" parent="." instance=ExtResource("4_bghhw")]
+transform = Transform3D(0.0235622, 0, -4.99994, 0, 5, 0, 4.99994, 0, 0.0235622, 26.4017, 274.66, -446.025)
 
 [connection signal="spawn_lw" from="Player" to="." method="_on_player_spawn_lw"]

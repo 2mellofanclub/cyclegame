@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvujyrv8j5jjh"]
+
+[ext_resource type="Script" path="res://ramp.gd" id="1_mqre5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ir5dj"]
+size = Vector3(84.5554, 38.4749, 97.8193)
+
+[sub_resource type="PrismMesh" id="PrismMesh_xic1j"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ngms3"]
+data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="ramp" type="Node3D"]
+script = ExtResource("1_mqre5")
+
+[node name="ramparea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ramparea"]
+transform = Transform3D(0.788011, 0, -0.615661, 0, 1, 0, 0.615661, 0, 0.788011, 125.822, 14.6438, -42.8006)
+shape = SubResource("BoxShape3D_ir5dj")
+
+[node name="rampmesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(50.7214, -60.4473, -61.4285, 76.6044, 64.2788, 0, 39.4855, -47.057, 78.9084, 122.452, -15.3917, -45.5648)
+mesh = SubResource("PrismMesh_xic1j")
+skeleton = NodePath("../..")
+
+[node name="rampStaticBody3D" type="StaticBody3D" parent="rampmesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rampmesh/rampStaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ngms3")
+
+[connection signal="body_entered" from="ramparea" to="." method="_on_ramparea_body_entered"]
+[connection signal="body_exited" from="ramparea" to="." method="_on_ramparea_body_exited"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://chv4761a20kmb"]
+
+[ext_resource type="Script" path="res://lightwallseg.gd" id="1_8kgsn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
+size = Vector3(0.144439, 1, 0.991921)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_38g7m"]
+
+[node name="lightwallseg" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886027, 0)
+script = ExtResource("1_8kgsn")
+
+[node name="lightarea" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lightarea"]
+shape = SubResource("BoxShape3D_qkq1s")
+
+[node name="shell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="shell"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.1, 0.3, 0)
+mesh = SubResource("PlaneMesh_38g7m")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="shell"]
+transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 1.20761e-20, -6.60022e-15, -1.50996e-07, -1, 0.1, 0.3, 0)
+mesh = SubResource("PlaneMesh_38g7m")
+
+[node name="ligths" type="Node3D" parent="."]
+
+[node name="bottom1" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.731, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 3.963
+omni_range = 4.892
+
+[node name="bottom2" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.731, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 3.963
+omni_range = 4.892
+
+[node name="upper2" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.619, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 3.963
+omni_range = 4.892
+
+[node name="upper1" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.619, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 3.963
+omni_range = 4.892
+
+[connection signal="body_entered" from="lightarea" to="." method="_on_lightarea_body_entered"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ramp.gd" id="1_mqre5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir5dj"]
-size = Vector3(84.5554, 38.4749, 97.8193)
+size = Vector3(110.033, 38.4749, 97.8193)
 
 [sub_resource type="PrismMesh" id="PrismMesh_xic1j"]
 
@@ -14,13 +14,14 @@ data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, 
 script = ExtResource("1_mqre5")
 
 [node name="ramparea" type="Area3D" parent="."]
+transform = Transform3D(0.968366, 0.249535, 0, -0.249535, 0.968366, 0, 0, 0, 1, 20.4236, 36.7767, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ramparea"]
-transform = Transform3D(0.788011, 0, -0.615661, 0, 1, 0, 0.615661, 0, 0.788011, 125.822, 14.6438, -42.8006)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_ir5dj")
 
 [node name="rampmesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(50.7214, -60.4473, -61.4285, 76.6044, 64.2788, 0, 39.4855, -47.057, 78.9084, 122.452, -15.3917, -45.5648)
+transform = Transform3D(64.2788, -76.6044, 0, 76.6044, 64.2788, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PrismMesh_xic1j")
 skeleton = NodePath("../..")
 

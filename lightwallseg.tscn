@@ -14,17 +14,17 @@ script = ExtResource("1_8kgsn")
 [node name="lightarea" type="Area3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="lightarea"]
+[node name="killbox" type="CollisionShape3D" parent="lightarea"]
 shape = SubResource("BoxShape3D_qkq1s")
 
 [node name="shell" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="shell"]
+[node name="wall2" type="MeshInstance3D" parent="shell"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.1, 0.3, 0)
 mesh = SubResource("PlaneMesh_38g7m")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="shell"]
+[node name="wall1" type="MeshInstance3D" parent="shell"]
 transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 1.20761e-20, -6.60022e-15, -1.50996e-07, -1, 0.1, 0.3, 0)
 mesh = SubResource("PlaneMesh_38g7m")
 

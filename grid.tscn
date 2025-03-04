@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cyde73xt2w162"]
+[gd_scene load_steps=15 format=3 uid="uid://cyde73xt2w162"]
 
 [ext_resource type="Script" path="res://grid.gd" id="1_2miq5"]
 [ext_resource type="PackedScene" uid="uid://d2cs66fu18gqv" path="res://player.tscn" id="1_fhnjh"]
@@ -10,10 +10,10 @@ metallic = 0.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_xw411"]
 material = SubResource("StandardMaterial3D_6dujx")
-size = Vector3(100, 0.5, 100)
+size = Vector3(3000, 0.5, 3000)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ags4f"]
-data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qunid"]
+data = PackedVector3Array(-1500, 0.25, 1500, 1500, 0.25, 1500, -1500, -0.25, 1500, 1500, 0.25, 1500, 1500, -0.25, 1500, -1500, -0.25, 1500, 1500, 0.25, -1500, -1500, 0.25, -1500, 1500, -0.25, -1500, -1500, 0.25, -1500, -1500, -0.25, -1500, 1500, -0.25, -1500, 1500, 0.25, 1500, 1500, 0.25, -1500, 1500, -0.25, 1500, 1500, 0.25, -1500, 1500, -0.25, -1500, 1500, -0.25, 1500, -1500, 0.25, -1500, -1500, 0.25, 1500, -1500, -0.25, -1500, -1500, 0.25, 1500, -1500, -0.25, 1500, -1500, -0.25, -1500, 1500, 0.25, 1500, -1500, 0.25, 1500, 1500, 0.25, -1500, -1500, 0.25, 1500, -1500, 0.25, -1500, 1500, 0.25, -1500, -1500, -0.25, 1500, 1500, -0.25, 1500, -1500, -0.25, -1500, 1500, -0.25, 1500, 1500, -0.25, -1500, -1500, -0.25, -1500)
 
 [sub_resource type="PrismMesh" id="PrismMesh_xic1j"]
 
@@ -42,58 +42,64 @@ ambient_light_color = Color(0, 0.0705882, 0.227451, 1)
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_ufbc5"]
+top_radius = 4.0
+bottom_radius = 4.0
+height = 100.0
+
 [node name="grid" type="Node3D"]
 script = ExtResource("1_2miq5")
-
-[node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -6.05668, 0)
-mesh = SubResource("BoxMesh_xw411")
-
-[node name="floorStaticBody3D" type="StaticBody3D" parent="floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/floorStaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ags4f")
-
-[node name="Player" parent="." instance=ExtResource("1_fhnjh")]
-transform = Transform3D(0.263233, 0, 0.964732, 0, 1, 0, -0.964732, 0, 0.263233, 4.15618, 1.01365, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 150.821, 316.62)
 fov = 50.0
 
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.05668, 0)
+mesh = SubResource("BoxMesh_xw411")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_qunid")
+
+[node name="Player" parent="." instance=ExtResource("1_fhnjh")]
+transform = Transform3D(0.263233, 0, 0.964732, 0, 1, 0, -0.964732, 0, 0.263233, 4.15618, 1.01365, 0)
+
 [node name="ramp" parent="." instance=ExtResource("2_iiu8i")]
+transform = Transform3D(0.862743, 0, -0.505642, 0, 1, 0, 0.505642, 0, 0.862743, 103.87, -12.4319, -88.1077)
 
 [node name="setdressin" type="Node3D" parent="."]
 transform = Transform3D(78.9063, 0, -61.4313, 0, 100, 0, 61.4313, 0, 78.9063, -142.92, 41.5013, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="setdressin"]
+[node name="tent_minor" type="MeshInstance3D" parent="setdressin"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("PrismMesh_xic1j")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="setdressin/MeshInstance3D2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="setdressin/tent_minor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="setdressin/MeshInstance3D2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="setdressin/tent_minor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ngms3")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="setdressin"]
+[node name="tent_major" type="MeshInstance3D" parent="setdressin"]
 transform = Transform3D(1.03073, 0.191564, 1.7032, 0.113061, 1.97554, -0.290617, -1.7102, 0.246057, 1.0073, -2.954, 0.099274, -1.18509)
 mesh = SubResource("PrismMesh_xic1j")
 skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="setdressin/MeshInstance3D3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="setdressin/tent_major"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="setdressin/MeshInstance3D3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="setdressin/tent_major/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ngms3")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="setdressin"]
+[node name="thin_tower" type="MeshInstance3D" parent="setdressin"]
 transform = Transform3D(0.490106, 0, 0.395895, 0, 5, 0, -0.0989734, 0, 1.96042, 3.61688, 4.2574, -2.81587)
 mesh = SubResource("CylinderMesh_au3no")
 skeleton = NodePath("../../floor")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="setdressin/MeshInstance3D4"]
+[node name="StaticBody3D" type="StaticBody3D" parent="setdressin/thin_tower"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="setdressin/MeshInstance3D4/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="setdressin/thin_tower/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_6fqgn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="setdressin"]
@@ -104,6 +110,105 @@ transform = Transform3D(-0.00990505, 0.00119058, -0.000687376, 0, 0.00499998, 0.
 light_color = Color(0.858824, 0.882353, 1, 1)
 light_energy = 0.384
 shadow_enabled = true
+
+[node name="columns" type="Node3D" parent="setdressin"]
+transform = Transform3D(0.00789062, 0, 0.00614312, 0, 0.01, 0, -0.00614312, 0, 0.00789062, 1.12773, -0.415013, -0.877975)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9987, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9987, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.218, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.218, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272.216, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272.216, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.664, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.664, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6654, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6654, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -319.282, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -399.501, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -399.501, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 867.789)
+mesh = SubResource("CylinderMesh_ufbc5")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="setdressin/columns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 1046.21)
+mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="trails" type="Node3D" parent="."]
 

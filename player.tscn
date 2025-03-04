@@ -24,6 +24,18 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.18, -0.6)
 script = ExtResource("1_5i27b")
 
+[node name="camtwist" type="Node3D" parent="."]
+
+[node name="campitch" type="Node3D" parent="camtwist"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="camtwist/campitch"]
+transform = Transform3D(1, 0, 0, 0, 0.997639, 0.068677, 0, -0.068677, 0.997639, 0, 2.7155, 6.43365)
+spring_length = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="camtwist/campitch/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 0, 1.68159, 0.706143)
+current = true
+
 [node name="frontleft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, -0.9, 0.152, -1.764)
 use_as_traction = true
@@ -101,17 +113,5 @@ shape = SubResource("ConvexPolygonShape3D_mm0jl")
 
 [node name="trailpoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.15371)
-
-[node name="camtwist" type="Node3D" parent="."]
-
-[node name="campitch" type="Node3D" parent="camtwist"]
-
-[node name="SpringArm3D" type="SpringArm3D" parent="camtwist/campitch"]
-transform = Transform3D(1, 0, 0, 0, 0.997639, 0.068677, 0, -0.068677, 0.997639, 0, 2.7155, 6.43365)
-spring_length = 2.0
-
-[node name="Camera3D" type="Camera3D" parent="camtwist/campitch/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 0, 1.68159, 0.706143)
-current = true
 
 [editable path="lightcycle"]

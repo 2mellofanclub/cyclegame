@@ -11,13 +11,13 @@ size = Vector3(0.144439, 1, 0.991921)
 script = ExtResource("1_8kgsn")
 
 [node name="lightarea" type="Area3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -1)
 
 [node name="killbox" type="CollisionShape3D" parent="lightarea"]
 shape = SubResource("BoxShape3D_qkq1s")
 
 [node name="shell" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, -1)
 
 [node name="wall2" type="MeshInstance3D" parent="shell"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.1, 0.3, 0)
@@ -28,6 +28,7 @@ transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 1.20761e-
 mesh = SubResource("PlaneMesh_38g7m")
 
 [node name="ligths" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="bottom1" type="OmniLight3D" parent="ligths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.731, 0)

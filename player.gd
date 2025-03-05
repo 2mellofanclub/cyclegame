@@ -6,11 +6,20 @@ signal spawn_lw
 
 var ALIVE = true
 var LAST_POS = Vector3.ZERO
+var LAST_ROT = Vector3.ZERO
 var mouse_sens := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 
 
+func get_last_pos():
+	return LAST_POS
+func get_last_rot():
+	return LAST_ROT
+func set_last_pos(pos: Vector3):
+	LAST_POS = pos
+func set_last_rot(rot: Vector3):
+	LAST_ROT = rot
 func is_alive():
 	return ALIVE
 	
@@ -36,10 +45,12 @@ func explode():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	LAST_POS = global_position
+	LAST_POS = get_global_position()
+	LAST_ROT = get_global_rotation()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(get_global_position(), get_last_pos())
 	
 	camtwist.rotate_y(twist_input)
 	campitch.rotate_x(pitch_input)
@@ -48,16 +59,21 @@ func _process(delta):
 	pitch_input = 0
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# stuff below is only for the living 
 	if not ALIVE:
 		return
 	
-	if LAST_POS.distance_to(global_position) >= 1:
-		LAST_POS = global_position
-		if (get_linear_velocity()*Vector3(1,0,1)).length() >= 50:
+	if LAST_POS.distance_to(get_global_position()) >= 5:
+		if (get_linear_velocity()*Vector3(1,0,1)).length() >= 70:
 			spawn_lw.emit()
+		else:
+			LAST_POS = get_global_position()
+			LAST_ROT = get_global_rotation()
 		
 	if not Input.is_action_pressed("superbrake"):
 		steering = Input.get_axis("steerright","steerleft") * MAX_STEER

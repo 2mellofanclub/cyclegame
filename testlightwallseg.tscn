@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://du2mu3442jbcs"]
+
+[ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://lightwallseg.gd" id="1_s7js3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s7js3"]
+radius = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s7js3"]
+top_radius = 0.2
+bottom_radius = 0.2
+radial_segments = 8
+
+[node name="lightwallseg" type="Node3D"]
+script = ExtResource("1_s7js3")
+
+[node name="lightarea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="killbox" type="CollisionShape3D" parent="lightarea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.255981, 0)
+shape = SubResource("CylinderShape3D_s7js3")
+
+[node name="shell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="shell"]
+mesh = SubResource("CylinderMesh_s7js3")
+
+[node name="ligths" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="bottom1" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.731, 0)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="bottom2" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.731, 0)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="bottom3" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.731, 0.5)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="bottom4" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.731, -0.5)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="upper1" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.619, 0)
+light_color = Color(0.796811, 0.328503, 0.29549, 1)
+light_energy = 3.963
+
+[node name="upper2" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.619, 0)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="upper3" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619, 0.5)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="upper4" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619, -0.5)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="top" type="OmniLight3D" parent="ligths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0.796078, 0.329412, 0.294118, 1)
+light_energy = 3.963
+
+[node name="deltimer" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+autostart = true
+
+[node name="lightosci" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="lightarea" to="." method="_on_lightarea_body_entered"]
+[connection signal="timeout" from="deltimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="lightosci" to="." method="_on_lightosci_timeout"]

@@ -1,24 +1,27 @@
 extends Node3D
 
+var HOT = false
 
-# Called when the node enters the scene tree for the first time.
+func heat():
+	HOT = true
+func cool():
+	HOT = false
+
+
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	hide() # Replace with function body.
 func _process(delta):
 	pass
-
+	
 func _on_lightarea_body_entered(body):
+	if not HOT:
+		return
 	if body.name == "Player":
-		if body.is_alive():
+		if body.is_alive() and body.is_explodable():
 			print("ka")
 			body.explode()
-
-
 func _on_timer_timeout() -> void:
-	queue_free() # Replace with function body.
+	queue_free()
 
 
 func _on_lightosci_timeout() -> void:

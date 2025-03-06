@@ -1,10 +1,12 @@
 extends VehicleBody3D
 
 const MAX_STEER = 1
-const ENGINE_POWER = 500
+const ENGINE_POWER = 400
 signal spawn_lw
 
 var ALIVE = true
+var EXPLODABLE = true
+var LW_ACTIVE = false
 var LAST_POS = Vector3.ZERO
 var LAST_ROT = Vector3.ZERO
 var mouse_sens := 0.001
@@ -22,6 +24,8 @@ func set_last_rot(rot: Vector3):
 	LAST_ROT = rot
 func is_alive():
 	return ALIVE
+func is_explodable():
+	return EXPLODABLE
 	
 func explode():
 	ALIVE = false
@@ -42,41 +46,37 @@ func explode():
 
 @onready var camtwist = $camtwist
 @onready var campitch = $camtwist/campitch
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	LAST_POS = get_global_position()
 	LAST_ROT = get_global_rotation()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(get_global_position(), get_last_pos())
-	
 	camtwist.rotate_y(twist_input)
 	campitch.rotate_x(pitch_input)
 	campitch.rotation.x = clamp(campitch.rotation.x, -1, 0.5)
 	twist_input = 0
 	pitch_input = 0
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 	# stuff below is only for the living 
 	if not ALIVE:
 		return
 	
-	if LAST_POS.distance_to(get_global_position()) >= 5:
-		if (get_linear_velocity()*Vector3(1,0,1)).length() >= 70:
+	if (get_linear_velocity()*Vector3(1,0,1)).length() > 50:
+		LW_ACTIVE = true
+	elif (get_linear_velocity()*Vector3(1,0,1)).length() < 15:
+		LW_ACTIVE = false
+	if LAST_POS.distance_to(get_global_position()) >= 3:
+		if LW_ACTIVE:
 			spawn_lw.emit()
 		else:
 			LAST_POS = get_global_position()
 			LAST_ROT = get_global_rotation()
-		
+	
+	# -- BEGIN STEERING -- #
 	if not Input.is_action_pressed("superbrake"):
 		steering = Input.get_axis("steerright","steerleft") * MAX_STEER
+		$backleft.steering = -0.2 * steering
+		$backright.steering = -0.2 * steering
 		engine_force = clamp(Input.get_axis("gasdown", "gasup") * ENGINE_POWER, -200, 500)
 		$lightcycle.global_rotation.z = Input.get_axis("steerright","steerleft") * 0.35
 		# Quickturn left with speed intact
@@ -84,12 +84,14 @@ func _process(delta):
 			var linvel = get_linear_velocity()
 			set_linear_velocity(Vector3.ZERO)
 			rotate_y(PI/2)
+			camtwist.rotate_y(-PI/2)
 			set_linear_velocity(-Vector3(-linvel.z,0,linvel.x))
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
 			var linvel = get_linear_velocity()
 			set_linear_velocity(Vector3.ZERO)
 			rotate_y(-PI/2)
+			camtwist.rotate_y(PI/2)
 			set_linear_velocity(Vector3(-linvel.z,0,linvel.x))
 			#apply_impulse(transform.basis.z*-100)
 	if Input.is_action_just_pressed("superbrake"):
@@ -99,7 +101,7 @@ func _process(delta):
 	if Input.is_action_just_released("superbrake"):
 		$lightcycle.rotate_y(-PI/2)
 		set_brake(0)
-	
+	# -- END STEERING -- #
 
 
 

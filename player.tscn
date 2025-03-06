@@ -36,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 
 current = true
 
 [node name="frontleft" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, -0.9, 0.152, -1.764)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.9, 0.152, -1.764)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.0
@@ -47,7 +47,7 @@ visible = false
 mesh = SubResource("BoxMesh_p2lnw")
 
 [node name="frontright" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, 0.9, 0.152, -1.764)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.9, 0.152, -1.764)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.0
@@ -109,8 +109,5 @@ shape = SubResource("ConvexPolygonShape3D_iyi0r")
 [node name="frontwheelcol" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.214781, -1.65755)
 shape = SubResource("ConvexPolygonShape3D_mm0jl")
-
-[node name="trailpoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.15371)
 
 [editable path="lightcycle"]

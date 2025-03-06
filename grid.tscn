@@ -107,7 +107,7 @@ shape = SubResource("ConcavePolygonShape3D_6fqgn")
 environment = SubResource("Environment_g42aa")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="setdressin"]
-transform = Transform3D(-0.00990505, 0.00119058, -0.000687376, 0, 0.00499998, 0.00866027, 0.00137476, 0.00857803, -0.0049525, 1.18197, 0.796057, -0.920207)
+transform = Transform3D(-0.990505, 0.119058, -0.0687377, 0, 0.499998, 0.866026, 0.137476, 0.857804, -0.495251, 1.18197, 0.796057, -0.920207)
 light_color = Color(0.858824, 0.882353, 1, 1)
 light_energy = 0.384
 shadow_enabled = true
@@ -214,6 +214,6 @@ mesh = SubResource("CylinderMesh_ufbc5")
 [node name="trails" type="Node3D" parent="."]
 
 [node name="solarsailor1" parent="." instance=ExtResource("4_bghhw")]
-transform = Transform3D(0.0235622, 0, -4.99994, 0, 5, 0, 4.99994, 0, 0.0235622, 26.4017, 274.66, -446.025)
+transform = Transform3D(-4.99797, 0, 0.142399, 0, 5, 0, -0.142399, 0, -4.99797, 235.37, 195.959, -261.112)
 
 [connection signal="spawn_lw" from="Player" to="." method="_on_player_spawn_lw"]

@@ -3,12 +3,22 @@ extends Node3D
 @onready var lightwall = preload("res://lightwallseg.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("ui_cancel"):
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	for lw in $trails.get_children():
+		if not lw.HOT:
+			if lw.get_global_position().distance_to($Player.get_global_position()) > 6:
+				lw.heat()
+				lw.show()
 
 
 # i knew shit was gonna be like this when i mess with vectors
@@ -18,30 +28,27 @@ func _on_player_spawn_lw():
 	var glo_pos = $Player.get_global_position()
 	# updated every loop, but only last value used
 	var new_last_pos = Vector3.ZERO
-	# revealed to this function in a dream
-	var lw_width = 2
-	# because of the lazy height below
-	var distance = (las_pos*Vector3(1,0,1)).distance_to(glo_pos*Vector3(1,0,1))
-	print("Distance: ", distance)
+	# revealed to this function in a dream (since lightwall hasn't been instantiated)
+	var lw_width = 0.3
+	var distance = (las_pos).distance_to(glo_pos)
 	var divcount = ceil(distance/lw_width)
-	# lazy, do this better
-	var height = glo_pos.y
 	var x1 = las_pos.x
+	var y1 = las_pos.y
 	var z1 = las_pos.z
 	var x2 = glo_pos.x
+	var y2 = glo_pos.y
 	var z2 = glo_pos.z
+	
 	for q in range(1,divcount):
 		var lw_instance = lightwall.instantiate()
 		$trails.add_child(lw_instance)
+		#lw_instance.scale_object_local(Vector3(1,1,1))
 		var p = divcount-q
-		lw_instance.set_global_position(Vector3( (p*x1+q*x2)/divcount, height, p*z1+q*z2/divcount ))
-		lw_instance.set_global_rotation($Player.get_last_rot())
-		new_last_pos = Vector3( (p*x1+q*x2)/divcount, height, p*z1+q*z2/divcount )
+		lw_instance.set_global_position(Vector3( (p*x1+q*x2)/divcount, (p*y1+q*y2)/divcount, (p*z1+q*z2)/divcount ))
+		var mod_rot = $Player.get_last_rot()
+		mod_rot.x = $Player.get_linear_velocity().angle_to($Player.get_linear_velocity()*Vector3(1,0,1))
+		lw_instance.set_global_rotation(mod_rot)
+		#lw_instance.set_global_rotation($Player.get_last_rot())
+		new_last_pos = Vector3( (p*x1+q*x2)/divcount,(p*y1+q*y2)/divcount, (p*z1+q*z2)/divcount )
 	$Player.set_last_pos(new_last_pos)
-	$Player.set_last_rot($Player.get_last_rot())
-
-#func _on_player_spawn_lw():
-#	var lw_instance = lightwall.instantiate()
-#	$trails.add_child(lw_instance)
-#	lw_instance.global_position = $Player.get_last_pos()
-#	lw_instance.global_rotation = $Player.get_last_rot()
+	$Player.set_last_rot($Player.get_global_rotation())

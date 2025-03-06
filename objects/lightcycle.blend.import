@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bt1mlu3jq0rmq"
-path="res://.godot/imported/lightcycle.blend-df19b09f7385c398a19907b0c399d952.scn"
+path="res://.godot/imported/lightcycle.blend-81ce32379668e477a1a47bd7a0c56563.scn"
 
 [deps]
 
-source_file="res://lightcycle.blend"
-dest_files=["res://.godot/imported/lightcycle.blend-df19b09f7385c398a19907b0c399d952.scn"]
+source_file="res://objects/lightcycle.blend"
+dest_files=["res://.godot/imported/lightcycle.blend-81ce32379668e477a1a47bd7a0c56563.scn"]
 
 [params]
 

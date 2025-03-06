@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://chv4761a20kmb"]
 
-[ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://lightwallseg.gd" id="1_8kgsn"]
+[ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://objects/lightwallseg.gd" id="1_8kgsn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
 size = Vector3(0.144, 1.02295, 0.27395)

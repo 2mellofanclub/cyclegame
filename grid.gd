@@ -1,10 +1,12 @@
 extends Node3D
 
-@onready var lightwall = preload("res://lightwallseg.tscn")
+const MAX_TRAILS = 4000
+
+@onready var lightwall = preload("res://objects/lightwallseg.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	$sos.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,6 +44,8 @@ func _on_player_spawn_lw():
 	for q in range(1,divcount):
 		var lw_instance = lightwall.instantiate()
 		$trails.add_child(lw_instance)
+		if $trails.get_child_count() == MAX_TRAILS:
+			$trails.get_child(0).free()
 		#lw_instance.scale_object_local(Vector3(1,1,1))
 		var p = divcount-q
 		lw_instance.set_global_position(Vector3( (p*x1+q*x2)/divcount, (p*y1+q*y2)/divcount, (p*z1+q*z2)/divcount ))

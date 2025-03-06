@@ -21,7 +21,7 @@ func _on_lightarea_body_entered(body):
 			print("ka")
 			body.explode()
 func _on_timer_timeout() -> void:
-	queue_free()
+	free()
 
 
 func _on_lightosci_timeout() -> void:

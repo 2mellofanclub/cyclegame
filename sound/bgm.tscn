@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsw1jkrbaf653"]
+
+[ext_resource type="AudioStream" uid="uid://dkcomc2brvv85" path="res://sos.mp3" id="1_l7bcd"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_l7bcd")
+autoplay = true
+parameters/looping = true

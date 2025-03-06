@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2cs66fu18gqv"]
+[gd_scene load_steps=9 format=3 uid="uid://d2cs66fu18gqv"]
 
-[ext_resource type="Script" uid="uid://cyhn2rwojv3k7" path="res://player.gd" id="1_5i27b"]
-[ext_resource type="PackedScene" uid="uid://bt1mlu3jq0rmq" path="res://lightcycle.blend" id="2_80jdm"]
+[ext_resource type="Script" uid="uid://cyhn2rwojv3k7" path="res://objects/player.gd" id="1_5i27b"]
+[ext_resource type="PackedScene" uid="uid://bt1mlu3jq0rmq" path="res://objects/lightcycle.blend" id="2_80jdm"]
+[ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="3_uxov2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p2lnw"]
 
@@ -109,5 +110,10 @@ shape = SubResource("ConvexPolygonShape3D_iyi0r")
 [node name="frontwheelcol" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.214781, -1.65755)
 shape = SubResource("ConvexPolygonShape3D_mm0jl")
+
+[node name="notpositive" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_uxov2")
+volume_db = -4.0
+pitch_scale = 0.79
 
 [editable path="lightcycle"]

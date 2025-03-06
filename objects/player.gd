@@ -33,6 +33,7 @@ func explode():
 	engine_force = 0
 	# i'm something of an animator myself
 	set_linear_velocity(Vector3.ZERO)
+	$notpositive.play()
 	$lightcycle/Frontwheel.hide()
 	$frontright/OmniLight3D2.hide()
 	await get_tree().create_timer(0.1).timeout
@@ -60,6 +61,7 @@ func _process(delta):
 	# stuff below is only for the living 
 	if not ALIVE:
 		return
+	
 	
 	if (get_linear_velocity()*Vector3(1,0,1)).length() > 50:
 		LW_ACTIVE = true

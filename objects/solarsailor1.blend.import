@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cerqag1g8lrav"
-path="res://.godot/imported/solarsailor1.blend-d22ab798df7c61cf0408579788d8e4bf.scn"
+path="res://.godot/imported/solarsailor1.blend-6742cab535b2b7ca1449219e8f26b648.scn"
 
 [deps]
 
-source_file="res://solarsailor1.blend"
-dest_files=["res://.godot/imported/solarsailor1.blend-d22ab798df7c61cf0408579788d8e4bf.scn"]
+source_file="res://objects/solarsailor1.blend"
+dest_files=["res://.godot/imported/solarsailor1.blend-6742cab535b2b7ca1449219e8f26b648.scn"]
 
 [params]
 

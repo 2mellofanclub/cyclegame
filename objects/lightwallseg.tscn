@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://chv4761a20kmb"]
+[gd_scene load_steps=5 format=3 uid="uid://chv4761a20kmb"]
 
 [ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://objects/lightwallseg.gd" id="1_8kgsn"]
+[ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="2_cwhoa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
 size = Vector3(0.144, 1.02295, 0.27395)
@@ -8,58 +9,39 @@ size = Vector3(0.144, 1.02295, 0.27395)
 [sub_resource type="PlaneMesh" id="PlaneMesh_38g7m"]
 size = Vector2(2, 0.4)
 
-[node name="lightwallseg" type="Node3D"]
+[node name="LightWallSeg" type="Node3D"]
 script = ExtResource("1_8kgsn")
 
-[node name="lightarea" type="Area3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="LightArea" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.2)
 
-[node name="killbox" type="CollisionShape3D" parent="lightarea"]
+[node name="KillBox" type="CollisionShape3D" parent="LightArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0114746, -0.00413817)
 shape = SubResource("BoxShape3D_qkq1s")
 
-[node name="shell" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, 0)
+[node name="Shell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276, 0.2)
 
-[node name="wall2" type="MeshInstance3D" parent="shell"]
+[node name="Wall1" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 2.60521e-20, -6.60021e-15, -1.50996e-07, -1, 0.1, 0.3, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_38g7m")
+surface_material_override/0 = ExtResource("2_cwhoa")
+
+[node name="Wall2" type="MeshInstance3D" parent="Shell"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.1, 0.3, 0)
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_38g7m")
+surface_material_override/0 = ExtResource("2_cwhoa")
 
-[node name="wall1" type="MeshInstance3D" parent="shell"]
-transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 1.20761e-20, -6.60022e-15, -1.50996e-07, -1, 0.1, 0.3, 0)
-mesh = SubResource("PlaneMesh_38g7m")
-
-[node name="ligths" type="Node3D" parent="."]
-
-[node name="bottom1" type="OmniLight3D" parent="ligths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.731, 0)
-light_color = Color(0.286275, 0.423529, 1, 1)
-light_energy = 3.963
-
-[node name="bottom2" type="OmniLight3D" parent="ligths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.731, 0)
-light_color = Color(0.286275, 0.423529, 1, 1)
-light_energy = 3.963
-
-[node name="upper1" type="OmniLight3D" parent="ligths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.619, 0)
-light_color = Color(0.286275, 0.423529, 1, 1)
-light_energy = 3.963
-
-[node name="upper2" type="OmniLight3D" parent="ligths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.619, 0)
-light_color = Color(0.286275, 0.423529, 1, 1)
-light_energy = 3.963
-
-[node name="deltimer" type="Timer" parent="."]
+[node name="DelTimer" type="Timer" parent="."]
 wait_time = 25.0
 one_shot = true
-autostart = true
 
-[node name="lightosci" type="Timer" parent="."]
+[node name="LightOsci" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[connection signal="body_entered" from="lightarea" to="." method="_on_lightarea_body_entered"]
-[connection signal="timeout" from="deltimer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="lightosci" to="." method="_on_lightosci_timeout"]
+[connection signal="body_entered" from="LightArea" to="." method="_on_lightarea_body_entered"]
+[connection signal="timeout" from="DelTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LightOsci" to="." method="_on_lightosci_timeout"]

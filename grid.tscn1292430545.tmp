@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://cyde73xt2w162"]
+[gd_scene load_steps=17 format=3 uid="uid://cyde73xt2w162"]
 
 [ext_resource type="Script" uid="uid://c1cmxcje2ud7c" path="res://grid.gd" id="1_2miq5"]
 [ext_resource type="PackedScene" uid="uid://d2cs66fu18gqv" path="res://objects/player.tscn" id="1_fhnjh"]
 [ext_resource type="PackedScene" uid="uid://bvujyrv8j5jjh" path="res://objects/ramp.tscn" id="2_iiu8i"]
+[ext_resource type="PackedScene" uid="uid://cerqag1g8lrav" path="res://objects/solarsailor1.blend" id="4_bghhw"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="5_fqc2p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dujx"]
@@ -212,6 +213,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 1046.21)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="Trails" type="Node3D" parent="."]
+
+[node name="solarsailor1" parent="." instance=ExtResource("4_bghhw")]
+transform = Transform3D(-4.99797, 0, 0.142399, 0, 5, 0, -0.142399, 0, -4.99797, 235.37, 195.959, -261.112)
 
 [node name="SOS" parent="." instance=ExtResource("5_fqc2p")]
 volume_db = -22.0

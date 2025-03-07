@@ -1,39 +1,48 @@
 extends Node3D
 
-var HOT = false
 
+var hot = false
+var Player
+
+
+func is_hot():
+	return hot
 func heat():
-	HOT = true
+	hot = true
 func cool():
-	HOT = false
+	hot = false
 
 
 func _ready():
-	hide() # Replace with function body.
+	hide()
+
+
 func _process(delta):
-	pass
-	
+	if not hot:
+		if not Player == null:
+			if global_position.distance_to(Player.get_global_position()) > 4:
+				heat()
+				show()
+
+
 func _on_lightarea_body_entered(body):
-	if not HOT:
+	if not hot:
 		return
 	if body.name == "Player":
 		if body.is_alive() and body.is_explodable():
 			print("ka")
 			body.explode()
+
+
 func _on_timer_timeout() -> void:
-	free()
+	queue_free()
 
 
 func _on_lightosci_timeout() -> void:
-	# why is this 0.0 when it's set to 5.0?
-	var original_range = $ligths/bottom1.get_param($ligths/bottom1.omni_range)
-	#print(original_range)
-	$ligths/bottom1.set_param($ligths/bottom1.omni_range, 1.0)
-	$ligths/bottom2.set_param($ligths/bottom2.omni_range, 1.0)
-	$ligths/upper1.set_param($ligths/upper1.omni_range, 1.0)
-	$ligths/upper2.set_param($ligths/upper2.omni_range, 1.0)
+	var original_material = $Shell/Wall1.get_surface_override_material(0)
+	var pulse_material = load("res://materials/lw_blue1_pulse.tres")
+	for wall in $Shell.get_children():
+		wall.set_surface_override_material(0, pulse_material)
 	await get_tree().create_timer(0.1).timeout
-	$ligths/bottom1.set_param($ligths/bottom1.omni_range, original_range)
-	$ligths/bottom2.set_param($ligths/bottom2.omni_range, original_range)
-	$ligths/upper1.set_param($ligths/upper1.omni_range, original_range)
-	$ligths/upper2.set_param($ligths/upper2.omni_range, original_range)
+	for wall in $Shell.get_children():
+		wall.set_surface_override_material(0, original_material)

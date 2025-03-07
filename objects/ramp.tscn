@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvujyrv8j5jjh"]
 
-[ext_resource type="Script" uid="uid://dtsvxygmane5n" path="res://ramp.gd" id="1_mqre5"]
+[ext_resource type="Script" uid="uid://dtsvxygmane5n" path="res://objects/ramp.gd" id="1_mqre5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ir5dj"]
 size = Vector3(110.033, 38.4749, 97.8193)
@@ -10,24 +10,24 @@ size = Vector3(110.033, 38.4749, 97.8193)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ngms3"]
 data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[node name="ramp" type="Node3D"]
+[node name="Ramp" type="Node3D"]
 script = ExtResource("1_mqre5")
 
-[node name="ramparea" type="Area3D" parent="."]
+[node name="RampArea" type="Area3D" parent="."]
 transform = Transform3D(0.968366, 0.249535, 0, -0.249535, 0.968366, 0, 0, 0, 1, 20.4236, 36.7767, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ramparea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RampArea"]
 shape = SubResource("BoxShape3D_ir5dj")
 
-[node name="rampmesh" type="MeshInstance3D" parent="."]
+[node name="RampMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(64.2788, -76.6044, 0, 76.6044, 64.2788, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("PrismMesh_xic1j")
 skeleton = NodePath("../..")
 
-[node name="rampStaticBody3D" type="StaticBody3D" parent="rampmesh"]
+[node name="RampStaticBody3D" type="StaticBody3D" parent="RampMesh"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="rampmesh/rampStaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RampMesh/RampStaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ngms3")
 
-[connection signal="body_entered" from="ramparea" to="." method="_on_ramparea_body_entered"]
-[connection signal="body_exited" from="ramparea" to="." method="_on_ramparea_body_exited"]
+[connection signal="body_entered" from="RampArea" to="." method="_on_ramparea_body_entered"]
+[connection signal="body_exited" from="RampArea" to="." method="_on_ramparea_body_exited"]

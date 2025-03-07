@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cerqag1g8lrav"
-path="res://.godot/imported/solarsailor1.blend-6742cab535b2b7ca1449219e8f26b648.scn"
+uid="uid://0bltx0kcmspt"
+path="res://.godot/imported/solarsailer1.blend-5b3eee5ebd02de0728a461dced056e65.scn"
 
 [deps]
 
-source_file="res://objects/solarsailor1.blend"
-dest_files=["res://.godot/imported/solarsailor1.blend-6742cab535b2b7ca1449219e8f26b648.scn"]
+source_file="res://objects/solarsailer1.blend"
+dest_files=["res://.godot/imported/solarsailer1.blend-5b3eee5ebd02de0728a461dced056e65.scn"]
 
 [params]
 

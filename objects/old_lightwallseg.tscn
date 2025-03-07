@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://b624qwla17yi3"]
+
+[ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://objects/lightwallseg.gd" id="1_8rwy1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
+size = Vector3(0.144, 1.02295, 0.27395)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_38g7m"]
+size = Vector2(2, 0.4)
+
+[node name="LightWallSeg" type="Node3D"]
+script = ExtResource("1_8rwy1")
+
+[node name="LightArea" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="KillBox" type="CollisionShape3D" parent="LightArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0114746, -0.00413817)
+shape = SubResource("BoxShape3D_qkq1s")
+
+[node name="Shell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.275531, 0)
+
+[node name="Wall2" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.1, 0.3, 0)
+gi_mode = 2
+mesh = SubResource("PlaneMesh_38g7m")
+
+[node name="Wall1" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 1.20761e-20, -6.60022e-15, -1.50996e-07, -1, 0.1, 0.3, 0)
+gi_mode = 2
+mesh = SubResource("PlaneMesh_38g7m")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="Bottom1" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.7, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 4.0
+omni_range = 1.0
+omni_shadow_mode = 0
+
+[node name="Bottom2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.7, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 4.0
+omni_range = 1.0
+omni_shadow_mode = 0
+
+[node name="Upper1" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.7, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 4.0
+omni_range = 1.0
+omni_shadow_mode = 0
+
+[node name="Upper2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.7, 0)
+light_color = Color(0.286275, 0.423529, 1, 1)
+light_energy = 4.0
+omni_range = 1.0
+omni_shadow_mode = 0
+
+[node name="DelTimer" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+autostart = true
+
+[node name="LightOsci" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="LightArea" to="." method="_on_lightarea_body_entered"]
+[connection signal="timeout" from="DelTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LightOsci" to="." method="_on_lightosci_timeout"]

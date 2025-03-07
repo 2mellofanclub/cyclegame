@@ -21,69 +21,69 @@ points = PackedVector3Array(-0.000122726, -0.0442932, 0.90034, -0.191418, 0.1506
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -0.18, -0.6)
+center_of_mass = Vector3(0, 0, -0.25)
 script = ExtResource("1_5i27b")
 
-[node name="camtwist" type="Node3D" parent="."]
+[node name="CamTwist" type="Node3D" parent="."]
 
-[node name="campitch" type="Node3D" parent="camtwist"]
+[node name="CamPitch" type="Node3D" parent="CamTwist"]
 
-[node name="SpringArm3D" type="SpringArm3D" parent="camtwist/campitch"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CamTwist/CamPitch"]
 transform = Transform3D(1, 0, 0, 0, 0.997639, 0.068677, 0, -0.068677, 0.997639, 0, 2.7155, 6.43365)
 spring_length = 2.0
 
-[node name="Camera3D" type="Camera3D" parent="camtwist/campitch/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CamTwist/CamPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 0, 1.68159, 0.706143)
 current = true
 
-[node name="frontleft" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.9, 0.152, -1.764)
+[node name="FrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.4, 0.152, -1.764)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.0
 wheel_radius = 1.1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="frontleft"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FrontLeft"]
 visible = false
 mesh = SubResource("BoxMesh_p2lnw")
 
-[node name="frontright" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.9, 0.152, -1.764)
+[node name="FrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.4, 0.152, -1.764)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.0
 wheel_radius = 1.1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="frontright"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FrontRight"]
 visible = false
 mesh = SubResource("BoxMesh_p2lnw")
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="frontright"]
+[node name="OmniLight3D2" type="OmniLight3D" parent="FrontRight"]
 transform = Transform3D(1, 0, 2.38418e-07, 0, 1, 0, -2.38418e-07, 0, 1, 0.9, 0.082, -0.127)
 light_color = Color(0.694118, 0.713726, 0.94902, 1)
 light_energy = 0.45
 
-[node name="backleft" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, -0.9, 0.234, 1.738)
+[node name="BackLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, -1.4, 0.234, 1.738)
 use_as_traction = true
 wheel_roll_influence = 0.0
 wheel_radius = 1.1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="backleft"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BackLeft"]
 visible = false
 mesh = SubResource("BoxMesh_bofwx")
 
-[node name="backright" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 0.9, 0.234, 1.738)
+[node name="BackRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 1.4, 0.234, 1.738)
 use_as_traction = true
 wheel_roll_influence = 0.0
 wheel_radius = 1.1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="backright"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BackRight"]
 visible = false
 mesh = SubResource("BoxMesh_bofwx")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="backright"]
+[node name="OmniLight3D" type="OmniLight3D" parent="BackRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.096)
 light_color = Color(0.694118, 0.713726, 0.94902, 1)
 light_energy = 0.45
@@ -99,21 +99,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258897, 1.76932)
 [node name="Frontwheel" parent="lightcycle" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230219, -1.62454)
 
-[node name="bodycol" type="CollisionShape3D" parent="."]
+[node name="BodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000592291, 0.951512, 0.00351632)
 shape = SubResource("ConvexPolygonShape3D_hsstx")
 
-[node name="rearwheelcol" type="CollisionShape3D" parent="."]
+[node name="RearWheelCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.243458, 1.73632)
 shape = SubResource("ConvexPolygonShape3D_iyi0r")
 
-[node name="frontwheelcol" type="CollisionShape3D" parent="."]
+[node name="FrontWheelCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.214781, -1.65755)
 shape = SubResource("ConvexPolygonShape3D_mm0jl")
 
-[node name="notpositive" type="AudioStreamPlayer3D" parent="."]
+[node name="NotPositive" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_uxov2")
-volume_db = -4.0
+volume_db = -5.0
 pitch_scale = 0.79
 
 [editable path="lightcycle"]

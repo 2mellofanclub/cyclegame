@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbxuer5xktb4d"]
+
+[ext_resource type="PackedScene" uid="uid://0bltx0kcmspt" path="res://objects/solarsailer1.blend" id="1_bdps5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ip4rd"]
+height = 119.383
+radius = 9.509
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bdps5"]
+top_radius = 9.5
+bottom_radius = 9.5
+height = 120.0
+
+[node name="SolarSailer" type="Node3D"]
+
+[node name="solarsailer1" parent="." instance=ExtResource("1_bdps5")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="LightMouth" type="Area3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightMouth"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 50)
+shape = SubResource("CylinderShape3D_ip4rd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40.0389, 49.2818)
+visible = false
+mesh = SubResource("CylinderMesh_bdps5")

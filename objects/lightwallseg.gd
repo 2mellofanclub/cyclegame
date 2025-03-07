@@ -22,7 +22,7 @@ func _process(delta):
 	if not Driver == null:
 		if not visible:
 			if global_position.distance_to(Driver.get_global_position()) > 2:
-				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["base"]))
+				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))
 				show()
 		if not hot:
 			if global_position.distance_to(Driver.get_global_position()) > 3.5:
@@ -45,6 +45,6 @@ func _on_timer_timeout() -> void:
 
 
 func _on_lightosci_timeout() -> void:
-	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["pulse"]))
+	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwpulse"]))
 	await get_tree().create_timer(0.1).timeout
-	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["base"]))
+	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))

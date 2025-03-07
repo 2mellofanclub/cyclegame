@@ -1,15 +1,16 @@
 extends VehicleBody3D
 
 
-const front_steer = 1
-const engine_power = 400.0
-const rear_steer = 0.0
+const FRONT_STEER = 1
+const ENGINE_POWER = 400.0
+const REAR_STEER = 0.0
 const trail_materials = {
 	"body":"res://materials/badguy_black1.tres",
-	"wheelwells":"res://materials/lw_orange1.tres",
-	"lwbase":"res://materials/lw_orange1.tres",
-	"lwpulse":"res://materials/lw_orange1_pulse.tres",
+	"wheelwells":"res://materials/lw_green1.tres",
+	"lwbase":"res://materials/lw_green1.tres",
+	"lwpulse":"res://materials/lw_green1_pulse.tres",
 }
+signal spawn_lw
 
 var alive = true
 var explodable = true
@@ -104,11 +105,11 @@ func _process(_delta):
 	
 	# -- BEGIN STEERING -- #
 	#if not Input.is_action_pressed("superbrake"):
-		#steering = Input.get_axis("steerright", "steerleft") * front_steer
-		#$BackLeft.steering = rear_steer * steering
-		#$BackRight.steering = rear_steer * steering
+		#steering = Input.get_axis("steerright", "steerleft") * FRONT_STEER
+		#$BackLeft.steering = REAR_STEER * steering
+		#$BackRight.steering = REAR_STEER * steering
 		#engine_force = clamp(
-				#Input.get_axis("gasdown", "gasup") * engine_power, -200, 500
+				#Input.get_axis("gasdown", "gasup") * ENGINE_POWER, -200, 500
 		#)
 		#$lightcycle.global_rotation.z = (global_rotation.z + 
 				#Input.get_axis("steerright", "steerleft") * PI/6

@@ -1,14 +1,15 @@
 extends VehicleBody3D
 
 
-const FRONT_STEER = 1
-const ENGINE_POWER = 400.0
-const REAR_STEER = 0.0
-const TRAIL_MATERIALS = {
-	"base":"res://materials/lw_blue1.tres",
-	"pulse":"res://materials/lw_blue1_pulse.tres",
+var front_steer = 1
+var engine_power = 400.0
+var rear_steer = 0.0
+var trail_materials = {
+	"body":"res://materials/badguy_black1.tres",
+	"wheelwells":"res://materials/lw_blue1.tres",
+	"lwbase":"res://materials/lw_blue1.tres",
+	"lwpulse":"res://materials/lw_blue1_pulse.tres",
 }
-signal spawn_lw
 
 var alive = true
 var explodable = true
@@ -57,13 +58,12 @@ func explode():
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
 func _ready():
-	las_pos = get_global_position()
-	las_rot = get_global_rotation()
+	las_pos = global_position
+	las_rot = global_rotation
 
 
 func _process(_delta):
 	var lin_vel = get_linear_velocity()
-	print(lin_vel.length())
 	
 	cam_twist.rotate_y(twist_input)
 	cam_pitch.rotate_x(pitch_input)
@@ -83,16 +83,16 @@ func _process(_delta):
 		if lw_active:
 			SignalBus.spawn_lw.emit(self)
 		else:
-			las_pos = get_global_position()
-			las_rot = get_global_rotation()
-	
+			las_pos = global_position
+			las_rot = global_rotation
+
 	# -- BEGIN STEERING -- #
 	if not Input.is_action_pressed("superbrake"):
-		steering = Input.get_axis("steerright", "steerleft") * FRONT_STEER
-		$BackLeft.steering = REAR_STEER * steering
-		$BackRight.steering = REAR_STEER * steering
+		steering = Input.get_axis("steerright", "steerleft") * front_steer
+		$BackLeft.steering = rear_steer * steering
+		$BackRight.steering = rear_steer * steering
 		engine_force = clamp(
-				Input.get_axis("gasdown", "gasup") * ENGINE_POWER, -200, 500
+				Input.get_axis("gasdown", "gasup") * engine_power, -200, 500
 		)
 		if lin_vel.length() > 100:
 			engine_force = 0
@@ -103,14 +103,14 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ninleft"):
 			set_linear_velocity(Vector3.ZERO)
 			rotate_y(PI/2)
-			las_rot = get_global_rotation()
+			las_rot = global_rotation
 			cam_twist.rotate_y(-PI/2)
 			set_linear_velocity(-Vector3(-lin_vel.z, 0, lin_vel.x))
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
 			set_linear_velocity(Vector3.ZERO)
 			rotate_y(-PI/2)
-			las_rot = get_global_rotation()
+			las_rot = global_rotation
 			cam_twist.rotate_y(PI/2)
 			set_linear_velocity(Vector3(-lin_vel.z, 0, lin_vel.x))
 	if Input.is_action_just_pressed("superbrake"):

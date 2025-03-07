@@ -4,10 +4,10 @@
 [ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="2_cwhoa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
-size = Vector3(0.145619, 1.02295, 0.167209)
+size = Vector3(0.146, 1.023, 0.31)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cwhoa"]
-size = Vector3(0.3, 2, 0.3)
+size = Vector3(0.3, 2, 0.6)
 
 [node name="LightWallSeg" type="Node3D"]
 script = ExtResource("1_8kgsn")

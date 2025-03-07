@@ -62,6 +62,9 @@ func _ready():
 
 
 func _process(_delta):
+	var lin_vel = get_linear_velocity()
+	print(lin_vel.length())
+	
 	cam_twist.rotate_y(twist_input)
 	cam_pitch.rotate_x(pitch_input)
 	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
@@ -72,13 +75,11 @@ func _process(_delta):
 	if not is_alive():
 		return
 	
-	if get_linear_velocity().length() > 100:
-		engine_force = 0
-	if (get_linear_velocity()*Vector3(1, 0, 1)).length() > 50:
+	if (lin_vel*Vector3(1, 0, 1)).length() > 50:
 		lw_active = true
-	elif (get_linear_velocity()*Vector3(1, 0, 1)).length() < 15:
+	elif (lin_vel*Vector3(1, 0, 1)).length() < 15:
 		lw_active = false
-	if las_pos.distance_to(get_global_position()) >= 0.9:
+	if las_pos.distance_to(get_global_position()) >= 0.6:
 		if lw_active:
 			SignalBus.spawn_lw.emit(self)
 		else:
@@ -93,12 +94,13 @@ func _process(_delta):
 		engine_force = clamp(
 				Input.get_axis("gasdown", "gasup") * ENGINE_POWER, -200, 500
 		)
+		if lin_vel.length() > 100:
+			engine_force = 0
 		$lightcycle.global_rotation.z = (global_rotation.z + 
 				Input.get_axis("steerright", "steerleft") * PI/6
 		)
 		# Quickturn left with speed intact
 		if Input.is_action_just_pressed("ninleft"):
-			var lin_vel = get_linear_velocity()
 			set_linear_velocity(Vector3.ZERO)
 			rotate_y(PI/2)
 			las_rot = get_global_rotation()
@@ -106,7 +108,6 @@ func _process(_delta):
 			set_linear_velocity(-Vector3(-lin_vel.z, 0, lin_vel.x))
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
-			var lin_vel = get_linear_velocity()
 			set_linear_velocity(Vector3.ZERO)
 			rotate_y(-PI/2)
 			las_rot = get_global_rotation()

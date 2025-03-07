@@ -19,12 +19,15 @@ func _ready():
 
 
 func _process(delta):
-	if not hot:
-		if not Driver == null:
-			if global_position.distance_to(Driver.get_global_position()) > 4:
+	if not Driver == null:
+		if not visible:
+			if global_position.distance_to(Driver.get_global_position()) > 2:
 				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["base"]))
-				heat()
 				show()
+		if not hot:
+			if global_position.distance_to(Driver.get_global_position()) > 3.5:
+				heat()
+
 
 
 func _on_lightarea_body_entered(body):

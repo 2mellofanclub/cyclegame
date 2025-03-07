@@ -4,34 +4,27 @@
 [ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="2_cwhoa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
-size = Vector3(0.144, 1.02295, 0.27395)
+size = Vector3(0.145619, 1.02295, 0.167209)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_38g7m"]
-size = Vector2(2, 0.4)
+[sub_resource type="BoxMesh" id="BoxMesh_cwhoa"]
+size = Vector3(0.3, 2, 0.3)
 
 [node name="LightWallSeg" type="Node3D"]
 script = ExtResource("1_8kgsn")
 
 [node name="LightArea" type="Area3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.2)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="KillBox" type="CollisionShape3D" parent="LightArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0114746, -0.00413817)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000809573, 0.0114746, 0.00078588)
 shape = SubResource("BoxShape3D_qkq1s")
 
 [node name="Shell" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276, 0)
 
-[node name="Wall1" type="MeshInstance3D" parent="Shell"]
-transform = Transform3D(4.37114e-08, 1, -1.50996e-07, 1, -4.37114e-08, 2.60521e-20, -6.60021e-15, -1.50996e-07, -1, 0.1, 0.3, 0)
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_38g7m")
-surface_material_override/0 = ExtResource("2_cwhoa")
-
-[node name="Wall2" type="MeshInstance3D" parent="Shell"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.1, 0.3, 0)
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_38g7m")
+[node name="DaGoodBox" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_cwhoa")
 surface_material_override/0 = ExtResource("2_cwhoa")
 
 [node name="DelTimer" type="Timer" parent="."]

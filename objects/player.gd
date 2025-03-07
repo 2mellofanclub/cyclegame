@@ -72,7 +72,7 @@ func _process(_delta):
 		lw_active = true
 	elif (get_linear_velocity()*Vector3(1, 0, 1)).length() < 15:
 		lw_active = false
-	if las_pos.distance_to(get_global_position()) >= 0.8:
+	if las_pos.distance_to(get_global_position()) >= 0.9:
 		if lw_active:
 			spawn_lw.emit()
 		else:

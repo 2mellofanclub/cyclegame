@@ -39,10 +39,8 @@ func _on_timer_timeout() -> void:
 
 
 func _on_lightosci_timeout() -> void:
-	var original_material = $Shell/Wall1.get_surface_override_material(0)
+	var original_material = $Shell/DaGoodBox.get_surface_override_material(0)
 	var pulse_material = load("res://materials/lw_blue1_pulse.tres")
-	for wall in $Shell.get_children():
-		wall.set_surface_override_material(0, pulse_material)
+	$Shell/DaGoodBox.set_surface_override_material(0, pulse_material)
 	await get_tree().create_timer(0.1).timeout
-	for wall in $Shell.get_children():
-		wall.set_surface_override_material(0, original_material)
+	$Shell/DaGoodBox.set_surface_override_material(0, original_material)

@@ -4,6 +4,10 @@ extends VehicleBody3D
 const FRONT_STEER = 1
 const ENGINE_POWER = 400.0
 const REAR_STEER = 0.0
+const TRAIL_MATERIALS = {
+	"base":"res://materials/lw_blue1.tres",
+	"pulse":"res://materials/lw_blue1_pulse.tres",
+}
 signal spawn_lw
 
 var alive = true
@@ -68,13 +72,15 @@ func _process(_delta):
 	if not is_alive():
 		return
 	
+	if get_linear_velocity().length() > 100:
+		engine_force = 0
 	if (get_linear_velocity()*Vector3(1, 0, 1)).length() > 50:
 		lw_active = true
 	elif (get_linear_velocity()*Vector3(1, 0, 1)).length() < 15:
 		lw_active = false
 	if las_pos.distance_to(get_global_position()) >= 0.9:
 		if lw_active:
-			spawn_lw.emit()
+			SignalBus.spawn_lw.emit(self)
 		else:
 			las_pos = get_global_position()
 			las_rot = get_global_rotation()
@@ -106,7 +112,6 @@ func _process(_delta):
 			las_rot = get_global_rotation()
 			cam_twist.rotate_y(PI/2)
 			set_linear_velocity(Vector3(-lin_vel.z, 0, lin_vel.x))
-			#apply_impulse(transform.basis.z * -100)
 	if Input.is_action_just_pressed("superbrake"):
 		$lightcycle.rotate_y(PI/2)
 		$lightcycle.rotate_x(PI/6)

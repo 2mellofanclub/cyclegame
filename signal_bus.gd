@@ -1,3 +1,3 @@
 extends Node
 
-signal toggle_music
+signal spawn_lw

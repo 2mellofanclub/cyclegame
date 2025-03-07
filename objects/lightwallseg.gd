@@ -2,7 +2,8 @@ extends Node3D
 
 
 var hot = false
-var Player
+var Driver
+var materials = {}
 
 
 func is_hot():
@@ -19,8 +20,9 @@ func _ready():
 
 func _process(delta):
 	if not hot:
-		if not Player == null:
-			if global_position.distance_to(Player.get_global_position()) > 4:
+		if not Driver == null:
+			if global_position.distance_to(Driver.get_global_position()) > 4:
+				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["base"]))
 				heat()
 				show()
 
@@ -28,7 +30,8 @@ func _process(delta):
 func _on_lightarea_body_entered(body):
 	if not hot:
 		return
-	if body.name == "Player":
+	if "explode" in body:
+		# move these checks to explode? (and have explode() return bool)
 		if body.is_alive() and body.is_explodable():
 			print("ka")
 			body.explode()
@@ -39,8 +42,6 @@ func _on_timer_timeout() -> void:
 
 
 func _on_lightosci_timeout() -> void:
-	var original_material = $Shell/DaGoodBox.get_surface_override_material(0)
-	var pulse_material = load("res://materials/lw_blue1_pulse.tres")
-	$Shell/DaGoodBox.set_surface_override_material(0, pulse_material)
+	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["pulse"]))
 	await get_tree().create_timer(0.1).timeout
-	$Shell/DaGoodBox.set_surface_override_material(0, original_material)
+	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["base"]))

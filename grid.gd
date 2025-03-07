@@ -35,7 +35,6 @@ func _on_player_spawn_lw():
 	var x2 = glo_pos.x
 	var y2 = glo_pos.y
 	var z2 = glo_pos.z
-	
 	# we split the distance with different ratios q:p,
 	# for example 1:3, 2:2, and 3:1, if divcount is 4
 	for q in range(1, divcount):
@@ -43,6 +42,7 @@ func _on_player_spawn_lw():
 		var lw_instance = LightWall.instantiate()
 		$Trails.add_child(lw_instance)
 		lw_instance.Player = $Player
+		#print($Trails.get_child_count())
 		if $Trails.get_child_count() >= MAX_TRAILS:
 			$Trails.get_child(0).free()
 		lw_instance.set_global_position(

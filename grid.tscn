@@ -77,7 +77,7 @@ mesh = SubResource("BoxMesh_xw411")
 shape = SubResource("ConcavePolygonShape3D_qunid")
 
 [node name="Player" parent="." instance=ExtResource("1_fhnjh")]
-transform = Transform3D(0.263233, 0, 0.964732, 0, 1, 0, -0.964732, 0, 0.263233, 4.15618, -2.23014, 0)
+transform = Transform3D(-0.999367, 0, 0.0355795, 0, 1, 0, -0.0355795, 0, -0.999367, 13.3779, -2.23014, -0.940729)
 
 [node name="Ramp" parent="." instance=ExtResource("2_iiu8i")]
 transform = Transform3D(0.862743, 0, -0.505642, 0, 1, 0, 0.505642, 0, 0.862743, 103.87, -12.4319, -88.1077)
@@ -125,102 +125,102 @@ light_energy = 0.384
 shadow_enabled = true
 
 [node name="columns" type="Node3D" parent="SetDressin"]
-transform = Transform3D(0.00789062, 0, 0.00614312, 0, 0.01, 0, -0.00614312, 0, 0.00789062, -0.245695, -0.415013, -2.64209)
+transform = Transform3D(0.00789062, 0, 0.00614312, 0, 0.01, 0, -0.00614312, 0, 0.00789062, 5.74623, -0.479831, 5.05432)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9987, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9987, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9987, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -95.9987, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.218, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.218, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.218, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.218, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272.216, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272.216, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272.216, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272.216, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D13" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.664, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.664, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D14" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.664, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.664, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D15" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6654, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6654, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D16" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6654, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.6654, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D17" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D18" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 362.882, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D19" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.883, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D20" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -319.282, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -319.282, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D21" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -399.501, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -399.501, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D22" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -399.501, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -399.501, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D23" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 867.789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, -82.7697)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="MeshInstance3D24" type="MeshInstance3D" parent="SetDressin/columns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 1046.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -495.5, 40.9567, 95.6512)
 mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="Trails" type="Node3D" parent="."]

@@ -68,8 +68,8 @@ func explode():
 					randi_range(-10, 10),
 					randi_range(30, 50),
 					randi_range(-10, 10)
-			) + last_lin_vel*0.1)
-		await get_tree().create_timer(4).timeout
+			) + last_lin_vel*0.2)
+		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()
 	print("boom")
 

@@ -2,6 +2,8 @@
 
 how far is charm from jank?
 
-![a primitively modeled grey lightcycle, trailed by a wall of blue light, driving across a dark landscape of grey shapes](https://github.com/2mellofanclub/cyclegame/blob/main/screenshot2.png)
+![a lightcycle with its glowing blue light trail swerving across a dark blue landscape of grey shapes. green and orange tails are also visible in the distance.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot8.png)
 
-![a slick black lightcycle between two rows of grey pillars, stopped in front of a wall of shining orange light](https://github.com/2mellofanclub/cyclegame/blob/main/screenshot4.png)
+![a blue lightcycle exploding into glowing blue voxels after running into an orange light trail. its body is fading into a glowing blue lattice.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshot10.png)
+
+![two lightcycles side by side. one has an orange trail, the other a light blue one.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot5.png)

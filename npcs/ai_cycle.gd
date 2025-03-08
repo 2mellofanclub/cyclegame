@@ -4,11 +4,12 @@ extends VehicleBody3D
 var front_steer = 1
 var engine_power = 400.0
 var rear_steer = 0.0
-var trail_materials = {
+var materials = {
 	"body":"res://materials/badguy_black1.tres",
 	"wheelwells":"res://materials/lw_green1.tres",
 	"lwbase":"res://materials/lw_green1.tres",
 	"lwpulse":"res://materials/lw_green1_pulse.tres",
+	"lattice":"res://materials/lw_green1.tres",
 }
 var alive = true
 var explodable = true
@@ -58,11 +59,12 @@ func explode():
 		var destruction_instance = Destruction.instantiate()
 		add_child(destruction_instance)
 		set_linear_velocity(Vector3.ZERO)
-		$lightcycle/Frontwheel.hide()
+		for child in $lightcycle.get_children():
+			child.hide()
 		$FrontRight/OmniLight3D2.hide()
-		$lightcycle/Body.hide()
-		$lightcycle/Rearwheel.hide()
 		$BackRight/OmniLight3D.hide()
+		destruction_instance.materials = materials
+		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
 					randi_range(-10, 10),
@@ -72,7 +74,16 @@ func explode():
 		await get_tree().create_timer(4).timeout
 		destruction_instance.queue_free()
 	print("boom")
-	
+
+
+func apply_materials():
+	$lightcycle/Body.set_surface_override_material(0, materials["body"])
+	$lightcycle/Body/Windshield_001.set_surface_override_material(0, materials["body"])
+	$lightcycle/Rearwheel.set_surface_override_material(0, materials["body"])
+	$lightcycle/Rearwheel.set_surface_override_material(1, materials["wheelwells"])
+	$lightcycle/Frontwheel.set_surface_override_material(0, materials["body"])
+	$lightcycle/Frontwheel.set_surface_override_material(1, materials["wheelwells"])
+
 
 #botbot
 func quickturn(dir):

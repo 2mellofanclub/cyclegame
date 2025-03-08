@@ -8,6 +8,9 @@ func spawn_enemies():
 	for point in $Spawns/Enemies.get_children():
 		var enemy_instance = Enemy.instantiate()
 		$NPCs.add_child(enemy_instance)
+		if randi_range(0,1) == 1:
+			enemy_instance.materials = MaterialsBus.MATERIALS["pink"]
+			enemy_instance.apply_materials()
 		enemy_instance.set_global_position(point.get_global_position())
 		enemy_instance.set_global_rotation(point.get_global_rotation())
 
@@ -16,6 +19,7 @@ func spawn_allies():
 	for point in $Spawns/Allies.get_children():
 		var ally_instance = Ally.instantiate()
 		$NPCs.add_child(ally_instance)
+		ally_instance.apply_materials()
 		ally_instance.set_global_position(point.get_global_position())
 		ally_instance.set_global_rotation(point.get_global_rotation())
 
@@ -55,7 +59,7 @@ func spawn_lw(Driver):
 	var lw_instance = LightWall.instantiate()
 	$Trails.add_child(lw_instance)
 	lw_instance.Driver = Driver
-	lw_instance.materials = Driver.trail_materials
+	lw_instance.materials = Driver.materials
 	if $Trails.get_child_count() >= MAX_TRAILS:
 		$Trails.get_child(0).free()
 	lw_instance.set_global_position(mid_point)
@@ -76,4 +80,7 @@ func _on_bot_turn_right_body_entered(body: Node3D) -> void:
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if "explode" in body:
-		body.explode()
+		if body.is_explodable():
+			body.explode()
+func _on_despawn_box_body_entered(body: Node3D) -> void:
+	body.queue_free()

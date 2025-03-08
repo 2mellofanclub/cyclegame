@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://l2rtmdw4pu4b" path="res://npcs/ai_cycle.gd" id="1_iwmfg"]
 [ext_resource type="PackedScene" uid="uid://bt1mlu3jq0rmq" path="res://objects/lightcycle.blend" id="2_o06jd"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_yuk60"]
-[ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="4_in3hj"]
+[ext_resource type="Material" uid="uid://tbwy0des5nju" path="res://materials/lw_pink1_pulse.tres" id="4_4xmki"]
 [ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="5_br8h5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p2lnw"]
@@ -102,12 +102,12 @@ surface_material_override/0 = ExtResource("3_yuk60")
 [node name="Rearwheel" parent="lightcycle" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258897, 1.76932)
 surface_material_override/0 = ExtResource("3_yuk60")
-surface_material_override/1 = ExtResource("4_in3hj")
+surface_material_override/1 = ExtResource("4_4xmki")
 
 [node name="Frontwheel" parent="lightcycle" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230219, -1.62454)
 surface_material_override/0 = ExtResource("3_yuk60")
-surface_material_override/1 = ExtResource("4_in3hj")
+surface_material_override/1 = ExtResource("4_4xmki")
 
 [node name="BodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000592291, 0.951512, 0.00351632)

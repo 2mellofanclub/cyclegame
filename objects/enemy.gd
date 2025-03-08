@@ -1,16 +1,16 @@
 extends VehicleBody3D
 
 
-const front_steer = 1
-const engine_power = 400.0
-const rear_steer = 0.0
-const trail_materials = {
+var front_steer = 1
+var engine_power = 400.0
+var rear_steer = 0.0
+var materials = {
 	"body":"res://materials/badguy_black1.tres",
 	"wheelwells":"res://materials/lw_orange1.tres",
 	"lwbase":"res://materials/lw_orange1.tres",
 	"lwpulse":"res://materials/lw_orange1_pulse.tres",
+	"lattice":"res://materials/lw_orange1.tres",
 }
-
 var alive = true
 var explodable = true
 var lw_active = false
@@ -38,7 +38,8 @@ func is_explodable():
 	
 	
 func explode():
-	kill()
+	alive = false
+	explodable = false
 	steering = 0
 	engine_force = 0
 	# i'm something of an animator myself
@@ -62,20 +63,33 @@ func explode():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
 		$BackRight/OmniLight3D.hide()
-		destruction_instance.prepare("orange")
+		destruction_instance.materials = materials
+		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
 					randi_range(-10, 10),
-					randi_range(30, 50),
+					randi_range(20, 30),
 					randi_range(-10, 10)
-			) + last_lin_vel*0.2)
-		await get_tree().create_timer(4).timeout
+			) + last_lin_vel*0.3)
+		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()
 	print("boom")
+
+
+func apply_materials():
+	$lightcycle/Body.set_surface_override_material(0, load(materials["body"]))
+	$lightcycle/Body/Windshield_001.set_surface_override_material(0, load(materials["body"]))
+	$lightcycle/Rearwheel.set_surface_override_material(0, load(materials["body"]))
+	$lightcycle/Rearwheel.set_surface_override_material(1, load(materials["wheelwells"]))
+	$lightcycle/Frontwheel.set_surface_override_material(0, load(materials["body"]))
+	$lightcycle/Frontwheel.set_surface_override_material(1, load(materials["wheelwells"]))
 	
+
 
 #botbot
 func quickturn(n):
+	if not alive:
+		return
 	var lin_vel = get_linear_velocity()
 	set_linear_velocity(Vector3.ZERO)
 	rotate_y(PI/2*n)

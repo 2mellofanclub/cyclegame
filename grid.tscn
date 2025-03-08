@@ -250,9 +250,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.206, 6.10352e-05, 525.639
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -160.367)
 shape = SubResource("BoxShape3D_g2qvd")
 
-[node name="KillBox" type="Area3D" parent="."]
+[node name="ExplodeBox" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplodeBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+shape = SubResource("BoxShape3D_05i0m")
+
+[node name="DespawnBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DespawnBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
 shape = SubResource("BoxShape3D_05i0m")
 
@@ -279,4 +285,5 @@ transform = Transform3D(-0.86292, 0, 0.505341, 0, 1, 0, -0.505341, 0, -0.86292, 
 [connection signal="body_entered" from="BotTurnLeft" to="." method="_on_bot_turn_left_body_entered"]
 [connection signal="body_entered" from="BotTurnLeft2" to="." method="_on_bot_turn_left_body_entered"]
 [connection signal="body_entered" from="BotTurnRight" to="." method="_on_bot_turn_right_body_entered"]
-[connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]
+[connection signal="body_entered" from="ExplodeBox" to="." method="_on_kill_box_body_entered"]
+[connection signal="body_entered" from="DespawnBox" to="." method="_on_despawn_box_body_entered"]

@@ -23,7 +23,7 @@ points = PackedVector3Array(-0.000122726, -0.0442932, 0.90034, -0.191418, 0.1506
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, 0, -0.25)
+center_of_mass = Vector3(0, -1, -0.25)
 script = ExtResource("1_5i27b")
 
 [node name="CamTwist" type="Node3D" parent="."]
@@ -39,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 
 current = true
 
 [node name="FrontLeft" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.4, 0.152, -1.764)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1.4, 0.152, -1.764)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.0
@@ -50,7 +50,7 @@ visible = false
 mesh = SubResource("BoxMesh_p2lnw")
 
 [node name="FrontRight" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.4, 0.152, -1.764)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 1.4, 0.152, -1.764)
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.0

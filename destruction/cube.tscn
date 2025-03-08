@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgukhxeh4ppgy"]
+
+[ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="1_kindn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i825w"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_38i3c"]
+points = PackedVector3Array(-0.05, -0.05, -0.05, 0.0499977, 0.05, 0.05, 0.0499977, 0.05, -0.05, 0.0499977, -0.05, 0.05, -0.05, 0.05, 0.05, 0.0499977, -0.05, -0.05, -0.05, 0.05, -0.05, -0.05, -0.05, 0.05)
+
+[node name="Cube" type="RigidBody3D"]
+
+[node name="Voxel" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i825w")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_kindn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_38i3c")

@@ -43,15 +43,34 @@ func explode():
 	steering = 0
 	engine_force = 0
 	# i'm something of an animator myself
-	set_linear_velocity(Vector3.ZERO)
-	$NotPositive.play()
-	$lightcycle/Frontwheel.hide()
-	$FrontRight/OmniLight3D2.hide()
-	await get_tree().create_timer(0.1).timeout
-	$lightcycle/Body.hide()
-	await get_tree().create_timer(0.1).timeout
-	$lightcycle/Rearwheel.hide()
-	$BackRight/OmniLight3D.hide()
+	if get_linear_velocity().length() < 50:
+		set_linear_velocity(Vector3.ZERO)
+		$NotPositive.play()
+		$lightcycle/Frontwheel.hide()
+		$FrontRight/OmniLight3D2.hide()
+		await get_tree().create_timer(0.1).timeout
+		$lightcycle/Body.hide()
+		await get_tree().create_timer(0.1).timeout
+		$lightcycle/Rearwheel.hide()
+		$BackRight/OmniLight3D.hide()
+	else:
+		var Destruction = load("res://destruction/destruction_blue.tscn")
+		var destruction_instance = Destruction.instantiate()
+		add_child(destruction_instance)
+		set_linear_velocity(Vector3.ZERO)
+		$lightcycle/Frontwheel.hide()
+		$FrontRight/OmniLight3D2.hide()
+		$lightcycle/Body.hide()
+		$lightcycle/Rearwheel.hide()
+		$BackRight/OmniLight3D.hide()
+		for child in destruction_instance.get_children():
+			child.apply_impulse(Vector3(
+					randi_range(-10, 10),
+					randi_range(10, 30),
+					randi_range(-10, 10)
+			))
+		await get_tree().create_timer(4).timeout
+		destruction_instance.queue_free()
 	print("boom")
 	
 

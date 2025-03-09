@@ -31,8 +31,8 @@ func spawn_allies():
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	SignalBus.spawn_lw.connect(spawn_lw)
-	spawn_enemies()
-	spawn_allies()
+	#spawn_enemies()
+	#spawn_allies()
 	$SOS.play()
 
 

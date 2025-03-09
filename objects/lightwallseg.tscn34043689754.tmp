@@ -35,6 +35,7 @@ one_shot = true
 
 [node name="LightOsci" type="Timer" parent="."]
 wait_time = 5.0
+autostart = true
 
 [connection signal="body_entered" from="LightArea" to="." method="_on_lightarea_body_entered"]
 [connection signal="timeout" from="DelTimer" to="." method="_on_timer_timeout"]

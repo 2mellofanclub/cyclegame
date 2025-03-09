@@ -253,11 +253,10 @@ shape = SubResource("BoxShape3D_g2qvd")
 [node name="ExplodeBox" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExplodeBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -168.668, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
 shape = SubResource("BoxShape3D_05i0m")
 
 [node name="DespawnBox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -566.392, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DespawnBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)

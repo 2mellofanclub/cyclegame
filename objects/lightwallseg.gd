@@ -2,6 +2,7 @@ extends Node3D
 
 
 var hot = false
+var using_shader = true
 var Driver
 var materials = {}
 
@@ -29,6 +30,7 @@ func _process(delta):
 		if not hot:
 			if global_position.distance_to(Driver.get_global_position()) > 3.5:
 				$Shell/DaGoodBox.using_shader = false
+				using_shader = false
 				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))
 				heat()
 
@@ -49,6 +51,11 @@ func _on_timer_timeout() -> void:
 
 
 func _on_lightosci_timeout() -> void:
-	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwpulse"]))
-	await get_tree().create_timer(0.1).timeout
-	$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))
+	if using_shader:
+		$Shell/DaGoodBox.set_surface_override_material(0, load(materials["slwpulse"]))
+		await get_tree().create_timer(0.1).timeout
+		$Shell/DaGoodBox.set_surface_override_material(0, load(materials["slwbase"]))
+	else:
+		$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwpulse"]))
+		await get_tree().create_timer(0.1).timeout
+		$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))

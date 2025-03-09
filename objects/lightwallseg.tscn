@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://chv4761a20kmb"]
 
 [ext_resource type="Script" uid="uid://d2rr6f64my7y6" path="res://objects/lightwallseg.gd" id="1_8kgsn"]
-[ext_resource type="Material" uid="uid://ceynuen7qnx1" path="res://materials/mask.tres" id="2_40qno"]
+[ext_resource type="Material" uid="uid://y5kioappetuf" path="res://materials/slw_blue1.tres" id="2_40qno"]
 [ext_resource type="Script" uid="uid://biucfvq0y528u" path="res://objects/da_good_box.gd" id="3_40qno"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]

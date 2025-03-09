@@ -5,11 +5,13 @@ var front_steer = 1
 var engine_power = 400.0
 var rear_steer = 0.0
 var materials = {
-	"body":"res://materials/badguy_black1.tres",
-	"wheelwells":"res://materials/lw_blue1.tres",
-	"lwbase":"res://materials/lw_blue1.tres",
-	"lwpulse":"res://materials/lw_blue1_pulse.tres",
-	"lattice":"res://materials/lw_blue1.tres",
+	"body" : "res://materials/badguy_black1.tres",
+	"wheelwells" : "res://materials/lw_blue1.tres",
+	"slwbase" : "res://materials/slw_blue1.tres",
+	"slwpulse" : "res://materials/slw_blue1_pulse.tres",
+	"lwbase" : "res://materials/lw_blue1.tres",
+	"lwpulse" : "res://materials/lw_blue1_pulse.tres",
+	"lattice" : "res://materials/lw_blue1.tres",
 }
 var alive = true
 var explodable = true

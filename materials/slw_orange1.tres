@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://co70ix7iphsu1"]
+
+[ext_resource type="Shader" uid="uid://bmsc1jkk7aypr" path="res://materials/mask.gdshader" id="1_bm05m"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bm05m")
+shader_parameter/Cpoint = Vector3(0, 0, 0)
+shader_parameter/emission = Color(0.807843, 0.247059, 0.160784, 1)
+shader_parameter/emission_energy = 10.0

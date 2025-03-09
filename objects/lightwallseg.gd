@@ -24,10 +24,12 @@ func _process(delta):
 		$Shell/DaGoodBox.cpoint = Driver.get_node("TrailEater").get_global_position()
 		if not visible:
 			if global_position.distance_to(Driver.get_global_position()) > 2:
-				#$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))
+				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["slwbase"]))
 				show()
 		if not hot:
 			if global_position.distance_to(Driver.get_global_position()) > 3.5:
+				$Shell/DaGoodBox.using_shader = false
+				$Shell/DaGoodBox.set_surface_override_material(0, load(materials["lwbase"]))
 				heat()
 
 

@@ -138,10 +138,12 @@ func _process(_delta):
 			set_linear_velocity(Vector3(-lin_vel.z, 0, lin_vel.x))
 	if Input.is_action_just_pressed("superbrake"):
 		$lightcycle.rotate_y(PI/2)
+		$IDunno.rotate_y(PI/2)
 		$lightcycle.rotate_x(PI/6)
 		set_brake(10)
 	if Input.is_action_just_released("superbrake"):
 		$lightcycle.rotate_y(-PI/2)
+		$IDunno.rotate_y(-PI/2)
 		set_brake(0)
 	# -- END STEERING -- #
 

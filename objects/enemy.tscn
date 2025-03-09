@@ -132,7 +132,9 @@ wait_time = 30.0
 [node name="TrailPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="TrailEater" type="Node3D" parent="."]
+[node name="IDunno" type="Node3D" parent="."]
+
+[node name="TrailEater" type="Node3D" parent="IDunno"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258897, 1.76932)
 
 [connection signal="timeout" from="Kill" to="." method="_on_kill_timeout"]

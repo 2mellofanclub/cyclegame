@@ -26,19 +26,22 @@ func get_last_pos():
 	return las_pos
 func get_last_rot():
 	return las_rot
+	
 func set_last_pos(pos: Vector3):
 	las_pos = pos
 func set_last_rot(rot: Vector3):
 	las_rot = rot
+	
 func is_alive():
 	return alive
 func kill():
 	alive = false
-func is_explodable():
-	return explodable
+
 
 
 func explode():
+	if not explodable:
+		return
 	alive = false
 	explodable = false
 	steering = 0
@@ -88,8 +91,6 @@ func apply_materials():
 	$lightcycle/Frontwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
 
 
-
-
 func _ready():
 	las_pos = global_position
 	las_rot = global_rotation
@@ -109,7 +110,7 @@ func _process(delta):
 	if not is_alive():
 		return
 	
-	if (xz_lin_vel).length() > 80:
+	if (xz_lin_vel).length() > 70:
 		if $ImpactRay.is_colliding():
 			explode()
 	

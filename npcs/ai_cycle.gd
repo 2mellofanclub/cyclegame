@@ -39,11 +39,11 @@ func is_alive():
 func kill():
 	alive = false
 	$Despawn.start()
-func is_explodable():
-	return explodable
 
 
 func explode():
+	if not explodable:
+		return
 	alive = false
 	explodable = false
 	steering = 0
@@ -111,24 +111,58 @@ func quickturn(dir):
 
 
 #botbot
-# head on = random 90 degree quickturn
-# left or right, aling with lightwall
-func avoid_lightwall(lin_vel):
+func avoid_lightwall(xz_lin_vel):
 	if $FRay.is_colliding():
-		if randi_range(0, 1) == 0:
+		if $FLRay.is_colliding():
+			quickturn("right")
+		elif $FRRay.is_colliding():
+			quickturn("left")
+		elif randi_range(0, 1) == 0:
 			quickturn("left")
 		else:
 			quickturn("right")
 	elif $FLRay.is_colliding():
-		var angle_to_normal = lin_vel.angle_to($FLRay.get_collision_normal())
+		var angle_to_normal = xz_lin_vel.angle_to($FLRay.get_collision_normal())
 		var rotate_angle = -1 * (angle_to_normal - PI/2)
 		rotate_y(rotate_angle)
-		set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+		set_linear_velocity(xz_lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
 	elif $FRRay.is_colliding():
-		var angle_to_normal = lin_vel.angle_to($FRRay.get_collision_normal())
+		var angle_to_normal = xz_lin_vel.angle_to($FRRay.get_collision_normal())
 		var rotate_angle = angle_to_normal - PI/2
 		rotate_y(rotate_angle)
-		set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+		set_linear_velocity(xz_lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+		
+
+func exp_avoid_lightwall(lin_vel):
+	if $FRay.is_colliding() and qt_available:
+		if $FLRay.is_colliding():
+			quickturn("right")
+		elif $FRRay.is_colliding():
+			quickturn("left")
+		elif randi_range(0, 1) == 0:
+			quickturn("left")
+		else:
+			quickturn("right")
+	elif $FLRay.is_colliding():
+		if qt_available:
+			var angle_to_normal = lin_vel.angle_to($FLRay.get_collision_normal())
+			var rotate_angle = -1 * (angle_to_normal - PI/2)
+			rotate_y(rotate_angle)
+			set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+			qt_available = false
+			$QTCooldown.start()
+		else:
+			steering = -1
+	elif $FRRay.is_colliding():
+		if qt_available:
+			var angle_to_normal = lin_vel.angle_to($FRRay.get_collision_normal())
+			var rotate_angle = angle_to_normal - PI/2
+			rotate_y(rotate_angle)
+			set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+			qt_available = false
+			$QTCooldown.start()
+		else:
+			steering = 1
 
 
 func _ready():
@@ -157,18 +191,18 @@ func _process(_delta):
 	if not is_alive():
 		return
 	
-	if xz_lin_vel.length() > 80:
+	if xz_lin_vel.length() > 70:
 		if $ImpactRay.is_colliding():
 			explode()
-	
 	var kill_speed = 3
+	
 	if xz_lin_vel.length() < kill_speed:
 		if $Kill.is_stopped():
 			$Kill.start()
 	else:
 		if not $Kill.is_stopped():
 			$Kill.stop()
-	
+			
 	if (lin_vel * Vector3(1, 0, 1)).length() > 50:
 		lw_active = true
 	elif (lin_vel * Vector3(1, 0, 1)).length() < 15:
@@ -179,12 +213,11 @@ func _process(_delta):
 		else:
 			las_pos = get_global_position()
 			las_rot = get_global_rotation()
-	
-	
+			
 	# -- BEGIN STEERING -- #
 	#botbot
-	avoid_lightwall(lin_vel)
-	
+	steering = 0
+	avoid_lightwall(xz_lin_vel)
 	# -- END STEERING -- #
 
 

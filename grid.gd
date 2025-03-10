@@ -7,6 +7,7 @@ extends Node3D
 @onready var Player = preload("res://objects/player.tscn")
 @onready var AICycle = preload("res://npcs/ai_cycle.tscn")
 
+
 func spawn_players():
 	for point in $Spawns/Players.get_children():
 		var player_instance = Player.instantiate()
@@ -104,7 +105,6 @@ func _on_bot_turn_right_body_entered(body: Node3D) -> void:
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if "explode" in body:
-		if body.is_explodable():
-			body.explode()
+		body.explode()
 func _on_despawn_box_body_entered(body: Node3D) -> void:
 	body.queue_free()

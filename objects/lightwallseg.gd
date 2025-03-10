@@ -46,7 +46,7 @@ func _on_lightarea_body_entered(body):
 		return
 	if "explode" in body:
 		# move these checks to explode? (and have explode() return bool)
-		if body.is_alive() and body.is_explodable():
+		if body.is_alive():
 			print("ka")
 			body.explode()
 

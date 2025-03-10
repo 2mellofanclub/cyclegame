@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ci7nrem6y005f"]
+
+[ext_resource type="Shader" uid="uid://bmsc1jkk7aypr" path="res://materials/mask.gdshader" id="1_txs0l"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_txs0l")
+shader_parameter/Cpoint = Vector3(0, 0, 0)
+shader_parameter/emission = Color(0.627451, 0.423529, 0.101961, 1)
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 16.0

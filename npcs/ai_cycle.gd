@@ -1,16 +1,17 @@
 extends VehicleBody3D
 
 
+@onready var cam_twist = $CamTwist
+@onready var cam_pitch = $CamTwist/CamPitch
+@onready var Destruction = load("res://destruction/destruction.tscn")
+@onready var destruction_instance = Destruction.instantiate()
+
 var front_steer = 1
 var engine_power = 400.0
 var rear_steer = 0.0
-var materials = {
-	"body":"res://materials/badguy_black1.tres",
-	"wheelwells":"res://materials/lw_green1.tres",
-	"lwbase":"res://materials/lw_green1.tres",
-	"lwpulse":"res://materials/lw_green1_pulse.tres",
-	"lattice":"res://materials/lw_green1.tres",
-}
+var qt_available = true
+var cycle_color = "pink"
+var lw_color = "pink"
 var alive = true
 var explodable = true
 var lw_active = false
@@ -34,19 +35,21 @@ func set_last_rot(rot: Vector3):
 	
 func is_alive():
 	return alive
+func kill():
+	alive = false
 func is_explodable():
 	return explodable
 
-func kill():
-	alive = false
+
 func explode():
-	kill()
+	alive = false
+	explodable = false
 	steering = 0
 	engine_force = 0
 	# i'm something of an animator myself
-	if get_linear_velocity().length() < 50:
+	if get_linear_velocity().length() < 30:
 		set_linear_velocity(Vector3.ZERO)
-		$NotPositive.play()
+		#$Sounds/Splash.play()
 		$lightcycle/Frontwheel.hide()
 		$FrontRight/OmniLight3D2.hide()
 		await get_tree().create_timer(0.1).timeout
@@ -55,38 +58,44 @@ func explode():
 		$lightcycle/Rearwheel.hide()
 		$BackRight/OmniLight3D.hide()
 	else:
-		var Destruction = load("res://destruction/destruction_blue.tscn")
-		var destruction_instance = Destruction.instantiate()
-		add_child(destruction_instance)
+		var last_lin_vel = get_linear_velocity()
 		set_linear_velocity(Vector3.ZERO)
+		#$Sounds/Splash.play()
+		add_child(destruction_instance)
 		for child in $lightcycle.get_children():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
 		$BackRight/OmniLight3D.hide()
-		destruction_instance.materials = materials
+		destruction_instance.cycle_color = cycle_color
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
 					randi_range(-10, 10),
-					randi_range(10, 30),
+					randi_range(20, 30),
 					randi_range(-10, 10)
-			))
-		await get_tree().create_timer(4).timeout
+			) + last_lin_vel * 0.3)
+		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()
 	print("boom")
 
 
 func apply_materials():
-	$lightcycle/Body.set_surface_override_material(0, materials["body"])
-	$lightcycle/Body/Windshield_001.set_surface_override_material(0, materials["body"])
-	$lightcycle/Rearwheel.set_surface_override_material(0, materials["body"])
-	$lightcycle/Rearwheel.set_surface_override_material(1, materials["wheelwells"])
-	$lightcycle/Frontwheel.set_surface_override_material(0, materials["body"])
-	$lightcycle/Frontwheel.set_surface_override_material(1, materials["wheelwells"])
+	var lc_materials = MaterialsBus.LC_MATERIALS
+	$lightcycle/Body.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
+	$lightcycle/Body.set_surface_override_material(1, lc_materials[cycle_color]["body1"])
+	$lightcycle/Body/Windshield_001.set_surface_override_material(0, lc_materials[cycle_color]["body1"])
+	$lightcycle/Rearwheel.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
+	$lightcycle/Rearwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
+	$lightcycle/Frontwheel.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
+	$lightcycle/Frontwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
 
 
 #botbot
 func quickturn(dir):
+	if not qt_available:
+		return
+	qt_available = false
+	$QTCooldown.start()
 	var directions = {
 		"left":1,
 		"right":-1,
@@ -99,10 +108,27 @@ func quickturn(dir):
 	set_linear_velocity(-directions[dir] * Vector3(-lin_vel.z, 0, lin_vel.x))
 
 
+#botbot
+# head on = random 90 degree quickturn
+# left or right, aling with lightwall
+func avoid_lightwall(lin_vel):
+	if $FRay.is_colliding():
+		if randi_range(0, 1) == 0:
+			quickturn("left")
+		else:
+			quickturn("right")
+	elif $FLRay.is_colliding():
+		var angle_to_normal = lin_vel.angle_to($FLRay.get_collision_normal())
+		var rotate_angle = -1 *(angle_to_normal - PI/2)
+		rotate_y(rotate_angle)
+		set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+	elif $FRRay.is_colliding():
+		var angle_to_normal = lin_vel.angle_to($FRRay.get_collision_normal())
+		var rotate_angle = angle_to_normal - PI/2
+		rotate_y(rotate_angle)
+		set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
 
 
-@onready var cam_twist = $CamTwist
-@onready var cam_pitch = $CamTwist/CamPitch
 func _ready():
 	las_pos = get_global_position()
 	las_rot = get_global_rotation()
@@ -115,9 +141,9 @@ func _process(_delta):
 		cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
 		twist_input = 0
 		pitch_input = 0
-	
-	var lin_vel = get_linear_velocity()
+		
 	#botbot
+	var lin_vel = get_linear_velocity()
 	if lin_vel.length() < 100:
 		engine_force = 400
 	else:
@@ -126,6 +152,10 @@ func _process(_delta):
 	# stuff below is only for the living 
 	if not is_alive():
 		return
+	
+	if (lin_vel * Vector3(1, 0, 1)).length() > 80:
+		if $ImpactRay.is_colliding():
+			explode()
 	
 	if (lin_vel * Vector3(1, 0, 1)).length() > 50:
 		lw_active = true
@@ -140,6 +170,8 @@ func _process(_delta):
 	
 	
 	# -- BEGIN STEERING -- #
+	#botbot
+	avoid_lightwall(lin_vel)
 	
 	# -- END STEERING -- #
 
@@ -153,3 +185,7 @@ func _unhandled_input(event):
 
 func _on_kill_timeout() -> void:
 	queue_free() # Replace with function body.
+
+
+func _on_qt_cooldown_timeout() -> void:
+	qt_available = true

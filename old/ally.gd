@@ -4,15 +4,8 @@ extends VehicleBody3D
 var FRONT_STEER = 1
 var ENGINE_POWER = 400.0
 var REAR_STEER = 0.0
-var materials = {
-	"body" : "res://materials/badguy_black1.tres",
-	"wheelwells" : "res://materials/lw_green1.tres",
-	"slwbase" : "res://materials/slw_green1.tres",
-	"slwpulse" : "res://materials/slw_green1_pulse.tres",
-	"lwbase" : "res://materials/lw_green1.tres",
-	"lwpulse" : "res://materials/lw_green1_pulse.tres",
-	"lattice" : "res://materials/lw_green1.tres",
-}
+var cycle_color = "green"
+var lw_color = "green"
 var alive = true
 var explodable = true
 var lw_active = false
@@ -65,7 +58,7 @@ func explode():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
 		$BackRight/OmniLight3D.hide()
-		destruction_instance.materials = materials
+		destruction_instance.cycle_color = cycle_color
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
@@ -79,12 +72,13 @@ func explode():
 
 
 func apply_materials():
-	$lightcycle/Body.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Body/Windshield_001.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Rearwheel.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Rearwheel.set_surface_override_material(1, load(materials["wheelwells"]))
-	$lightcycle/Frontwheel.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Frontwheel.set_surface_override_material(1, load(materials["wheelwells"]))
+	var lc_materials = MaterialsBus.LC_MATERIALS
+	$lightcycle/Body.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Body/Windshield_001.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Rearwheel.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Rearwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
+	$lightcycle/Frontwheel.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Frontwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
 
 
 #botbot

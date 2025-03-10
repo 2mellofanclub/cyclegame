@@ -4,15 +4,8 @@ extends VehicleBody3D
 var front_steer = 1
 var engine_power = 400.0
 var rear_steer = 0.0
-var materials = {
-	"body" : "res://materials/badguy_black1.tres",
-	"wheelwells" : "res://materials/lw_orange1.tres",
-	"slwbase" : "res://materials/slw_orange1.tres",
-	"slwpulse" : "res://materials/slw_orange1_pulse.tres",
-	"lwbase" : "res://materials/lw_orange1.tres",
-	"lwpulse" : "res://materials/lw_orange1_pulse.tres",
-	"lattice" : "res://materials/lw_orange1.tres",
-}
+var cycle_color = "orange"
+var lw_color = "orange"
 var alive = true
 var explodable = true
 var lw_active = false
@@ -65,7 +58,7 @@ func explode():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
 		$BackRight/OmniLight3D.hide()
-		destruction_instance.materials = materials
+		destruction_instance.cycle_color = cycle_color
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
@@ -79,12 +72,13 @@ func explode():
 
 
 func apply_materials():
-	$lightcycle/Body.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Body/Windshield_001.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Rearwheel.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Rearwheel.set_surface_override_material(1, load(materials["wheelwells"]))
-	$lightcycle/Frontwheel.set_surface_override_material(0, load(materials["body"]))
-	$lightcycle/Frontwheel.set_surface_override_material(1, load(materials["wheelwells"]))
+	var lc_materials = MaterialsBus.LC_MATERIALS
+	$lightcycle/Body.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Body/Windshield_001.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Rearwheel.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Rearwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
+	$lightcycle/Frontwheel.set_surface_override_material(0, lc_materials["body"])
+	$lightcycle/Frontwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
 	
 
 
@@ -139,39 +133,7 @@ func _process(_delta):
 	
 	
 	# -- BEGIN STEERING -- #
-	#if not Input.is_action_pressed("superbrake"):
-		#steering = Input.get_axis("steerright", "steerleft") * front_steer
-		#$BackLeft.steering = rear_steer * steering
-		#$BackRight.steering = rear_steer * steering
-		#engine_force = clamp(
-				#Input.get_axis("gasdown", "gasup") * engine_power, -200, 500
-		#)
-		#$lightcycle.global_rotation.z = (global_rotation.z + 
-				#Input.get_axis("steerright", "steerleft") * PI/6
-		#)
-		## Quickturn left with speed intact
-		#if Input.is_action_just_pressed("ninleft"):
-			#var lin_vel = get_linear_velocity()
-			#set_linear_velocity(Vector3.ZERO)
-			#rotate_y(PI/2)
-			#las_rot = get_global_rotation()
-			#cam_twist.rotate_y(-PI/2)
-			#set_linear_velocity(-Vector3(-lin_vel.z, 0, lin_vel.x))
-		## Quickturn right with speed intact
-		#if Input.is_action_just_pressed("ninright"):
-			#var lin_vel = get_linear_velocity()
-			#set_linear_velocity(Vector3.ZERO)
-			#rotate_y(-PI/2)
-			#las_rot = get_global_rotation()
-			#cam_twist.rotate_y(PI/2)
-			#set_linear_velocity(Vector3(-lin_vel.z, 0, lin_vel.x))
-	#if Input.is_action_just_pressed("superbrake"):
-		#$lightcycle.rotate_y(PI/2)
-		#$lightcycle.rotate_x(PI/6)
-		#set_brake(10)
-	#if Input.is_action_just_released("superbrake"):
-		#$lightcycle.rotate_y(-PI/2)
-		#set_brake(0)
+	
 	# -- END STEERING -- #
 
 

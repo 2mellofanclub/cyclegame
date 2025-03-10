@@ -16,8 +16,10 @@ func _process(delta):
 func _on_ramparea_body_entered(body):
 	if (not RAMP_PHYSICS) and "explodable" in body:
 		body.rotate_object_local(Vector3(1, 0, 0), deg_to_rad(14.4))
+		body.get_node("CamTwist").rotate_object_local(Vector3(1, 0, 0), deg_to_rad(-14.4))
 		print("in")
 func _on_ramparea_body_exited(body):
 	if  (not RAMP_PHYSICS) and "explodable" in body:
 		body.rotate_object_local(Vector3(1, 0, 0), -deg_to_rad(14.4))
+		body.get_node("CamTwist").rotate_object_local(Vector3(1, 0, 0), deg_to_rad(14.4))
 		print("out")

@@ -1,7 +1,7 @@
 extends Node3D
 
 
-const MAX_TRAILS = 5000
+const MAX_TRAILS = 1000
 @onready var LightWall = preload("res://objects/lightwallseg.tscn")
 @onready var Player = preload("res://objects/player.tscn")
 @onready var AICycle = preload("res://npcs/ai_cycle.tscn")

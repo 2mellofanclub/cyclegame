@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bt1mlu3jq0rmq"
+uid="uid://md1l12bhugd1"
 path="res://.godot/imported/lightcycle.blend-81ce32379668e477a1a47bd7a0c56563.scn"
 
 [deps]
@@ -13,8 +13,8 @@ dest_files=["res://.godot/imported/lightcycle.blend-81ce32379668e477a1a47bd7a0c5
 
 [params]
 
-nodes/root_type="Node3D"
-nodes/root_name="Scene Root"
+nodes/root_type=""
+nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

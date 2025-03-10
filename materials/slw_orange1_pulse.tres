@@ -7,4 +7,5 @@ render_priority = 0
 shader = ExtResource("1_58jo2")
 shader_parameter/Cpoint = Vector3(0, 0, 0)
 shader_parameter/emission = Color(0.807843, 0.247059, 0.160784, 1)
+shader_parameter/albedo = Color(0, 0, 0, 1)
 shader_parameter/emission_energy = 16.0

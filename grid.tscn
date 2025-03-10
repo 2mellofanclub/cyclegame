@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cyde73xt2w162"]
+[gd_scene load_steps=21 format=3 uid="uid://cyde73xt2w162"]
 
 [ext_resource type="Script" uid="uid://c1cmxcje2ud7c" path="res://grid.gd" id="1_2miq5"]
-[ext_resource type="PackedScene" uid="uid://d2cs66fu18gqv" path="res://objects/player.tscn" id="1_fhnjh"]
 [ext_resource type="PackedScene" uid="uid://bvujyrv8j5jjh" path="res://objects/ramp.tscn" id="2_iiu8i"]
+[ext_resource type="PackedScene" uid="uid://bm2iawxbkla2q" path="res://objects/bounds.tscn" id="4_bghhw"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="5_fqc2p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dujx"]
@@ -48,6 +48,10 @@ top_radius = 4.0
 bottom_radius = 4.0
 height = 100.0
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bghhw"]
+height = 50.0
+radius = 100.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_bghhw"]
 size = Vector3(100, 10, 100)
 
@@ -76,9 +80,6 @@ mesh = SubResource("BoxMesh_xw411")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_qunid")
 
-[node name="Player" parent="." instance=ExtResource("1_fhnjh")]
-transform = Transform3D(-0.999367, 0, 0.0355795, 0, 1, 0, -0.0355795, 0, -0.999367, 13.3779, -2.23014, -0.940729)
-
 [node name="Ramp" parent="." instance=ExtResource("2_iiu8i")]
 transform = Transform3D(0.862743, 0, -0.505642, 0, 1, 0, 0.505642, 0, 0.862743, 103.87, -12.4319, -88.1077)
 
@@ -91,6 +92,7 @@ mesh = SubResource("PrismMesh_xic1j")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SetDressin/tent_minor"]
+collision_layer = 65
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SetDressin/tent_minor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ngms3")
@@ -101,6 +103,7 @@ mesh = SubResource("PrismMesh_xic1j")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SetDressin/tent_major"]
+collision_layer = 65
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SetDressin/tent_major/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ngms3")
@@ -110,9 +113,10 @@ transform = Transform3D(0.490106, 0, 0.395895, 0, 5, 0, -0.0989734, 0, 1.96042, 
 mesh = SubResource("CylinderMesh_au3no")
 skeleton = NodePath("../../Floor")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SetDressin/thin_tower"]
+[node name="TowerBody" type="StaticBody3D" parent="SetDressin/thin_tower"]
+collision_layer = 65
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SetDressin/thin_tower/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SetDressin/thin_tower/TowerBody"]
 shape = SubResource("ConcavePolygonShape3D_6fqgn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SetDressin"]
@@ -225,45 +229,12 @@ mesh = SubResource("CylinderMesh_ufbc5")
 
 [node name="Trails" type="Node3D" parent="."]
 
-[node name="SOS" parent="." instance=ExtResource("5_fqc2p")]
-volume_db = -22.0
-pitch_scale = 0.68
-autoplay = false
-
-[node name="BotTurnLeft" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 522.59, 6.10352e-05, 729.979)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BotTurnLeft"]
-shape = SubResource("BoxShape3D_bghhw")
-
-[node name="BotTurnLeft2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440.407, 6.10352e-05, 436.894)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BotTurnLeft2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 415.669, 0, 0)
-shape = SubResource("BoxShape3D_fqc2p")
-
-[node name="BotTurnRight" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.206, 6.10352e-05, 525.639)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BotTurnRight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -160.367)
-shape = SubResource("BoxShape3D_g2qvd")
-
-[node name="ExplodeBox" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplodeBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -168.668, 0)
-shape = SubResource("BoxShape3D_05i0m")
-
-[node name="DespawnBox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -566.392, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DespawnBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
-shape = SubResource("BoxShape3D_05i0m")
-
 [node name="Spawns" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="Spawns"]
+
+[node name="PlayerSpawn" type="Node3D" parent="Spawns/Players"]
+transform = Transform3D(-0.999367, 0, 0.0355795, 0, 1, 0, -0.0355795, 0, -0.999367, 13.3779, -2.23014, -0.940729)
 
 [node name="Enemies" type="Node3D" parent="Spawns"]
 
@@ -283,8 +254,100 @@ transform = Transform3D(-0.86292, 0, 0.505341, 0, 1, 0, -0.505341, 0, -0.86292, 
 
 [node name="NPCs" type="Node3D" parent="."]
 
-[connection signal="body_entered" from="BotTurnLeft" to="." method="_on_bot_turn_left_body_entered"]
-[connection signal="body_entered" from="BotTurnLeft2" to="." method="_on_bot_turn_left_body_entered"]
-[connection signal="body_entered" from="BotTurnRight" to="." method="_on_bot_turn_right_body_entered"]
-[connection signal="body_entered" from="ExplodeBox" to="." method="_on_kill_box_body_entered"]
-[connection signal="body_entered" from="DespawnBox" to="." method="_on_despawn_box_body_entered"]
+[node name="SOS" parent="." instance=ExtResource("5_fqc2p")]
+volume_db = -22.0
+pitch_scale = 0.68
+autoplay = false
+
+[node name="Boxes" type="Node" parent="."]
+
+[node name="Bounds" parent="Boxes" instance=ExtResource("4_bghhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1337.94)
+
+[node name="Bounds2" parent="Boxes" instance=ExtResource("4_bghhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1374.06)
+
+[node name="Bounds3" parent="Boxes" instance=ExtResource("4_bghhw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1346.05, 0, -1.61798)
+
+[node name="Bounds4" parent="Boxes" instance=ExtResource("4_bghhw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1351.28, 0, -1.61786)
+
+[node name="Bounce" type="Area3D" parent="Boxes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1330.49, 0, -1.61786)
+collision_layer = 65
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.5705, 0)
+shape = SubResource("CylinderShape3D_bghhw")
+
+[node name="Bounce2" type="Area3D" parent="Boxes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -224.266, 0, -1309.3)
+collision_layer = 65
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.5705, 0)
+shape = SubResource("CylinderShape3D_bghhw")
+
+[node name="Bounce3" type="Area3D" parent="Boxes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1285.63, 0, -186.57)
+collision_layer = 65
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.5705, 0)
+shape = SubResource("CylinderShape3D_bghhw")
+
+[node name="Bounce5" type="Area3D" parent="Boxes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -31.9391, 0, 1339.34)
+collision_layer = 65
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.5705, 0)
+shape = SubResource("CylinderShape3D_bghhw")
+
+[node name="Bounce4" type="Area3D" parent="Boxes"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1278.64, 0, -1257.37)
+collision_layer = 65
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.5705, 0)
+shape = SubResource("CylinderShape3D_bghhw")
+
+[node name="BotTurnLeft" type="Area3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 522.59, 6.10352e-05, 729.979)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/BotTurnLeft"]
+shape = SubResource("BoxShape3D_bghhw")
+
+[node name="BotTurnLeft2" type="Area3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 440.407, 6.10352e-05, 436.894)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/BotTurnLeft2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 415.669, 0, 0)
+shape = SubResource("BoxShape3D_fqc2p")
+
+[node name="BotTurnRight" type="Area3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.206, 6.10352e-05, 525.639)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/BotTurnRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -160.367)
+shape = SubResource("BoxShape3D_g2qvd")
+
+[node name="ExplodeBox" type="Area3D" parent="Boxes"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/ExplodeBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -168.668, 0)
+shape = SubResource("BoxShape3D_05i0m")
+
+[node name="DespawnBox" type="Area3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -566.392, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/DespawnBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+shape = SubResource("BoxShape3D_05i0m")
+
+[connection signal="body_entered" from="Boxes/BotTurnLeft" to="." method="_on_bot_turn_left_body_entered"]
+[connection signal="body_entered" from="Boxes/BotTurnLeft2" to="." method="_on_bot_turn_left_body_entered"]
+[connection signal="body_entered" from="Boxes/BotTurnRight" to="." method="_on_bot_turn_right_body_entered"]
+[connection signal="body_entered" from="Boxes/ExplodeBox" to="." method="_on_kill_box_body_entered"]
+[connection signal="body_entered" from="Boxes/DespawnBox" to="." method="_on_despawn_box_body_entered"]

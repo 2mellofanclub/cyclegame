@@ -1,18 +1,16 @@
 extends VehicleBody3D
 
 
+@onready var cam_twist = $CamTwist
+@onready var cam_pitch = $CamTwist/CamPitch
+@onready var Destruction = load("res://destruction/destruction.tscn")
+@onready var destruction_instance = Destruction.instantiate()
+
 var front_steer = 1
 var engine_power = 400.0
 var rear_steer = 0.0
-var materials = {
-	"body" : "res://materials/badguy_black1.tres",
-	"wheelwells" : "res://materials/lw_blue1.tres",
-	"slwbase" : "res://materials/slw_blue1.tres",
-	"slwpulse" : "res://materials/slw_blue1_pulse.tres",
-	"lwbase" : "res://materials/lw_blue1.tres",
-	"lwpulse" : "res://materials/lw_blue1_pulse.tres",
-	"lattice" : "res://materials/lw_blue1.tres",
-}
+var cycle_color = "blue"
+var lw_color = "blue"
 var alive = true
 var explodable = true
 var lw_active = false
@@ -37,17 +35,18 @@ func kill():
 	alive = false
 func is_explodable():
 	return explodable
-	
-	
+
+
 func explode():
 	alive = false
 	explodable = false
 	steering = 0
 	engine_force = 0
+	$IDunno/TrailEater.translate(Vector3(0, 100, 0))
 	# i'm something of an animator myself
 	if get_linear_velocity().length() < 3:
 		set_linear_velocity(Vector3.ZERO)
-		$NotPositive.play()
+		#$Sounds/Splash.play()
 		$lightcycle/Frontwheel.hide()
 		$FrontRight/OmniLight3D2.hide()
 		await get_tree().create_timer(0.1).timeout
@@ -58,35 +57,46 @@ func explode():
 	else:
 		var last_lin_vel = get_linear_velocity()
 		set_linear_velocity(Vector3.ZERO)
-		var Destruction = load("res://destruction/destruction.tscn")
-		var destruction_instance = Destruction.instantiate()
+		#$Sounds/Splash.play()
 		add_child(destruction_instance)
 		for child in $lightcycle.get_children():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
 		$BackRight/OmniLight3D.hide()
-		destruction_instance.materials = materials
+		destruction_instance.cycle_color = cycle_color
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
 					randi_range(-10, 10),
 					randi_range(20, 30),
 					randi_range(-10, 10)
-			) + last_lin_vel*0.3)
+			) + last_lin_vel * 0.3)
 		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()
 	print("boom")
 
 
-@onready var cam_twist = $CamTwist
-@onready var cam_pitch = $CamTwist/CamPitch
+func apply_materials():
+	var lc_materials = MaterialsBus.LC_MATERIALS
+	$lightcycle/Body.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
+	$lightcycle/Body.set_surface_override_material(1, lc_materials[cycle_color]["body1"])
+	$lightcycle/Body/Windshield_001.set_surface_override_material(0, lc_materials[cycle_color]["body1"])
+	$lightcycle/Rearwheel.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
+	$lightcycle/Rearwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
+	$lightcycle/Frontwheel.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
+	$lightcycle/Frontwheel.set_surface_override_material(1, lc_materials[cycle_color]["wheelwells"])
+
+
+
+
 func _ready():
 	las_pos = global_position
 	las_rot = global_rotation
 
 
-func _process(_delta):
+func _process(delta):
 	var lin_vel = get_linear_velocity()
+	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
 	
 	cam_twist.rotate_y(twist_input)
 	cam_pitch.rotate_x(pitch_input)
@@ -98,9 +108,13 @@ func _process(_delta):
 	if not is_alive():
 		return
 	
-	if (lin_vel*Vector3(1, 0, 1)).length() > 50:
+	if (xz_lin_vel).length() > 80:
+		if $ImpactRay.is_colliding():
+			explode()
+	
+	if (xz_lin_vel).length() > 50:
 		lw_active = true
-	elif (lin_vel*Vector3(1, 0, 1)).length() < 15:
+	elif (xz_lin_vel).length() < 15:
 		lw_active = false
 	if las_pos.distance_to(get_global_position()) >= 0.6:
 		if lw_active:
@@ -108,6 +122,15 @@ func _process(_delta):
 		else:
 			las_pos = global_position
 			las_rot = global_rotation
+
+	$lightcycle/Rearwheel.rotate_object_local(
+			Vector3(1, 0, 0), 
+			(2 * PI) * ($BackLeft.get_rpm() / 60 * delta)
+	)
+	$lightcycle/Frontwheel.rotate_object_local(
+			Vector3(1, 0, 0), 
+			(2 * PI) * ($FrontLeft.get_rpm() / 60 * delta)
+	)
 
 	# -- BEGIN STEERING -- #
 	if not Input.is_action_pressed("superbrake"):

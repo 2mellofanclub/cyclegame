@@ -12,6 +12,7 @@ var rear_steer = 0.0
 var qt_available = true
 var cycle_color = "pink"
 var lw_color = "pink"
+var lw_special = false
 var alive = true
 var explodable = true
 var lw_active = false
@@ -37,6 +38,7 @@ func is_alive():
 	return alive
 func kill():
 	alive = false
+	$Despawn.start()
 func is_explodable():
 	return explodable
 
@@ -119,7 +121,7 @@ func avoid_lightwall(lin_vel):
 			quickturn("right")
 	elif $FLRay.is_colliding():
 		var angle_to_normal = lin_vel.angle_to($FLRay.get_collision_normal())
-		var rotate_angle = -1 *(angle_to_normal - PI/2)
+		var rotate_angle = -1 * (angle_to_normal - PI/2)
 		rotate_y(rotate_angle)
 		set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
 	elif $FRRay.is_colliding():
@@ -144,6 +146,8 @@ func _process(_delta):
 		
 	#botbot
 	var lin_vel = get_linear_velocity()
+	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
+	
 	if lin_vel.length() < 100:
 		engine_force = 400
 	else:
@@ -153,9 +157,17 @@ func _process(_delta):
 	if not is_alive():
 		return
 	
-	if (lin_vel * Vector3(1, 0, 1)).length() > 80:
+	if xz_lin_vel.length() > 80:
 		if $ImpactRay.is_colliding():
 			explode()
+	
+	var kill_speed = 3
+	if xz_lin_vel.length() < kill_speed:
+		if $Kill.is_stopped():
+			$Kill.start()
+	else:
+		if not $Kill.is_stopped():
+			$Kill.stop()
 	
 	if (lin_vel * Vector3(1, 0, 1)).length() > 50:
 		lw_active = true
@@ -184,8 +196,12 @@ func _unhandled_input(event):
 
 
 func _on_kill_timeout() -> void:
-	queue_free() # Replace with function body.
+	explode()
 
 
 func _on_qt_cooldown_timeout() -> void:
 	qt_available = true
+
+
+func _on_despawn_timeout() -> void:
+	queue_free()

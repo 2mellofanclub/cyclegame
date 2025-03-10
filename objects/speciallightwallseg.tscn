@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgo172ha1twno"]
+
+[ext_resource type="Script" uid="uid://c2sg65r3mcni8" path="res://objects/speciallightwallseg.gd" id="1_5v8yr"]
+[ext_resource type="Material" uid="uid://uma81157l0p2" path="res://materials/slw_white1.tres" id="2_72puk"]
+[ext_resource type="Material" uid="uid://y5kioappetuf" path="res://materials/slw_blue1.tres" id="2_jmcd2"]
+[ext_resource type="Script" uid="uid://biucfvq0y528u" path="res://objects/da_good_box.gd" id="3_72puk"]
+[ext_resource type="Material" uid="uid://cvn50t6jdfvry" path="res://materials/slw_pink1.tres" id="4_48mpl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
+size = Vector3(0.18, 1.023, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cwhoa"]
+size = Vector3(0.3, 0.4, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_72puk"]
+size = Vector3(0.3, 0.4, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jmcd2"]
+size = Vector3(0.3, 0.4, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_48mpl"]
+size = Vector3(0.3, 0.4, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3da6r"]
+size = Vector3(0.3, 0.4, 0.6)
+
+[node name="SpecialLightWallSeg" type="Node3D"]
+script = ExtResource("1_5v8yr")
+
+[node name="LightArea" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.265731, 0)
+collision_layer = 65
+
+[node name="KillBox" type="CollisionShape3D" parent="LightArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000809573, 0.0114746, 0.00078588)
+shape = SubResource("BoxShape3D_qkq1s")
+
+[node name="Shell" type="Node3D" parent="."]
+
+[node name="DaGoodBox" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_cwhoa")
+surface_material_override/0 = ExtResource("2_72puk")
+script = ExtResource("3_72puk")
+
+[node name="DaGoodBox1U" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("BoxMesh_72puk")
+surface_material_override/0 = ExtResource("4_48mpl")
+script = ExtResource("3_72puk")
+
+[node name="DaGoodBox1D" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_jmcd2")
+skeleton = NodePath("../DaGoodBox1U")
+surface_material_override/0 = ExtResource("4_48mpl")
+script = ExtResource("3_72puk")
+
+[node name="DaGoodBox2U" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+mesh = SubResource("BoxMesh_48mpl")
+skeleton = NodePath("../DaGoodBox")
+surface_material_override/0 = ExtResource("2_jmcd2")
+script = ExtResource("3_72puk")
+
+[node name="DaGoodBox2D" type="MeshInstance3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_3da6r")
+skeleton = NodePath("../DaGoodBox")
+surface_material_override/0 = ExtResource("2_jmcd2")
+script = ExtResource("3_72puk")
+
+[node name="DelTimer" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+autostart = true
+
+[node name="LightOsci" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="LightArea" to="." method="_on_lightarea_body_entered"]
+[connection signal="timeout" from="DelTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LightOsci" to="." method="_on_lightosci_timeout"]

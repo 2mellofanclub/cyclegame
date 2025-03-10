@@ -11,6 +11,7 @@ var engine_power = 400.0
 var rear_steer = 0.0
 var cycle_color = "blue"
 var lw_color = "blue"
+var lw_special = false
 var alive = true
 var explodable = true
 var lw_active = false
@@ -112,6 +113,14 @@ func _process(delta):
 		if $ImpactRay.is_colliding():
 			explode()
 	
+	var kill_speed = 3
+	if xz_lin_vel.length() < kill_speed:
+		if $Kill.is_stopped():
+			$Kill.start()
+	else:
+		if not $Kill.is_stopped():
+			$Kill.stop()
+	
 	if (xz_lin_vel).length() > 50:
 		lw_active = true
 	elif (xz_lin_vel).length() < 15:
@@ -176,3 +185,7 @@ func _unhandled_input(event):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = -1 * event.relative.x * mouse_sens
 			pitch_input = -1 * event.relative.y * mouse_sens
+
+
+func _on_kill_timeout() -> void:
+	explode()

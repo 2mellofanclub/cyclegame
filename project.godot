@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="grid"
-run/main_scene="res://grid.tscn"
+config/name="CycleGame"
+run/main_scene="uid://cmadx5t65yy61"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://ntqkxwllo4m0"
 
 [autoload]
 

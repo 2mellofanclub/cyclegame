@@ -1,4 +1,4 @@
-shader_type spatial; 
+shader_type spatial;
 uniform vec3 Cpoint;
 uniform vec4 emission : source_color;
 uniform vec4 albedo : source_color;

@@ -1,30 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dafvan80dn320"]
+[gd_scene load_steps=16 format=3 uid="uid://dafvan80dn320"]
 
-[ext_resource type="Script" uid="uid://bbfij4sxrnctn" path="res://one_v_one.gd" id="1_rioro"]
+[ext_resource type="Script" uid="uid://bbfij4sxrnctn" path="res://levels/one_v_one.gd" id="1_rioro"]
 [ext_resource type="Material" uid="uid://c5rh67bs67dbf" path="res://materials/floor2.tres" id="2_rioro"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="3_0cylr"]
-
-[sub_resource type="GDScript" id="GDScript_rioro"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(Engine.get_frames_per_second()))
-	
-"
-
-[sub_resource type="GDScript" id="GDScript_eglif"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(get_node(\"../Trails\").get_child_count()))
-"
-
-[sub_resource type="GDScript" id="GDScript_0cylr"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(get_node(\"../NPCs\").get_child_count() + 1))
-"
 
 [sub_resource type="BoxMesh" id="BoxMesh_xw411"]
 material = ExtResource("2_rioro")
@@ -74,27 +52,6 @@ size = Vector3(300, 200, 300)
 
 [node name="OneVOne" type="Node3D"]
 script = ExtResource("1_rioro")
-max_trails = 2000
-
-[node name="FPS" type="RichTextLabel" parent="."]
-offset_right = 100.0
-offset_bottom = 20.0
-scroll_active = false
-script = SubResource("GDScript_rioro")
-
-[node name="Lightwalls" type="RichTextLabel" parent="."]
-offset_top = 22.0
-offset_right = 100.0
-offset_bottom = 42.0
-scroll_active = false
-script = SubResource("GDScript_eglif")
-
-[node name="Riders" type="RichTextLabel" parent="."]
-offset_top = 44.0
-offset_right = 100.0
-offset_bottom = 64.0
-scroll_active = false
-script = SubResource("GDScript_0cylr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 150.821, 578.702)

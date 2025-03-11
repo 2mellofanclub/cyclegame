@@ -1,38 +1,9 @@
-[gd_scene load_steps=49 format=3 uid="uid://cyde73xt2w162"]
+[gd_scene load_steps=45 format=3 uid="uid://cyde73xt2w162"]
 
-[ext_resource type="Script" uid="uid://c1cmxcje2ud7c" path="res://grid.gd" id="1_2miq5"]
+[ext_resource type="Script" uid="uid://c1cmxcje2ud7c" path="res://levels/grid.gd" id="1_2miq5"]
 [ext_resource type="PackedScene" uid="uid://bvujyrv8j5jjh" path="res://objects/ramp.tscn" id="2_iiu8i"]
 [ext_resource type="PackedScene" uid="uid://bm2iawxbkla2q" path="res://objects/bounds.tscn" id="4_bghhw"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="5_fqc2p"]
-
-[sub_resource type="GDScript" id="GDScript_bghhw"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(\"FPS: \", Engine.get_frames_per_second()))
-	
-"
-
-[sub_resource type="GDScript" id="GDScript_fqc2p"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(\"LTWS: \", get_node(\"../Trails\").get_child_count()))
-"
-
-[sub_resource type="GDScript" id="GDScript_g2qvd"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(\"RDRS: \", get_node(\"../NPCs\").get_child_count() + 1))
-"
-
-[sub_resource type="GDScript" id="GDScript_05i0m"]
-script/source = "extends RichTextLabel
-
-func _process(delta: float) -> void:
-	set_text(str(\"LINV: \", get_node(\"../Player\").get_linear_velocity().length()))
-"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dujx"]
 albedo_color = Color(0.00392157, 0, 0.0784314, 1)
@@ -167,34 +138,6 @@ size = Vector3(5000, 100, 5000)
 
 [node name="Grid" type="Node3D"]
 script = ExtResource("1_2miq5")
-max_trails = 2000
-
-[node name="FPS" type="RichTextLabel" parent="."]
-offset_right = 100.0
-offset_bottom = 20.0
-scroll_active = false
-script = SubResource("GDScript_bghhw")
-
-[node name="Lightwalls" type="RichTextLabel" parent="."]
-offset_top = 22.0
-offset_right = 100.0
-offset_bottom = 42.0
-scroll_active = false
-script = SubResource("GDScript_fqc2p")
-
-[node name="Riders" type="RichTextLabel" parent="."]
-offset_top = 44.0
-offset_right = 100.0
-offset_bottom = 64.0
-scroll_active = false
-script = SubResource("GDScript_g2qvd")
-
-[node name="PlayerEF" type="RichTextLabel" parent="."]
-offset_top = 66.0
-offset_right = 268.0
-offset_bottom = 86.0
-scroll_active = false
-script = SubResource("GDScript_05i0m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 150.821, 316.62)

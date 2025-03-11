@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmadx5t65yy61"]
+
+[ext_resource type="Script" uid="uid://dersqex60arov" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dg6x1yktajyf2" path="res://level_controller.gd" id="2_0xm2m"]
+
+[sub_resource type="GDScript" id="GDScript_0xm2m"]
+script/source = "extends RichTextLabel
+
+func _process(delta: float) -> void:
+	set_text(\"FRAME: \" + str(Engine.get_frames_per_second()))
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_h2yge"]
+script/source = "extends RichTextLabel
+
+func _process(delta: float) -> void:
+	var current_level_instance = get_node_or_null(\"../../LevelController\").get_child(0)
+	if current_level_instance == null:
+		return
+	set_text(\"LTWLS: \" + str(current_level_instance.get_node(\"Trails\").get_child_count()))
+"
+
+[sub_resource type="GDScript" id="GDScript_1bvp3"]
+script/source = "extends RichTextLabel
+
+func _process(delta: float) -> void:
+	var current_level_instance = get_node_or_null(\"../../LevelController\").get_child(0)
+	if current_level_instance == null:
+		return
+	set_text(\"RIDRS: \" + str(current_level_instance.get_node(\"NPCs\").get_child_count() + 1))
+"
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ig7tw")
+
+[node name="LevelController" type="Node3D" parent="."]
+script = ExtResource("2_0xm2m")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPS" type="RichTextLabel" parent="Control"]
+offset_right = 100.0
+offset_bottom = 20.0
+scroll_active = false
+script = SubResource("GDScript_0xm2m")
+
+[node name="Lightwalls" type="RichTextLabel" parent="Control"]
+offset_top = 22.0
+offset_right = 100.0
+offset_bottom = 42.0
+scroll_active = false
+script = SubResource("GDScript_h2yge")
+
+[node name="Riders" type="RichTextLabel" parent="Control"]
+offset_top = 44.0
+offset_right = 100.0
+offset_bottom = 64.0
+scroll_active = false
+script = SubResource("GDScript_1bvp3")

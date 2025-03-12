@@ -1,11 +1,10 @@
 extends Node
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$LevelController.start_new_level("res://levels/grid.tscn")
-	await get_tree().create_timer(30).timeout
-	$LevelController.start_new_level("res://levels/one_v_one.tscn")
+	#await get_tree().create_timer(30).timeout
+	#$LevelController.start_new_level("res://levels/one_v_one.tscn")
 	
 
 func _process(delta):

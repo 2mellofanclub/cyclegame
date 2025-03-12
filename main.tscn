@@ -25,10 +25,8 @@ func _process(delta: float) -> void:
 script/source = "extends RichTextLabel
 
 func _process(delta: float) -> void:
-	var current_level_instance = get_node_or_null(\"../../LevelController\").get_child(0)
-	if current_level_instance == null:
-		return
-	set_text(\"RIDRS: \" + str(current_level_instance.get_node(\"NPCs\").get_child_count() + 1))
+	var alive = get_node_or_null(\"../../LevelController\").drivers_alive
+	set_text(\"ALIVE: \" + str(alive))
 "
 
 [node name="Main" type="Node"]

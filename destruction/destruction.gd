@@ -1,6 +1,6 @@
 extends Node3D
 
-var cycle_color = ""
+var cycle_color := ""
 var lc_styles = MaterialsBus.LC_STYLES
 @onready var Cube = load("res://destruction/cube.tscn")
 

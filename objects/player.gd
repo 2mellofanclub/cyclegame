@@ -12,6 +12,7 @@ var explodable := true
 var lw_active := false
 var las_pos := Vector3.ZERO
 var las_rot := Vector3.ZERO
+var qt_cam_inverter := 1.0
 var mouse_sens := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
@@ -89,18 +90,10 @@ func _process(delta):
 		)
 		# Quickturn left with speed intact
 		if Input.is_action_just_pressed("ninleft"):
-			set_linear_velocity(Vector3.ZERO)
-			rotate_y(PI/2)
-			las_rot = global_rotation
-			cam_twist.rotate_y(-PI/2)
-			set_linear_velocity(-Vector3(-lin_vel.z, 0, lin_vel.x))
+			player_quickturn("left", lin_vel)
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
-			set_linear_velocity(Vector3.ZERO)
-			rotate_y(-PI/2)
-			las_rot = global_rotation
-			cam_twist.rotate_y(PI/2)
-			set_linear_velocity(Vector3(-lin_vel.z, 0, lin_vel.x))
+			player_quickturn("right", lin_vel)
 	if Input.is_action_just_pressed("superbrake"):
 		$lightcycle.rotate_y(PI/2)
 		$IDunno.rotate_y(PI/2)
@@ -128,6 +121,25 @@ func is_alive():
 	return alive
 func kill():
 	alive = false
+
+
+func player_quickturn(dir, lin_vel):
+	var old_vel = lin_vel
+	var directions = {
+		"left" : 1,
+		"right" : -1,
+	}
+	set_linear_velocity(Vector3.ZERO)
+	rotate_y(directions[dir] * PI/2)
+	las_rot = global_rotation
+	cam_twist.rotate_y(qt_cam_inverter * directions[dir] * -PI/2)
+	set_linear_velocity(
+			Vector3(
+			old_vel.z * directions[dir],
+			old_vel.y, 
+			old_vel.x * -directions[dir]
+			)
+	)
 
 
 func spawn_lw():
@@ -160,6 +172,7 @@ func spawn_lw():
 func explode():
 	if not explodable:
 		return
+	SignalBus.driver_just_fuckkin_died.emit()
 	alive = false
 	explodable = false
 	steering = 0

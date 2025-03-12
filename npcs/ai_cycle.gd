@@ -1,21 +1,21 @@
 extends VehicleBody3D
 
-var front_steer = 1
-var engine_power = 400.0
-var rear_steer = 0.0
-var qt_available = true
-var cycle_color = "pink"
-var lw_color = "pink"
-var lw_special = false
-var alive = true
-var explodable = true
-var lw_active = false
-var las_pos = Vector3.ZERO
-var las_rot = Vector3.ZERO
-var cam_active = false
-var mouse_sens = 0.001
-var twist_input = 0.0
-var pitch_input = 0.0
+var front_steer := 1.0
+var engine_power := 400.0
+var rear_steer := 0.0
+var qt_available := true
+var cycle_color := "pink"
+var lw_color := "pink"
+var lw_special := false
+var alive := true
+var explodable := true
+var lw_active := false
+var las_pos := Vector3.ZERO
+var las_rot := Vector3.ZERO
+var cam_active := false
+var mouse_sens := 0.001
+var twist_input := 0.0
+var pitch_input := 0.0
 var level_instance: Node3D
 
 @onready var cam_twist = $CamTwist
@@ -123,6 +123,7 @@ func spawn_lw():
 func explode():
 	if not explodable:
 		return
+	SignalBus.driver_just_fuckkin_died.emit()
 	alive = false
 	explodable = false
 	steering = 0
@@ -178,8 +179,8 @@ func quickturn(dir):
 	qt_available = false
 	$QTCooldown.start()
 	var directions = {
-		"left":1,
-		"right":-1,
+		"left": 1,
+		"right": -1,
 	}
 	var lin_vel = get_linear_velocity()
 	set_linear_velocity(Vector3.ZERO)

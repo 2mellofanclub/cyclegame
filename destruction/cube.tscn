@@ -3,10 +3,10 @@
 [ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="1_kindn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i825w"]
-size = Vector3(0.1, 0.1, 0.1)
+size = Vector3(0.05, 0.05, 0.05)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_38i3c"]
-points = PackedVector3Array(-0.05, -0.05, -0.05, 0.0499977, 0.05, 0.05, 0.0499977, 0.05, -0.05, 0.0499977, -0.05, 0.05, -0.05, 0.05, 0.05, 0.0499977, -0.05, -0.05, -0.05, 0.05, -0.05, -0.05, -0.05, 0.05)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kindn"]
+points = PackedVector3Array(0.025, 0.025, 0.025, 0.025, 0.025, -0.025, -0.025, 0.025, 0.025, 0.025, -0.025, 0.025, 0.025, -0.025, -0.025, -0.025, 0.025, -0.025, -0.025, -0.025, 0.025, -0.025, -0.025, -0.025)
 
 [node name="Cube" type="RigidBody3D"]
 
@@ -16,4 +16,4 @@ skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_kindn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_38i3c")
+shape = SubResource("ConvexPolygonShape3D_kindn")

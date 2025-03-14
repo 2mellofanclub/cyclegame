@@ -1,20 +1,25 @@
 shader_type spatial;
-uniform vec3 Cpoint;
-uniform vec3 DCpoint;
 uniform vec4 emission : source_color;
 uniform vec4 albedo : source_color;
 uniform float emission_energy : hint_range(0.0, 100.0, 0.01);
-varying vec3 glo_vertex;
+uniform float height_scale;
+uniform float sinpan;
+uniform float cospan;
+uniform sampler2D noise;
+uniform sampler2D normalmap;
+
+varying vec2 tex_position;
+
 
 void vertex() {
-	// Fine Pixezy, We'll do it your way.
-	glo_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	tex_position = vec2(VERTEX.x + sinpan, VERTEX.z + cospan);
+	float height = texture(noise, tex_position).x;
+	VERTEX.y += height * height_scale;
 }
 void fragment() {
-	if(distance(Cpoint, glo_vertex) < 0.5) discard;
-	//if(distance(DCpoint, glo_vertex) < 1.2) discard;
 	EMISSION = (emission.rgb) * emission_energy;
 	ALBEDO = albedo.rgb;
+	NORMAL_MAP = texture(normalmap, tex_position).xyz;
 }
 
 //void light() {

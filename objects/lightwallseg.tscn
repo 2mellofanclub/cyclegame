@@ -5,16 +5,16 @@
 [ext_resource type="Script" uid="uid://biucfvq0y528u" path="res://objects/da_good_box.gd" id="3_40qno"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
-size = Vector3(0.18, 1.023, 0.3)
+size = Vector3(0.11, 0.6, 0.3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cwhoa"]
-size = Vector3(0.3, 2, 0.6)
+size = Vector3(0.2, 1, 0.6)
 
 [node name="LightWallSeg" type="Node3D"]
 script = ExtResource("1_8kgsn")
 
 [node name="LightArea" type="Area3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.5, 0)
 collision_layer = 65
 
 [node name="KillBox" type="CollisionShape3D" parent="LightArea"]
@@ -22,10 +22,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000809573, 0.0114746, 0.00
 shape = SubResource("BoxShape3D_qkq1s")
 
 [node name="Shell" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="DaGoodBox" type="MeshInstance3D" parent="Shell"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 mesh = SubResource("BoxMesh_cwhoa")
 surface_material_override/0 = ExtResource("2_40qno")
 script = ExtResource("3_40qno")

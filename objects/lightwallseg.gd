@@ -18,15 +18,16 @@ func _process(delta):
 	if Driver == null:
 		return
 	$Shell/DaGoodBox.cpoint = Driver.get_node("IDunno/TrailEater").get_global_position()
+	$Shell/DaGoodBox.dcpoint = Driver.get_node("IDunno/TrailDestroyer").get_global_position()
 	if not visible:
-		if global_position.distance_to(Driver.get_global_position()) > 2.1:
+		if global_position.distance_to(Driver.get_global_position()) > 1.5:
 			$Shell/DaGoodBox.set_surface_override_material(0, lc_styles[lw_color]["slwbase"])
 			show()
 	elif not hot:
-		if global_position.distance_to(Driver.get_global_position()) > 3.5:
+		if global_position.distance_to(Driver.get_global_position()) > 2.5:
 			hot = true
 	elif using_shader:
-		if global_position.distance_to(Driver.get_global_position()) > 6:
+		if global_position.distance_to(Driver.get_global_position()) > 3.5:
 			using_shader = false
 			$Shell/DaGoodBox.using_shader = false
 			$Shell/DaGoodBox.set_surface_override_material(0, lc_styles[lw_color]["lwbase"])
@@ -36,8 +37,6 @@ func _on_lightarea_body_entered(body):
 	if not hot:
 		return
 	if "explode" in body:
-		# move these checks to explode? (and have explode() return bool)
-		if body.is_alive():
 			print("ka")
 			body.explode()
 

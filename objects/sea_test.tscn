@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6r1tsvpe7nth"]
+
+[ext_resource type="Material" uid="uid://b1crt7q46ob0f" path="res://materials/sea_test.tres" id="1_y303h"]
+[ext_resource type="Script" uid="uid://byf4un4oy2vdg" path="res://objects/sea_mesh.gd" id="3_0qman"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y303h"]
+sky_horizon_color = Color(0.471872, 0.489122, 0.528809, 1)
+ground_bottom_color = Color(0, 0, 0.0627451, 1)
+ground_horizon_color = Color(0.471872, 0.489122, 0.528809, 1)
+
+[sub_resource type="Sky" id="Sky_h3g7k"]
+sky_material = SubResource("ProceduralSkyMaterial_y303h")
+
+[sub_resource type="Environment" id="Environment_0qman"]
+background_mode = 2
+sky = SubResource("Sky_h3g7k")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c8jk0"]
+size = Vector2(20, 20)
+subdivide_width = 64
+subdivide_depth = 64
+
+[node name="SeaTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0qman")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 1.97892, 5.31013, -3.03734)
+light_color = Color(0.858824, 0.882353, 1, 1)
+shadow_enabled = true
+
+[node name="SeaMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_c8jk0")
+surface_material_override/0 = ExtResource("1_y303h")
+script = ExtResource("3_0qman")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.856222, 0.516608, 0, -0.516608, 0.856222, 0, 2.24724, 2.00479)

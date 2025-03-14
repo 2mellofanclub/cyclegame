@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://md1l12bhugd1"
-path="res://.godot/imported/lightcycle.blend-81ce32379668e477a1a47bd7a0c56563.scn"
+uid="uid://b7848art0y1qj"
+path="res://.godot/imported/old_lc_body_deb3.blend-f9109b48480a1500b31ea691b3b40173.scn"
 
 [deps]
 
-source_file="res://objects/lightcycle.blend"
-dest_files=["res://.godot/imported/lightcycle.blend-81ce32379668e477a1a47bd7a0c56563.scn"]
+source_file="res://old/old_lc_body_deb3.blend"
+dest_files=["res://.godot/imported/old_lc_body_deb3.blend-f9109b48480a1500b31ea691b3b40173.scn"]
 
 [params]
 

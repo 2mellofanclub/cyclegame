@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b7848art0y1qj"
-path="res://.godot/imported/lc_body_deb3.blend-f542286cd4fc1859fd7238c15f57d69c.scn"
+uid="uid://mxvq46s0yx4r"
+path="res://.godot/imported/old_lc_wheel.blend-469263cd8b6689cc009b6c7e6135b009.scn"
 
 [deps]
 
-source_file="res://destruction/lc_body_deb3.blend"
-dest_files=["res://.godot/imported/lc_body_deb3.blend-f542286cd4fc1859fd7238c15f57d69c.scn"]
+source_file="res://old/old_lc_wheel.blend"
+dest_files=["res://.godot/imported/old_lc_wheel.blend-469263cd8b6689cc009b6c7e6135b009.scn"]
 
 [params]
 

@@ -32,7 +32,7 @@ hit_from_inside = true
 [node name="CamPitch" type="Node3D" parent="CamTwist"]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CamTwist/CamPitch"]
-transform = Transform3D(1, 0, 0, 0, 0.997639, 0.068677, 0, -0.068677, 0.997639, 0, 1.3065, 3.67504)
+transform = Transform3D(1, 0, 0, 0, 0.997639, 0.068677, 0, -0.068677, 0.997639, 0, 1.50498, 4.33443)
 spring_length = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CamTwist/CamPitch/SpringArm3D"]
@@ -82,11 +82,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00022534, 0.97095, 0.148209
 shape = SubResource("ConvexPolygonShape3D_sdl0q")
 
 [node name="RearWheelCol" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.79643e-05, 0.584442, 1.0917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.79643e-05, 0.584442, 1.0917)
 shape = SubResource("ConvexPolygonShape3D_pnjel")
 
 [node name="FrontWheelCol" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.79643e-05, 0.544608, -0.815331)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.79643e-05, 0.544608, -0.815331)
 shape = SubResource("ConvexPolygonShape3D_08a3r")
 
 [node name="Kill" type="Timer" parent="."]
@@ -97,9 +97,6 @@ one_shot = true
 
 [node name="TrailEater" type="Node3D" parent="IDunno"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.79643e-05, 0.584442, 1.0917)
-
-[node name="TrailDestroyer" type="Node3D" parent="IDunno"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.584, 0.2)
 
 [node name="Sounds" type="Node" parent="."]
 

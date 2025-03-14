@@ -2,8 +2,13 @@ extends VehicleBody3D
 
 
 var front_steer := 1.0
-var engine_power := 400.0
 var rear_steer := 0.0
+var engine_power := 400.0
+var max_speed := 80.0
+var lw_on_th := 50.0
+var lw_off_th := 15.0
+var deadly_impact_th := 70.0
+var kill_speed = 3.0
 var cycle_color := "blue"
 var lw_color := "blue"
 var lw_special := false
@@ -42,23 +47,21 @@ func _process(delta):
 	pitch_input = 0
 	
 	# stuff below is only for the living 
-	if not is_alive():
+	if not alive:
 		return
 		
-	if (xz_lin_vel).length() > 70:
+	if (xz_lin_vel).length() > deadly_impact_th:
 		if $ImpactRay.is_colliding():
 			explode()
-	var kill_speed = 3
 	if xz_lin_vel.length() < kill_speed:
 		if $Kill.is_stopped():
 			$Kill.start()
-	else:
-		if not $Kill.is_stopped():
-			$Kill.stop()
+	else:	
+		$Kill.stop()
 			
-	if (xz_lin_vel).length() > 50:
+	if (xz_lin_vel).length() > lw_on_th:
 		lw_active = true
-	elif (xz_lin_vel).length() < 15:
+	elif (xz_lin_vel).length() < lw_off_th:
 		lw_active = false
 	if las_pos.distance_to(get_global_position()) >= 0.6:
 		if lw_active:
@@ -83,7 +86,7 @@ func _process(delta):
 		engine_force = clamp(
 				Input.get_axis("gasdown", "gasup") * engine_power, -200, 500
 		)
-		if lin_vel.length() > 100:
+		if lin_vel.length() > max_speed:
 			engine_force = 0
 		$lightcycle.global_rotation.z = (global_rotation.z + 
 				Input.get_axis("steerright", "steerleft") * PI/6
@@ -116,9 +119,6 @@ func set_last_pos(pos: Vector3):
 func set_last_rot(rot: Vector3):
 	las_rot = rot
 
-# is there even a point to this
-func is_alive():
-	return alive
 func kill():
 	alive = false
 
@@ -172,6 +172,7 @@ func spawn_lw():
 func explode():
 	if not explodable:
 		return
+	print("boom")
 	SignalBus.driver_just_fuckkin_died.emit()
 	alive = false
 	explodable = false
@@ -202,9 +203,9 @@ func explode():
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
-					randi_range(-10, 10),
+					randi_range(-20, 20),
 					randi_range(20, 30),
-					randi_range(-10, 10)
+					randi_range(-20, 20)
 			) + last_lin_vel * 0.3)
 		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()

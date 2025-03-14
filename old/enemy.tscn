@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://h6m217vc36b0"]
 
 [ext_resource type="Script" uid="uid://0o77s6qwpkr5" path="res://old/enemy.gd" id="1_41oev"]
-[ext_resource type="PackedScene" uid="uid://md1l12bhugd1" path="res://objects/lightcycle.blend" id="2_we7g8"]
+[ext_resource type="PackedScene" uid="uid://md1l12bhugd1" path="res://old/old_lightcycle.blend" id="2_we7g8"]
 [ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="3_3hb37"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_we7g8"]
 [ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="4_3hb37"]

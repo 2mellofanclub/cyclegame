@@ -42,12 +42,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="FPS" type="RichTextLabel" parent="Control"]
+layout_mode = 0
 offset_right = 100.0
 offset_bottom = 20.0
 scroll_active = false
 script = SubResource("GDScript_0xm2m")
 
 [node name="Lightwalls" type="RichTextLabel" parent="Control"]
+layout_mode = 0
 offset_top = 22.0
 offset_right = 100.0
 offset_bottom = 42.0
@@ -55,6 +57,7 @@ scroll_active = false
 script = SubResource("GDScript_h2yge")
 
 [node name="Riders" type="RichTextLabel" parent="Control"]
+layout_mode = 0
 offset_top = 44.0
 offset_right = 100.0
 offset_bottom = 64.0

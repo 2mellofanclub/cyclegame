@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://mxvq46s0yx4r"
-path="res://.godot/imported/lc_wheel.blend-219d1c913384a22053c96e9cd24aa789.scn"
+uid="uid://md1l12bhugd1"
+path="res://.godot/imported/old_lightcycle.blend-d78e788cf6a63fb1a80d6d54f68e87b0.scn"
 
 [deps]
 
-source_file="res://destruction/lc_wheel.blend"
-dest_files=["res://.godot/imported/lc_wheel.blend-219d1c913384a22053c96e9cd24aa789.scn"]
+source_file="res://old/old_lightcycle.blend"
+dest_files=["res://.godot/imported/old_lightcycle.blend-d78e788cf6a63fb1a80d6d54f68e87b0.scn"]
 
 [params]
 

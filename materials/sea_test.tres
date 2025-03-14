@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b1crt7q46ob0f"]
+
+[ext_resource type="Shader" uid="uid://dd2vyidvl2ecm" path="res://materials/sea_test.gdshader" id="1_cesrs"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cesrs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cesrs"]
+noise = SubResource("FastNoiseLite_cesrs")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h27wn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eid2k"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_h27wn")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cesrs")
+shader_parameter/emission = Color(0.0140964, 0.0168773, 0.0209838, 1)
+shader_parameter/albedo = Color(0, 0.00784314, 0.0627451, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/height_scale = 0.5
+shader_parameter/sinpan = 0.0
+shader_parameter/cospan = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_cesrs")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_eid2k")

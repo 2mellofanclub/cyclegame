@@ -42,14 +42,12 @@ func _process(_delta):
 	#botbot
 	var lin_vel = get_linear_velocity()
 	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
-	if lin_vel.length() < 100:
-		engine_force = 400
-	else:
-		engine_force = 0
+	engine_force = 400 if (xz_lin_vel.length() < 80) else 0
 		
 	# stuff below is only for the living 
-	if not is_alive():
+	if not alive:
 		return
+		
 	if xz_lin_vel.length() > 70:
 		if $ImpactRay.is_colliding():
 			explode()
@@ -87,8 +85,6 @@ func set_last_pos(pos: Vector3):
 func set_last_rot(rot: Vector3):
 	las_rot = rot
 	
-func is_alive():
-	return alive
 func kill():
 	alive = false
 
@@ -123,6 +119,7 @@ func spawn_lw():
 func explode():
 	if not explodable:
 		return
+	print("boom")
 	SignalBus.driver_just_fuckkin_died.emit()
 	alive = false
 	explodable = false
@@ -152,13 +149,12 @@ func explode():
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
-					randi_range(-10, 10),
+					randi_range(-20, 20),
 					randi_range(20, 30),
-					randi_range(-10, 10)
+					randi_range(-20, 20)
 			) + last_lin_vel * 0.3)
 		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()
-	print("boom")
 
 
 func apply_materials():
@@ -172,12 +168,15 @@ func apply_materials():
 	$lightcycle/Frontwheel.set_surface_override_material(1, lc_styles[cycle_color]["wheelwells"])
 
 
+func reset_qt_cooldown():
+	qt_available = false
+	$QTCooldown.start()
+
 #botbot
 func quickturn(dir):
 	if not qt_available:
 		return
-	qt_available = false
-	$QTCooldown.start()
+	reset_qt_cooldown()
 	var directions = {
 		"left": 1,
 		"right": -1,
@@ -192,57 +191,38 @@ func quickturn(dir):
 
 #botbot
 func avoid_lightwall(xz_lin_vel):
+	if not qt_available:
+		return
 	if $FRay.is_colliding():
+		#print("we do it")
 		if $FLRay.is_colliding():
 			quickturn("right")
 		elif $FRRay.is_colliding():
 			quickturn("left")
-		elif randi_range(0, 1) == 0:
-			quickturn("left")
 		else:
-			quickturn("right")
+			if randi_range(0, 1) == 0:
+				quickturn("left")
+			else:
+				quickturn("right")
+		reset_qt_cooldown()
 	elif $FLRay.is_colliding():
+		reset_qt_cooldown()
+		var old_vel = xz_lin_vel
 		var angle_to_normal = xz_lin_vel.angle_to($FLRay.get_collision_normal())
 		var rotate_angle = -1 * (angle_to_normal - PI/2)
+		#print(rotate_angle)
+		set_linear_velocity(Vector3.ZERO)
 		rotate_y(rotate_angle)
-		set_linear_velocity(xz_lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
+		set_linear_velocity(old_vel.rotated(Vector3(0, 1, 0), rotate_angle))
 	elif $FRRay.is_colliding():
+		reset_qt_cooldown()
+		var old_vel = xz_lin_vel
 		var angle_to_normal = xz_lin_vel.angle_to($FRRay.get_collision_normal())
 		var rotate_angle = angle_to_normal - PI/2
+		#print(rotate_angle)
+		set_linear_velocity(Vector3.ZERO)
 		rotate_y(rotate_angle)
 		set_linear_velocity(xz_lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
-		
-
-func exp_avoid_lightwall(lin_vel):
-	if $FRay.is_colliding() and qt_available:
-		if $FLRay.is_colliding():
-			quickturn("right")
-		elif $FRRay.is_colliding():
-			quickturn("left")
-		elif randi_range(0, 1) == 0:
-			quickturn("left")
-		else:
-			quickturn("right")
-	elif $FLRay.is_colliding():
-		if qt_available:
-			var angle_to_normal = lin_vel.angle_to($FLRay.get_collision_normal())
-			var rotate_angle = -1 * (angle_to_normal - PI/2)
-			rotate_y(rotate_angle)
-			set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
-			qt_available = false
-			$QTCooldown.start()
-		else:
-			steering = -1
-	elif $FRRay.is_colliding():
-		if qt_available:
-			var angle_to_normal = lin_vel.angle_to($FRRay.get_collision_normal())
-			var rotate_angle = angle_to_normal - PI/2
-			rotate_y(rotate_angle)
-			set_linear_velocity(lin_vel.rotated(Vector3(0, 1, 0), rotate_angle))
-			qt_available = false
-			$QTCooldown.start()
-		else:
-			steering = 1
 
 
 func _unhandled_input(event):

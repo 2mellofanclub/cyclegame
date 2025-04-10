@@ -1,7 +1,7 @@
 extends Node3D
 
 
-const LW_BASE_WIDTH := 0.6
+const LW_BASE_WIDTH := 0.5
 var hot := false
 var using_shader := true
 var Driver : VehicleBody3D
@@ -19,15 +19,16 @@ func _process(delta):
 		return
 	$Shell/DaGoodBox.cpoint = Driver.get_node("IDunno/TrailEater").get_global_position()
 	$Shell/DaGoodBox.dcpoint = Driver.get_node("IDunno/TrailDestroyer").get_global_position()
+	#var edge_to_bike = (LW_BASE_WIDTH * 0.5 * scale.z) + 1.6
 	if not visible:
 		if global_position.distance_to(Driver.get_global_position()) > 1.5:
 			$Shell/DaGoodBox.set_surface_override_material(0, lc_styles[lw_color]["slwbase"])
 			show()
 	elif not hot:
-		if global_position.distance_to(Driver.get_global_position()) > 2.5:
+		if global_position.distance_to(Driver.get_global_position()) > 2.0:
 			hot = true
 	elif using_shader:
-		if global_position.distance_to(Driver.get_global_position()) > 3.5:
+		if global_position.distance_to(Driver.get_global_position()) > 2.0:
 			using_shader = false
 			$Shell/DaGoodBox.using_shader = false
 			$Shell/DaGoodBox.set_surface_override_material(0, lc_styles[lw_color]["lwbase"])

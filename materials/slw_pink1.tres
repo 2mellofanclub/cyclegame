@@ -6,6 +6,7 @@
 render_priority = 0
 shader = ExtResource("1_xcniw")
 shader_parameter/Cpoint = Vector3(0, 0, 0)
+shader_parameter/DCpoint = Vector3(0, 0, 0)
 shader_parameter/emission = Color(0.811765, 0.2, 0.364706, 1)
 shader_parameter/albedo = Color(0, 0, 0, 1)
 shader_parameter/emission_energy = 10.0

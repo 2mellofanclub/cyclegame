@@ -54,10 +54,10 @@ func _process(delta):
 		if $ImpactRay.is_colliding():
 			explode()
 	if xz_lin_vel.length() < kill_speed:
-		if $Kill.is_stopped():
-			$Kill.start()
+		if $KillTimer.is_stopped():
+			$KillTimer.start()
 	else:	
-		$Kill.stop()
+		$KillTimer.stop()
 			
 	if (xz_lin_vel).length() > lw_on_th:
 		lw_active = true
@@ -89,7 +89,7 @@ func _process(delta):
 		if lin_vel.length() > max_speed:
 			engine_force = 0
 		$lightcycle.global_rotation.z = (global_rotation.z + 
-				Input.get_axis("steerright", "steerleft") * PI/6
+				Input.get_axis("steerright", "steerleft") * PI/9
 		)
 		# Quickturn left with speed intact
 		if Input.is_action_just_pressed("ninleft"):
@@ -203,9 +203,9 @@ func explode():
 		destruction_instance.prepare()
 		for child in destruction_instance.get_children():
 			child.apply_impulse(Vector3(
-					randi_range(-20, 20),
-					randi_range(20, 30),
-					randi_range(-20, 20)
+					randi_range(-10, 10),
+					randi_range(10, 20),
+					randi_range(-10, 10)
 			) + last_lin_vel * 0.3)
 		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()

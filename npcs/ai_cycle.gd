@@ -1,8 +1,13 @@
 extends VehicleBody3D
 
 var front_steer := 1.0
-var engine_power := 400.0
 var rear_steer := 0.0
+var engine_power := 400.0
+var max_speed := 80.0
+var lw_on_th := 50.0
+var lw_off_th := 15.0
+var deadly_impact_th := 70.0
+var kill_speed = 3.0
 var qt_available := true
 var cycle_color := "pink"
 var lw_color := "pink"
@@ -48,19 +53,18 @@ func _process(_delta):
 	if not alive:
 		return
 		
-	if xz_lin_vel.length() > 70:
+	if xz_lin_vel.length() > deadly_impact_th:
 		if $ImpactRay.is_colliding():
 			explode()
-	var kill_speed = 3
 	if xz_lin_vel.length() < kill_speed:
-		if $Kill.is_stopped():
-			$Kill.start()
+		if $KillTimer.is_stopped():
+			$KillTimer.start()
 	else:
-		if not $Kill.is_stopped():
-			$Kill.stop()
-	if (lin_vel * Vector3(1, 0, 1)).length() > 50:
+		if not $KillTimer.is_stopped():
+			$KillTimer.stop()
+	if (lin_vel * Vector3(1, 0, 1)).length() > lw_on_th:
 		lw_active = true
-	elif (lin_vel * Vector3(1, 0, 1)).length() < 15:
+	elif (lin_vel * Vector3(1, 0, 1)).length() < lw_off_th:
 		lw_active = false
 	if las_pos.distance_to(get_global_position()) >= 0.6:
 		if lw_active:

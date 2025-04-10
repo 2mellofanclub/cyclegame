@@ -43,7 +43,7 @@ hit_back_faces = false
 collide_with_areas = true
 
 [node name="ImpactRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555, -1)
 target_position = Vector3(0, 0, -0.5)
 hit_from_inside = true
 
@@ -116,7 +116,7 @@ one_shot = true
 wait_time = 15.0
 one_shot = true
 
-[node name="Kill" type="Timer" parent="."]
+[node name="KillTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
@@ -142,6 +142,6 @@ pitch_scale = 0.77
 
 [connection signal="timeout" from="QTCooldown" to="." method="_on_qt_cooldown_timeout"]
 [connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
-[connection signal="timeout" from="Kill" to="." method="_on_kill_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timeout"]
 
 [editable path="lightcycle"]

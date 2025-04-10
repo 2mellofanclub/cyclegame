@@ -5,20 +5,19 @@
 [ext_resource type="Script" uid="uid://biucfvq0y528u" path="res://objects/da_good_box.gd" id="3_40qno"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkq1s"]
-size = Vector3(0.11, 0.6, 0.3)
+size = Vector3(0.25, 1.1, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cwhoa"]
-size = Vector3(0.2, 1, 0.6)
+size = Vector3(0.2, 1, 0.5)
 
 [node name="LightWallSeg" type="Node3D"]
 script = ExtResource("1_8kgsn")
 
 [node name="LightArea" type="Area3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 65
 
 [node name="KillBox" type="CollisionShape3D" parent="LightArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000809573, 0.0114746, 0.00078588)
 shape = SubResource("BoxShape3D_qkq1s")
 
 [node name="Shell" type="Node3D" parent="."]
@@ -36,7 +35,6 @@ autostart = true
 
 [node name="LightOsci" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
 [connection signal="body_entered" from="LightArea" to="." method="_on_lightarea_body_entered"]
 [connection signal="timeout" from="DelTimer" to="." method="_on_timer_timeout"]

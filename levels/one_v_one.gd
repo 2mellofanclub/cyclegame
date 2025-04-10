@@ -13,7 +13,8 @@ func _ready():
 
 
 func _process(delta):
-	pass
+	if ft_active:
+		$FunkyTown.gravity_direction = -1 * global_basis.y
 
 
 #botbot
@@ -35,7 +36,6 @@ func _on_despawn_box_body_entered(body: Node3D) -> void:
 func _on_funky_town_body_entered(body: Node3D) -> void:
 	if not ft_active:
 		return
-	body.gravity_scale = -1.0
 	await get_tree().create_timer(1).timeout
 	body.rotate_object_local(Vector3(0, 0, 1), PI)
 	if "qt_cam_inverter" in body:
@@ -46,7 +46,6 @@ func _on_funky_town_body_entered(body: Node3D) -> void:
 func _on_funky_town_body_exited(body: Node3D) -> void:
 	if not ft_active:
 		return
-	body.gravity_scale = 1.0
 	await get_tree().create_timer(1).timeout
 	body.rotate_object_local(Vector3(0, 0, 1), PI)
 	if "qt_cam_inverter" in body:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6ipnsdu7pdo0"]
+[gd_scene load_steps=9 format=3 uid="uid://b6ipnsdu7pdo0"]
 
 [ext_resource type="Script" uid="uid://cyhn2rwojv3k7" path="res://objects/player.gd" id="1_5i27b"]
+[ext_resource type="PackedScene" uid="uid://ccv1l2g8ig03p" path="res://npcs/sapientblockman.blend" id="3_f46kd"]
 [ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="3_uxov2"]
 [ext_resource type="PackedScene" uid="uid://nfqfptuvxlg1" path="res://objects/lightcycle1.blend" id="5_i825w"]
 [ext_resource type="AudioStream" uid="uid://brmoh8hudwf2s" path="res://sound/synth_misc_08.ogg" id="6_3rerk"]
@@ -19,11 +20,10 @@ collision_layer = 257
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 center_of_mass_mode = 1
-center_of_mass = Vector3(0, -1, -0.25)
 script = ExtResource("1_5i27b")
 
 [node name="ImpactRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555, -1)
 target_position = Vector3(0, 0, -0.5)
 hit_from_inside = true
 
@@ -43,14 +43,14 @@ current = true
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -1, 0.5, -1)
 use_as_traction = true
 use_as_steering = true
-wheel_roll_influence = 0.0
+wheel_roll_influence = 0.5
 wheel_radius = 0.6
 
 [node name="FrontRight" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 1, 0.5, -1)
 use_as_traction = true
 use_as_steering = true
-wheel_roll_influence = 0.0
+wheel_roll_influence = 0.5
 wheel_radius = 0.6
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="FrontRight"]
@@ -61,13 +61,13 @@ light_energy = 0.45
 [node name="BackLeft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, -1, 0.5, 1.2)
 use_as_traction = true
-wheel_roll_influence = 0.0
+wheel_roll_influence = 0.5
 wheel_radius = 0.6
 
 [node name="BackRight" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 1, 0.5, 1.2)
 use_as_traction = true
-wheel_roll_influence = 0.0
+wheel_roll_influence = 0.5
 wheel_radius = 0.6
 
 [node name="OmniLight3D" type="OmniLight3D" parent="BackRight"]
@@ -76,6 +76,48 @@ light_color = Color(0.694118, 0.713726, 0.94902, 1)
 light_energy = 0.45
 
 [node name="lightcycle" parent="." instance=ExtResource("5_i825w")]
+
+[node name="sapientblockman" parent="lightcycle" instance=ExtResource("3_f46kd")]
+visible = false
+
+[node name="Armature" parent="lightcycle/sapientblockman" index="0"]
+transform = Transform3D(0.280576, 0, 0, 0, 0.280576, 0, 0, 0, 0.280576, 0, 0.834079, 0.0850718)
+
+[node name="Skeleton3D" parent="lightcycle/sapientblockman/Armature" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.35789, 1.52037)
+bones/5/rotation = Quaternion(0.258819, 6.43657e-15, 6.17073e-08, 0.965926)
+bones/5/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(9.8067e-07, 0.765799, 3.72929e-08)
+bones/9/rotation = Quaternion(-0.312001, 0.29126, -0.685857, 0.589426)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/position = Vector3(-8.37764e-08, 1.3352, 3.63671e-07)
+bones/10/rotation = Quaternion(-0.598461, 0.216816, -0.0524213, 0.769472)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(-1.21198e-07, 1.22948, -3.66129e-07)
+bones/11/rotation = Quaternion(-0.0242587, 0.489948, -0.150486, 0.858322)
+bones/11/scale = Vector3(1, 1, 1)
+bones/13/position = Vector3(-8.69566e-07, 0.765799, 3.72929e-08)
+bones/13/rotation = Quaternion(-0.312001, -0.29126, 0.685857, 0.589426)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(1.44803e-07, 1.3352, 1.89535e-07)
+bones/14/rotation = Quaternion(-0.598461, -0.216817, 0.0524213, 0.769472)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/position = Vector3(1.42991e-07, 1.22948, -2.69708e-07)
+bones/15/rotation = Quaternion(-0.0185667, -0.37499, 0.131428, 0.917477)
+bones/15/scale = Vector3(1, 1, 1)
+bones/17/rotation = Quaternion(-0.34989, 0.618652, 0.606028, 0.357179)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/position = Vector3(9.04941e-08, 1.28234, -3.06653e-08)
+bones/18/rotation = Quaternion(-0.00728864, -0.00728851, -0.707069, 0.707069)
+bones/18/scale = Vector3(1, 1, 1)
+bones/22/rotation = Quaternion(0.34989, 0.618652, 0.606028, -0.357179)
+bones/22/scale = Vector3(1, 1, 1)
+bones/23/position = Vector3(-3.59766e-07, 1.28234, -3.3039e-08)
+bones/23/rotation = Quaternion(-0.0072886, 0.00728856, 0.707069, 0.707069)
+bones/23/scale = Vector3(1, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="lightcycle/sapientblockman/Armature/Skeleton3D" index="1"]
+root_node = NodePath("../..")
 
 [node name="BodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00022534, 0.97095, 0.148209)
@@ -89,7 +131,7 @@ shape = SubResource("ConvexPolygonShape3D_pnjel")
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.79643e-05, 0.544608, -0.815331)
 shape = SubResource("ConvexPolygonShape3D_08a3r")
 
-[node name="Kill" type="Timer" parent="."]
+[node name="KillTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
@@ -113,6 +155,7 @@ stream = ExtResource("6_3rerk")
 unit_size = 58.56
 pitch_scale = 0.77
 
-[connection signal="timeout" from="Kill" to="." method="_on_kill_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timeout"]
 
 [editable path="lightcycle"]
+[editable path="lightcycle/sapientblockman"]

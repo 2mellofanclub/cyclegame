@@ -6,6 +6,7 @@
 render_priority = 0
 shader = ExtResource("1_txs0l")
 shader_parameter/Cpoint = Vector3(0, 0, 0)
+shader_parameter/DCpoint = Vector3(0, 0, 0)
 shader_parameter/emission = Color(0.627451, 0.423529, 0.101961, 1)
 shader_parameter/albedo = Color(0, 0, 0, 1)
 shader_parameter/emission_energy = 16.0

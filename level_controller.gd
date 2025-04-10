@@ -4,7 +4,8 @@ extends Node3D
 var current_level_instance : Node3D
 var drivers_alive: int
 @export var max_trails := 3000
-@onready var Player = preload("res://objects/player.tscn")
+#@onready var Player = preload("res://objects/player.tscn")
+@onready var Player = preload("res://objects/player_tank.tscn")
 @onready var AICycle = preload("res://npcs/ai_cycle.tscn")
 
 
@@ -33,8 +34,8 @@ func spawn_players(level_instance):
 	for point in level_instance.get_node("Spawns/Players").get_children():
 		var player_instance = Player.instantiate()
 		level_instance.add_child(player_instance)
-		player_instance.cycle_color = "blue"
-		player_instance.lw_color = "blue"
+		player_instance.cycle_color = "orange"
+		player_instance.lw_color = "orange"
 		player_instance.level_instance = level_instance
 		player_instance.apply_materials()
 		player_instance.set_global_position(point.get_global_position())

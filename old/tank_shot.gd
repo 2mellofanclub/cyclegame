@@ -2,7 +2,10 @@ extends Node3D
 
 
 var exploded := false
-var muzzle_vel := 100.0
+var out_of_muzzle := false
+var gunner : VehicleBody3D
+var muzzle_vel := 200.0
+var carry_vel := 0.0
 var cycle_color := ""
 var lc_styles = MaterialsBus.LC_STYLES
 
@@ -12,7 +15,12 @@ var lc_styles = MaterialsBus.LC_STYLES
 func _process(delta):
 	if exploded:
 		return
-	transform = transform.translated_local(Vector3(0,0,-1) * muzzle_vel * delta)
+	if $TSHitBox/ImpactRay.is_colliding():
+		if out_of_muzzle and $TSHitBox/ImpactRay.get_collider().name != "TSHitBox":
+			explode()
+	transform = transform.translated_local(
+			Vector3(0,0,-1) * (muzzle_vel + carry_vel) * delta
+	)
 
 
 func explode():
@@ -40,9 +48,15 @@ func _on_timer_timeout() -> void:
 
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
-	explode()
-	print("area")
+	if area.name != "TSHitBox":
+		explode()
+		print("area")
 
 func _on_hit_box_body_entered(body: Node3D) -> void:
-	explode()
-	print("body")
+	if body != gunner:
+		explode()
+		print("body")
+
+
+func _on_muzzle_timer_timeout() -> void:
+	out_of_muzzle = true

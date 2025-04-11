@@ -196,14 +196,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nfiyy")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vmec3"]
+size = Vector3(6.26865, 2.55426, 8.23883)
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_71fr4"]
 points = PackedVector3Array(-0.629069, -0.970893, 0.214815, 1.4365, 0.178677, 0.0197924, 1.34934, 0.00513389, 0.000417663, -0.343686, 0.583506, -2.08385, -1.06756, 0.694937, 0.755875, 0.31019, 0.870863, 1.03181, 0.0460701, -0.196074, -2.08385, 0.304042, -1.13781, 0.483044, -1.42614, 0.066263, -0.197126, 0.623652, 0.120495, 1.38716, -0.647856, 0.0700319, 1.40143, 0.324257, 0.583506, -2.08385, -0.733147, 0.917799, -0.52425, 0.984953, 0.85077, 0.0125466, 1.32691, -0.0292545, -0.691026, 0.44698, -1.10952, -0.149999, -0.476615, -1.13052, -0.0944731, 1.09917, 0.0677711, 1.071, -1.07676, 0.0707836, 1.08592, -1.25148, 0.0627483, -0.663555, -0.061817, -0.823542, 0.90086, 0.773051, -0.821976, 0.37622, -0.330418, 0.499151, 1.35617, 1.1597, 0.360645, -0.802675, -0.321552, -1.13211, 0.478292, -0.32783, 0.864939, 1.02441, 1.1009, 0.38546, 0.861749, 0.0420206, -1.17711, -0.250536, -1.34432, 0.444548, 0.178733, 0.829329, 0.852363, -0.458659, 0.491463, 0.917799, 0.812048, -0.0652046, -0.140467, -2.08385)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vmec3"]
 points = PackedVector3Array(0.204459, 0.170259, 2.17615, -0.0399672, -0.514353, -0.953853, 0.0577498, -0.514353, -0.953853, 0.351236, 0.268148, -0.953853, -0.333453, 0.268148, -0.953853, -0.137818, -0.0742343, 2.17615, 0.0577498, -0.269783, 2.17615, -0.333453, 0.268148, 0.318248, 0.351236, 0.170259, 0.318248, -0.0399672, -0.514353, 0.318248, -0.333453, 0.121391, 0.318248, -0.186677, 0.170259, 2.17615, 0.0577498, -0.514353, 0.318248, 0.351236, 0.268148, 0.318248, -0.333453, 0.121391, -0.953853, 0.351236, 0.170259, -0.953853, -0.0399672, -0.269783, 2.17615, 0.204459, 0.072523, 2.17615, -0.137818, -0.318728, 0.318248, -0.186677, 0.0235784, 2.17615, 0.106675, -0.17197, 2.17615, -0.137818, -0.318728, -0.953853)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vmec3"]
-size = Vector3(6.26865, 2.33911, 8.23883)
 
 [node name="PlayerTank" type="VehicleBody3D"]
 axis_lock_angular_x = true
@@ -252,6 +252,10 @@ metadata/extras = {
 "kb": {}
 }
 
+[node name="TankBodyCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26943, -0.07)
+shape = SubResource("BoxShape3D_vmec3")
+
 [node name="TurretBaseCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25136, 1.30197)
 shape = SubResource("ConvexPolygonShape3D_71fr4")
@@ -259,10 +263,6 @@ shape = SubResource("ConvexPolygonShape3D_71fr4")
 [node name="TurretBarrelCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.59588, -2.90577)
 shape = SubResource("ConvexPolygonShape3D_vmec3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.377, -0.07)
-shape = SubResource("BoxShape3D_vmec3")
 
 [node name="FrontLeft" type="VehicleWheel3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3, 0, -2.5)
@@ -287,7 +287,6 @@ wheel_radius = 1.0
 [node name="DamageDots" type="Node" parent="."]
 
 [node name="ShotCooldown" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]

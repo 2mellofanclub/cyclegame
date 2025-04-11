@@ -444,6 +444,13 @@ transform = Transform3D(0.802391, 0, -0.596799, 0, 1, 0, 0.596799, 0, 0.802391, 
 [node name="AllySpawn" type="Node3D" parent="Spawns/Allies"]
 transform = Transform3D(-0.86292, 0, 0.505341, 0, 1, 0, -0.505341, 0, -0.86292, -1.39215, 0, -59.3091)
 
+[node name="PlayerTanks" type="Node3D" parent="Spawns"]
+
+[node name="PlayerSpawn" type="Node3D" parent="Spawns/PlayerTanks"]
+transform = Transform3D(-0.999367, 0, 0.0355795, 0, 1, 0, -0.0355795, 0, -0.999367, 66.0337, -2.23014, 33.7675)
+
+[node name="EnemyTanks" type="Node3D" parent="Spawns"]
+
 [node name="NPCs" type="Node3D" parent="."]
 
 [node name="SOS" parent="." instance=ExtResource("5_fqc2p")]

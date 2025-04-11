@@ -1,11 +1,9 @@
-[gd_scene load_steps=26 format=4 uid="uid://dlehw30vjkukd"]
+[gd_scene load_steps=24 format=4 uid="uid://u2a2g7qoasjm"]
 
-[ext_resource type="Script" uid="uid://detjwulravopg" path="res://objects/player_tank.gd" id="1_jtb6v"]
-[ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_vmec3"]
-[ext_resource type="Material" uid="uid://d30mq7wl3j76o" path="res://materials/smdg_badguy_black.tres" id="4_gc6wh"]
-[ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="4_vmec3"]
-[ext_resource type="AudioStream" uid="uid://6bk7j8crvceq" path="res://sound/synth_laser_08.ogg" id="5_gc6wh"]
-[ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="6_71fr4"]
+[ext_resource type="Script" uid="uid://n5340hgrgvh6" path="res://npcs/ai_tank.gd" id="1_1xmg7"]
+[ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="2_87it7"]
+[ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="3_ovfoj"]
+[ext_resource type="Material" uid="uid://d30mq7wl3j76o" path="res://materials/smdg_badguy_black.tres" id="4_dtpb0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7e5w"]
 resource_name = "base"
@@ -302,10 +300,10 @@ points = PackedVector3Array(-0.629069, -0.970893, 0.214815, 1.4365, 0.178677, 0.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vmec3"]
 points = PackedVector3Array(0.204459, 0.170259, 2.17615, -0.0399672, -0.514353, -0.953853, 0.0577498, -0.514353, -0.953853, 0.351236, 0.268148, -0.953853, -0.333453, 0.268148, -0.953853, -0.137818, -0.0742343, 2.17615, 0.0577498, -0.269783, 2.17615, -0.333453, 0.268148, 0.318248, 0.351236, 0.170259, 0.318248, -0.0399672, -0.514353, 0.318248, -0.333453, 0.121391, 0.318248, -0.186677, 0.170259, 2.17615, 0.0577498, -0.514353, 0.318248, 0.351236, 0.268148, 0.318248, -0.333453, 0.121391, -0.953853, 0.351236, 0.170259, -0.953853, -0.0399672, -0.269783, 2.17615, 0.204459, 0.072523, 2.17615, -0.137818, -0.318728, 0.318248, -0.186677, 0.0235784, 2.17615, 0.106675, -0.17197, 2.17615, -0.137818, -0.318728, -0.953853)
 
-[node name="PlayerTank" type="VehicleBody3D"]
+[node name="AITank" type="VehicleBody3D"]
 axis_lock_angular_x = true
 center_of_mass_mode = 1
-script = ExtResource("1_jtb6v")
+script = ExtResource("1_1xmg7")
 
 [node name="CamTwist" type="Node3D" parent="."]
 
@@ -317,7 +315,6 @@ spring_length = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CamTwist/CamPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 0, 1.68159, 0.706143)
-current = true
 
 [node name="TurretTwist" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.251, 1.302)
@@ -328,31 +325,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.251, 1.302)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000360727, -3.37362e-05)
 mesh = SubResource("ArrayMesh_8secn")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_vmec3")
-surface_material_override/1 = ExtResource("4_vmec3")
-surface_material_override/2 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("2_87it7")
+surface_material_override/1 = ExtResource("3_ovfoj")
+surface_material_override/2 = ExtResource("3_ovfoj")
 
 [node name="Turretbarrel" type="MeshInstance3D" parent="TurretTwist/TurretPitch/Turretbase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344519, -4.20773)
 mesh = SubResource("ArrayMesh_0qipb")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_vmec3")
-surface_material_override/1 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("2_87it7")
+surface_material_override/1 = ExtResource("3_ovfoj")
 
 [node name="MuzzlePoint" type="Node3D" parent="TurretTwist/TurretPitch/Turretbase/Turretbarrel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000360966, -1.45694)
 
-[node name="Shot" type="AudioStreamPlayer3D" parent="TurretTwist/TurretPitch/Turretbase/Turretbarrel/MuzzlePoint"]
-stream = ExtResource("5_gc6wh")
-volume_db = -10.0
-max_db = -10.0
-
 [node name="Tankbody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_0pf2p")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("4_gc6wh")
-surface_material_override/1 = ExtResource("4_vmec3")
-surface_material_override/2 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("4_dtpb0")
+surface_material_override/1 = ExtResource("3_ovfoj")
+surface_material_override/2 = ExtResource("3_ovfoj")
 metadata/extras = {
 "kb": {}
 }
@@ -361,7 +353,7 @@ metadata/extras = {
 transform = Transform3D(0.999946, 0.00115306, 0.0103291, -0.00163455, 0.998906, 0.046729, -0.0102639, -0.0467434, 0.998854, 0.116458, 1.42488, 0.425223)
 mesh = SubResource("ArrayMesh_5oe4v")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("3_ovfoj")
 
 [node name="TankBodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26943, -0.07)
@@ -398,17 +390,6 @@ wheel_radius = 1.0
 [node name="DamageDots" type="Node3D" parent="."]
 
 [node name="ShotCooldown" type="Timer" parent="."]
-wait_time = 0.1
 one_shot = true
-
-[node name="AudioListener3D" type="AudioListener3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
-current = true
-
-[node name="Hit" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
-stream = ExtResource("6_71fr4")
-volume_db = -10.0
-max_db = -10.0
 
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]

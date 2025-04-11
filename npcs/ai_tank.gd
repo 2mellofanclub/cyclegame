@@ -26,59 +26,21 @@ func _ready():
 	pass
 	
 func _process(delta):
-	
 	if material_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():
 			points_to_pass.append(d_dot.get_global_position())
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
-
+	
+	
 	#region CamAndGunControl
-	cam_twist.rotate_y(twist_input)
-	cam_pitch.rotate_x(pitch_input)
-	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
-	if not Input.is_action_pressed("freelook"):
-		turret_twist.rotate_y(twist_input)
-		turret_pitch.rotate_x(pitch_input)
-		turret_pitch.rotation.x = clamp(turret_pitch.rotation.x, -PI/8, PI/8)
-	twist_input = 0
-	pitch_input = 0
-	# do this better!
-	$TurretBaseCol.global_position = turret_pitch.get_child(0).global_position
-	$TurretBaseCol.global_rotation = turret_pitch.get_child(0).global_rotation
-	$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
-	$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
 	#endregion
 	
 	
 	#region Steering
-	$BackLeft.engine_force = clamp(
-				Input.get_axis("gasdown", "gasup") * 400, -max_ef, max_ef
-	)
-	$BackRight.engine_force = clamp(
-				Input.get_axis("gasdown", "gasup") * 400, -max_ef, max_ef
-	)
-	$FrontLeft.engine_force = clamp(
-				Input.get_axis("gasdown", "gasup") * 400, -max_ef, max_ef
-	)
-	$FrontRight.engine_force = clamp(
-				Input.get_axis("gasdown", "gasup") * 400, -max_ef, max_ef
-	)
-	if Input.is_action_pressed("steerleft"):
-		$BackLeft.engine_force = -max_ef
-		$FrontLeft.engine_force = -max_ef
-		$BackRight.engine_force = max_ef
-		$FrontRight.engine_force = max_ef
-	if Input.is_action_pressed("steerright"):
-		$BackRight.engine_force = -max_ef
-		$FrontRight.engine_force = -max_ef
-		$BackLeft.engine_force = max_ef
-		$FrontLeft.engine_force = max_ef
+	
 	#endregion
 	
-	if Input.is_action_pressed("light_attack"):
-		if shot_available:
-			shoot(delta)
 	
 	
 
@@ -118,7 +80,7 @@ func apply_materials():
 
 
 func take_hit(shot_pos):
-	if $DamageDots.get_child_count() < 100:
+	if $DamageDots.get_child_count() < 200:
 		var damage_dot = Node3D.new()
 		$DamageDots.add_child(damage_dot)
 		damage_dot.set_global_position(shot_pos)

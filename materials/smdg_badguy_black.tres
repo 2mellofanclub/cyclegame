@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d30mq7wl3j76o"]
+
+[ext_resource type="Shader" uid="uid://dtvsf1fa5fn2s" path="res://materials/damage_hole.gdshader" id="1_cox0m"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cox0m")
+shader_parameter/Cpoint = Vector3(0, 0, 0)
+shader_parameter/DCpoint = Vector3(0, 0, 0)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/albedo = Color(0.247059, 0.247059, 0.247059, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/metallic = 1.0
+shader_parameter/roughness = 0.8
+shader_parameter/specular = 0.5
+shader_parameter/uv1_scale = Vector3(0, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

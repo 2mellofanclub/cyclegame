@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://y67v8bmwqsx5"]
 
 [ext_resource type="Script" uid="uid://cyekjbhftntme" path="res://destruction/rb_tank_shot.gd" id="1_fprv4"]
-[ext_resource type="Material" uid="uid://ck6nc7ge77nui" path="res://materials/lw_blue1_pulse.tres" id="2_tcd1e"]
+[ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="2_fprv4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yt1kc"]
 
@@ -17,7 +17,7 @@ script = ExtResource("1_fprv4")
 [node name="ShotMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, -2.62268e-08, -0.3, 0, 0.6, -1.31134e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_yt1kc")
-surface_material_override/0 = ExtResource("2_tcd1e")
+surface_material_override/0 = ExtResource("2_fprv4")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 10.0

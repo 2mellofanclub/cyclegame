@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bw2k0jedhcqnn"]
+
+[ext_resource type="Shader" uid="uid://c7blfeuqwulrq" path="res://materials/radar.gdshader" id="1_6xyy8"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6xyy8")
+shader_parameter/enemy_pos = Vector3(0, 0, 0)
+shader_parameter/emission = Color(0.807843, 0.247059, 0.160784, 1)
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 10.0

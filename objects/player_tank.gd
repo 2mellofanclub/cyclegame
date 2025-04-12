@@ -35,11 +35,25 @@ func _ready():
 	
 func _process(delta):
 	
+	#region MaterialManipulation
 	if material_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():
 			points_to_pass.append(d_dot.get_global_position())
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
+		
+	if get_parent().get_node("Recognizers").get_child_count() > 0:
+		var closest_rec_pos
+		var closest_distance := 1_000_000.0
+		for rec in get_parent().get_node("Recognizers").get_children():
+			if rec.global_position.distance_to(global_position) < closest_distance:
+				closest_rec_pos = rec.global_position
+				closest_distance = rec.global_position.distance_to(global_position)
+		turret_base.get_surface_override_material(1).set_shader_parameter("enemy_pos", closest_rec_pos)
+		
+		
+	#endregion
+
 
 	cam_twist.rotate_y(twist_input)
 	cam_pitch.rotate_x(pitch_input)

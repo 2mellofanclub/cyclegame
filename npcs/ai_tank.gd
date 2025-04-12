@@ -14,7 +14,7 @@ var mouse_sens := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 var player_targetable := false
-var targeting := true
+var targeting := false
 var max_targeting_dist := 150.0
 var max_firing_dist := 100.0
 var level_instance : Node3D

@@ -50,12 +50,16 @@ radius = 100.0
 [node name="TheRange" type="Node3D"]
 script = ExtResource("1_y7cpa")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 150.821, 578.702)
+[node name="CameraTwist" type="Node3D" parent="."]
+
+[node name="CameraPitch" type="Node3D" parent="CameraTwist"]
+
+[node name="IntroCam" type="Camera3D" parent="CameraTwist/CameraPitch"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 199.197, 675.758)
+current = true
 fov = 50.0
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.05668, 0)
 mesh = SubResource("BoxMesh_xw411")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
@@ -88,21 +92,28 @@ shadow_enabled = true
 [node name="PlayerTanks" type="Node3D" parent="Spawns"]
 
 [node name="PlayerSpawn" type="Node3D" parent="Spawns/PlayerTanks"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.23, -228.653)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, -228.653)
+
+[node name="SpawnCam" type="Camera3D" parent="Spawns/PlayerTanks/PlayerSpawn"]
+transform = Transform3D(-0.675462, -0.0977421, 0.730889, 0, 0.991176, 0.132551, -0.737395, 0.0895327, -0.669501, 5.736, 2.6, -5.649)
 
 [node name="EnemyTanks" type="Node3D" parent="Spawns"]
 
 [node name="EnemySpawn" type="Node3D" parent="Spawns/EnemyTanks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31985, -2.23, -19.4733)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32, 0.5, -19.473)
+
+[node name="AllyTanks" type="Node3D" parent="Spawns"]
 
 [node name="SOS" parent="." instance=ExtResource("3_ws1pa")]
 volume_db = -22.0
 pitch_scale = 0.68
 autoplay = false
 
+[node name="Players" type="Node3D" parent="."]
+
 [node name="NPCs" type="Node3D" parent="."]
 
-[node name="Boxes" type="Node" parent="."]
+[node name="Boxes" type="Node3D" parent="."]
 
 [node name="BotTurnLeft" type="Area3D" parent="Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 522.59, 879.475, 729.979)

@@ -37,9 +37,9 @@ func _process(delta):
 func _on_lightarea_body_entered(body):
 	if not hot:
 		return
-	if "explode" in body:
+	if "take_dmg" in body:
 			print("ka")
-			body.explode()
+			body.take_dmg(10000.0)
 
 
 func _on_timer_timeout() -> void:

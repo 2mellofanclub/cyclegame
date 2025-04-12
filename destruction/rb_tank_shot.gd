@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 
+var damage := 0.0
 var exploded := false
 var out_of_muzzle := false
 var gunner : VehicleBody3D
@@ -9,6 +10,9 @@ var tank_styles = MaterialsBus.TANK_STYLES
 
 @onready var Cube = load("res://destruction/cube.tscn")
 
+func _ready() -> void:
+	set_use_continuous_collision_detection(true)
+
 
 func _process(delta):
 	if exploded:
@@ -16,8 +20,7 @@ func _process(delta):
 	if $ImpactRay.is_colliding():
 		if $ImpactRay.get_collider().name != "RBTankShot":
 			if "take_hit" in $ImpactRay.get_collider():
-				$ImpactRay.get_collider().take_hit($ImpactRay.get_collision_point())
-			print($ImpactRay.get_collider().name)
+				$ImpactRay.get_collider().take_hit($ImpactRay.get_collision_point(), damage)
 			explode()
 
 

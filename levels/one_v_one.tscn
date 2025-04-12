@@ -115,6 +115,12 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -42.30
 [node name="AllySpawn2" type="Node3D" parent="Spawns/Allies"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29.62, -2.23, -275.696)
 
+[node name="PlayerTanks" type="Node3D" parent="Spawns"]
+
+[node name="EnemyTanks" type="Node3D" parent="Spawns"]
+
+[node name="AllyTanks" type="Node3D" parent="Spawns"]
+
 [node name="SOS" parent="." instance=ExtResource("3_0cylr")]
 volume_db = -22.0
 pitch_scale = 0.68

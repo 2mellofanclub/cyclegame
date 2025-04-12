@@ -10,7 +10,9 @@ radius = 0.75
 height = 6.01883
 
 [node name="RBTankShot" type="RigidBody3D"]
+collision_layer = 0
 collision_mask = 65
+mass = 0.4
 gravity_scale = 0.0
 script = ExtResource("1_fprv4")
 
@@ -20,7 +22,7 @@ mesh = SubResource("CapsuleMesh_yt1kc")
 surface_material_override/0 = ExtResource("2_fprv4")
 
 [node name="DespawnTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
@@ -34,10 +36,9 @@ transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 
 shape = SubResource("CapsuleShape3D_hbysm")
 
 [node name="ImpactRay" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.485)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, -0.485)
 collision_mask = 65
 hit_from_inside = true
-collide_with_areas = true
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="MuzzleTimer" to="." method="_on_muzzle_timer_timeout"]

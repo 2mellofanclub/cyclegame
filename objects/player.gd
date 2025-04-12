@@ -12,8 +12,10 @@ var kill_speed = 3.0
 var cycle_color := "blue"
 var lw_color := "blue"
 var lw_special := false
-var alive := true
+var hp := 400.0
+var dead := false
 var explodable := true
+var controllable := true
 var lw_active := false
 var las_pos := Vector3.ZERO
 var las_rot := Vector3.ZERO
@@ -47,7 +49,7 @@ func _process(delta):
 	pitch_input = 0
 	
 	# stuff below is only for the living 
-	if not alive:
+	if not controllable:
 		return
 		
 	if (xz_lin_vel).length() > deadly_impact_th:
@@ -78,7 +80,7 @@ func _process(delta):
 			Vector3(1, 0, 0), 
 			(2 * PI) * ($FrontLeft.get_rpm() / 60 * delta)
 	)
-	# -- BEGIN STEERING -- #
+	#region Steering
 	if not Input.is_action_pressed("superbrake"):
 		steering = Input.get_axis("steerright", "steerleft") * front_steer
 		$BackLeft.steering = rear_steer * steering
@@ -106,7 +108,7 @@ func _process(delta):
 		$lightcycle.rotate_y(-PI/2)
 		$IDunno.rotate_y(-PI/2)
 		set_brake(0)
-	# -- END STEERING -- #
+	#endregion
 
 
 func get_last_pos():
@@ -118,9 +120,6 @@ func set_last_pos(pos: Vector3):
 	las_pos = pos
 func set_last_rot(rot: Vector3):
 	las_rot = rot
-
-func kill():
-	alive = false
 
 
 func player_quickturn(dir, lin_vel):
@@ -174,7 +173,6 @@ func explode():
 		return
 	print("boom")
 	SignalBus.driver_just_fuckkin_died.emit()
-	alive = false
 	explodable = false
 	steering = 0
 	engine_force = 0
@@ -194,7 +192,8 @@ func explode():
 		var last_lin_vel = get_linear_velocity()
 		set_linear_velocity(Vector3.ZERO)
 		#$Sounds/Splash.play()
-		add_child(destruction_instance)
+		get_parent().add_child(destruction_instance)
+		destruction_instance.set_global_position(global_position)
 		for child in $lightcycle.get_children():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
@@ -211,6 +210,20 @@ func explode():
 		destruction_instance.queue_free()
 	print("boom")
 
+func take_dmg(dmg_value):
+	if hp <= 0:
+		return
+	hp -= float(dmg_value)
+	if hp <= 0:
+		dead = true
+		controllable = false
+		SignalBus.player_became_untargetable.emit()
+		explode()
+
+
+func take_hit(shot_pos, dmg_value):
+	take_dmg(dmg_value)
+	#$Hit.play()
 
 func apply_materials():
 	var lc_materials = MaterialsBus.LC_STYLES

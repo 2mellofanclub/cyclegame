@@ -9,6 +9,8 @@ var max_trails: int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	SignalBus.spawns_requested.emit()
+	await get_tree().create_timer(3).timeout
 	$SOS.play()
 
 

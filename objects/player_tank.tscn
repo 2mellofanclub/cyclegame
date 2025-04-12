@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dlehw30vjkukd"]
+[gd_scene load_steps=29 format=4 uid="uid://dlehw30vjkukd"]
 
 [ext_resource type="Script" uid="uid://detjwulravopg" path="res://objects/player_tank.gd" id="1_jtb6v"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_vmec3"]
@@ -6,6 +6,8 @@
 [ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="4_vmec3"]
 [ext_resource type="AudioStream" uid="uid://6bk7j8crvceq" path="res://sound/synth_laser_08.ogg" id="5_gc6wh"]
 [ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="6_71fr4"]
+[ext_resource type="AudioStream" uid="uid://6prqoc76fnmn" path="res://sound/retro_misc_05.ogg" id="7_7o55n"]
+[ext_resource type="AudioStream" uid="uid://bxrq7r32cbpjp" path="res://sound/power_up_05.ogg" id="7_xlgoc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7e5w"]
 resource_name = "base"
@@ -25,7 +27,7 @@ cull_mode = 2
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6b6uy"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_71fr4"]
 _surfaces = [{
 "aabb": AABB(-1.48541, -1.28213, -2.05603, 2.97082, 2.16609, 3.5087),
 "format": 34896613377,
@@ -101,7 +103,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("10lwMNH3DcBvIAAAN9YNwMcmcTDR1Q3AhEsAAP//DcA32XEw0dXbzHq0AAD+/9vMJ7ZxMNH328yP3wAAN9bbzE4FcTBVTPTrdRAAAGMN9OuzEnEwURX06wAAAAD9UPTrS+1xMFEV9Ov//wAA/VD067D6cTBVTPTrie8AAGMN9Ot53P//FgoT6YnvAABjDRfpS+1xMFEVGOmd2hP5AAAT6bD6cTBVTOjq9/QT+Txs8eoG8v7/nWLz6v//AAD9UObq+A3+/51i7uoAAAAA/VDq6k4FcTBVTOnqBwsT+Txs7uqzEnEwURUa6WElE/kAABDphSP+/xYKDul1EAAAYw0b6QXc/v//vF/Lj98AADfWZMs32XEw0dVmy6PiE/mFt17LJ7ZxMNH3msunnRL5afqpy5mj/v+186zLerQAAP7/mMtlXP7/tfM9wYRLAAD//0LB10lwMNH3Q8FXYhL5afo8wccmcTDR1S2/Wx0T+YW3O7/5I/7//7w+v28gAAA31iu/o/zzzaP8882j/PPNo/zzzb4sAAO+LAADviwAA74sAANBXkqzQV5Js0FeSbNBXkqzSjO9IUozvSFKM70hSjO9IeEx7CLdMe8i3DHwIuEx7CKqM74joDPHI54zyCOsM70jO1yjsz5cp7M/XKizOlyisw1d2rEVXeSxF13msQxd2LEvKUMELClFBCspRgQvKUIEVytGB04rTQdNK08HWCtFBwf4sNAL+LHQDPix0Af4sNA6+yrSRPst0kb7LtI5+yrS")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_6b6uy")
+shadow_mesh = SubResource("ArrayMesh_71fr4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwmhb"]
 resource_name = "base.002"
@@ -115,7 +117,7 @@ cull_mode = 2
 albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_hol5o"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_xlgoc"]
 _surfaces = [{
 "aabb": AABB(-0.309011, -0.489938, -0.929361, 0.618023, 0.713942, 3.08106),
 "format": 34896613377,
@@ -167,7 +169,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("/38AAAAAgt8AAP////+C3wAA//8AAILf/38AAP//gt///////////wAA/////////38AAP//////////AACC3/9/AAD//4Lf/38AAAAAgt////////+C3wAA//8AAP+//////////7//////AAD/vwAA//////+/LTCkHy0wpB8tMKQfLTCkHwlqCOoJagjqCWoI6lpgLLBaYCywWmAssFpgLLAAAP9/AAD/fwAA/38AAP9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_hol5o")
+shadow_mesh = SubResource("ArrayMesh_xlgoc")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ist4r"]
 resource_name = "base.003"
@@ -293,8 +295,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7oins")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vmec3"]
-size = Vector3(6.26865, 2.55426, 8.23883)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7o55n"]
+points = PackedVector3Array(2.50745, 0.0908575, -1.2963, 2.87267, 2.0521, 3.34123, 2.62171, 2.15488, 3.06041, 0.12593, 0.622363, 3.99482, 0.162132, 2.54674, -1.35039, 3.02234, 1.74798, -3.67612, 0.118578, 0.864836, -2.99458, 2.93011, 0.0194582, 2.14454, 0.151222, 2.5567, 2.72238, 2.76283, 0.712358, -3.93494, 0.205385, 0.429463, -1.53597, 2.95806, 0.613709, 3.5491, 1.34625, 1.97979, 4.06409, 1.70855, 2.5267, 2.65953, 0.131874, 1.59966, -2.96568, 1.24866, 2.48958, -1.28508, 0.141851, 2.08113, 3.95052, 0.198724, 0.425119, 2.51596, 2.85467, 2.04193, -1.29918, 2.8863, 0.0594504, -1.45014, 1.34893, 0.620285, 4.00691, 2.96987, 0.857972, -3.91876, 2.71454, 1.97932, 3.68795, 1.83195, 2.4327, 2.95386, 2.90049, 1.59237, -3.72568, 1.2327, 2.07579, 3.92423, 2.69782, 0.620618, 3.63688, 2.55328, 2.07542, 3.56205, 2.91414, 0.154269, 2.48135)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yvy0j"]
+points = PackedVector3Array(-0.0590279, 2.08113, 3.95052, -1.27086, 2.07433, 3.91707, -2.93098, 0.0523021, -1.45899, -0.0347437, 0.864836, -2.99458, -0.0424149, 0.622363, 3.99482, -3.06476, 1.74798, -3.67612, -2.99348, 0.615634, 3.5393, -2.89316, 2.04375, 3.30526, -0.0801908, 2.54674, -1.35039, -1.63057, 2.5567, 2.72238, -0.125325, 0.429463, -1.53597, -2.96283, 0.0244289, 2.1365, -3, 0.86089, -3.89207, -0.0486178, 1.59966, -2.96568, -0.0688062, 2.5567, 2.72238, -0.118374, 0.425119, 2.51596, -2.87607, 2.0345, -1.28546, -1.16313, 2.51129, -1.30989, -1.26801, 0.627893, 3.96264, -2.25696, 1.97966, 3.81377, -2.94278, 1.59345, -3.73947, -2.41474, 0.10798, -1.27674, -2.58907, 2.07396, 3.55553, -2.73399, 0.867042, -3.8358, -2.93829, 0.759779, -3.60826, -2.07966, 2.3769, 2.6987)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_71fr4"]
 points = PackedVector3Array(-0.629069, -0.970893, 0.214815, 1.4365, 0.178677, 0.0197924, 1.34934, 0.00513389, 0.000417663, -0.343686, 0.583506, -2.08385, -1.06756, 0.694937, 0.755875, 0.31019, 0.870863, 1.03181, 0.0460701, -0.196074, -2.08385, 0.304042, -1.13781, 0.483044, -1.42614, 0.066263, -0.197126, 0.623652, 0.120495, 1.38716, -0.647856, 0.0700319, 1.40143, 0.324257, 0.583506, -2.08385, -0.733147, 0.917799, -0.52425, 0.984953, 0.85077, 0.0125466, 1.32691, -0.0292545, -0.691026, 0.44698, -1.10952, -0.149999, -0.476615, -1.13052, -0.0944731, 1.09917, 0.0677711, 1.071, -1.07676, 0.0707836, 1.08592, -1.25148, 0.0627483, -0.663555, -0.061817, -0.823542, 0.90086, 0.773051, -0.821976, 0.37622, -0.330418, 0.499151, 1.35617, 1.1597, 0.360645, -0.802675, -0.321552, -1.13211, 0.478292, -0.32783, 0.864939, 1.02441, 1.1009, 0.38546, 0.861749, 0.0420206, -1.17711, -0.250536, -1.34432, 0.444548, 0.178733, 0.829329, 0.852363, -0.458659, 0.491463, 0.917799, 0.812048, -0.0652046, -0.140467, -2.08385)
@@ -304,6 +309,7 @@ points = PackedVector3Array(0.204459, 0.170259, 2.17615, -0.0399672, -0.514353, 
 
 [node name="PlayerTank" type="VehicleBody3D"]
 axis_lock_angular_x = true
+mass = 100.0
 center_of_mass_mode = 1
 script = ExtResource("1_jtb6v")
 
@@ -316,8 +322,7 @@ transform = Transform3D(1, 0, 0, 0, 0.997639, 0.068677, 0, -0.068677, 0.997639, 
 spring_length = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CamTwist/CamPitch/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.983458, 0.181137, 0, -0.181137, 0.983458, 0, 1.68159, 0.706143)
-current = true
+transform = Transform3D(1, 0, 0, 0, 0.975419, 0.220357, 0, -0.220357, 0.975419, 0, 2.22248, 1.08016)
 
 [node name="TurretTwist" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.251, 1.302)
@@ -342,11 +347,6 @@ surface_material_override/1 = ExtResource("4_vmec3")
 [node name="MuzzlePoint" type="Node3D" parent="TurretTwist/TurretPitch/Turretbase/Turretbarrel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000360966, -1.45694)
 
-[node name="Shot" type="AudioStreamPlayer3D" parent="TurretTwist/TurretPitch/Turretbase/Turretbarrel/MuzzlePoint"]
-stream = ExtResource("5_gc6wh")
-volume_db = -10.0
-max_db = -10.0
-
 [node name="Tankbody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_0pf2p")
 skeleton = NodePath("")
@@ -363,9 +363,11 @@ mesh = SubResource("ArrayMesh_5oe4v")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_vmec3")
 
-[node name="TankBodyCol" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26943, -0.07)
-shape = SubResource("BoxShape3D_vmec3")
+[node name="TankBodyCol1" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_7o55n")
+
+[node name="TankBodyCol2" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_yvy0j")
 
 [node name="TurretBaseCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25136, 1.30197)
@@ -397,6 +399,10 @@ wheel_radius = 1.0
 
 [node name="DamageDots" type="Node3D" parent="."]
 
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.75
+one_shot = true
+
 [node name="ShotCooldown" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
@@ -405,10 +411,32 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
 current = true
 
+[node name="Shot" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+stream = ExtResource("5_gc6wh")
+volume_db = -15.0
+max_db = -15.0
+
 [node name="Hit" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
 stream = ExtResource("6_71fr4")
 volume_db = -10.0
 max_db = -10.0
 
+[node name="Explode" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+stream = ExtResource("7_7o55n")
+volume_db = -10.0
+unit_size = 20.0
+max_db = -10.0
+pitch_scale = 0.48
+
+[node name="Spawn" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, 0)
+stream = ExtResource("7_xlgoc")
+volume_db = -15.0
+max_db = -15.0
+pitch_scale = 0.23
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]

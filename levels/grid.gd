@@ -8,7 +8,9 @@ var max_trails: int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#$SOS.play()
+	SignalBus.spawns_requested.emit()
+	await get_tree().create_timer(3).timeout
+	$SOS.play()
 
 
 func _process(delta):
@@ -26,7 +28,7 @@ func _on_bot_turn_right_body_entered(body: Node3D) -> void:
 
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
-	if "explode" in body:
-		body.explode()
+	if "take_dmg" in body:
+		body.take_dmg(10000.0)
 func _on_despawn_box_body_entered(body: Node3D) -> void:
 	body.queue_free()

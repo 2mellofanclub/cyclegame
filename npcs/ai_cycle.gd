@@ -12,8 +12,10 @@ var qt_available := true
 var cycle_color := "pink"
 var lw_color := "pink"
 var lw_special := false
-var alive := true
+var hp := 400.0
+var dead := false
 var explodable := true
+var controllable := false
 var lw_active := false
 var las_pos := Vector3.ZERO
 var las_rot := Vector3.ZERO
@@ -50,7 +52,7 @@ func _process(_delta):
 	engine_force = 400 if (xz_lin_vel.length() < 80) else 0
 		
 	# stuff below is only for the living 
-	if not alive:
+	if dead:
 		return
 		
 	if xz_lin_vel.length() > deadly_impact_th:
@@ -88,9 +90,6 @@ func set_last_pos(pos: Vector3):
 	las_pos = pos
 func set_last_rot(rot: Vector3):
 	las_rot = rot
-	
-func kill():
-	alive = false
 
 
 func spawn_lw():
@@ -125,10 +124,10 @@ func explode():
 		return
 	print("boom")
 	SignalBus.driver_just_fuckkin_died.emit()
-	alive = false
 	explodable = false
 	steering = 0
 	engine_force = 0
+	$IDunno/TrailEater.translate(Vector3(0, 100, 0))
 	# i'm something of an animator myself
 	if get_linear_velocity().length() < 30:
 		set_linear_velocity(Vector3.ZERO)
@@ -144,7 +143,8 @@ func explode():
 		var last_lin_vel = get_linear_velocity()
 		set_linear_velocity(Vector3.ZERO)
 		#$Sounds/Splash.play()
-		add_child(destruction_instance)
+		get_parent().add_child(destruction_instance)
+		destruction_instance.set_global_position(global_position)
 		for child in $lightcycle.get_children():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
@@ -159,6 +159,21 @@ func explode():
 			) + last_lin_vel * 0.3)
 		await get_tree().create_timer(13).timeout
 		destruction_instance.queue_free()
+
+
+func take_dmg(dmg_value):
+	if hp <= 0:
+		return
+	hp -= float(dmg_value)
+	if hp <= 0:
+		dead = true
+		controllable = false
+		explode()
+
+
+func take_hit(shot_pos, dmg_value):
+	take_dmg(dmg_value)
+	#$Hit.play()
 
 
 func apply_materials():

@@ -97,6 +97,7 @@ func spawn_player_tanks(level_instance):
 	for point in level_instance.get_node("Spawns/PlayerTanks").get_children():
 		var player_instance = PlayerTank.instantiate()
 		level_instance.add_child(player_instance)
+		level_instance.players.append(player_instance)
 		player_instance.tank_color = "green"
 		player_instance.shot_color = "green"
 		player_instance.level_instance = level_instance
@@ -110,7 +111,9 @@ func spawn_enemy_tanks(level_instance):
 		return
 	for point in level_instance.get_node("Spawns/EnemyTanks").get_children():
 		var enemy_instance = AITank.instantiate()
-		level_instance.get_node("Enemies").add_child(enemy_instance)
+		#level_instance.get_node("Enemies").add_child(enemy_instance)
+		level_instance.add_child(enemy_instance)
+		level_instance.enemies.append(enemy_instance)
 		enemy_instance.tank_color = "orange"
 		enemy_instance.shot_color = "orange"
 		enemy_instance.enemy = true
@@ -126,6 +129,7 @@ func spawn_ally_tanks(level_instance):
 	for point in level_instance.get_node("Spawns/AllyTanks").get_children():
 		var ally_instance = AITank.instantiate()
 		level_instance.add_child(ally_instance)
+		level_instance.allies.append(ally_instance)
 		ally_instance.tank_color = "blue"
 		ally_instance.shot_color = "blue"
 		ally_instance.level_instance = level_instance

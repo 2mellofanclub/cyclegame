@@ -4,6 +4,10 @@ extends Node3D
 var level_controller: Node3D
 var max_trails: int
 var in_intro := true
+var players = []
+var enemies = []
+var recognizers = []
+var allies = []
 @export var pulse_offset := 500.0
 @export var pulse_band_offset := 0.6
 @export var pulse_speed_mps := 50.0
@@ -15,7 +19,7 @@ var in_intro := true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+	recognizers.append($Recognizers/StaticBody3D)
 
 
 func _process(delta):

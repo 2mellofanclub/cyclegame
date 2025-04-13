@@ -48,10 +48,10 @@ func _process(delta):
 			points_to_pass.append(d_dot.get_global_position())
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
 		turret_base.get_surface_override_material(1).set_shader_parameter(
-				"enemy_pos", get_closest_living_child_pos("Recognizers")
+				"enemy_pos", get_closest_living_pos(level_instance.recognizers)
 		)
 		turret_base.get_surface_override_material(2).set_shader_parameter(
-				"enemy_pos", get_closest_living_child_pos("Enemies")
+				"enemy_pos", get_closest_living_pos(level_instance.enemies)
 		)
 	#endregion
 
@@ -117,19 +117,19 @@ func _process(delta):
 	#endregion
 	
 
-func get_closest_living_child_pos(parent_node):
-	var closest_child_pos = Vector3(0.0, 9999.0, 0.0)
-	if level_instance.get_node(parent_node).get_child_count() > 0:
+func get_closest_living_pos(array):
+	var closest_member_pos = Vector3(0.0, 9999.0, 0.0)
+	if len(array) > 0:
 		var closest_distance :=  99999.0
-		for child in level_instance.get_node(parent_node).get_children():
-			if not "dead" in child:
+		for member in array:
+			if not "dead" in member:
 				continue
-			if child.dead == true:
+			if member.dead == true:
 				continue
-			if child.global_position.distance_to(global_position) < closest_distance:
-				closest_child_pos = child.global_position
-				closest_distance = child.global_position.distance_to(global_position)
-	return closest_child_pos
+			if member.global_position.distance_to(global_position) < closest_distance:
+				closest_member_pos = member.global_position
+				closest_distance = member.global_position.distance_to(global_position)
+	return closest_member_pos
 
 
 func shoot(shot_type):

@@ -2,7 +2,7 @@ extends Node
 
 const MATERIALS = {
 	"badguy_black1" : preload("res://materials/badguy_black1.tres"),
-	"sdmg_badguy_black1": preload("res://materials/smdg_badguy_black.tres"),
+	"sdmg_badguy_black1": preload("res://materials/sdmg_badguy_black.tres"),
 	"father_white1" : preload("res://materials/father_white1.tres"),
 	"lw_blue1" : preload("res://materials/lw_blue1.tres"),
 	"lw_blue1_pulse" : preload("res://materials/lw_blue1_pulse.tres"),

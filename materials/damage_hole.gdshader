@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, world_vertex_coords;
 uniform vec3 dmg_points[220];
 uniform vec4 emission : source_color;
 uniform vec4 albedo : source_color;
@@ -20,7 +20,8 @@ varying vec3 surf_vertex;
 void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
 	// Fine Pixezy, We'll do it your way.
-	surf_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	//surf_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	surf_vertex = VERTEX;
 }
 void fragment() {
 	vec2 base_uv = UV;

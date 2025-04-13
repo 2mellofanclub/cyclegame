@@ -20,7 +20,7 @@ var pitch_input := 0.0
 # ai specific
 var enemy := false
 var player_targetable := false
-var targeting := true
+var targeting := false
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 100.0

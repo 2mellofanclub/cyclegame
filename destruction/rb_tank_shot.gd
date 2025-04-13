@@ -43,6 +43,7 @@ func explode():
 					randi_range(-10, 10)
 				)
 		)
+		$DespawnTimer.start()
 
 func apply_materials():
 	$ShotMesh.set_surface_override_material(0, tank_styles[shot_color]["shot"])

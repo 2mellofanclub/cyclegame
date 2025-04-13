@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnfh4npw34ijx"]
+
+[ext_resource type="Shader" uid="uid://c7blfeuqwulrq" path="res://materials/radarlo.gdshader" id="1_b77ex"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_b77ex")
+shader_parameter/enemy_pos = Vector3(0, 0, 0)
+shader_parameter/emission = Color(0, 0.568627, 0.219608, 1)
+shader_parameter/albedo = Color(0, 0, 0, 1)

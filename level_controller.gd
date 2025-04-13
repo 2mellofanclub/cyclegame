@@ -2,7 +2,9 @@ extends Node3D
 
 
 var current_level_instance : Node3D
-var drivers_alive: int
+var players_alive: int
+var enemies_alive: int
+var allies_alive: int
 @export var max_trails := 3000
 @onready var Player = preload("res://objects/player.tscn")
 @onready var PlayerTank = preload("res://objects/player_tank.tscn")
@@ -11,8 +13,10 @@ var drivers_alive: int
 
 
 func _ready():
-	SignalBus.driver_spawned.connect(increment_living)
-	SignalBus.driver_just_fuckkin_died.connect(decrement_living)
+	SignalBus.player_spawned.connect(increment_players_alive)
+	SignalBus.ai_spawned.connect(increment_ais_alive)
+	SignalBus.player_just_fuckkin_died.connect(decrement_players_alive)
+	SignalBus.ai_just_fuckkin_died.connect(decrement_ais_alive)
 	SignalBus.spawns_requested.connect(spawn_everybody)
 
 func _process(delta):
@@ -22,7 +26,9 @@ func _process(delta):
 func start_new_level(level_path):
 	for child in get_children():
 		child.queue_free()
-	drivers_alive = 0
+	players_alive = 0
+	enemies_alive = 0
+	allies_alive = 0
 	current_level_instance = load(level_path).instantiate()
 	current_level_instance.level_controller = self
 	current_level_instance.max_trails = max_trails
@@ -50,7 +56,7 @@ func spawn_player_cycles(level_instance):
 		player_instance.apply_materials()
 		player_instance.set_global_position(point.get_global_position())
 		player_instance.set_global_rotation(point.get_global_rotation())
-		SignalBus.driver_spawned.emit()
+		SignalBus.player_spawned.emit()
 
 func spawn_enemy_cycles(level_instance):
 	if level_instance.get_node("Spawns/Enemies").get_child_count() == 0:
@@ -69,7 +75,7 @@ func spawn_enemy_cycles(level_instance):
 		enemy_instance.level_instance = level_instance
 		enemy_instance.set_global_position(point.get_global_position())
 		enemy_instance.set_global_rotation(point.get_global_rotation())
-		SignalBus.driver_spawned.emit()
+		SignalBus.ai_spawned.emit("enemy")
 
 func spawn_ally_cycles(level_instance):
 	if level_instance.get_node("Spawns/Allies").get_child_count() == 0:
@@ -83,7 +89,7 @@ func spawn_ally_cycles(level_instance):
 		ally_instance.apply_materials()
 		ally_instance.set_global_position(point.get_global_position())
 		ally_instance.set_global_rotation(point.get_global_rotation())
-		SignalBus.driver_spawned.emit()
+		SignalBus.ai_spawned.emit("ally")
 
 func spawn_player_tanks(level_instance):
 	if level_instance.get_node("Spawns/PlayerTanks").get_child_count() == 0:
@@ -91,27 +97,28 @@ func spawn_player_tanks(level_instance):
 	for point in level_instance.get_node("Spawns/PlayerTanks").get_children():
 		var player_instance = PlayerTank.instantiate()
 		level_instance.add_child(player_instance)
-		player_instance.tank_color = "blue"
-		player_instance.shot_color = "blue"
+		player_instance.tank_color = "green"
+		player_instance.shot_color = "green"
 		player_instance.level_instance = level_instance
 		player_instance.apply_materials()
 		player_instance.set_global_position(point.get_global_position())
 		player_instance.set_global_rotation(point.get_global_rotation())
-		SignalBus.driver_spawned.emit()
+		SignalBus.player_spawned.emit()
 
 func spawn_enemy_tanks(level_instance):
 	if level_instance.get_node("Spawns/EnemyTanks").get_child_count() == 0:
 		return
 	for point in level_instance.get_node("Spawns/EnemyTanks").get_children():
 		var enemy_instance = AITank.instantiate()
-		level_instance.add_child(enemy_instance)
+		level_instance.get_node("Enemies").add_child(enemy_instance)
 		enemy_instance.tank_color = "orange"
 		enemy_instance.shot_color = "orange"
+		enemy_instance.enemy = true
 		enemy_instance.level_instance = level_instance
 		enemy_instance.apply_materials()
 		enemy_instance.set_global_position(point.get_global_position())
 		enemy_instance.set_global_rotation(point.get_global_rotation())
-		SignalBus.driver_spawned.emit()
+		SignalBus.ai_spawned.emit("enemy")
 
 func spawn_ally_tanks(level_instance):
 	if level_instance.get_node("Spawns/AllyTanks").get_child_count() == 0:
@@ -125,10 +132,20 @@ func spawn_ally_tanks(level_instance):
 		ally_instance.apply_materials()
 		ally_instance.set_global_position(point.get_global_position())
 		ally_instance.set_global_rotation(point.get_global_rotation())
-		SignalBus.driver_spawned.emit()
+		SignalBus.ai_spawned.emit("ally")
 
 
-func increment_living():
-	drivers_alive += 1
-func decrement_living():
-	drivers_alive -= 1
+func increment_players_alive():
+	players_alive += 1
+func decrement_players_alive():
+	players_alive -= 1
+func increment_ais_alive(aitype):
+	if aitype == "enemy":
+		enemies_alive += 1
+	else:
+		allies_alive += 1
+func decrement_ais_alive(aitype):
+	if aitype == "enemy":
+		enemies_alive -= 1
+	else:
+		allies_alive -= 1

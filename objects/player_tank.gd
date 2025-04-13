@@ -1,26 +1,31 @@
 extends VehicleBody3D
 
 
+var level_instance : Node3D
 var shot_available := true
 var tank_color := "blue"
 var shot_color := "blue"
-var material_applied := false
+var shot_lin_vel_mult := 0.2
+var shot_types = ShotBus.SHOT_TYPES
+var materials_applied := false
 var max_speed := 70.0
 var max_ef := 300.0
-var muzzle_vel := 200.0
+var max_hp := 5000.0
 var hp := 5000.0
 var dead := false
 var explodable := true
-var controllable := false
 var mouse_sens := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
-var level_instance: Node3D
+# player specific
+var controllable := false
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
+@onready var free_cam = $CamTwist/CamPitch/SpringArm3D/Camera3D
 @onready var turret_twist = $TurretTwist
 @onready var turret_pitch = $TurretTwist/TurretPitch
+@onready var gun_cam = $TurretTwist/TurretPitch/SpringArm3D/Camera3D
 @onready var turret_base = $TurretTwist/TurretPitch/Turretbase
 @onready var turret_barrel = $TurretTwist/TurretPitch/Turretbase/Turretbarrel
 @onready var muzzle_point = $TurretTwist/TurretPitch/Turretbase/Turretbarrel/MuzzlePoint
@@ -32,32 +37,39 @@ var level_instance: Node3D
 func _ready():
 	$Spawn.play()
 	$SpawnTimer.start()
+	SignalBus.ai_just_fuckkin_died.connect(receive_health)
 	
 func _process(delta):
-	
+
 	#region MaterialManipulation
-	if material_applied:
+	if materials_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():
 			points_to_pass.append(d_dot.get_global_position())
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
-		
-	if get_parent().get_node("Recognizers").get_child_count() > 0:
-		var closest_rec_pos
-		var closest_distance := 1_000_000.0
-		for rec in get_parent().get_node("Recognizers").get_children():
-			if rec.global_position.distance_to(global_position) < closest_distance:
-				closest_rec_pos = rec.global_position
-				closest_distance = rec.global_position.distance_to(global_position)
-		turret_base.get_surface_override_material(1).set_shader_parameter("enemy_pos", closest_rec_pos)
-		
-		
+		turret_base.get_surface_override_material(1).set_shader_parameter(
+				"enemy_pos", get_closest_living_child_pos("Recognizers")
+		)
+		turret_base.get_surface_override_material(2).set_shader_parameter(
+				"enemy_pos", get_closest_living_child_pos("Enemies")
+		)
 	#endregion
 
 
-	cam_twist.rotate_y(twist_input)
-	cam_pitch.rotate_x(pitch_input)
-	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
+	#region CamControl
+	if Input.is_action_just_pressed("freelook"):
+		free_cam.make_current()
+	if Input.is_action_just_released("freelook"):
+		gun_cam.make_current()
+		cam_twist.global_position = $CTDefaultPos.global_position
+		cam_twist.global_rotation = $CTDefaultPos.global_rotation
+		cam_pitch.global_position = $CPDefaultPos.global_position
+		cam_pitch.global_rotation = $CPDefaultPos.global_rotation
+	if Input.is_action_pressed("freelook"):
+		cam_twist.rotate_y(twist_input)
+		cam_pitch.rotate_x(pitch_input)
+		cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
+	#endregion
 	
 	if not controllable:
 		return
@@ -92,38 +104,65 @@ func _process(delta):
 	if get_linear_velocity().length() > max_speed:
 			engine_force = 0
 	if Input.is_action_pressed("steerleft"):
-		# i fucking hate that this works better
-		#rotate_y(delta * PI/4)
 		angular_velocity = Vector3(0, PI/3, 0)
-		#$BackLeft.engine_force = -max_ef
-		#$FrontLeft.engine_force = -max_ef
-		#$BackRight.engine_force = max_ef
-		#$FrontRight.engine_force = max_ef
 	if Input.is_action_pressed("steerright"):
 		angular_velocity = Vector3(0, -PI/3, 0)
 	#endregion
 	
+	#region Attacks
 	if Input.is_action_pressed("light_attack"):
-		shoot()
+		shoot("machinegun1")
+	elif Input.is_action_pressed("heavy_attack"):
+		shoot("cannon1")
+	#endregion
 	
 
+func get_closest_living_child_pos(parent_node):
+	var closest_child_pos = Vector3(0.0, 9999.0, 0.0)
+	if level_instance.get_node(parent_node).get_child_count() > 0:
+		var closest_distance :=  99999.0
+		for child in level_instance.get_node(parent_node).get_children():
+			if not "dead" in child:
+				continue
+			if child.dead == true:
+				continue
+			if child.global_position.distance_to(global_position) < closest_distance:
+				closest_child_pos = child.global_position
+				closest_distance = child.global_position.distance_to(global_position)
+	return closest_child_pos
 
-func shoot():
+
+func shoot(shot_type):
 	if not shot_available:
 		return
 	shot_available = false
-	var tankshot_instance = RBTankShot.instantiate()
-	tankshot_instance.shot_color = shot_color
-	tankshot_instance.gunner = self
-	tankshot_instance.damage = 200.0
-	tankshot_instance.apply_materials()
-	level_instance.add_child(tankshot_instance)
-	tankshot_instance.global_position = muzzle_point.global_position
-	tankshot_instance.global_rotation = muzzle_point.global_rotation
-	tankshot_instance.apply_central_impulse(
-			-1 * tankshot_instance.global_basis.z * muzzle_vel + get_linear_velocity()
-	)
-	$ShotCooldown.start()
+	var shot_params = shot_types[shot_type]
+	for i in range(0, shot_params["bullet_count"]):
+		var tankshot_instance = RBTankShot.instantiate()
+		tankshot_instance.shot_color = shot_color
+		tankshot_instance.gunner = self
+		tankshot_instance.damage = shot_params["dmg"]
+		tankshot_instance.apply_materials()
+		level_instance.add_child(tankshot_instance)
+		tankshot_instance.global_position = muzzle_point.global_position
+		tankshot_instance.global_rotation = muzzle_point.global_rotation
+		tankshot_instance.scale = shot_params["scale"]
+		tankshot_instance.apply_central_impulse(
+				-1 * tankshot_instance.global_basis.z 
+				* shot_params["muzzle_vel"] 
+				+ shot_lin_vel_mult * get_linear_velocity()
+		)
+		var spread = shot_params["spread"]
+		if spread > 0:
+			tankshot_instance.apply_central_impulse(
+					Vector3(
+						randf_range(-spread, spread),
+						randf_range(-spread, spread),
+						randf_range(-spread, spread)
+					)
+			)
+		tankshot_instance.show()
+	$ShotCooldown.start(1.0/shot_params["rof"])
 	$Shot.play()
 	turret_barrel.transform = turret_barrel.transform.translated_local(Vector3(0,0,1) * 0.5)
 	$TurretBarrelCol.transform = $TurretBarrelCol.transform.translated_local(Vector3(0,0,1) * 0.5)
@@ -143,7 +182,39 @@ func apply_materials():
 	turret_base.set_surface_override_material(2, tank_materials[tank_color]["lower_radar"])
 	turret_barrel.set_surface_override_material(0, tank_materials[tank_color]["barrel"])
 	turret_barrel.set_surface_override_material(1, tank_materials[tank_color]["muzzle"])
-	material_applied = true
+	materials_applied = true
+
+
+func receive_health(source):
+	if source == "enemy":
+		hp = 5000.0
+	else:
+		pass
+	hp = clamp(0.0, hp, max_hp)
+
+
+func take_hit(shot_pos, dmg_value):
+	if $DamageDots.get_child_count() < 200:
+		var damage_dot = Node3D.new()
+		$DamageDots.add_child(damage_dot)
+		damage_dot.set_global_position(shot_pos)
+	take_dmg(dmg_value)
+	$Hit.play()
+
+
+func take_dmg(dmg_value):
+	if hp <= 0:
+		return
+	hp -= float(dmg_value)
+	if hp <= 0:
+		dead = true
+		controllable = false
+		engine_force = 0
+		# so everything has time to stop before explosion frees collision
+		await get_tree().create_timer(0.15).timeout
+		SignalBus.player_became_untargetable.emit()
+		SignalBus.player_just_fuckkin_died.emit()
+		explode()
 
 
 func explode():
@@ -158,6 +229,13 @@ func explode():
 	tank_destruction_instance.global_position = global_position
 	tank_destruction_instance.tank_color = tank_color
 	tank_destruction_instance.prepare()
+	apply_impulse(
+			Vector3(
+				randi_range(-10, 10),
+				randi_range(40, 50),
+				randi_range(-10, 10)
+			)
+	)
 	# turret debris
 	tank_destruction_instance.get_child(0).apply_impulse(
 			Vector3(
@@ -177,28 +255,6 @@ func explode():
 			)
 
 
-func take_dmg(dmg_value):
-	if hp <= 0:
-		return
-	hp -= float(dmg_value)
-	if hp <= 0:
-		dead = true
-		controllable = false
-		# so everything has time to stop before explosion frees collision
-		await get_tree().create_timer(0.15).timeout
-		SignalBus.player_became_untargetable.emit()
-		explode()
-
-
-func take_hit(shot_pos, dmg_value):
-	if $DamageDots.get_child_count() < 200:
-		var damage_dot = Node3D.new()
-		$DamageDots.add_child(damage_dot)
-		damage_dot.set_global_position(shot_pos)
-	take_dmg(dmg_value)
-	$Hit.play()
-
-
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -211,6 +267,7 @@ func _on_shot_cooldown_timeout() -> void:
 
 
 func _on_spawn_timer_timeout() -> void:
-	$CamTwist/CamPitch/SpringArm3D/Camera3D.current = true
+	gun_cam.make_current()
+	await get_tree().create_timer(0.2).timeout
 	controllable = true
 	SignalBus.player_became_targetable.emit()

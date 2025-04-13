@@ -24,10 +24,10 @@ func _process(delta):
 	if pulse_offset < 0.0:
 		pulse_offset = 500.0
 	#print(pulse_offset)
-	$BaseNav/LightfloorCross.get_surface_override_material(1).set_shader_parameter(
+	$LightfloorCross.get_surface_override_material(1).set_shader_parameter(
 			"pulse_offset", pulse_offset
 	)
-	$BaseNav/LightfloorCross.get_surface_override_material(1).set_shader_parameter(
+	$LightfloorCross.get_surface_override_material(1).set_shader_parameter(
 			"pulse_band_offset", pulse_band_offset
 	)
 	

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cvru6fsi7epv1"]
+
+[resource]
+resource_name = "lw_test1"
+shading_mode = 2
+diffuse_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.918413, 0.000403889, 0.0537345, 1)
+emission_energy_multiplier = 3.0
+rim_enabled = true
+disable_receive_shadows = true
+billboard_mode = 1

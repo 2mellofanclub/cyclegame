@@ -1,7 +1,9 @@
 extends Node
 
-signal driver_spawned
-signal driver_just_fuckkin_died
+signal player_spawned
+signal player_just_fuckkin_died
+signal ai_spawned
+signal ai_just_fuckkin_died
 signal spawns_requested
 signal player_became_targetable
 signal player_became_untargetable

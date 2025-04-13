@@ -32,7 +32,7 @@ func explode():
 	$HitShape.queue_free()
 	freeze = true
 	$ShotMesh.hide()
-	for i in range(0, randi_range(10, 20)):
+	for i in range(0, randi_range(5, 10)):
 		var cube_instance = Cube.instantiate()
 		cube_instance.get_child(0).set_surface_override_material(0, tank_styles[shot_color]["shot"])
 		add_child(cube_instance)

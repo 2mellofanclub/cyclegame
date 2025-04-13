@@ -14,3 +14,4 @@ func prepare():
 		var cube_instance = Cube.instantiate()
 		cube_instance.get_child(0).set_surface_override_material(0, tank_materials[tank_color]["lattice"])
 		$Cubes.add_child(cube_instance)
+		cube_instance.scale = Vector3(2,2,2)

@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://2jjok7i0q8gq"]
+
+[ext_resource type="Shader" uid="uid://bt5k56fld8bpw" path="res://materials/floor_pulse.gdshader" id="1_bsquc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bsquc")
+shader_parameter/z1 = 0.0
+shader_parameter/z2 = 0.0
+shader_parameter/x1 = 0.0
+shader_parameter/x2 = 0.0
+shader_parameter/emission = Color(0.207843, 0.396078, 1, 1)
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 10.0

@@ -1,6 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://btfn72pdewqqe"]
-
-[ext_resource type="Texture2D" uid="uid://bog458aoxl2j8" path="res://screenshots/screenshot17.png" id="1_hh3ki"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://btfn72pdewqqe"]
 
 [resource]
 resource_name = "lw_test1"
@@ -10,6 +8,5 @@ albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 8.89
-emission_texture = ExtResource("1_hh3ki")
 rim_enabled = true
 disable_receive_shadows = true

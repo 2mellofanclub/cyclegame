@@ -374,7 +374,7 @@ spring_length = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22248, 1.08016)
 
 [node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
 
 [node name="Tankbody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_7o55n")

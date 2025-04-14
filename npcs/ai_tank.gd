@@ -74,7 +74,7 @@ func _process(delta):
 			return
 		if player_aim_target_distance > max_targeting_dist:
 			return
-		turret_twist.look_at(player_location)
+		turret_twist.look_at(player_aim_target_pos)
 		#$GunTargetTracker.look_at(player_location)
 		#turret_twist.rotation = turret_twist.rotation.lerp($GunTargetTracker.rotation, delta * 5.0)
 		# do this better!
@@ -94,7 +94,7 @@ func _process(delta):
 		if nav_agent.distance_to_target() > 15.0:
 			look_at(global_position + direction)
 			global_position += direction * max_speed/2.0 * delta
-			# ----- figure this shit out ----- #
+			# ----- figure this shit out ----- # 
 			#nav_agent.set_velocity(global_position + direction * max_speed/2.0)
 	elif move_mode == "patrol":
 		pass
@@ -119,6 +119,7 @@ func shoot(shot_type):
 		tankshot_instance.gunner = self
 		tankshot_instance.damage = shot_params["dmg"]
 		tankshot_instance.ddot_rad = shot_params["ddot_rad"]
+		tankshot_instance.mass = shot_params["bullet_mass"]
 		tankshot_instance.apply_materials()
 		level_instance.add_child(tankshot_instance)
 		tankshot_instance.global_position = muzzle_point.global_position
@@ -126,7 +127,7 @@ func shoot(shot_type):
 		tankshot_instance.scale = shot_params["scale"]
 		tankshot_instance.apply_central_impulse(
 				-1 * tankshot_instance.global_basis.z 
-				* shot_params["muzzle_vel"] 
+				* shot_params["muzzle_force"] 
 				+ shot_lin_vel_mult * get_linear_velocity()
 		)
 		var spread = shot_params["spread"]

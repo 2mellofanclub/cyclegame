@@ -2,7 +2,7 @@ extends Node3D
 
 @export var ramp_physics = false
 
-# AAAAAAAAAa
+# AAAAAAAAAaaaaa
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

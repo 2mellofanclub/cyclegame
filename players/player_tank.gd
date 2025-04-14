@@ -19,6 +19,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 # player specific
 var controllable := false
+var godmode := true
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
@@ -83,7 +84,7 @@ func _process(delta):
 	if not Input.is_action_pressed("freelook"):
 		turret_twist.rotate_y(twist_input)
 		turret_pitch.rotate_x(pitch_input)
-		turret_pitch.rotation.x = clamp(turret_pitch.rotation.x, -PI/8, PI/8)
+		turret_pitch.rotation.x = clamp(turret_pitch.rotation.x, -PI/9, PI/7)
 	twist_input = 0
 	pitch_input = 0
 	# do this better!
@@ -127,8 +128,8 @@ func get_closest_living_pos(array):
 	if len(array) > 0:
 		var closest_distance :=  99999.0
 		for member in array:
-			#if not "dead" in member:
-				#continue
+			if not "dead" in member:
+				continue
 			if member.dead == true:
 				continue
 			if member.global_position.distance_to(global_position) < closest_distance:
@@ -148,6 +149,7 @@ func shoot(shot_type):
 		tankshot_instance.gunner = self
 		tankshot_instance.damage = shot_params["dmg"]
 		tankshot_instance.ddot_rad = shot_params["ddot_rad"]
+		tankshot_instance.mass = shot_params["bullet_mass"]
 		tankshot_instance.apply_materials()
 		level_instance.add_child(tankshot_instance)
 		tankshot_instance.global_position = muzzle_point.global_position
@@ -155,7 +157,7 @@ func shoot(shot_type):
 		tankshot_instance.scale = shot_params["scale"]
 		tankshot_instance.apply_central_impulse(
 				-1 * tankshot_instance.global_basis.z 
-				* shot_params["muzzle_vel"] 
+				* shot_params["muzzle_force"] 
 				+ shot_lin_vel_mult * get_linear_velocity()
 		)
 		var spread = shot_params["spread"]
@@ -212,7 +214,7 @@ func take_hit(shot_pos, dmg_value, ddot_rad):
 
 
 func take_dmg(dmg_value):
-	if hp <= 0:
+	if hp <= 0 or godmode:
 		return
 	hp -= float(dmg_value)
 	if hp <= 0:

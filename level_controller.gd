@@ -146,7 +146,7 @@ func spawn_recognizers(level_instance):
 	for point in level_instance.get_node("Spawns/Recognizers").get_children():
 		var enemy_instance = Recognizer.instantiate()
 		level_instance.add_child(enemy_instance)
-		level_instance.enemies.append(enemy_instance)
+		level_instance.recognizers.append(enemy_instance)
 		enemy_instance.rec_color = "orange"
 		enemy_instance.enemy = true
 		enemy_instance.level_instance = level_instance

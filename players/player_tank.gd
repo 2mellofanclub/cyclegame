@@ -127,8 +127,8 @@ func get_closest_living_pos(array):
 	if len(array) > 0:
 		var closest_distance :=  99999.0
 		for member in array:
-			if not "dead" in member:
-				continue
+			#if not "dead" in member:
+				#continue
 			if member.dead == true:
 				continue
 			if member.global_position.distance_to(global_position) < closest_distance:

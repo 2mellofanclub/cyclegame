@@ -20,7 +20,7 @@ var pitch_input := 0.0
 # ai specific
 var enemy := false
 var player_targetable := false
-var targeting := false
+var targeting := true
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 100.0
@@ -60,17 +60,19 @@ func _process(delta):
 		return
 	
 	var player_location
-	var player_distance
+	var player_aim_target_pos
+	var player_aim_target_distance
 	var player_instance = level_instance.get_node_or_null("PlayerTank")
 	if player_instance:
 		player_location = player_instance.global_position
-		player_distance = player_location.distance_to(global_position)
+		player_aim_target_pos = player_instance.get_node("Target").global_position
+		player_aim_target_distance = player_aim_target_pos.distance_to(global_position)
 	
 	#region GunControl
 	if targeting:
 		if not player_location:
 			return
-		if player_distance > max_targeting_dist:
+		if player_aim_target_distance > max_targeting_dist:
 			return
 		turret_twist.look_at(player_location)
 		#$GunTargetTracker.look_at(player_location)
@@ -80,18 +82,20 @@ func _process(delta):
 		$TurretBaseCol.global_rotation = turret_pitch.get_child(0).global_rotation
 		$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
 		$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
-		if player_distance < max_firing_dist and player_targetable:
-			shoot("machinegun1")
+		if player_aim_target_distance < max_firing_dist and player_targetable:
+			shoot("shotgun1")
 	#endregion
 	
 	#region Steering
-	if move_mode == "hunt":
-		if player_location and player_distance > 15.0:
-			nav_agent.target_position = player_location
-			var direction = nav_agent.get_next_path_position() - global_position
-			direction = direction.normalized()
+	if move_mode == "hunt" and player_location != null:
+		nav_agent.target_position = player_location
+		var direction = nav_agent.get_next_path_position() - global_position
+		direction = direction.normalized()
+		if nav_agent.distance_to_target() > 15.0:
 			look_at(global_position + direction)
 			global_position += direction * max_speed/2.0 * delta
+			# ----- figure this shit out ----- #
+			#nav_agent.set_velocity(global_position + direction * max_speed/2.0)
 	elif move_mode == "patrol":
 		pass
 	else:

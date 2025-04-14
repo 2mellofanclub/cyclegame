@@ -14,6 +14,7 @@ var player_targetable := false
 var targeting := false
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
+var cruising_alt := 50.0
 
 @onready var nav_agent = $NavAgent
 #@onready var Cube = load("res://destruction/cube.tscn")
@@ -113,6 +114,8 @@ func explode():
 	dead = true
 	$RBLL.freeze = false
 	$RBRL.freeze = false
+	$RBLL.top_level = true
+	$RBRL.top_level = true
 	self.gravity_scale = 0.5
 	$RBLL.gravity_scale = 0.5
 	$RBRL.gravity_scale = 0.5

@@ -313,6 +313,8 @@ center_of_mass_mode = 1
 script = ExtResource("1_1xmg7")
 
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
+avoidance_layers = 0
+avoidance_mask = 0
 
 [node name="CamTwist" type="Node3D" parent="."]
 

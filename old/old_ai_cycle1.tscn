@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://4c5jgqap7ifx"]
+[gd_scene load_steps=13 format=3 uid="uid://155gedpe4l7h"]
 
-[ext_resource type="Script" uid="uid://l2rtmdw4pu4b" path="res://npcs/ai_cycle.gd" id="1_iwmfg"]
-[ext_resource type="PackedScene" uid="uid://md1l12bhugd1" path="res://old/old_lightcycle.blend" id="2_o06jd"]
-[ext_resource type="Material" uid="uid://4yffp84o5t44" path="res://materials/father_white1.tres" id="3_qu70w"]
-[ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_yuk60"]
-[ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="5_br8h5"]
-[ext_resource type="Material" uid="uid://btfn72pdewqqe" path="res://materials/lw_white1.tres" id="5_ngn0u"]
-[ext_resource type="AudioStream" uid="uid://brmoh8hudwf2s" path="res://sound/synth_misc_08.ogg" id="7_qu70w"]
+[ext_resource type="Script" uid="uid://l2rtmdw4pu4b" path="res://npcs/ai_cycle.gd" id="1_lmi7h"]
+[ext_resource type="PackedScene" uid="uid://md1l12bhugd1" path="res://old/old_lightcycle.blend" id="2_pwg1o"]
+[ext_resource type="Material" uid="uid://4yffp84o5t44" path="res://materials/father_white1.tres" id="3_0vlgn"]
+[ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="4_1y7da"]
+[ext_resource type="Material" uid="uid://btfn72pdewqqe" path="res://materials/lw_white1.tres" id="5_kbl23"]
+[ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="6_awve7"]
+[ext_resource type="AudioStream" uid="uid://brmoh8hudwf2s" path="res://sound/synth_misc_08.ogg" id="7_gidan"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p2lnw"]
 
@@ -27,7 +27,7 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, -0.25)
-script = ExtResource("1_iwmfg")
+script = ExtResource("1_lmi7h")
 
 [node name="ImpactRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -2)
@@ -118,25 +118,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.096)
 light_color = Color(0.694118, 0.713726, 0.94902, 1)
 light_energy = 0.45
 
-[node name="lightcycle" parent="." instance=ExtResource("2_o06jd")]
+[node name="lightcycle" parent="." instance=ExtResource("2_pwg1o")]
 
 [node name="Body" parent="lightcycle" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000592291, 0.96695, 0.0365156)
-surface_material_override/0 = ExtResource("3_qu70w")
-surface_material_override/1 = ExtResource("3_yuk60")
+surface_material_override/0 = ExtResource("3_0vlgn")
+surface_material_override/1 = ExtResource("4_1y7da")
 
 [node name="Windshield_001" parent="lightcycle/Body" index="0"]
-surface_material_override/0 = ExtResource("3_yuk60")
+surface_material_override/0 = ExtResource("4_1y7da")
 
 [node name="Rearwheel" parent="lightcycle" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258897, 1.76932)
-surface_material_override/0 = ExtResource("3_qu70w")
-surface_material_override/1 = ExtResource("5_ngn0u")
+surface_material_override/0 = ExtResource("3_0vlgn")
+surface_material_override/1 = ExtResource("5_kbl23")
 
 [node name="Frontwheel" parent="lightcycle" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.170669, -1.69771)
-surface_material_override/0 = ExtResource("3_qu70w")
-surface_material_override/1 = ExtResource("5_ngn0u")
+surface_material_override/0 = ExtResource("3_0vlgn")
+surface_material_override/1 = ExtResource("5_kbl23")
 
 [node name="BodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000592291, 0.951512, 0.00351632)
@@ -170,12 +170,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258897, 1.76932)
 [node name="Sounds" type="Node" parent="."]
 
 [node name="NotPositive" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("5_br8h5")
+stream = ExtResource("6_awve7")
 volume_db = -5.0
 pitch_scale = 0.79
 
 [node name="Splash" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("7_qu70w")
+stream = ExtResource("7_gidan")
 unit_size = 15.0
 pitch_scale = 0.77
 

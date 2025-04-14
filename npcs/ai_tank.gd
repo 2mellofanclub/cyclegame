@@ -44,17 +44,27 @@ func _ready():
 	
 	
 func _process(delta):
+	
 	if materials_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():
-			points_to_pass.append(d_dot.get_global_position())
+			points_to_pass.append(Vector4(
+					d_dot.get_global_position().x,
+					d_dot.get_global_position().y,
+					d_dot.get_global_position().z,
+					d_dot.scale.x
+			))
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
 	
 	if dead:
 		return
-		
-	var player_location = level_instance.get_node_or_null("PlayerTank").global_position
-	var player_distance = player_location.distance_to(global_position)
+	
+	var player_location
+	var player_distance
+	var player_instance = level_instance.get_node_or_null("PlayerTank")
+	if player_instance:
+		player_location = player_instance.global_position
+		player_distance = player_location.distance_to(global_position)
 	
 	#region GunControl
 	if targeting:
@@ -71,7 +81,7 @@ func _process(delta):
 		$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
 		$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
 		if player_distance < max_firing_dist and player_targetable:
-			shoot("cannon1")
+			shoot("machinegun1")
 	#endregion
 	
 	#region Steering
@@ -104,6 +114,7 @@ func shoot(shot_type):
 		tankshot_instance.shot_color = shot_color
 		tankshot_instance.gunner = self
 		tankshot_instance.damage = shot_params["dmg"]
+		tankshot_instance.ddot_rad = shot_params["ddot_rad"]
 		tankshot_instance.apply_materials()
 		level_instance.add_child(tankshot_instance)
 		tankshot_instance.global_position = muzzle_point.global_position
@@ -135,7 +146,8 @@ func shoot(shot_type):
 
 func apply_materials():
 	var tank_materials = MaterialsBus.TANK_STYLES
-	$Tankbody.set_surface_override_material(0, tank_materials[tank_color]["body0"])
+	# duplication necessary for passing instance specific vec4 of ddots
+	$Tankbody.set_surface_override_material(0, tank_materials[tank_color]["body0"].duplicate())
 	$Tankbody.set_surface_override_material(1, tank_materials[tank_color]["tracks"])
 	$Tankbody.set_surface_override_material(2, tank_materials[tank_color]["pit"])
 	$Tankbody/Lattice.set_surface_override_material(0, tank_materials[tank_color]["lattice"])
@@ -155,11 +167,12 @@ func receive_health(source):
 	hp = clamp(0.0, hp, max_hp)
 
 
-func take_hit(shot_pos, dmg_value):
+func take_hit(shot_pos, dmg_value, ddot_rad):
 	if $DamageDots.get_child_count() < 200:
 		var damage_dot = Node3D.new()
 		$DamageDots.add_child(damage_dot)
 		damage_dot.set_global_position(shot_pos)
+		damage_dot.scale = Vector3(ddot_rad, ddot_rad, ddot_rad)
 	take_dmg(dmg_value)
 	$Hit.play()
 

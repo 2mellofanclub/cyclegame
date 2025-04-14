@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=4 uid="uid://u2a2g7qoasjm"]
 
 [ext_resource type="Script" uid="uid://n5340hgrgvh6" path="res://npcs/ai_tank.gd" id="1_1xmg7"]
-[ext_resource type="Material" uid="uid://4yffp84o5t44" path="res://materials/father_white1.tres" id="2_ets37"]
+[ext_resource type="Material" uid="uid://d30mq7wl3j76o" path="res://materials/sdmg_badguy_black.tres" id="2_ets37"]
 [ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="3_ovfoj"]
 [ext_resource type="AudioStream" uid="uid://6bk7j8crvceq" path="res://sound/synth_laser_08.ogg" id="5_1xmg7"]
 [ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="6_hlkpo"]
@@ -307,7 +307,7 @@ points = PackedVector3Array(-0.629069, -0.970893, 0.214815, 1.4365, 0.178677, 0.
 points = PackedVector3Array(0.204459, 0.170259, 2.17615, -0.0399672, -0.514353, -0.953853, 0.0577498, -0.514353, -0.953853, 0.351236, 0.268148, -0.953853, -0.333453, 0.268148, -0.953853, -0.137818, -0.0742343, 2.17615, 0.0577498, -0.269783, 2.17615, -0.333453, 0.268148, 0.318248, 0.351236, 0.170259, 0.318248, -0.0399672, -0.514353, 0.318248, -0.333453, 0.121391, 0.318248, -0.186677, 0.170259, 2.17615, 0.0577498, -0.514353, 0.318248, 0.351236, 0.268148, 0.318248, -0.333453, 0.121391, -0.953853, 0.351236, 0.170259, -0.953853, -0.0399672, -0.269783, 2.17615, 0.204459, 0.072523, 2.17615, -0.137818, -0.318728, 0.318248, -0.186677, 0.0235784, 2.17615, 0.106675, -0.17197, 2.17615, -0.137818, -0.318728, -0.953853)
 
 [node name="AITank" type="VehicleBody3D"]
-axis_lock_angular_x = true
+collision_layer = 63
 mass = 100.0
 center_of_mass_mode = 1
 script = ExtResource("1_1xmg7")

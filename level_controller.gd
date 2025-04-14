@@ -6,10 +6,11 @@ var players_alive: int
 var enemies_alive: int
 var allies_alive: int
 @export var max_trails := 3000
-@onready var Player = preload("res://objects/player.tscn")
-@onready var PlayerTank = preload("res://objects/player_tank.tscn")
+@onready var Player = preload("res://players/player.tscn")
+@onready var PlayerTank = preload("res://players/player_tank.tscn")
 @onready var AICycle = preload("res://npcs/ai_cycle.tscn")
 @onready var AITank = preload("res://npcs/ai_tank.tscn")
+@onready var Recognizer = preload("res://npcs/recognizer.tscn")
 
 
 func _ready():
@@ -43,6 +44,7 @@ func spawn_everybody():
 	spawn_ally_tanks(current_level_instance)
 	spawn_enemy_cycles(current_level_instance)
 	spawn_enemy_tanks(current_level_instance)
+	spawn_recognizers(current_level_instance)
 
 func spawn_player_cycles(level_instance):
 	if level_instance.get_node("Spawns/Players").get_child_count() == 0:
@@ -137,6 +139,21 @@ func spawn_ally_tanks(level_instance):
 		ally_instance.set_global_position(point.get_global_position())
 		ally_instance.set_global_rotation(point.get_global_rotation())
 		SignalBus.ai_spawned.emit("ally")
+
+func spawn_recognizers(level_instance):
+	if level_instance.get_node("Spawns/Recognizers").get_child_count() == 0:
+		return
+	for point in level_instance.get_node("Spawns/Recognizers").get_children():
+		var enemy_instance = Recognizer.instantiate()
+		level_instance.add_child(enemy_instance)
+		level_instance.enemies.append(enemy_instance)
+		enemy_instance.rec_color = "orange"
+		enemy_instance.enemy = true
+		enemy_instance.level_instance = level_instance
+		enemy_instance.apply_materials()
+		enemy_instance.set_global_position(point.get_global_position())
+		enemy_instance.set_global_rotation(point.get_global_rotation())
+		SignalBus.ai_spawned.emit("enemy")
 
 
 func increment_players_alive():

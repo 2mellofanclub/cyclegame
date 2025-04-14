@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, world_vertex_coords;
-uniform vec3 dmg_points[220];
+uniform vec4 dmg_points[220];
 uniform vec4 emission : source_color;
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
@@ -26,7 +26,7 @@ void vertex() {
 void fragment() {
 	vec2 base_uv = UV;
 	for (int i=0; i<dmg_points.length(); i++) {
-		if(distance(dmg_points[i], surf_vertex) < 0.50) discard;
+		if(distance(dmg_points[i].xyz, surf_vertex) < dmg_points[i].w) discard;
 	}
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;

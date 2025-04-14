@@ -45,14 +45,19 @@ func _process(delta):
 	if materials_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():
-			points_to_pass.append(d_dot.get_global_position())
+			points_to_pass.append(Vector4(
+					d_dot.get_global_position().x,
+					d_dot.get_global_position().y,
+					d_dot.get_global_position().z,
+					d_dot.scale.x
+			))
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
 		turret_base.get_surface_override_material(1).set_shader_parameter(
 				"enemy_pos", get_closest_living_pos(level_instance.recognizers)
 		)
 		turret_base.get_surface_override_material(2).set_shader_parameter(
 				"enemy_pos", get_closest_living_pos(level_instance.enemies)
-		)
+		) 
 	#endregion
 
 
@@ -142,6 +147,7 @@ func shoot(shot_type):
 		tankshot_instance.shot_color = shot_color
 		tankshot_instance.gunner = self
 		tankshot_instance.damage = shot_params["dmg"]
+		tankshot_instance.ddot_rad = shot_params["ddot_rad"]
 		tankshot_instance.apply_materials()
 		level_instance.add_child(tankshot_instance)
 		tankshot_instance.global_position = muzzle_point.global_position
@@ -160,7 +166,7 @@ func shoot(shot_type):
 						randf_range(-spread, spread),
 						randf_range(-spread, spread)
 					)
-			)
+			) 
 		tankshot_instance.show()
 	$ShotCooldown.start(1.0/shot_params["rof"])
 	$Shot.play()
@@ -173,7 +179,7 @@ func shoot(shot_type):
 
 func apply_materials():
 	var tank_materials = MaterialsBus.TANK_STYLES
-	$Tankbody.set_surface_override_material(0, tank_materials[tank_color]["body0"])
+	$Tankbody.set_surface_override_material(0, tank_materials[tank_color]["body0"].duplicate())
 	$Tankbody.set_surface_override_material(1, tank_materials[tank_color]["tracks"])
 	$Tankbody.set_surface_override_material(2, tank_materials[tank_color]["pit"])
 	$Tankbody/Lattice.set_surface_override_material(0, tank_materials[tank_color]["lattice"])
@@ -187,17 +193,20 @@ func apply_materials():
 
 func receive_health(source):
 	if source == "enemy":
-		hp = 5000.0
+		hp = max_hp
+		for child in $DamageDots.get_children():
+			child.queue_free()
 	else:
 		pass
 	hp = clamp(0.0, hp, max_hp)
 
 
-func take_hit(shot_pos, dmg_value):
+func take_hit(shot_pos, dmg_value, ddot_rad):
 	if $DamageDots.get_child_count() < 200:
 		var damage_dot = Node3D.new()
 		$DamageDots.add_child(damage_dot)
 		damage_dot.set_global_position(shot_pos)
+		damage_dot.scale = Vector3(ddot_rad, ddot_rad, ddot_rad)
 	take_dmg(dmg_value)
 	$Hit.play()
 

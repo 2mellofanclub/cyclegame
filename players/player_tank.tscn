@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=4 uid="uid://dlehw30vjkukd"]
 
-[ext_resource type="Script" uid="uid://detjwulravopg" path="res://objects/player_tank.gd" id="1_jtb6v"]
+[ext_resource type="Script" uid="uid://detjwulravopg" path="res://players/player_tank.gd" id="1_jtb6v"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_vmec3"]
 [ext_resource type="Material" uid="uid://cvru6fsi7epv1" path="res://materials/reticle_test.tres" id="4_7o55n"]
 [ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="4_vmec3"]
@@ -312,7 +312,7 @@ points = PackedVector3Array(-0.629069, -0.970893, 0.214815, 1.4365, 0.178677, 0.
 points = PackedVector3Array(0.204459, 0.170259, 2.17615, -0.0399672, -0.514353, -0.953853, 0.0577498, -0.514353, -0.953853, 0.351236, 0.268148, -0.953853, -0.333453, 0.268148, -0.953853, -0.137818, -0.0742343, 2.17615, 0.0577498, -0.269783, 2.17615, -0.333453, 0.268148, 0.318248, 0.351236, 0.170259, 0.318248, -0.0399672, -0.514353, 0.318248, -0.333453, 0.121391, 0.318248, -0.186677, 0.170259, 2.17615, 0.0577498, -0.514353, 0.318248, 0.351236, 0.268148, 0.318248, -0.333453, 0.121391, -0.953853, 0.351236, 0.170259, -0.953853, -0.0399672, -0.269783, 2.17615, 0.204459, 0.072523, 2.17615, -0.137818, -0.318728, 0.318248, -0.186677, 0.0235784, 2.17615, 0.106675, -0.17197, 2.17615, -0.137818, -0.318728, -0.953853)
 
 [node name="PlayerTank" type="VehicleBody3D"]
-axis_lock_angular_x = true
+collision_layer = 455
 mass = 100.0
 center_of_mass_mode = 1
 script = ExtResource("1_jtb6v")
@@ -372,6 +372,9 @@ spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="TurretTwist/TurretPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22248, 1.08016)
+
+[node name="Target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Tankbody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_7o55n")

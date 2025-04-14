@@ -2,6 +2,7 @@ extends RigidBody3D
 
 
 var damage := 0.0
+var ddot_rad := 0.0
 var exploded := false
 var out_of_muzzle := false
 var gunner : VehicleBody3D
@@ -20,7 +21,7 @@ func _process(delta):
 	if $ImpactRay.is_colliding():
 		if $ImpactRay.get_collider().name != "RBTankShot":
 			if "take_hit" in $ImpactRay.get_collider():
-				$ImpactRay.get_collider().take_hit($ImpactRay.get_collision_point(), damage)
+				$ImpactRay.get_collider().take_hit($ImpactRay.get_collision_point(), damage, ddot_rad)
 			explode()
 
 
@@ -45,8 +46,10 @@ func explode():
 		)
 		$DespawnTimer.start()
 
+
 func apply_materials():
 	$ShotMesh.set_surface_override_material(0, tank_styles[shot_color]["shot"])
+
 
 func _on_timer_timeout() -> void:
 	queue_free()

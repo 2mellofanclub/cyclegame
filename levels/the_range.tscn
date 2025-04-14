@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://dtgdeujl30rr6"]
+[gd_scene load_steps=20 format=4 uid="uid://dtgdeujl30rr6"]
 
 [ext_resource type="Script" uid="uid://bpcngkmp6fh8w" path="res://levels/the_range.gd" id="1_y7cpa"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_deyc5"]
 [ext_resource type="Material" uid="uid://2jjok7i0q8gq" path="res://materials/floor_slw_blue1.tres" id="3_deyc5"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="3_ws1pa"]
-[ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="5_ws1pa"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_dt65n"]
 vertices = PackedVector3Array(-500, 0.75, -500, -500, 0.75, 500, 500, 0.75, 500, 500, 0.75, -500)
@@ -96,47 +95,6 @@ ambient_light_color = Color(0, 0.0705882, 0.227451, 1)
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="GDScript" id="GDScript_dt65n"]
-script/source = "extends StaticBody3D
-
-var hp = 4000.0
-var dead = false
-var enemy = true
-
-
-func _ready() -> void:
-	SignalBus.ai_spawned.emit(\"enemy\")
-
-func take_hit(shot_pos, dmg_value):
-	take_dmg(dmg_value)
-	$Hit.play()
-
-
-func take_dmg(dmg_value):
-	if hp <= 0:
-		return
-	hp -= float(dmg_value)
-	if hp <= 0:
-		dead = true
-		if enemy:
-			SignalBus.ai_just_fuckkin_died.emit(\"enemy\")
-		else:
-			SignalBus.ai_just_fuckkin_died.emit(\"ally\")
-		# so everything has time to stop before explosion frees collision
-		await get_tree().create_timer(0.15).timeout
-		explode()
-
-func explode():
-	get_node(\"M\").hide()
-	get_node(\"C\").queue_free()
-"
-
-[sub_resource type="PrismMesh" id="PrismMesh_y7cpa"]
-size = Vector3(3.605, 8.62, 2.79)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dt65n"]
-data = PackedVector3Array(0, 4.31, 1.395, 1.8025, -4.31, 1.395, -1.8025, -4.31, 1.395, 0, 4.31, -1.395, -1.8025, -4.31, -1.395, 1.8025, -4.31, -1.395, 0, 4.31, 1.395, 0, 4.31, -1.395, 1.8025, -4.31, 1.395, 0, 4.31, -1.395, 1.8025, -4.31, -1.395, 1.8025, -4.31, 1.395, 0, 4.31, -1.395, 0, 4.31, 1.395, -1.8025, -4.31, -1.395, 0, 4.31, 1.395, -1.8025, -4.31, 1.395, -1.8025, -4.31, -1.395, -1.8025, -4.31, 1.395, 1.8025, -4.31, 1.395, -1.8025, -4.31, -1.395, 1.8025, -4.31, 1.395, 1.8025, -4.31, -1.395, -1.8025, -4.31, -1.395)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_bghhw"]
 size = Vector3(100, 10, 100)
 
@@ -224,39 +182,29 @@ transform = Transform3D(-0.675462, -0.0977421, 0.730889, 0, 0.991176, 0.132551, 
 [node name="EnemySpawn" type="Node3D" parent="Spawns/EnemyTanks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32, 0.5, -19.473)
 
+[node name="EnemySpawn2" type="Node3D" parent="Spawns/EnemyTanks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.112, 0.5, -45.0454)
+
+[node name="EnemySpawn3" type="Node3D" parent="Spawns/EnemyTanks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -176.549, 0.5, -72.3096)
+
 [node name="AllyTanks" type="Node3D" parent="Spawns"]
+
+[node name="Recognizers" type="Node3D" parent="Spawns"]
+
+[node name="Node3D" type="Node3D" parent="Spawns/Recognizers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.7735, 0)
+
+[node name="Node3D3" type="Node3D" parent="Spawns/Recognizers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.9574, 27.7735, 39.7592)
+
+[node name="Node3D2" type="Node3D" parent="Spawns/Recognizers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8514, 27.7735, -47.3691)
 
 [node name="SOS" parent="." instance=ExtResource("3_ws1pa")]
 volume_db = -22.0
 pitch_scale = 0.68
 autoplay = false
-
-[node name="Players" type="Node3D" parent="."]
-
-[node name="Enemies" type="Node3D" parent="."]
-
-[node name="Allies" type="Node3D" parent="."]
-
-[node name="Recognizers" type="Node3D" parent="."]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Recognizers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.7735, 0)
-script = SubResource("GDScript_dt65n")
-
-[node name="M" type="MeshInstance3D" parent="Recognizers/StaticBody3D"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("PrismMesh_y7cpa")
-
-[node name="C" type="CollisionShape3D" parent="Recognizers/StaticBody3D"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("ConcavePolygonShape3D_dt65n")
-
-[node name="Hit" type="AudioStreamPlayer3D" parent="Recognizers/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
-stream = ExtResource("5_ws1pa")
-volume_db = -10.0
-max_db = -10.0
-max_polyphony = 10
 
 [node name="Boxes" type="Node3D" parent="."]
 

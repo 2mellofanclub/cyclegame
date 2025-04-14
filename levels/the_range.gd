@@ -27,7 +27,6 @@ func _process(delta):
 	pulse_offset -= delta * pulse_speed_mps
 	if pulse_offset < 0.0:
 		pulse_offset = 500.0
-	#print(pulse_offset)
 	$BaseNav/LightfloorCross.get_surface_override_material(1).set_shader_parameter(
 			"pulse_offset", pulse_offset
 	)
@@ -43,5 +42,5 @@ func _process(delta):
 		await get_tree().create_timer(0.25).timeout
 		SignalBus.spawns_requested.emit()
 		await get_tree().create_timer(3).timeout
-		$SOS.play()
+		#$SOS.play()
 		

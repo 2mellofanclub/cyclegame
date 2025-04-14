@@ -135,3 +135,26 @@ const TANK_STYLES = {
 		"lower_radar" : MATERIALS["radarlo_slw_green1"],
 	},
 }
+const REC_STYLES = {
+	"orange" : {
+		"body0" : MATERIALS["sdmg_badguy_black1"],
+		"lattice" : MATERIALS["lw_orange1"],
+		"leftleg" : MATERIALS["sdmg_badguy_black1"],
+		"rightleg" : MATERIALS["sdmg_badguy_black1"],
+		"lines" : MATERIALS["lw_orange1"],
+	},
+	"blue" : {
+		"body0" : MATERIALS["sdmg_badguy_black1"],
+		"lattice" : MATERIALS["lw_blue1"],
+		"leftleg" : MATERIALS["sdmg_badguy_black1"],
+		"rightleg" : MATERIALS["sdmg_badguy_black1"],
+		"lines" : MATERIALS["lw_blue1"],
+	},
+	"green" : {
+		"body0" : MATERIALS["sdmg_badguy_black1"],
+		"lattice" : MATERIALS["lw_green1"],
+		"leftleg" : MATERIALS["sdmg_badguy_black1"],
+		"rightleg" : MATERIALS["sdmg_badguy_black1"],
+		"lines" : MATERIALS["lw_green1"],
+	},
+}

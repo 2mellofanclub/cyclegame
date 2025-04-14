@@ -36,6 +36,7 @@ script = ExtResource("1_ig7tw")
 script = ExtResource("2_0xm2m")
 
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

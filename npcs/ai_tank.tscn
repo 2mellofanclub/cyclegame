@@ -313,9 +313,7 @@ center_of_mass_mode = 1
 script = ExtResource("1_1xmg7")
 
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
-path_desired_distance = 5.0
 target_desired_distance = 20.0
-path_max_distance = 7.01
 avoidance_enabled = true
 height = 4.0
 radius = 4.0

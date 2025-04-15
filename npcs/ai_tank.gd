@@ -20,7 +20,7 @@ var pitch_input := 0.0
 # ai specific
 var enemy := false
 var player_targetable := false
-var targeting := false
+var targeting := true
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 100.0
@@ -71,19 +71,20 @@ func _process(delta):
 	#region GunControl
 	if targeting:
 		if not player_location:
-			return
-		if player_aim_target_distance > max_targeting_dist:
-			return
-		turret_twist.look_at(player_aim_target_pos)
-		#$GunTargetTracker.look_at(player_location)
-		#turret_twist.rotation = turret_twist.rotation.lerp($GunTargetTracker.rotation, delta * 5.0)
-		# do this better!
-		$TurretBaseCol.global_position = turret_pitch.get_child(0).global_position
-		$TurretBaseCol.global_rotation = turret_pitch.get_child(0).global_rotation
-		$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
-		$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
-		if player_aim_target_distance < max_firing_dist and player_targetable:
-			shoot("shotgun1")
+			pass
+		elif player_aim_target_distance > max_targeting_dist:
+			pass
+		else:
+			turret_twist.look_at(player_aim_target_pos)
+			#$GunTargetTracker.look_at(player_location)
+			#turret_twist.rotation = turret_twist.rotation.lerp($GunTargetTracker.rotation, delta * 5.0)
+			# do this better!
+			$TurretBaseCol.global_position = turret_pitch.get_child(0).global_position
+			$TurretBaseCol.global_rotation = turret_pitch.get_child(0).global_rotation
+			$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
+			$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
+			if player_aim_target_distance < max_firing_dist and player_targetable:
+				shoot("machinegun1")
 	#endregion
 	
 	#region Steering
@@ -94,8 +95,6 @@ func _process(delta):
 		if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
 			look_at(global_position + direction)
 			move_and_collide(velocity)
-			
-			
 	elif move_mode == "patrol":
 		pass
 	else:

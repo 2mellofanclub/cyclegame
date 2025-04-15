@@ -406,22 +406,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.59588, -2.90577)
 shape = SubResource("ConvexPolygonShape3D_vmec3")
 
 [node name="FrontLeft" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3, 0, -2.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, -2.5)
 use_as_traction = true
 wheel_radius = 1.0
 
 [node name="BackLeft" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3, 0, 2)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, 2)
 use_as_traction = true
 wheel_radius = 1.0
 
 [node name="BackRight" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3, 0, 2)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.8, 0, 2)
 use_as_traction = true
 wheel_radius = 1.0
 
 [node name="FrontRight" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3, 0, -2.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.8, 0, -2.5)
 use_as_traction = true
 wheel_radius = 1.0
 

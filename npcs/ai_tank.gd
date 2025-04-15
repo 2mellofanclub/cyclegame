@@ -20,7 +20,7 @@ var pitch_input := 0.0
 # ai specific
 var enemy := false
 var player_targetable := false
-var targeting := true
+var targeting := false
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 100.0
@@ -90,12 +90,12 @@ func _process(delta):
 	if move_mode == "hunt" and player_location != null:
 		nav_agent.target_position = player_location
 		var direction = nav_agent.get_next_path_position() - global_position
-		direction = direction.normalized()
-		if nav_agent.distance_to_target() > 15.0:
+		var velocity = direction.normalized() * max_speed/2.0 * delta
+		if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
 			look_at(global_position + direction)
-			global_position += direction * max_speed/2.0 * delta
-			# ----- figure this shit out ----- # 
-			#nav_agent.set_velocity(global_position + direction * max_speed/2.0)
+			move_and_collide(velocity)
+			
+			
 	elif move_mode == "patrol":
 		pass
 	else:
@@ -245,3 +245,10 @@ func _unhandled_input(event):
 
 func _on_shot_cooldown_timeout() -> void:
 	shot_available = true
+
+
+func _on_nav_agent_navigation_finished() -> void:
+	if move_mode == "hunt":
+		move_mode = "still"
+		await get_tree().create_timer(randf_range(1.0, 2.0)).timeout
+		move_mode = "hunt"

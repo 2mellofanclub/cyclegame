@@ -17,7 +17,7 @@ var explodable := true
 var mouse_sens := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
-# player specific
+# player specific 
 var controllable := false
 var godmode := true
 

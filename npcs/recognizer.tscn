@@ -352,7 +352,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.22733, 1)
 shape = SubResource("ConvexPolygonShape3D_yjh8k")
 
 [node name="RBRL" type="RigidBody3D" parent="."]
-mass = 10.0
+mass = 50.0
 gravity_scale = 0.0
 freeze = true
 script = SubResource("GDScript_odwck")
@@ -378,7 +378,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98967, 2.45015, 1)
 shape = SubResource("ConvexPolygonShape3D_pb50i")
 
 [node name="RBLL" type="RigidBody3D" parent="."]
-mass = 10.0
+mass = 50.0
 gravity_scale = 0.0
 freeze = true
 script = SubResource("GDScript_yjh8k")

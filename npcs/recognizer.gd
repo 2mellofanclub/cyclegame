@@ -69,9 +69,11 @@ func apply_materials():
 	$RBLL/Leftleg.set_surface_override_material(0, rec_materials[rec_color]["leftleg"].duplicate())
 	$RBLL/Leftleg.set_surface_override_material(1, rec_materials[rec_color]["lines"])
 	$RBLL/Leftleg/LLLattice.set_surface_override_material(0, rec_materials[rec_color]["lattice"])
+	$RBLL.materials_applied = true
 	$RBRL/Rightleg.set_surface_override_material(0, rec_materials[rec_color]["rightleg"].duplicate())
 	$RBRL/Rightleg.set_surface_override_material(1, rec_materials[rec_color]["lines"])
 	$RBRL/Rightleg/RLLattice.set_surface_override_material(0, rec_materials[rec_color]["lattice"])
+	$RBRL.materials_applied = true
 	
 	materials_applied = true
 

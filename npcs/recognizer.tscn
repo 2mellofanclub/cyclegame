@@ -111,8 +111,28 @@ points = PackedVector3Array(-3.41117, 1.13652, -0.859334, 1.98623, 1.94853, 0.08
 [sub_resource type="GDScript" id="GDScript_odwck"]
 script/source = "extends RigidBody3D
 
+var materials_applied := false
+
+func _process(delta: float) -> void:
+	if materials_applied:
+		var points_to_pass = []
+		for d_dot in $DamageDots.get_children():
+			points_to_pass.append(Vector4(
+					d_dot.get_global_position().x,
+					d_dot.get_global_position().y,
+					d_dot.get_global_position().z,
+					d_dot.scale.x
+			))
+		$Rightleg.get_surface_override_material(0).set_shader_parameter(\"dmg_points\", points_to_pass)
+
 func take_hit(shot_pos, dmg_value, ddot_rad):
-	get_parent().take_hit(shot_pos, dmg_value, ddot_rad)
+	if $DamageDots.get_child_count() < 200:
+		var damage_dot = Node3D.new()
+		$DamageDots.add_child(damage_dot)
+		damage_dot.set_global_position(shot_pos)
+		damage_dot.scale = Vector3(ddot_rad, ddot_rad, ddot_rad)
+	get_parent().take_dmg(dmg_value)
+	get_parent().get_node(\"Hit\").play()
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sx55g"]
@@ -219,8 +239,28 @@ points = PackedVector3Array(-0.332006, 3.66061, 0.866, -1.38612, -2.33272, -0.91
 [sub_resource type="GDScript" id="GDScript_yjh8k"]
 script/source = "extends RigidBody3D
 
+var materials_applied := false
+
+func _process(delta: float) -> void:
+	if materials_applied:
+		var points_to_pass = []
+		for d_dot in $DamageDots.get_children():
+			points_to_pass.append(Vector4(
+					d_dot.get_global_position().x,
+					d_dot.get_global_position().y,
+					d_dot.get_global_position().z,
+					d_dot.scale.x
+			))
+		$Leftleg.get_surface_override_material(0).set_shader_parameter(\"dmg_points\", points_to_pass)
+
 func take_hit(shot_pos, dmg_value, ddot_rad):
-	get_parent().take_hit(shot_pos, dmg_value, ddot_rad)
+	if $DamageDots.get_child_count() < 200:
+		var damage_dot = Node3D.new()
+		$DamageDots.add_child(damage_dot)
+		damage_dot.set_global_position(shot_pos)
+		damage_dot.scale = Vector3(ddot_rad, ddot_rad, ddot_rad)
+	get_parent().take_dmg(dmg_value)
+	get_parent().get_node(\"Hit\").play()
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_451s8"]
@@ -377,6 +417,8 @@ metadata/extras = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98967, 2.45015, 1)
 shape = SubResource("ConvexPolygonShape3D_pb50i")
 
+[node name="DamageDots" type="Node3D" parent="RBRL"]
+
 [node name="RBLL" type="RigidBody3D" parent="."]
 mass = 50.0
 gravity_scale = 0.0
@@ -402,6 +444,8 @@ metadata/extras = {
 [node name="LeftLegCol" type="CollisionShape3D" parent="RBLL"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98967, 2.45015, 1)
 shape = SubResource("ConvexPolygonShape3D_e6bw4")
+
+[node name="DamageDots" type="Node3D" parent="RBLL"]
 
 [node name="DamageDots" type="Node3D" parent="."]
 

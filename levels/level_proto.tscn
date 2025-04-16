@@ -1,9 +1,8 @@
-[gd_scene load_steps=23 format=4 uid="uid://ey0bxai0u3jw"]
+[gd_scene load_steps=14 format=4 uid="uid://ey0bxai0u3jw"]
 
 [ext_resource type="Script" uid="uid://cxno4emquekyv" path="res://levels/level_proto.gd" id="1_tlrxs"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_a715s"]
 [ext_resource type="Material" uid="uid://2jjok7i0q8gq" path="res://materials/floor_slw_blue1.tres" id="3_l40dc"]
-[ext_resource type="Material" uid="uid://c5rh67bs67dbf" path="res://materials/floor2.tres" id="4_j5i8p"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="5_enl8r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkext"]
@@ -75,10 +74,6 @@ shadow_mesh = SubResource("ArrayMesh_trifc")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_atseg"]
 data = PackedVector3Array(-500, 0.25, 500, 500, 0.25, 500, -500, -0.25, 500, 500, 0.25, 500, 500, -0.25, 500, -500, -0.25, 500, 500, 0.25, -500, -500, 0.25, -500, 500, -0.25, -500, -500, 0.25, -500, -500, -0.25, -500, 500, -0.25, -500, 500, 0.25, 500, 500, 0.25, -500, 500, -0.25, 500, 500, 0.25, -500, 500, -0.25, -500, 500, -0.25, 500, -500, 0.25, -500, -500, 0.25, 500, -500, -0.25, -500, -500, 0.25, 500, -500, -0.25, 500, -500, -0.25, -500, 500, 0.25, 500, -500, 0.25, 500, 500, 0.25, -500, -500, 0.25, 500, -500, 0.25, -500, 500, 0.25, -500, -500, -0.25, 500, 500, -0.25, 500, -500, -0.25, -500, 500, -0.25, 500, 500, -0.25, -500, -500, -0.25, -500)
 
-[sub_resource type="BoxMesh" id="BoxMesh_xw411"]
-material = ExtResource("4_j5i8p")
-size = Vector3(1000, 0.5, 1000)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ne5nj"]
 sky_horizon_color = Color(0.59625, 0.6135, 0.653186, 1)
 ground_bottom_color = Color(0, 0, 0.0627451, 1)
@@ -96,30 +91,8 @@ ambient_light_color = Color(0, 0.0705882, 0.227451, 1)
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="PrismMesh" id="PrismMesh_y7cpa"]
-size = Vector3(3.605, 8.62, 2.79)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dt65n"]
-data = PackedVector3Array(0, 4.31, 1.395, 1.8025, -4.31, 1.395, -1.8025, -4.31, 1.395, 0, 4.31, -1.395, -1.8025, -4.31, -1.395, 1.8025, -4.31, -1.395, 0, 4.31, 1.395, 0, 4.31, -1.395, 1.8025, -4.31, 1.395, 0, 4.31, -1.395, 1.8025, -4.31, -1.395, 1.8025, -4.31, 1.395, 0, 4.31, -1.395, 0, 4.31, 1.395, -1.8025, -4.31, -1.395, 0, 4.31, 1.395, -1.8025, -4.31, 1.395, -1.8025, -4.31, -1.395, -1.8025, -4.31, 1.395, 1.8025, -4.31, 1.395, -1.8025, -4.31, -1.395, 1.8025, -4.31, 1.395, 1.8025, -4.31, -1.395, -1.8025, -4.31, -1.395)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bghhw"]
-size = Vector3(100, 10, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_g2qvd"]
-size = Vector3(100, 10, 420.735)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_05i0m"]
 size = Vector3(5000, 100, 5000)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_atseg"]
-size = Vector3(1100, 100, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_rioro"]
-size = Vector3(200, 200, 200)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_atseg"]
-height = 50.0
-radius = 100.0
 
 [node name="LevelProto" type="Node3D"]
 script = ExtResource("1_tlrxs")
@@ -150,10 +123,6 @@ shape = SubResource("ConcavePolygonShape3D_atseg")
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 199.197, 675.758)
 current = true
 fov = 50.0
-
-[node name="Floor" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_xw411")
 
 [node name="SetDressin" type="Node3D" parent="."]
 transform = Transform3D(78.9063, 0, -61.4313, 0, 100, 0, 61.4313, 0, 78.9063, -142.92, 41.5013, 0)
@@ -197,37 +166,7 @@ volume_db = -22.0
 pitch_scale = 0.68
 autoplay = false
 
-[node name="Players" type="Node3D" parent="."]
-
-[node name="NPCs" type="Node3D" parent="."]
-
-[node name="Recognizers" type="Node3D" parent="."]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Recognizers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.7735, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Recognizers/StaticBody3D"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("PrismMesh_y7cpa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Recognizers/StaticBody3D"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("ConcavePolygonShape3D_dt65n")
-
 [node name="Boxes" type="Node3D" parent="."]
-
-[node name="BotTurnLeft" type="Area3D" parent="Boxes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 522.59, 879.475, 729.979)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/BotTurnLeft"]
-shape = SubResource("BoxShape3D_bghhw")
-
-[node name="BotTurnRight" type="Area3D" parent="Boxes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 154.206, 879.475, 525.639)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/BotTurnRight"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -160.367)
-shape = SubResource("BoxShape3D_g2qvd")
 
 [node name="ExplodeBox" type="Area3D" parent="Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.0609, 0)
@@ -243,96 +182,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -566.392, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
 shape = SubResource("BoxShape3D_05i0m")
 
-[node name="Bounds5" type="Area3D" parent="Boxes"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 477.142, 0, 0)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds5"]
-shape = SubResource("BoxShape3D_atseg")
-
-[node name="Bounds9" type="Area3D" parent="Boxes"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 21.7904, 6.10352e-05, 472.726)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds9"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
-shape = SubResource("BoxShape3D_rioro")
-
-[node name="Bounds12" type="Area3D" parent="Boxes"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -69.3512, 6.10352e-05, -474.415)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds12"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
-shape = SubResource("BoxShape3D_rioro")
-
-[node name="Bounds11" type="Area3D" parent="Boxes"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -545.133, 6.10352e-05, -30.4464)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds11"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
-shape = SubResource("BoxShape3D_rioro")
-
-[node name="Bounds10" type="Area3D" parent="Boxes"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 502.251, 6.10352e-05, -30.4464)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds10"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
-shape = SubResource("BoxShape3D_rioro")
-
-[node name="Bounds8" type="Area3D" parent="Boxes"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -477.181, 0, 0)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds8"]
-shape = SubResource("BoxShape3D_atseg")
-
-[node name="Bounds7" type="Area3D" parent="Boxes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -468.133)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds7"]
-shape = SubResource("BoxShape3D_atseg")
-
-[node name="Bounds6" type="Area3D" parent="Boxes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 481.304)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounds6"]
-shape = SubResource("BoxShape3D_atseg")
-
-[node name="Bounce" type="Area3D" parent="Boxes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.81, 6.10352e-05, 526.504)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-shape = SubResource("CylinderShape3D_atseg")
-
-[node name="Bounce2" type="Area3D" parent="Boxes"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -498.189, 6.10352e-05, -504.816)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce2"]
-shape = SubResource("CylinderShape3D_atseg")
-
-[node name="Bounce3" type="Area3D" parent="Boxes"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -507.377, -6.10352e-05, 489.411)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce3"]
-shape = SubResource("CylinderShape3D_atseg")
-
-[node name="Bounce4" type="Area3D" parent="Boxes"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 521.59, -0.00012207, -499.703)
-collision_layer = 65
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/Bounce4"]
-shape = SubResource("CylinderShape3D_atseg")
-
-[connection signal="body_entered" from="Boxes/BotTurnLeft" to="." method="_on_bot_turn_left_body_entered"]
-[connection signal="body_entered" from="Boxes/BotTurnRight" to="." method="_on_bot_turn_right_body_entered"]
 [connection signal="body_entered" from="Boxes/ExplodeBox" to="." method="_on_kill_box_body_entered"]
 [connection signal="body_entered" from="Boxes/DespawnBox" to="." method="_on_despawn_box_body_entered"]

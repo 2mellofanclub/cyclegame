@@ -62,7 +62,7 @@ func _process(delta):
 	var player_location
 	var player_aim_target_pos
 	var player_aim_target_distance
-	var player_instance = level_instance.get_node_or_null("PlayerTank")
+	var player_instance = level_instance.players[0]
 	if player_instance:
 		player_location = player_instance.global_position
 		player_aim_target_pos = player_instance.get_node("Target").global_position

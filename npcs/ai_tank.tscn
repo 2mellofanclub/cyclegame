@@ -313,6 +313,7 @@ center_of_mass_mode = 1
 script = ExtResource("1_1xmg7")
 
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 2.0
 target_desired_distance = 20.0
 avoidance_enabled = true
 height = 4.0
@@ -322,6 +323,9 @@ time_horizon_agents = 3.0
 time_horizon_obstacles = 0.25
 avoidance_layers = 2
 avoidance_mask = 2
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.893874, 0.611597, 0.223647, 1)
 
 [node name="CamTwist" type="Node3D" parent="."]
 

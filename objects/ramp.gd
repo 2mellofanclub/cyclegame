@@ -8,7 +8,7 @@ func _ready():
 	pass
  
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.azzaaaassasa
+# Called every frame. 'delta' is the elapsed time since the previous frame.azzaaaassasa asa
 func _process(delta):
 	pass
 

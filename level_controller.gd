@@ -65,7 +65,8 @@ func spawn_enemy_cycles(level_instance):
 		return
 	for point in level_instance.get_node("Spawns/Enemies").get_children():
 		var enemy_instance = AICycle.instantiate()
-		level_instance.get_node("NPCs").add_child(enemy_instance)
+		level_instance.add_child(enemy_instance)
+		level_instance.enemies.append(enemy_instance)
 		if point.get_index() == 1:
 			enemy_instance.cycle_color = "yellow"
 			enemy_instance.lw_color = "yellow"
@@ -84,7 +85,8 @@ func spawn_ally_cycles(level_instance):
 		return
 	for point in level_instance.get_node("Spawns/Allies").get_children():
 		var ally_instance = AICycle.instantiate()
-		level_instance.get_node("NPCs").add_child(ally_instance)
+		level_instance.add_child(ally_instance)
+		level_instance.allies.append(ally_instance)
 		ally_instance.cycle_color = "green"
 		ally_instance.lw_color = "green"
 		ally_instance.level_instance = level_instance

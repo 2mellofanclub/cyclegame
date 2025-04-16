@@ -87,7 +87,7 @@ func _process(delta):
 		turret_pitch.rotation.x = clamp(turret_pitch.rotation.x, -PI/9, PI/7)
 	twist_input = 0
 	pitch_input = 0
-	# do this better!
+	# do this better! 
 	$TurretBaseCol.global_position = turret_pitch.get_child(0).global_position
 	$TurretBaseCol.global_rotation = turret_pitch.get_child(0).global_rotation
 	$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position

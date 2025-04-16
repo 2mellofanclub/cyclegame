@@ -3,7 +3,11 @@ extends Node3D
 
 var level_controller: Node3D
 var max_trails: int
-
+var in_intro := true
+var players = []
+var enemies = []
+var recognizers = []
+var allies = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

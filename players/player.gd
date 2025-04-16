@@ -172,7 +172,7 @@ func explode():
 	if not explodable:
 		return
 	print("boom")
-	SignalBus.driver_just_fuckkin_died.emit()
+	SignalBus.player_just_fuckkin_died.emit()
 	explodable = false
 	steering = 0
 	engine_force = 0

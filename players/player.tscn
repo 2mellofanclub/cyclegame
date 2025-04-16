@@ -17,6 +17,7 @@ points = PackedVector3Array(-6.70552e-05, 1.78814e-07, 0.545768, -0.106503, 1.78
 
 [node name="Player" type="VehicleBody3D"]
 collision_layer = 3527
+collision_mask = 3073
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 center_of_mass_mode = 1
@@ -143,7 +144,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.79643e-05, 0.584442, 1.091
 [node name="TrailDestroyer" type="Node3D" parent="IDunno"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.584, 0.2)
 
-[node name="Sounds" type="Node" parent="."]
+[node name="Sounds" type="Node3D" parent="."]
 
 [node name="NotPositive" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("3_uxov2")

@@ -67,7 +67,7 @@ func _process(delta):
 		player_location = player_instance.global_position
 		player_aim_target_pos = player_instance.get_node("Target").global_position
 		player_aim_target_distance = player_aim_target_pos.distance_to(global_position)
-	
+	 
 	#region GunControl
 	if targeting:
 		if not player_location:

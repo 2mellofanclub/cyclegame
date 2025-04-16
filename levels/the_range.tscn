@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bpcngkmp6fh8w" path="res://levels/the_range.gd" id="1_y7cpa"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_deyc5"]
-[ext_resource type="NavigationMesh" uid="uid://cfudicjrnistd" path="res://navmeshes/the_grid.tres" id="2_ws1pa"]
+[ext_resource type="NavigationMesh" uid="uid://cbdyajtmilybt" path="res://navmeshes/the_range.tres" id="2_ws1pa"]
 [ext_resource type="Material" uid="uid://2jjok7i0q8gq" path="res://materials/floor_slw_blue1.tres" id="3_deyc5"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="3_ws1pa"]
 
@@ -186,15 +186,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dt65n")
 transform = Transform3D(0.479917, 0, 0.877314, 0, 1, 0, -0.877314, 0, 0.479917, -30.2522, 0, -92.3314)
 shape = SubResource("ConcavePolygonShape3D_ws1pa")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="BaseNav"]
+[node name="ShallowRamp" type="StaticBody3D" parent="BaseNav"]
 transform = Transform3D(0.718152, 0, 1.34532, 0, 1.525, 0, -1.34532, 0, 0.718152, -30.9329, 0.74092, -191.422)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BaseNav/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BaseNav/ShallowRamp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50321, 0, -0.130039)
 mesh = SubResource("PrismMesh_dt65n")
 surface_material_override/0 = ExtResource("2_deyc5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseNav/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseNav/ShallowRamp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.50321, 0, -0.130039)
 shape = SubResource("ConcavePolygonShape3D_k87hq")
 

@@ -15,6 +15,7 @@ var targeting := false
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var cruising_alt := 50.0
+var in_animation = false
 
 @onready var nav_agent = $NavAgent
 #@onready var Cube = load("res://destruction/cube.tscn")
@@ -37,9 +38,18 @@ func _process(delta: float) -> void:
 		$RBLL/Leftleg.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
 		$RBRL/Rightleg.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
 	
+	
 
 	if dead:
 		return
+	
+	if not in_animation and Input.is_action_just_pressed("ninright"):
+		in_animation = true
+		$AnimationPlayer.play("crush")
+	if not in_animation and Input.is_action_just_pressed("ninleft"):
+		in_animation = true
+		$AnimationPlayer.play("RESET")
+	
 	
 	var player_location
 	var player_distance
@@ -58,6 +68,9 @@ func allow_target_player():
 	player_targetable = true
 func disallow_target_player():
 	player_targetable = false
+
+
+
 
 
 func apply_materials():
@@ -136,3 +149,7 @@ func explode():
 			)
 	)
 	# add cube squibs to joints
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	in_animation = false

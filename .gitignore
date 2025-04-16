@@ -1,2 +1,4 @@
 .godot/
 materials/floortest.blend
+objects/floor_grid.blend
+objects/floor_grid.blend.import

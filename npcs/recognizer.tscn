@@ -1,9 +1,118 @@
-[gd_scene load_steps=31 format=4 uid="uid://bjfstckgf7r66"]
+[gd_scene load_steps=34 format=4 uid="uid://bjfstckgf7r66"]
 
 [ext_resource type="Script" uid="uid://xyue5oe681wk" path="res://npcs/recognizer.gd" id="1_nbj5v"]
 [ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="3_e6bw4"]
 [ext_resource type="AudioStream" uid="uid://6prqoc76fnmn" path="res://sound/retro_misc_05.ogg" id="4_pb50i"]
 [ext_resource type="AudioStream" uid="uid://bxrq7r32cbpjp" path="res://sound/power_up_05.ogg" id="5_loiw3"]
+
+[sub_resource type="Animation" id="Animation_yjh8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RBRL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.98967, 2.45015, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RBRL:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RBLL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.98967, 2.45015, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RBLL:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_odwck"]
+resource_name = "crush"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RBRL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.98967, 2.45015, 1), Vector3(1.2, 2.45, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RBRL:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RBLL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-2.98967, 2.45015, 1), Vector3(-1.2, 2.45, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RBLL:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6bw4"]
+_data = {
+&"RESET": SubResource("Animation_yjh8k"),
+&"crush": SubResource("Animation_odwck")
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0aejb"]
 resource_name = "Material.001"
@@ -108,7 +217,7 @@ shadow_mesh = SubResource("ArrayMesh_wg6ds")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yjh8k"]
 points = PackedVector3Array(-3.41117, 1.13652, -0.859334, 1.98623, 1.94853, 0.0812294, 2.01424, 1.97325, -0.0362743, 3.79259, -1.58221, -0.866, -4.06349, -1.70919, 0.97527, 4.06349, -1.70919, 0.97527, -4.06349, 1.08419, 0.97527, -3.79259, -1.58221, -0.866, 4.06349, 1.08419, 0.97527, 3.79259, 1.02494, -0.866, -1.85789, 1.93734, 0.196964, -1.74095, 1.58841, -0.847725, 1.85885, 1.58957, 0.777889, -3.79259, 1.02494, -0.866, 1.74095, 1.58841, -0.847725, -2.00736, 1.96718, -0.0360722, -1.86691, 1.59561, 0.78116, 3.66994, 1.3794, -0.0362155, -3.65743, 1.37536, -0.0360139, -1.61508, 1.92659, -0.265501, 1.73396, 1.69825, 0.658625, 1.73075, 1.92659, -0.265501, 2.02329, 1.43185, 0.866, 1.85048, 1.9304, 0.19627, -1.73396, 1.69825, 0.658625, -2.00172, 1.9622, 0.0816845, 3.78109, 1.25872, -0.272393, -2.02329, 1.43185, 0.866, 1.87901, 1.95714, -0.153165, -1.87017, 1.94886, -0.152337, -3.74611, 1.24889, -0.269661, 3.77614, 1.13951, -0.625986)
 
-[sub_resource type="GDScript" id="GDScript_odwck"]
+[sub_resource type="GDScript" id="GDScript_e6bw4"]
 script/source = "extends RigidBody3D
 
 var materials_applied := false
@@ -236,7 +345,7 @@ shadow_mesh = SubResource("ArrayMesh_itoc8")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pb50i"]
 points = PackedVector3Array(-0.332006, 3.66061, 0.866, -1.38612, -2.33272, -0.913619, -1.38612, -2.33272, 0.895905, 1.0103, -2.1364, 0.83761, 1.0103, 3.565, -0.855324, 1.0103, -2.1364, -0.855324, -0.328281, 3.60095, -0.866, 1.0103, 3.565, 0.83761, -1.38612, -2.23728, -0.913619, -1.38612, -2.23728, 0.895905)
 
-[sub_resource type="GDScript" id="GDScript_yjh8k"]
+[sub_resource type="GDScript" id="GDScript_odwck"]
 script/source = "extends RigidBody3D
 
 var materials_applied := false
@@ -369,6 +478,11 @@ mass = 100.0
 gravity_scale = 0.0
 script = ExtResource("1_nbj5v")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_e6bw4")
+}
+
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
 
 [node name="Recbody" type="MeshInstance3D" parent="."]
@@ -392,13 +506,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.22733, 1)
 shape = SubResource("ConvexPolygonShape3D_yjh8k")
 
 [node name="RBRL" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98967, 2.45015, 1)
 mass = 50.0
 gravity_scale = 0.0
 freeze = true
-script = SubResource("GDScript_odwck")
+script = SubResource("GDScript_e6bw4")
 
 [node name="Rightleg" type="MeshInstance3D" parent="RBRL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98967, 2.45015, 1)
 mesh = SubResource("ArrayMesh_5a7nw")
 skeleton = NodePath("")
 metadata/extras = {
@@ -414,19 +528,19 @@ metadata/extras = {
 }
 
 [node name="RightLegCol" type="CollisionShape3D" parent="RBRL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98967, 2.45015, 1)
 shape = SubResource("ConvexPolygonShape3D_pb50i")
 
 [node name="DamageDots" type="Node3D" parent="RBRL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98967, -2.45015, -1)
 
 [node name="RBLL" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98967, 2.45015, 1)
 mass = 50.0
 gravity_scale = 0.0
 freeze = true
-script = SubResource("GDScript_yjh8k")
+script = SubResource("GDScript_odwck")
 
 [node name="Leftleg" type="MeshInstance3D" parent="RBLL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98967, 2.45015, 1)
 mesh = SubResource("ArrayMesh_qir00")
 skeleton = NodePath("")
 metadata/extras = {
@@ -442,10 +556,10 @@ metadata/extras = {
 }
 
 [node name="LeftLegCol" type="CollisionShape3D" parent="RBLL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98967, 2.45015, 1)
 shape = SubResource("ConvexPolygonShape3D_e6bw4")
 
 [node name="DamageDots" type="Node3D" parent="RBLL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98967, -2.45015, -1)
 
 [node name="DamageDots" type="Node3D" parent="."]
 
@@ -470,3 +584,5 @@ stream = ExtResource("5_loiw3")
 volume_db = -10.0
 max_db = -10.0
 pitch_scale = 0.23
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

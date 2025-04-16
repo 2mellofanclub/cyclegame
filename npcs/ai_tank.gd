@@ -20,7 +20,7 @@ var pitch_input := 0.0
 # ai specific
 var enemy := false
 var player_targetable := false
-var targeting := true
+var targeting := false
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 100.0
@@ -67,7 +67,7 @@ func _process(delta):
 		player_location = player_instance.global_position
 		player_aim_target_pos = player_instance.get_node("Target").global_position
 		player_aim_target_distance = player_aim_target_pos.distance_to(global_position)
-	 
+	  
 	#region GunControl
 	if targeting:
 		if not player_location:
@@ -106,7 +106,7 @@ func allow_target_player():
 func disallow_target_player():
 	player_targetable = false
 
-
+ 
 func shoot(shot_type):
 	if not shot_available:
 		return

@@ -93,12 +93,19 @@ func _process(delta):
 		$lightcycle.global_rotation.z = (global_rotation.z + 
 				Input.get_axis("steerright", "steerleft") * PI/9
 		)
+		$sapientblockman.global_rotation.z = (global_rotation.z + 
+				Input.get_axis("steerright", "steerleft") * PI/9
+		)
 		# Quickturn left with speed intact
 		if Input.is_action_just_pressed("ninleft"):
 			player_quickturn("left", lin_vel)
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
 			player_quickturn("right", lin_vel)
+		if Input.is_action_just_pressed("heavy_attack"):
+			$AnimationPlayer.play("road_rash_right")
+		if Input.is_action_just_released("heavy_attack"):
+			$AnimationPlayer.play("road_rash_right_back")
 	if Input.is_action_just_pressed("superbrake"):
 		$lightcycle.rotate_y(PI/2)
 		$IDunno.rotate_y(PI/2)
@@ -218,6 +225,7 @@ func take_dmg(dmg_value):
 		dead = true
 		controllable = false
 		SignalBus.player_became_untargetable.emit()
+		$sapientblockman.hide()
 		explode()
 
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=4 uid="uid://bjfstckgf7r66"]
+[gd_scene load_steps=36 format=4 uid="uid://bjfstckgf7r66"]
 
 [ext_resource type="Script" uid="uid://xyue5oe681wk" path="res://npcs/recognizer.gd" id="1_nbj5v"]
 [ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="3_e6bw4"]
 [ext_resource type="AudioStream" uid="uid://6prqoc76fnmn" path="res://sound/retro_misc_05.ogg" id="4_pb50i"]
 [ext_resource type="AudioStream" uid="uid://bxrq7r32cbpjp" path="res://sound/power_up_05.ogg" id="5_loiw3"]
+[ext_resource type="AudioStream" uid="uid://b2d2657la1nlf" path="res://sound/sfx_vehicle_carloop1.wav" id="5_yjh8k"]
 
 [sub_resource type="Animation" id="Animation_yjh8k"]
 length = 0.001
@@ -473,7 +474,12 @@ shadow_mesh = SubResource("ArrayMesh_eqa35")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_e6bw4"]
 points = PackedVector3Array(0.370205, 3.76132, 0.895905, -0.992756, -2.17235, -0.866, 1.41827, -2.33272, -0.913619, 1.41827, -2.33272, 0.895905, 0.370205, 3.76132, -0.913619, -1.0103, 3.64413, 0.861106, -1.0103, -2.21553, 0.861106, -0.992756, 3.60095, -0.866, 1.41827, -2.23728, -0.913619, 1.41827, -2.23728, 0.895905)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_odwck"]
+radius = 1.5
+
 [node name="Recognizer" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 mass = 100.0
 gravity_scale = 0.0
 script = ExtResource("1_nbj5v")
@@ -484,6 +490,14 @@ libraries = {
 }
 
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_max_distance = 100.01
+avoidance_enabled = true
+radius = 5.0
+use_3d_avoidance = true
+avoidance_layers = 2
+avoidance_mask = 2
+debug_use_custom = true
+debug_path_custom_color = Color(0.927005, 0, 0.0966139, 1)
 
 [node name="Recbody" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.22733, 1)
@@ -585,4 +599,18 @@ volume_db = -10.0
 max_db = -10.0
 pitch_scale = 0.23
 
+[node name="Crush" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_yjh8k")
+volume_db = -20.0
+max_db = -20.0
+pitch_scale = 1.36
+
+[node name="CrushBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrushBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 1)
+shape = SubResource("SphereShape3D_odwck")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="CrushBox" to="." method="_on_crush_box_body_entered"]
+[connection signal="body_exited" from="CrushBox" to="." method="_on_crush_box_body_exited"]

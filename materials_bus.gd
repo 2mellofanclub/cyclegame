@@ -20,6 +20,7 @@ const MATERIALS = {
 	"lw_yellow1_pulse" : preload("res://materials/lw_yellow1_pulse.tres"),
 	"slw_yellow1" : preload("res://materials/slw_yellow1.tres"),
 	"slw_yellow1_pulse" : preload("res://materials/slw_yellow1_pulse.tres"),
+	"lw_red1" : preload("res://materials/lw_red1.tres"),
 	"lw_green1" : preload("res://materials/lw_green1.tres"),
 	"lw_green1_pulse" : preload("res://materials/lw_green1_pulse.tres"),
 	"slw_green1" : preload("res://materials/slw_green1.tres"),
@@ -142,6 +143,13 @@ const REC_STYLES = {
 		"leftleg" : MATERIALS["sdmg_badguy_black1"],
 		"rightleg" : MATERIALS["sdmg_badguy_black1"],
 		"lines" : MATERIALS["lw_orange1"],
+	},
+	"red" : {
+		"body0" : MATERIALS["sdmg_badguy_black1"],
+		"lattice" : MATERIALS["lw_red1"],
+		"leftleg" : MATERIALS["sdmg_badguy_black1"],
+		"rightleg" : MATERIALS["sdmg_badguy_black1"],
+		"lines" : MATERIALS["lw_red1"],
 	},
 	"blue" : {
 		"body0" : MATERIALS["sdmg_badguy_black1"],

@@ -10,8 +10,8 @@ var shot_types = ShotBus.SHOT_TYPES
 var materials_applied := false
 var max_speed := 70.0
 var max_ef := 300.0
-var max_hp := 5000.0
-var hp := 5000.0
+var max_hp := 10000.0
+var hp := 10000.0
 var dead := false
 var explodable := true
 var mouse_sens := 0.001
@@ -19,7 +19,8 @@ var twist_input := 0.0
 var pitch_input := 0.0
 # player specific 
 var controllable := false
-var godmode := true
+var targetable := false
+var godmode := false
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
@@ -223,7 +224,7 @@ func take_dmg(dmg_value):
 		engine_force = 0
 		# so everything has time to stop before explosion frees collision
 		await get_tree().create_timer(0.15).timeout
-		SignalBus.player_became_untargetable.emit()
+		targetable = false
 		SignalBus.player_just_fuckkin_died.emit()
 		explode()
 
@@ -281,4 +282,4 @@ func _on_spawn_timer_timeout() -> void:
 	gun_cam.make_current()
 	await get_tree().create_timer(0.2).timeout
 	controllable = true
-	SignalBus.player_became_targetable.emit()
+	targetable = true

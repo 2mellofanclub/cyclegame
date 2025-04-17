@@ -19,11 +19,11 @@ var twist_input := 0.0
 var pitch_input := 0.0
 # ai specific
 var enemy := false
-var player_targetable := false
-var targeting := false
+var targeting := true
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
-var max_firing_dist := 100.0
+var max_firing_dist := 80.0
+var ai_cooldown_mult := 1.5
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
@@ -39,12 +39,12 @@ var max_firing_dist := 100.0
 
 
 func _ready():
-	SignalBus.player_became_targetable.connect(allow_target_player)
-	SignalBus.player_became_untargetable.connect(disallow_target_player)
+	pass
 	
 	
 func _process(delta):
 	
+	#region Materials
 	if materials_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():
@@ -55,16 +55,19 @@ func _process(delta):
 					d_dot.scale.x
 			))
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
+	#endregion
 	
 	if dead:
 		return
 	
+	var player_instance = level_instance.players[0]
 	var player_location
+	var player_targetable
 	var player_aim_target_pos
 	var player_aim_target_distance
-	var player_instance = level_instance.players[0]
 	if player_instance:
 		player_location = player_instance.global_position
+		player_targetable = player_instance.targetable
 		player_aim_target_pos = player_instance.get_node("Target").global_position
 		player_aim_target_distance = player_aim_target_pos.distance_to(global_position)
 	  
@@ -84,7 +87,7 @@ func _process(delta):
 			$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
 			$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
 			if player_aim_target_distance < max_firing_dist and player_targetable:
-				shoot("machinegun1")
+				shoot("cannon1")
 	#endregion
 	
 	#region Steering
@@ -100,11 +103,6 @@ func _process(delta):
 	else:
 		pass
 	#endregion
-
-func allow_target_player():
-	player_targetable = true
-func disallow_target_player():
-	player_targetable = false
 
  
 func shoot(shot_type):
@@ -139,7 +137,7 @@ func shoot(shot_type):
 					)
 			)
 		tankshot_instance.show()
-	$ShotCooldown.start(1.0/shot_params["rof"])
+	$ShotCooldown.start(1.0 / shot_params["rof"] * ai_cooldown_mult)
 	$Shot.play()
 	turret_barrel.transform = turret_barrel.transform.translated_local(Vector3(0,0,1) * 0.5)
 	$TurretBarrelCol.transform = $TurretBarrelCol.transform.translated_local(Vector3(0,0,1) * 0.5)

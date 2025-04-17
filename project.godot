@@ -24,6 +24,7 @@ config/icon="uid://ntqkxwllo4m0"
 SignalBus="*res://signal_bus.gd"
 MaterialsBus="*res://materials_bus.gd"
 ShotBus="*res://shot_bus.gd"
+Utilities="*res://utilities.gd"
 
 [display]
 

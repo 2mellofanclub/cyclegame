@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6ipnsdu7pdo0"]
+[gd_scene load_steps=18 format=3 uid="uid://b6ipnsdu7pdo0"]
 
 [ext_resource type="Script" uid="uid://cyhn2rwojv3k7" path="res://players/player.gd" id="1_5i27b"]
 [ext_resource type="PackedScene" uid="uid://bquodg1chhlr8" path="res://objects/identity_disc.tscn" id="2_5illy"]
@@ -34,7 +34,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, -1.63913e-07, 1.22948, 2.84217e-14)
 
 [sub_resource type="Animation" id="Animation_l1fvc"]
-resource_name = "road_rash_right"
+resource_name = "road_rash_right_old"
 length = 0.23
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -79,8 +79,33 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = PackedFloat32Array(0, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.99806, 0.2, 1, 0.0433993, 0.695807, -0.0446292, 0.715526)
 
+[sub_resource type="Animation" id="Animation_ogrlw"]
+resource_name = "road_rash_right"
+length = 0.75
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.L")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.183387, 0.182637, -0.681611, 0.684412, 0.25, 1, -0.18023, 0.843172, 0.353395, 0.362893, 0.4, 1, -0.18023, 0.843172, 0.353395, 0.362893, 0.75, 1, 0.0778819, 0.204141, -0.196925, 0.955762)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.L")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.780994, 0.139492, -0.107036, 0.599278, 0.25, 1, 0.924736, -0.165165, 0.0602917, -0.337564, 0.4, 1, 0.924736, -0.165165, 0.0602917, -0.337564, 0.75, 1, -0.150345, 0.0110057, -0.0618434, 0.986636)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.L")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061, 0.25, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061, 0.4, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061, 0.75, 1, 0.048839, 0.783022, -0.0386007, 0.618871)
+
 [sub_resource type="Animation" id="Animation_0yn0j"]
-resource_name = "road_rash_right_back"
+resource_name = "road_rash_right_back_old"
 length = 0.23
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -125,11 +150,37 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = PackedFloat32Array(0, 1, 0.0433993, 0.695807, -0.0446292, 0.715526, 0.2, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.99806)
 
+[sub_resource type="Animation" id="Animation_1jwom"]
+resource_name = "road_rash_right_back"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.L")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.0778819, 0.204141, -0.196925, 0.955762, 0.5, 1, -0.18023, 0.843172, 0.353395, 0.362893, 1, 1, -0.183387, 0.182637, -0.681611, 0.684412)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.L")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.150345, 0.0110057, -0.0618434, 0.986636, 0.5, 1, 0.924736, -0.165165, 0.0602917, -0.337564, 1, 1, -0.780994, 0.139492, -0.107036, 0.599278)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.L")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.048839, 0.783022, -0.0386007, 0.618871, 0.5, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061, 1, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5illy"]
 _data = {
 &"RESET": SubResource("Animation_5illy"),
-&"road_rash_right": SubResource("Animation_l1fvc"),
-&"road_rash_right_back": SubResource("Animation_0yn0j")
+&"road_rash_right": SubResource("Animation_ogrlw"),
+&"road_rash_right_back": SubResource("Animation_1jwom"),
+&"road_rash_right_back_old": SubResource("Animation_0yn0j"),
+&"road_rash_right_old": SubResource("Animation_l1fvc")
 }
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sdl0q"]
@@ -210,46 +261,59 @@ light_energy = 0.45
 [node name="sapientblockman" parent="." instance=ExtResource("3_k00sm")]
 
 [node name="Armature" parent="sapientblockman" index="0"]
-transform = Transform3D(0.280576, 0, 0, 0, 0.280576, 0, 0, 0, 0.280576, 0, 1.18437, 0.419267)
+transform = Transform3D(0.280576, 0, 0, 0, 0.280576, 0, 0, 0, 0.280576, 0, 1.17706, 0.415152)
 
 [node name="Skeleton3D" parent="sapientblockman/Armature" index="0"]
-bones/0/rotation = Quaternion(-0.424144, 1.07955e-07, 5.05619e-08, 0.905595)
-bones/5/rotation = Quaternion(0.258819, 0, 0, 0.965926)
-bones/5/scale = Vector3(1, 1, 1)
+bones/0/rotation = Quaternion(-0.330869, 1.12495e-07, 3.94426e-08, 0.943677)
+bones/5/rotation = Quaternion(0.130526, 0, 0, 0.991445)
 bones/9/position = Vector3(7.15256e-07, 0.765799, 3.55271e-14)
 bones/9/rotation = Quaternion(-0.183387, 0.182637, -0.681611, 0.684412)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/position = Vector3(-1.19209e-07, 1.3352, 7.81597e-14)
 bones/10/rotation = Quaternion(-0.780994, 0.139492, -0.107036, 0.599278)
-bones/10/scale = Vector3(1, 1, 1)
+bones/10/scale = Vector3(1, 1, 0.999999)
 bones/11/position = Vector3(-1.63913e-07, 1.22948, 2.84217e-14)
 bones/11/rotation = Quaternion(7.15847e-09, -4.49014e-08, -0.0622516, 0.998061)
-bones/11/scale = Vector3(1, 1, 0.999998)
+bones/11/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.183387, -0.182637, 0.681611, 0.684412)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(-0.780994, -0.139492, 0.107036, 0.599278)
 bones/14/scale = Vector3(1, 1, 1)
 bones/17/rotation = Quaternion(-0.520093, 0.393518, 0.308453, 0.692462)
 bones/17/scale = Vector3(1, 1, 1)
-bones/18/rotation = Quaternion(-0.00728861, -0.00728859, -0.707069, 0.707069)
+bones/18/rotation = Quaternion(-0.00728862, -0.00728862, -0.707069, 0.707069)
 bones/18/scale = Vector3(1, 1, 1)
 bones/22/rotation = Quaternion(-0.520093, -0.393518, -0.308453, 0.692462)
 bones/22/scale = Vector3(1, 1, 1)
-bones/23/rotation = Quaternion(-0.00728861, 0.00728861, 0.707069, 0.707069)
+bones/23/rotation = Quaternion(-0.00728862, 0.00728862, 0.707069, 0.707069)
 bones/23/scale = Vector3(1, 1, 1)
 
-[node name="SBM" parent="sapientblockman/Armature/Skeleton3D" index="0"]
+[node name="IdiscBack" parent="sapientblockman/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = ExtResource("4_5illy")
 surface_material_override/1 = ExtResource("5_0yn0j")
 
-[node name="IdentityDisc" parent="sapientblockman/Armature" index="1" instance=ExtResource("2_5illy")]
+[node name="IdiscLeft" parent="sapientblockman/Armature/Skeleton3D" index="1"]
+visible = false
+surface_material_override/0 = ExtResource("4_5illy")
+surface_material_override/1 = ExtResource("5_0yn0j")
+
+[node name="IdiscRight" parent="sapientblockman/Armature/Skeleton3D" index="2"]
+surface_material_override/0 = ExtResource("4_5illy")
+surface_material_override/1 = ExtResource("5_0yn0j")
+
+[node name="IdentityDisc" parent="sapientblockman/Armature/Skeleton3D/IdiscRight" index="0" instance=ExtResource("2_5illy")]
+transform = Transform3D(3.4425, 1.0532, 0, -1.0532, 3.4425, 0, 0, 0, 3.6, 3.85642, 0.915631, -1.32236)
+
+[node name="Idisc" parent="sapientblockman/Armature/Skeleton3D/IdiscRight/IdentityDisc" index="0"]
 visible = false
 
-[node name="Idisc" parent="sapientblockman/Armature/IdentityDisc" index="0"]
-transform = Transform3D(2.4, 0, 0, 0, -1.04907e-07, -2.4, 0, 2.4, -1.04907e-07, 0, 0.4, 0)
+[node name="SBM" parent="sapientblockman/Armature/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("4_5illy")
+surface_material_override/1 = ExtResource("5_0yn0j")
 
-[node name="HitBox" parent="sapientblockman/Armature/IdentityDisc" index="1"]
-transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 0, 0.4, 0)
+[node name="DiscCamRight" type="Camera3D" parent="sapientblockman"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72649, 1.60778, 1.8843)
+fov = 40.1
 
 [node name="lightcycle" parent="." instance=ExtResource("5_i825w")]
 
@@ -289,9 +353,14 @@ stream = ExtResource("6_3rerk")
 unit_size = 58.56
 pitch_scale = 0.77
 
+[node name="DiscAttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="KillTimer" to="." method="_on_kill_timeout"]
+[connection signal="timeout" from="DiscAttackCooldown" to="." method="_on_disc_attack_cooldown_timeout"]
 
 [editable path="sapientblockman"]
-[editable path="sapientblockman/Armature/IdentityDisc"]
+[editable path="sapientblockman/Armature/Skeleton3D/IdiscRight/IdentityDisc"]
 [editable path="lightcycle"]

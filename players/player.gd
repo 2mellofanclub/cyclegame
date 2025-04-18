@@ -1,8 +1,9 @@
 extends VehicleBody3D
 
 var replace_with_group := "cycle"
-var disc_visible := false
-var disc_active := false
+var disc_attack_available := true
+var right_disc_out := false
+var left_disc_out := false
 var road_rash_side := ""
 var front_steer := 1.0
 var rear_steer := 0.0
@@ -30,8 +31,12 @@ var level_instance: Node3D
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
-@onready var identity_disc = $sapientblockman/Armature/IdentityDisc
-#@onready var identity_disc = $IdentityDisc
+@onready var default_cam = $CamTwist/CamPitch/SpringArm3D/Camera3D
+@onready var disc_back = $sapientblockman/Armature/Skeleton3D/IdiscBack
+@onready var disc_left = $sapientblockman/Armature/Skeleton3D/IdiscLeft
+#@onready var disc_left_sc = $sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc
+@onready var disc_right = $sapientblockman/Armature/Skeleton3D/IdiscRight
+@onready var disc_right_sc = $sapientblockman/Armature/Skeleton3D/IdiscRight/IdentityDisc
 @onready var LightWall = preload("res://objects/lightwallseg.tscn")
 @onready var SpecialLightWall= preload("res://objects/speciallightwallseg.tscn")
 @onready var Destruction = load("res://destruction/destruction.tscn")
@@ -41,15 +46,16 @@ var level_instance: Node3D
 func _ready():
 	las_pos = global_position
 	las_rot = global_rotation
-	identity_disc.disc_owner = self
+	
 
 
 func _process(delta):
 	var lin_vel = get_linear_velocity()
 	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
 	
-	cam_twist.rotate_y(twist_input)
-	cam_pitch.rotate_x(pitch_input)
+	if default_cam.current:
+		cam_twist.rotate_y(twist_input)
+		cam_pitch.rotate_x(pitch_input)
 	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
 	twist_input = 0
 	pitch_input = 0
@@ -110,11 +116,6 @@ func _process(delta):
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
 			player_quickturn("right", lin_vel)
-		
-		if Input.is_action_just_pressed("heavy_attack"):
-			road_rash("right")
-		if Input.is_action_just_released("heavy_attack"):
-			road_rash_recover("right")
 	if Input.is_action_just_pressed("superbrake"):
 		$lightcycle.rotate_y(PI/2)
 		$IDunno.rotate_y(PI/2)
@@ -125,6 +126,15 @@ func _process(delta):
 		$IDunno.rotate_y(-PI/2)
 		set_brake(0)
 	#endregion
+
+	if Input.is_action_just_pressed("heavy_attack"):
+		road_rash("right")
+	if Input.is_action_just_pressed("light_attack"):
+		road_rash("left")
+	if Input.is_action_just_released("heavy_attack"):
+		road_rash_recover("right")
+	if Input.is_action_just_released("light_attack"):
+		road_rash_recover("left")
 	
 
 
@@ -137,24 +147,6 @@ func set_last_pos(pos: Vector3):
 	las_pos = pos
 func set_last_rot(rot: Vector3):
 	las_rot = rot
-
-
-func road_rash(side: String):
-	match side:
-		"left":
-			pass
-		"right":
-			$AnimationPlayer.play("road_rash_right")
-			identity_disc.show()
-			disc_active = true
-			
-func road_rash_recover(side: String):
-	match side:
-		"left":
-			pass
-		"right":
-			$AnimationPlayer.play("road_rash_right_back")
-			disc_active = false
 
 
 func player_quickturn(dir, lin_vel):
@@ -282,7 +274,45 @@ func _unhandled_input(event):
 func _on_kill_timeout() -> void:
 	explode()
 
+
+func road_rash(side: String):
+	if not disc_attack_available:
+		return
+	match side:
+		"left":
+			pass
+		"right":
+			disc_attack_available = false
+			right_disc_out = true
+			$AnimationPlayer.play("road_rash_right")
+			$sapientblockman/DiscCamRight.make_current()
+			await get_tree().create_timer(0.4).timeout
+			disc_back.hide()
+			disc_right.show()
+
+
+func road_rash_recover(side: String):
+	match side:
+		"left":
+			pass
+		"right":
+			if not right_disc_out:
+				return
+			$AnimationPlayer.play("road_rash_right_back")
+			$DiscAttackCooldown.start()
+			default_cam.make_current()
+			disc_right_sc.hitbox_active = false
+			await get_tree().create_timer(0.5).timeout
+			disc_right.hide()
+			disc_back.show()
  
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "road_rash_right_back":
-		identity_disc.hide()
+	match anim_name:
+		"road_rash_right":
+			disc_right_sc.hitbox_active = true
+		"road_rash_right_back":
+			right_disc_out = false
+
+
+func _on_disc_attack_cooldown_timeout() -> void:
+	disc_attack_available = true

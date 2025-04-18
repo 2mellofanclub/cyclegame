@@ -79,7 +79,6 @@ points = PackedVector3Array(-0.0218582, -0.00270294, -0.116768, -0.0304523, -0.0
 script = ExtResource("1_g47t8")
 
 [node name="Idisc" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.4, 0, 0, 0, 2.4, 0, 0, 0, 2.4, 0, 0, 0)
 mesh = SubResource("ArrayMesh_8xt8r")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_14qee")
@@ -89,7 +88,6 @@ metadata/extras = {
 }
 
 [node name="HitBox" type="Area3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 collision_layer = 0
 collision_mask = 3072
 

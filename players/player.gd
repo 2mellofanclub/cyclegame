@@ -34,7 +34,7 @@ var level_instance: Node3D
 @onready var default_cam = $CamTwist/CamPitch/SpringArm3D/Camera3D
 @onready var disc_back = $sapientblockman/Armature/Skeleton3D/IdiscBack
 @onready var disc_left = $sapientblockman/Armature/Skeleton3D/IdiscLeft
-#@onready var disc_left_sc = $sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc
+@onready var disc_left_sc = $sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc
 @onready var disc_right = $sapientblockman/Armature/Skeleton3D/IdiscRight
 @onready var disc_right_sc = $sapientblockman/Armature/Skeleton3D/IdiscRight/IdentityDisc
 @onready var LightWall = preload("res://objects/lightwallseg.tscn")
@@ -280,7 +280,13 @@ func road_rash(side: String):
 		return
 	match side:
 		"left":
-			pass
+			disc_attack_available = false
+			left_disc_out = true
+			$AnimationPlayer.play("road_rash_left")
+			$sapientblockman/DiscCamLeft.make_current()
+			await get_tree().create_timer(0.4).timeout
+			disc_back.hide()
+			disc_left.show()
 		"right":
 			disc_attack_available = false
 			right_disc_out = true
@@ -294,7 +300,15 @@ func road_rash(side: String):
 func road_rash_recover(side: String):
 	match side:
 		"left":
-			pass
+			if not left_disc_out:
+				return
+			$AnimationPlayer.play("road_rash_left_back")
+			$DiscAttackCooldown.start()
+			default_cam.make_current()
+			disc_left_sc.hitbox_active = false
+			await get_tree().create_timer(0.5).timeout
+			disc_left.hide()
+			disc_back.show()
 		"right":
 			if not right_disc_out:
 				return
@@ -308,6 +322,10 @@ func road_rash_recover(side: String):
  
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
+		"road_rash_left":
+			disc_left_sc.hitbox_active = true
+		"road_rash_left_back":
+			left_disc_out = false
 		"road_rash_right":
 			disc_right_sc.hitbox_active = true
 		"road_rash_right_back":

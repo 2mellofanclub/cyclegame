@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6ipnsdu7pdo0"]
+[gd_scene load_steps=20 format=3 uid="uid://b6ipnsdu7pdo0"]
 
 [ext_resource type="Script" uid="uid://cyhn2rwojv3k7" path="res://players/player.gd" id="1_5i27b"]
 [ext_resource type="PackedScene" uid="uid://bquodg1chhlr8" path="res://objects/identity_disc.tscn" id="2_5illy"]
@@ -11,27 +11,188 @@
 
 [sub_resource type="Animation" id="Animation_5illy"]
 length = 0.001
-tracks/0/type = "position_3d"
+tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.L")
+tracks/0/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 7.15256e-07, 0.765799, 3.55271e-14)
-tracks/1/type = "position_3d"
+tracks/0/keys = PackedFloat32Array(0, 1, -0.330869, 1.12495e-07, 3.94426e-08, 0.943677)
+tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.L")
+tracks/1/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.001")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -1.19209e-07, 1.3352, 7.81597e-14)
-tracks/2/type = "position_3d"
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.L")
+tracks/2/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.002")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -1.63913e-07, 1.22948, 2.84217e-14)
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.003")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, -1.42109e-14, 0, 1)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.004")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 1.42109e-14, 0, 1)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.005")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0.130526, 0, 0, 0.991445)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.006.L")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, -0.707107, 0, -1.68587e-07, 0.707107)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.006.R")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, -0.707107, -1.68587e-07, 2.00972e-14, 0.707107)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.007.L")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 8.46727e-08, -2.98776e-08, -0.564603, 0.825362)
+tracks/9/type = "rotation_3d"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.L")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, -0.183387, 0.182637, -0.681611, 0.684412)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.L")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, -0.780994, 0.139492, -0.107036, 0.599278)
+tracks/11/type = "rotation_3d"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.L")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = PackedFloat32Array(0, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061)
+tracks/12/type = "rotation_3d"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.007.R")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = PackedFloat32Array(0, 1, -4.99392e-08, -1.66904e-07, 0.564603, 0.825362)
+tracks/13/type = "rotation_3d"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.R")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = PackedFloat32Array(0, 1, -0.183387, -0.182637, 0.681611, 0.684412)
+tracks/14/type = "rotation_3d"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.R")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = PackedFloat32Array(0, 1, -0.780994, -0.139492, 0.107036, 0.599278)
+tracks/15/type = "rotation_3d"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.R")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = PackedFloat32Array(0, 1, 7.15846e-09, 4.49014e-08, 0.0622516, 0.998061)
+tracks/16/type = "rotation_3d"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.012.L")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = PackedFloat32Array(0, 1, 0.5, 0.5, 0.5, -0.5)
+tracks/17/type = "rotation_3d"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.013.L")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = PackedFloat32Array(0, 1, -0.520093, 0.393518, 0.308453, 0.692462)
+tracks/18/type = "rotation_3d"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.014.L")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = PackedFloat32Array(0, 1, -0.00728862, -0.00728862, -0.707069, 0.707069)
+tracks/19/type = "rotation_3d"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.015.L")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = PackedFloat32Array(0, 1, 5.43787e-08, -2.63782e-09, 0.687215, 0.726454)
+tracks/20/type = "rotation_3d"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.016.L")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = PackedFloat32Array(0, 1, 5.74836e-08, 2.49534e-09, 0.726454, 0.687215)
+tracks/21/type = "rotation_3d"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.012.R")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = PackedFloat32Array(0, 1, 0.5, -0.5, -0.5, -0.5)
+tracks/22/type = "rotation_3d"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.013.R")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = PackedFloat32Array(0, 1, -0.520093, -0.393518, -0.308453, 0.692462)
+tracks/23/type = "rotation_3d"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.014.R")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = PackedFloat32Array(0, 1, -0.00728862, 0.00728862, 0.707069, 0.707069)
+tracks/24/type = "rotation_3d"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.015.R")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = PackedFloat32Array(0, 1, 5.43787e-08, 2.63782e-09, -0.687215, 0.726454)
+tracks/25/type = "rotation_3d"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.016.R")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = PackedFloat32Array(0, 1, 5.74836e-08, -2.49534e-09, -0.726454, 0.687215)
 
 [sub_resource type="Animation" id="Animation_l1fvc"]
 resource_name = "road_rash_right_old"
@@ -174,9 +335,60 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.048839, 0.783022, -0.0386007, 0.618871, 0.5, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061, 1, 1, 7.15847e-09, -4.49014e-08, -0.0622516, 0.998061)
 
+[sub_resource type="Animation" id="Animation_lpvu1"]
+resource_name = "road_rash_left"
+length = 0.75
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.R")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.183387, -0.182637, 0.681611, 0.684412, 0.25, 1, 0.242467, 0.87785, 0.333597, -0.243518, 0.4, 1, 0.242467, 0.877851, 0.333598, -0.243518, 0.75, 1, 0.0255978, -0.333377, 0.160188, 0.928733)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.R")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.780994, -0.139492, 0.107036, 0.599278, 0.25, 1, 0.932427, 0.103785, -0.0831639, -0.335994, 0.4, 1, -0.932427, -0.103785, 0.0831639, 0.335994, 0.75, 1, 0.00789503, 0.044528, 0.0925785, 0.994678)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.R")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 7.15846e-09, 4.49014e-08, 0.0622516, 0.99806, 0.25, 1, 7.15846e-09, 4.49014e-08, 0.0622516, 0.998061, 0.4, 1, 7.15846e-09, 4.49014e-08, 0.0622516, 0.998061, 0.75, 1, 0.0471143, -0.755362, 0.040688, 0.652344)
+
+[sub_resource type="Animation" id="Animation_0d8xx"]
+resource_name = "road_rash_left_back"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.009.R")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.0255978, -0.333377, 0.160188, 0.928733, 0.5, 1, 0.242467, 0.87785, 0.333597, -0.243518, 1, 1, -0.183387, -0.182637, 0.681611, 0.684412)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.010.R")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.00789503, 0.044528, 0.0925785, 0.994678, 0.5, 1, 0.932427, 0.103785, -0.0831639, -0.335994, 1, 1, -0.780994, -0.139492, 0.107036, 0.599278)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sapientblockman/Armature/Skeleton3D:Bone.011.R")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.0471143, -0.755362, 0.040688, 0.652344, 0.5, 1, 7.15846e-09, 4.49014e-08, 0.0622516, 0.998061, 1, 1, 7.15846e-09, 4.49014e-08, 0.0622516, 0.99806)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5illy"]
 _data = {
 &"RESET": SubResource("Animation_5illy"),
+&"road_rash_left": SubResource("Animation_lpvu1"),
+&"road_rash_left_back": SubResource("Animation_0d8xx"),
 &"road_rash_right": SubResource("Animation_ogrlw"),
 &"road_rash_right_back": SubResource("Animation_1jwom"),
 &"road_rash_right_back_old": SubResource("Animation_0yn0j"),
@@ -266,19 +478,18 @@ transform = Transform3D(0.280576, 0, 0, 0, 0.280576, 0, 0, 0, 0.280576, 0, 1.177
 [node name="Skeleton3D" parent="sapientblockman/Armature" index="0"]
 bones/0/rotation = Quaternion(-0.330869, 1.12495e-07, 3.94426e-08, 0.943677)
 bones/5/rotation = Quaternion(0.130526, 0, 0, 0.991445)
-bones/9/position = Vector3(7.15256e-07, 0.765799, 3.55271e-14)
 bones/9/rotation = Quaternion(-0.183387, 0.182637, -0.681611, 0.684412)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/position = Vector3(-1.19209e-07, 1.3352, 7.81597e-14)
 bones/10/rotation = Quaternion(-0.780994, 0.139492, -0.107036, 0.599278)
 bones/10/scale = Vector3(1, 1, 0.999999)
-bones/11/position = Vector3(-1.63913e-07, 1.22948, 2.84217e-14)
-bones/11/rotation = Quaternion(7.15847e-09, -4.49014e-08, -0.0622516, 0.998061)
+bones/11/rotation = Quaternion(7.15847e-09, -4.49014e-08, -0.0622516, 0.99806)
 bones/11/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.183387, -0.182637, 0.681611, 0.684412)
 bones/13/scale = Vector3(1, 1, 1)
-bones/14/rotation = Quaternion(-0.780994, -0.139492, 0.107036, 0.599278)
+bones/14/rotation = Quaternion(-0.780994, -0.139492, 0.107036, 0.599277)
 bones/14/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(7.15846e-09, 4.49014e-08, 0.0622516, 0.99806)
+bones/15/scale = Vector3(1, 1, 0.999999)
 bones/17/rotation = Quaternion(-0.520093, 0.393518, 0.308453, 0.692462)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/rotation = Quaternion(-0.00728862, -0.00728862, -0.707069, 0.707069)
@@ -297,7 +508,14 @@ visible = false
 surface_material_override/0 = ExtResource("4_5illy")
 surface_material_override/1 = ExtResource("5_0yn0j")
 
+[node name="IdentityDisc" parent="sapientblockman/Armature/Skeleton3D/IdiscLeft" index="0" instance=ExtResource("2_5illy")]
+transform = Transform3D(3.4427, -1.05254, 0, 1.05254, 3.4427, 0, 0, 0, 3.6, -3.856, 0.916, -1.322)
+
+[node name="Idisc" parent="sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc" index="0"]
+visible = false
+
 [node name="IdiscRight" parent="sapientblockman/Armature/Skeleton3D" index="2"]
+visible = false
 surface_material_override/0 = ExtResource("4_5illy")
 surface_material_override/1 = ExtResource("5_0yn0j")
 
@@ -313,6 +531,10 @@ surface_material_override/1 = ExtResource("5_0yn0j")
 
 [node name="DiscCamRight" type="Camera3D" parent="sapientblockman"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72649, 1.60778, 1.8843)
+fov = 40.1
+
+[node name="DiscCamLeft" type="Camera3D" parent="sapientblockman"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.726, 1.608, 1.884)
 fov = 40.1
 
 [node name="lightcycle" parent="." instance=ExtResource("5_i825w")]
@@ -362,5 +584,6 @@ one_shot = true
 [connection signal="timeout" from="DiscAttackCooldown" to="." method="_on_disc_attack_cooldown_timeout"]
 
 [editable path="sapientblockman"]
+[editable path="sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc"]
 [editable path="sapientblockman/Armature/Skeleton3D/IdiscRight/IdentityDisc"]
 [editable path="lightcycle"]

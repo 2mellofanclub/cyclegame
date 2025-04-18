@@ -52,8 +52,8 @@ func spawn_player_cycles(level_instance):
 	for point in level_instance.get_node("Spawns/Players").get_children():
 		var player_instance = Player.instantiate()
 		level_instance.add_child(player_instance)
-		player_instance.cycle_color = "orange"
-		player_instance.lw_color = "orange"
+		player_instance.cycle_color = "blue"
+		player_instance.lw_color = "blue"
 		player_instance.level_instance = level_instance
 		player_instance.apply_materials()
 		player_instance.set_global_position(point.get_global_position())

@@ -166,3 +166,33 @@ const REC_STYLES = {
 		"lines" : MATERIALS["lw_green1"],
 	},
 }
+const DISC_STYLES = {
+	"blue" : {
+		"body0" : MATERIALS["badguy_black1"],
+		"trims" : MATERIALS["lw_blue1"],
+	},
+	"orange" : {
+		"body0" : MATERIALS["badguy_black1"],
+		"trims" : MATERIALS["lw_orange1"],
+	},
+	"yellow" : {
+		"body0" : MATERIALS["badguy_black1"],
+		"trims" : MATERIALS["lw_yellow1"],
+	},
+	"red" : {
+		"body0" : MATERIALS["badguy_black1"],
+		"trims" : MATERIALS["lw_red1"],
+	},
+	"green" : {
+		"body0" : MATERIALS["badguy_black1"],
+		"trims" : MATERIALS["lw_green1"],
+	},
+	"pink" : {
+		"body0" : MATERIALS["badguy_black1"],
+		"trims" : MATERIALS["lw_pink1"],
+	},
+	"godwhite" : {
+		"body0" : MATERIALS["father_white1"],
+		"trims" : MATERIALS["lw_white1"],
+	},
+}

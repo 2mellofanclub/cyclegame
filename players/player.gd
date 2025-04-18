@@ -1,6 +1,9 @@
 extends VehicleBody3D
 
-
+var replace_with_group := "cycle"
+var disc_visible := false
+var disc_active := false
+var road_rash_side := ""
 var front_steer := 1.0
 var rear_steer := 0.0
 var engine_power := 400.0
@@ -27,6 +30,8 @@ var level_instance: Node3D
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
+@onready var identity_disc = $sapientblockman/Armature/IdentityDisc
+#@onready var identity_disc = $IdentityDisc
 @onready var LightWall = preload("res://objects/lightwallseg.tscn")
 @onready var SpecialLightWall= preload("res://objects/speciallightwallseg.tscn")
 @onready var Destruction = load("res://destruction/destruction.tscn")
@@ -36,6 +41,7 @@ var level_instance: Node3D
 func _ready():
 	las_pos = global_position
 	las_rot = global_rotation
+	identity_disc.disc_owner = self
 
 
 func _process(delta):
@@ -80,6 +86,8 @@ func _process(delta):
 			Vector3(1, 0, 0), 
 			(2 * PI) * ($FrontLeft.get_rpm() / 60 * delta)
 	)
+	
+
 	#region Steering
 	if not Input.is_action_pressed("superbrake"):
 		steering = Input.get_axis("steerright", "steerleft") * front_steer
@@ -102,10 +110,11 @@ func _process(delta):
 		# Quickturn right with speed intact
 		if Input.is_action_just_pressed("ninright"):
 			player_quickturn("right", lin_vel)
+		
 		if Input.is_action_just_pressed("heavy_attack"):
-			$AnimationPlayer.play("road_rash_right")
+			road_rash("right")
 		if Input.is_action_just_released("heavy_attack"):
-			$AnimationPlayer.play("road_rash_right_back")
+			road_rash_recover("right")
 	if Input.is_action_just_pressed("superbrake"):
 		$lightcycle.rotate_y(PI/2)
 		$IDunno.rotate_y(PI/2)
@@ -116,6 +125,7 @@ func _process(delta):
 		$IDunno.rotate_y(-PI/2)
 		set_brake(0)
 	#endregion
+	
 
 
 func get_last_pos():
@@ -127,6 +137,24 @@ func set_last_pos(pos: Vector3):
 	las_pos = pos
 func set_last_rot(rot: Vector3):
 	las_rot = rot
+
+
+func road_rash(side: String):
+	match side:
+		"left":
+			pass
+		"right":
+			$AnimationPlayer.play("road_rash_right")
+			identity_disc.show()
+			disc_active = true
+			
+func road_rash_recover(side: String):
+	match side:
+		"left":
+			pass
+		"right":
+			$AnimationPlayer.play("road_rash_right_back")
+			disc_active = false
 
 
 func player_quickturn(dir, lin_vel):
@@ -173,7 +201,7 @@ func spawn_lw():
 	lw_instance.scale_object_local(Vector3(1, 1, distance/lw_width))
 	set_last_pos(glo_pos)
 	set_last_rot(get_global_rotation())
-
+ 
 
 func explode():
 	if not explodable:
@@ -253,3 +281,8 @@ func _unhandled_input(event):
 
 func _on_kill_timeout() -> void:
 	explode()
+
+ 
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "road_rash_right_back":
+		identity_disc.hide()

@@ -1,5 +1,6 @@
 extends VehicleBody3D
 
+var replace_with_group = "cycle"
 var front_steer := 1.0
 var rear_steer := 0.0
 var engine_power := 400.0

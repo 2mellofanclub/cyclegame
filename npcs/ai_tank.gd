@@ -19,11 +19,12 @@ var twist_input := 0.0
 var pitch_input := 0.0
 # ai specific
 var enemy := false
-var targeting := true
+var targeting := false
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 80.0
 var ai_cooldown_mult := 1.5
+var ai_damage_mult := 0.8
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
@@ -145,7 +146,7 @@ func shoot(shot_type):
 	turret_barrel.transform = turret_barrel.transform.translated_local(Vector3(0,0,-1) * 0.5)
 	$TurretBarrelCol.transform = $TurretBarrelCol.transform.translated_local(Vector3(0,0,-1) * 0.5)
 
-
+ 
 func apply_materials():
 	var tank_materials = MaterialsBus.TANK_STYLES
 	# duplication necessary for passing instance specific vec4 of ddots

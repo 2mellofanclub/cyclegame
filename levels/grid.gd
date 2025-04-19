@@ -6,13 +6,23 @@ var max_trails: int
 var in_intro := true
 var players = []
 var enemies = []
-var recognizers = []
 var allies = []
+var recognizers = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	SignalBus.spawns_requested.emit()
+	#region Initial Spawns
+	for spawn in $Spawns/Players.get_children():
+		Spawner.spawn_player_cycle(spawn, self, "blue", "blue")
+	for spawn in $Spawns/Enemies.get_children():
+		if randi() % 2 == 0:
+			Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange")
+		else:
+			Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow")
+	for spawn in $Spawns/Allies.get_children():
+		Spawner.spawn_ally_cycle(spawn, self, "green", "green")
+	#endregion
 	await get_tree().create_timer(3).timeout
 	$SOS.play()
 

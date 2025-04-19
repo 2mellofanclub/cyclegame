@@ -6,8 +6,8 @@ var max_trails: int
 var in_intro := true
 var players = []
 var enemies = []
-var recognizers = []
 var allies = []
+var recognizers = []
 @export var pulse_offset := 500.0
 @export var pulse_band_offset := 0.6
 @export var pulse_speed_mps := 50.0

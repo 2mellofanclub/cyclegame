@@ -22,7 +22,7 @@ func _process(delta):
 	#var edge_to_bike = (LW_BASE_WIDTH * 0.5 * scale.z) + 1.6
 	if not visible:
 		if global_position.distance_to(Driver.get_global_position()) > 1.5:
-			$Shell/DaGoodBox.set_surface_override_material(0, lc_styles[lw_color]["slwbase"])
+			$Shell/DaGoodBox.set_surface_override_material(0, lc_styles[lw_color]["slwbase"].duplicate())
 			show()
 	elif not hot:
 		if global_position.distance_to(Driver.get_global_position()) > 2.0:

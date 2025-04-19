@@ -97,10 +97,9 @@ size = Vector3(5000, 100, 5000)
 [node name="LevelProto" type="Node3D"]
 script = ExtResource("1_tlrxs")
 
-[node name="FloorLight" type="Timer" parent="."]
-autostart = true
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 
-[node name="LightfloorCross" type="MeshInstance3D" parent="."]
+[node name="LightfloorCross" type="MeshInstance3D" parent="NavigationRegion3D"]
 mesh = SubResource("ArrayMesh_duheo")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_a715s")
@@ -109,11 +108,14 @@ metadata/extras = {
 "kb": {}
 }
 
-[node name="StaticBody3D" type="StaticBody3D" parent="LightfloorCross"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/LightfloorCross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.05176e-05)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LightfloorCross/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/LightfloorCross/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_atseg")
+
+[node name="FloorLight" type="Timer" parent="."]
+autostart = true
 
 [node name="CameraTwist" type="Node3D" parent="."]
 

@@ -53,12 +53,14 @@ func _process(delta):
 	var lin_vel = get_linear_velocity()
 	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
 	
+	#region Cam
 	if default_cam.current:
 		cam_twist.rotate_y(twist_input)
 		cam_pitch.rotate_x(pitch_input)
 	cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
 	twist_input = 0
 	pitch_input = 0
+	#endregion
 	
 	# stuff below is only for the living 
 	if not controllable:
@@ -72,7 +74,8 @@ func _process(delta):
 			$KillTimer.start()
 	else:	
 		$KillTimer.stop()
-			
+	
+	#region LW
 	if (xz_lin_vel).length() > lw_on_th:
 		lw_active = true
 	elif (xz_lin_vel).length() < lw_off_th:
@@ -83,6 +86,7 @@ func _process(delta):
 		else:
 			las_pos = global_position
 			las_rot = global_rotation
+		#endregion
 
 	$lightcycle/Rearwheel.rotate_object_local(
 			Vector3(1, 0, 0), 
@@ -93,7 +97,6 @@ func _process(delta):
 			(2 * PI) * ($FrontLeft.get_rpm() / 60 * delta)
 	)
 	
-
 	#region Steering
 	if not Input.is_action_pressed("superbrake"):
 		steering = Input.get_axis("steerright", "steerleft") * front_steer
@@ -104,11 +107,16 @@ func _process(delta):
 		)
 		if lin_vel.length() > max_speed:
 			engine_force = 0
-		$lightcycle.global_rotation.z = (global_rotation.z + 
-				Input.get_axis("steerright", "steerleft") * PI/9
+		
+		$lightcycle.rotation.z = lerp(
+				$lightcycle.rotation.z, 
+				Input.get_axis("steerright", "steerleft") * PI/9, 
+				0.1
 		)
-		$sapientblockman.global_rotation.z = (global_rotation.z + 
-				Input.get_axis("steerright", "steerleft") * PI/9
+		$sapientblockman.rotation.z = lerp(
+				$sapientblockman.rotation.z, 
+				Input.get_axis("steerright", "steerleft") * PI/9, 
+				0.1
 		)
 		# Quickturn left with speed intact
 		if Input.is_action_just_pressed("ninleft"):
@@ -126,7 +134,7 @@ func _process(delta):
 		$IDunno.rotate_y(-PI/2)
 		set_brake(0)
 	#endregion
-
+	
 	if Input.is_action_just_pressed("heavy_attack"):
 		road_rash("right")
 	if Input.is_action_just_pressed("light_attack"):
@@ -199,6 +207,7 @@ func explode():
 	if not explodable:
 		return
 	print("boom")
+	default_cam.make_current()
 	SignalBus.player_just_fuckkin_died.emit()
 	explodable = false
 	steering = 0
@@ -320,6 +329,7 @@ func road_rash_recover(side: String):
 			disc_right.hide()
 			disc_back.show()
  
+
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"road_rash_left":

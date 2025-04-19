@@ -450,6 +450,7 @@ wheel_radius = 0.6
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="FrontRight"]
 transform = Transform3D(1, 0, 2.38418e-07, 0, 1, 0, -2.38418e-07, 0, 1, 0.9, 0.082, -0.127)
+visible = false
 light_color = Color(0.694118, 0.713726, 0.94902, 1)
 light_energy = 0.45
 
@@ -467,6 +468,7 @@ wheel_radius = 0.6
 
 [node name="OmniLight3D" type="OmniLight3D" parent="BackRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -0.096)
+visible = false
 light_color = Color(0.694118, 0.713726, 0.94902, 1)
 light_energy = 0.45
 
@@ -481,7 +483,7 @@ bones/5/rotation = Quaternion(0.130526, 0, 0, 0.991445)
 bones/9/rotation = Quaternion(-0.183387, 0.182637, -0.681611, 0.684412)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/rotation = Quaternion(-0.780994, 0.139492, -0.107036, 0.599278)
-bones/10/scale = Vector3(1, 1, 0.999999)
+bones/10/scale = Vector3(0.999999, 1, 0.999999)
 bones/11/rotation = Quaternion(7.15847e-09, -4.49014e-08, -0.0622516, 0.99806)
 bones/11/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.183387, -0.182637, 0.681611, 0.684412)

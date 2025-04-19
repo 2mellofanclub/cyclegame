@@ -28,6 +28,8 @@ var level_instance: Node3D
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
+@onready var default_cam = $CamTwist/CamPitch/SpringArm3D/Camera3D
+@onready var nav_agent = $NavAgent
 @onready var LightWall = preload("res://objects/lightwallseg.tscn")
 @onready var SpecialLightWall= preload("res://objects/speciallightwallseg.tscn")
 @onready var Destruction = load("res://destruction/destruction.tscn")
@@ -40,21 +42,24 @@ func _ready():
 
 
 func _process(_delta):
-	if cam_active:
+	
+	#region Cam
+	if default_cam.current:
 		cam_twist.rotate_y(twist_input)
 		cam_pitch.rotate_x(pitch_input)
 		cam_pitch.rotation.x = clamp(cam_pitch.rotation.x, -1, 0.5)
 		twist_input = 0
 		pitch_input = 0
+	#endregion
+		
+	# stuff below is only for the living 
+	if dead:
+		return
 		
 	#botbot
 	var lin_vel = get_linear_velocity()
 	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
 	engine_force = 400 if (xz_lin_vel.length() < 80) else 0
-		
-	# stuff below is only for the living 
-	if dead:
-		return
 		
 	if xz_lin_vel.length() > deadly_impact_th:
 		if $ImpactRay.is_colliding():
@@ -65,6 +70,8 @@ func _process(_delta):
 	else:
 		if not $KillTimer.is_stopped():
 			$KillTimer.stop()
+			
+	#region LW
 	if (lin_vel * Vector3(1, 0, 1)).length() > lw_on_th:
 		lw_active = true
 	elif (lin_vel * Vector3(1, 0, 1)).length() < lw_off_th:
@@ -75,18 +82,19 @@ func _process(_delta):
 		else:
 			las_pos = get_global_position()
 			las_rot = get_global_rotation()
-	# -- BEGIN STEERING -- #
+	#endregion
+	
+	#region Steering
 	#botbot
 	steering = 0
 	avoid_lightwall(xz_lin_vel)
-	# -- END STEERING -- #
+	#endregion
 
 
 func get_last_pos():
 	return las_pos
 func get_last_rot():
 	return las_rot
-	
 func set_last_pos(pos: Vector3):
 	las_pos = pos
 func set_last_rot(rot: Vector3):
@@ -210,6 +218,7 @@ func quickturn(dir):
 
 
 #botbot
+# change this to better complement nav
 func avoid_lightwall(xz_lin_vel):
 	if not qt_available:
 		return

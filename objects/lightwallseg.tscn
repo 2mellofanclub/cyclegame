@@ -39,4 +39,4 @@ wait_time = 5.0
 
 [connection signal="body_entered" from="LightArea" to="." method="_on_lightarea_body_entered"]
 [connection signal="timeout" from="DelTimer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="LightOsci" to="." method="_on_lightosci_timeout"]
+[connection signal="timeout" from="LightOsci" to="Shell/DaGoodBox" method="_on_light_osci_timeout"]

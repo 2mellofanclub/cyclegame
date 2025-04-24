@@ -140,7 +140,6 @@ func apply_materials():
 	$RBRL/Rightleg.set_surface_override_material(1, rec_materials[rec_color]["lines"])
 	$RBRL/Rightleg/RLLattice.set_surface_override_material(0, rec_materials[rec_color]["lattice"])
 	$RBRL.materials_applied = true
-	
 	materials_applied = true
 
 
@@ -187,18 +186,25 @@ func explode():
 	self.gravity_scale = 0.5
 	$RBLL.gravity_scale = 0.5
 	$RBRL.gravity_scale = 0.5
+	apply_impulse(
+			Vector3(
+				randi_range(-500, 500),
+				randi_range(-500, 500),
+				randi_range(-500, 500),
+			)
+	)
 	$RBLL.apply_impulse(
 			Vector3(
-				randi_range(-10, 10),
-				randi_range(-10, 10),
-				randi_range(-10, 10)
+				randi_range(-500, 500),
+				randi_range(-500, 500),
+				randi_range(-500, 500),
 			)
 	)
 	$RBRL.apply_impulse(
 			Vector3(
-				randi_range(-10, 10),
-				randi_range(-10, 10),
-				randi_range(-10, 10)
+				randi_range(-500, 500),
+				randi_range(-500, 500),
+				randi_range(-500, 500),
 			)
 	)
 	# add cube squibs to joints

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvpqvgmhal68a"]
+
+[ext_resource type="Script" uid="uid://comwuyosg03by" path="res://objects/lightwallbase.gd" id="1_fk8d6"]
+[ext_resource type="Material" uid="uid://y5kioappetuf" path="res://materials/slw_blue1.tres" id="2_rnecl"]
+[ext_resource type="Script" uid="uid://biucfvq0y528u" path="res://objects/da_good_box.gd" id="3_l5ux5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cwhoa"]
+size = Vector3(0.2, 1, 0.5)
+
+[node name="LightWallBase" type="Node3D"]
+script = ExtResource("1_fk8d6")
+
+[node name="Shell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="DaGoodBox" type="MeshInstance3D" parent="Shell"]
+mesh = SubResource("BoxMesh_cwhoa")
+surface_material_override/0 = ExtResource("2_rnecl")
+script = ExtResource("3_l5ux5")
+
+[node name="LightOsci" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="LightOsci" to="." method="_on_lightosci_timeout"]

@@ -1,4 +1,5 @@
 shader_type spatial;
+//render_mode world_vertex_coords;
 uniform vec3 Cpoint;
 uniform vec3 DCpoint;
 uniform vec4 emission : source_color;
@@ -12,7 +13,7 @@ void vertex() {
 }
 void fragment() {
 	if(distance(Cpoint, glo_vertex) < 0.5) discard;
-	//if(distance(DCpoint, glo_vertex) < 1.2) discard;
+	if(distance(DCpoint, glo_vertex) < 1.2) discard;
 	EMISSION = (emission.rgb) * emission_energy;
 	ALBEDO = albedo.rgb;
 }

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ddh08yu1e6d0w"]
+
+[ext_resource type="Shader" uid="uid://ldq4iwmii6h5" path="res://environments/sky1.gdshader" id="1_2pkjx"]
+[ext_resource type="Texture2D" uid="uid://debyv6am74c46" path="res://environments/sky_test1.png" id="2_k62xn"]
+
+[resource]
+shader = ExtResource("1_2pkjx")
+shader_parameter/sky_color = Color(0, 0, 0, 1)
+shader_parameter/hor_color = Color(0, 0, 0, 1)
+shader_parameter/sky_tex = ExtResource("2_k62xn")

@@ -39,7 +39,19 @@ func _process(delta):
 		in_intro = false
 		PlayerTankSpawnCam.current = true
 		await get_tree().create_timer(0.25).timeout
-		SignalBus.spawns_requested.emit()
+		#region Initial Spawns
+		for spawn in $Spawns/PlayerTanks.get_children():
+			Spawner.spawn_player_tank(spawn, self, "blue", "blue")
+		for spawn in $Spawns/EnemyTanks.get_children():
+			Spawner.spawn_enemy_tank(spawn, self, "orange", "orange")
+			#if randi() % 2 == 0:
+				#Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange")
+			#else:
+				#Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow")
+		for spawn in $Spawns/Recognizers.get_children():
+			Spawner.spawn_recognizer(spawn, self,"orange")
+		#endregion
 		await get_tree().create_timer(3).timeout
+		print(enemies)
 		#$SOS.play()
 		

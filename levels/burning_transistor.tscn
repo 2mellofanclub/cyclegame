@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://hf2prj3h1x5u"]
+[gd_scene load_steps=8 format=3 uid="uid://hf2prj3h1x5u"]
 
 [ext_resource type="Script" uid="uid://cd7u204pifhmq" path="res://levels/burning_transistor.gd" id="1_visgt"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_hdrvo"]
+[ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="3_visgt"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="4_6akp8"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2qasv"]
@@ -10,23 +11,6 @@ bottom_radius = 500.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_352r7"]
 radius = 500.0
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ne5nj"]
-sky_horizon_color = Color(0.59625, 0.6135, 0.653186, 1)
-ground_bottom_color = Color(0, 0, 0.0627451, 1)
-ground_horizon_color = Color(0.59625, 0.6135, 0.653186, 1)
-
-[sub_resource type="Sky" id="Sky_8uoks"]
-sky_material = SubResource("ProceduralSkyMaterial_ne5nj")
-
-[sub_resource type="Environment" id="Environment_g42aa"]
-background_mode = 2
-background_energy_multiplier = 0.01
-sky = SubResource("Sky_8uoks")
-ambient_light_source = 2
-ambient_light_color = Color(0, 0.0705882, 0.227451, 1)
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_05i0m"]
 size = Vector3(5000, 100, 5000)
@@ -61,7 +45,7 @@ fov = 50.0
 transform = Transform3D(78.9063, 0, -61.4313, 0, 100, 0, 61.4313, 0, 78.9063, -142.92, 41.5013, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SetDressin"]
-environment = SubResource("Environment_g42aa")
+environment = ExtResource("3_visgt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SetDressin"]
 transform = Transform3D(-0.990505, 0.119058, -0.0687377, 0, 0.499998, 0.866026, 0.137476, 0.857804, -0.495251, 1.18197, 0.796057, -0.920207)
@@ -76,12 +60,12 @@ shadow_enabled = true
 [node name="Players" type="Node3D" parent="Spawns"]
 
 [node name="Node3D" type="Node3D" parent="Spawns/Players"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 200)
 
 [node name="Enemies" type="Node3D" parent="Spawns"]
 
 [node name="Node3D" type="Node3D" parent="Spawns/Enemies"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -150)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -200)
 
 [node name="Allies" type="Node3D" parent="Spawns"]
 

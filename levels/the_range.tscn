@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=4 uid="uid://dtgdeujl30rr6"]
+[gd_scene load_steps=22 format=4 uid="uid://dtgdeujl30rr6"]
 
 [ext_resource type="Script" uid="uid://bpcngkmp6fh8w" path="res://levels/the_range.gd" id="1_y7cpa"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_deyc5"]
 [ext_resource type="NavigationMesh" uid="uid://cbdyajtmilybt" path="res://navmeshes/the_range.tres" id="2_ws1pa"]
 [ext_resource type="Material" uid="uid://2jjok7i0q8gq" path="res://materials/floor_slw_blue1.tres" id="3_deyc5"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="3_ws1pa"]
+[ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="5_deyc5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkext"]
 resource_name = "Material.001"
@@ -103,23 +104,6 @@ size = Vector3(10, 1.5, 6)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k87hq"]
 data = PackedVector3Array(0, 0.75, 3, 5, -0.75, 3, -5, -0.75, 3, 0, 0.75, -3, -5, -0.75, -3, 5, -0.75, -3, 0, 0.75, 3, 0, 0.75, -3, 5, -0.75, 3, 0, 0.75, -3, 5, -0.75, -3, 5, -0.75, 3, 0, 0.75, -3, 0, 0.75, 3, -5, -0.75, -3, 0, 0.75, 3, -5, -0.75, 3, -5, -0.75, -3, -5, -0.75, 3, 5, -0.75, 3, -5, -0.75, -3, 5, -0.75, 3, 5, -0.75, -3, -5, -0.75, -3)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ne5nj"]
-sky_horizon_color = Color(0.59625, 0.6135, 0.653186, 1)
-ground_bottom_color = Color(0, 0, 0.0627451, 1)
-ground_horizon_color = Color(0.59625, 0.6135, 0.653186, 1)
-
-[sub_resource type="Sky" id="Sky_8uoks"]
-sky_material = SubResource("ProceduralSkyMaterial_ne5nj")
-
-[sub_resource type="Environment" id="Environment_g42aa"]
-background_mode = 2
-background_energy_multiplier = 0.01
-sky = SubResource("Sky_8uoks")
-ambient_light_source = 2
-ambient_light_color = Color(0, 0.0705882, 0.227451, 1)
-tonemap_mode = 2
-glow_enabled = true
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_05i0m"]
 size = Vector3(5000, 100, 5000)
 
@@ -214,7 +198,7 @@ fov = 50.0
 transform = Transform3D(78.9063, 0, -61.4313, 0, 100, 0, 61.4313, 0, 78.9063, -142.92, 41.5013, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SetDressin"]
-environment = SubResource("Environment_g42aa")
+environment = ExtResource("5_deyc5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SetDressin"]
 transform = Transform3D(-0.990505, 0.119058, -0.0687377, 0, 0.499998, 0.866026, 0.137476, 0.857804, -0.495251, 1.18197, 0.796057, -0.920207)

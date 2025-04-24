@@ -1,10 +1,6 @@
 extends VehicleBody3D
 
 var replace_with_group := "cycle"
-var disc_attack_available := true
-var right_disc_out := false
-var left_disc_out := false
-var road_rash_side := ""
 var front_steer := 1.0
 var rear_steer := 0.0
 var engine_power := 400.0
@@ -12,7 +8,9 @@ var max_speed := 80.0
 var lw_on_th := 50.0
 var lw_off_th := 15.0
 var deadly_impact_th := 70.0
-var kill_speed = 3.0
+var kill_speed := 3.0
+var qt_available := true
+var driver_color := "blue"
 var cycle_color := "blue"
 var lw_color := "blue"
 var lw_special := false
@@ -23,15 +21,21 @@ var controllable := true
 var lw_active := false
 var las_pos := Vector3.ZERO
 var las_rot := Vector3.ZERO
-var qt_cam_inverter := 1.0
 var mouse_sens := 0.001
 var twist_input := 0.0
 var pitch_input := 0.0
 var level_instance: Node3D
+# player specific
+var qt_cam_inverter := 1.0
+var disc_attack_available := true
+var right_disc_out := false
+var left_disc_out := false
+var road_rash_side := ""
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
 @onready var default_cam = $CamTwist/CamPitch/SpringArm3D/Camera3D
+@onready var sbm = $sapientblockman/Armature/Skeleton3D/SBM
 @onready var disc_back = $sapientblockman/Armature/Skeleton3D/IdiscBack
 @onready var disc_left = $sapientblockman/Armature/Skeleton3D/IdiscLeft
 @onready var disc_left_sc = $sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc
@@ -42,10 +46,13 @@ var level_instance: Node3D
 @onready var Destruction = load("res://destruction/destruction.tscn")
 @onready var destruction_instance = Destruction.instantiate()
 
-
+ 
 func _ready():
 	las_pos = global_position
 	las_rot = global_rotation
+	
+	disc_left_sc.disc_owner = self
+	disc_right_sc.disc_owner = self
 	
 
 
@@ -63,7 +70,7 @@ func _process(delta):
 	#endregion
 	
 	# stuff below is only for the living 
-	if not controllable:
+	if dead:
 		return
 		
 	if (xz_lin_vel).length() > deadly_impact_th:
@@ -80,12 +87,11 @@ func _process(delta):
 		lw_active = true
 	elif (xz_lin_vel).length() < lw_off_th:
 		lw_active = false
-	if las_pos.distance_to(get_global_position()) >= 0.6:
+	if las_pos.distance_to(global_position) >= 0.5:
 		if lw_active:
 			spawn_lw()
-		else:
-			las_pos = global_position
-			las_rot = global_rotation
+		las_pos = global_position
+		las_rot = global_rotation
 		#endregion
 
 	$lightcycle/Rearwheel.rotate_object_local(
@@ -199,8 +205,6 @@ func spawn_lw():
 	lw_instance.set_global_rotation(las_rot)
 	var lw_width = lw_instance.LW_BASE_WIDTH
 	lw_instance.scale_object_local(Vector3(1, 1, distance/lw_width))
-	set_last_pos(glo_pos)
-	set_last_rot(get_global_rotation())
  
 
 func explode():
@@ -216,20 +220,22 @@ func explode():
 	# i'm something of an animator myself
 	if get_linear_velocity().length() < 3:
 		set_linear_velocity(Vector3.ZERO)
-		#$Sounds/Splash.play()
+		$Explode.play()
 		$lightcycle/Frontwheel.hide()
 		$FrontRight/OmniLight3D2.hide()
 		await get_tree().create_timer(0.1).timeout
 		$lightcycle/Body.hide()
+		$sapientblockman.hide()
 		await get_tree().create_timer(0.1).timeout
 		$lightcycle/Rearwheel.hide()
 		$BackRight/OmniLight3D.hide()
 	else:
 		var last_lin_vel = get_linear_velocity()
 		set_linear_velocity(Vector3.ZERO)
-		#$Sounds/Splash.play()
+		$Explode.play()
 		get_parent().add_child(destruction_instance)
 		destruction_instance.set_global_position(global_position)
+		$sapientblockman.hide()
 		for child in $lightcycle.get_children():
 			child.hide()
 		$FrontRight/OmniLight3D2.hide()
@@ -246,6 +252,7 @@ func explode():
 		destruction_instance.queue_free()
 	print("boom")
 
+
 func take_dmg(dmg_value):
 	if hp <= 0:
 		return
@@ -260,10 +267,19 @@ func take_dmg(dmg_value):
 
 func take_hit(shot_pos, dmg_value):
 	take_dmg(dmg_value)
-	#$Hit.play()
+	$Hit.play()
+
 
 func apply_materials():
 	var lc_materials = MaterialsBus.LC_STYLES
+	sbm.set_surface_override_material(0, lc_materials[driver_color]["body0"])
+	sbm.set_surface_override_material(1, lc_materials[driver_color]["lwbase"])
+	disc_back.set_surface_override_material(0, lc_materials[driver_color]["body0"])
+	disc_back.set_surface_override_material(1, lc_materials[driver_color]["lwbase"])
+	disc_left.set_surface_override_material(0, lc_materials[driver_color]["body0"])
+	disc_left.set_surface_override_material(1, lc_materials[driver_color]["lwbase"])
+	disc_right.set_surface_override_material(0, lc_materials[driver_color]["body0"])
+	disc_right.set_surface_override_material(1, lc_materials[driver_color]["lwbase"])
 	$lightcycle/Body.set_surface_override_material(0, lc_materials[cycle_color]["body0"])
 	$lightcycle/Body.set_surface_override_material(1, lc_materials[cycle_color]["body1"])
 	$lightcycle/Body/Windshield_001.set_surface_override_material(0, lc_materials[cycle_color]["body1"])
@@ -287,6 +303,7 @@ func _on_kill_timeout() -> void:
 func road_rash(side: String):
 	if not disc_attack_available:
 		return
+	front_steer = 0.01
 	match side:
 		"left":
 			disc_attack_available = false
@@ -307,6 +324,7 @@ func road_rash(side: String):
 
 
 func road_rash_recover(side: String):
+	front_steer = 1.0
 	match side:
 		"left":
 			if not left_disc_out:

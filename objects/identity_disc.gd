@@ -23,4 +23,5 @@ func apply_materials():
 func _on_hit_box_body_entered(body: Node3D) -> void:
 	if hitbox_active and "replace_with_group" in body:
 		if body != disc_owner:
+			print("Got you!")
 			body.explode()

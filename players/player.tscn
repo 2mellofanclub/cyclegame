@@ -1,13 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6ipnsdu7pdo0"]
+[gd_scene load_steps=21 format=3 uid="uid://b6ipnsdu7pdo0"]
 
 [ext_resource type="Script" uid="uid://cyhn2rwojv3k7" path="res://players/player.gd" id="1_5i27b"]
 [ext_resource type="PackedScene" uid="uid://bquodg1chhlr8" path="res://objects/identity_disc.tscn" id="2_5illy"]
 [ext_resource type="PackedScene" uid="uid://4o7rrctk4tll" path="res://objects/sapientblockman_var1.blend" id="3_k00sm"]
-[ext_resource type="AudioStream" uid="uid://bp28yklm5ncpc" path="res://sound/positive.ogg" id="3_uxov2"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="4_5illy"]
 [ext_resource type="Material" uid="uid://crp7pjoe06fu8" path="res://materials/lw_blue1.tres" id="5_0yn0j"]
 [ext_resource type="PackedScene" uid="uid://nfqfptuvxlg1" path="res://objects/lightcycle1.blend" id="5_i825w"]
-[ext_resource type="AudioStream" uid="uid://brmoh8hudwf2s" path="res://sound/synth_misc_08.ogg" id="6_3rerk"]
+[ext_resource type="AudioStream" uid="uid://6prqoc76fnmn" path="res://sound/retro_misc_05.ogg" id="7_l1fvc"]
+[ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="8_5illy"]
 
 [sub_resource type="Animation" id="Animation_5illy"]
 length = 0.001
@@ -395,6 +395,10 @@ _data = {
 &"road_rash_right_old": SubResource("Animation_l1fvc")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5illy"]
+radius = 0.326697
+height = 1.03684
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sdl0q"]
 points = PackedVector3Array(0.00054957, -0.526281, 0.35614, -0.000271752, -0.526189, 0.356001, -0.000271752, -0.526189, 0.355862, 0.00430423, -0.436632, -0.38647, 0.0389566, -0.518148, 0.358369, 0.135092, 0.13971, 0.691576, -0.148776, 0.131669, 0.688232, -0.0379748, -0.519072, 0.358508, -0.0342202, -0.428776, -0.389256, -0.190821, 0.0967339, -0.717866, 0.196613, 0.0903568, -0.715637, 0.0427504, -0.427667, -0.390371, 0.0757993, -0.493749, 0.355583, 0.079593, -0.40336, -0.392599, 0.136343, 0.137399, 0.686421, 0.133488, 0.143684, 0.691993, 0.103255, 0.194239, 0.697844, 0.0688766, 0.231762, 0.702162, -0.0068033, 0.262076, 0.705227, -0.134618, 0.139525, 0.689347, 0.10963, -0.454932, 0.355722, 0.139159, -0.403453, 0.359623, 0.180852, -0.27092, 0.382189, 0.191451, -0.195873, 0.406706, 0.194501, -0.118701, 0.439024, 0.189964, -0.0429154, 0.48165, 0.177918, 0.0277873, 0.540435, 0.158832, 0.090634, 0.612314, -0.145335, 0.140634, 0.689347, -0.143692, 0.180006, 0.393891, -0.169075, 0.0863827, 0.615657, -0.18644, 0.0229813, 0.543778, -0.199816, -0.123507, 0.439442, -0.195358, -0.200587, 0.407403, -0.183468, -0.275449, 0.383165, -0.139703, -0.406872, 0.359901, -0.109431, -0.457704, 0.356279, -0.0750912, -0.495597, 0.356001, -0.0713366, -0.405301, -0.391624, -0.190782, 0.0973809, -0.717866, -0.105676, -0.366576, -0.398032, -0.135831, -0.313896, -0.409594, -0.160119, -0.250772, -0.425474, -0.160705, -0.249201, -0.425892, -0.179244, -0.173415, -0.461135, -0.190743, -0.0898656, -0.508915, -0.194693, 6.07371e-05, -0.58358, -0.19305, 0.0413733, -0.62537, -0.196805, -0.0477213, 0.483043, -0.17545, 0.108379, -0.716473, -0.0895232, 0.288232, -0.694045, -0.000271752, 0.304128, -0.691399, 0.088745, 0.289988, -0.692374, 0.165442, 0.24886, -0.696692, 0.184176, 0.17825, -0.70505, 0.195988, 0.101632, -0.714244, 0.198256, 0.0413733, -0.63136, 0.199703, 0.00634545, -0.595978, 0.196066, -0.0843203, -0.516159, 0.185154, -0.168332, -0.467264, 0.167241, -0.244672, -0.431325, 0.143031, -0.310107, -0.412937, 0.113463, -0.363526, -0.400957, 0.0788499, -0.490237, 0.354887, 0.10963, -0.454932, 0.355583, 0.153904, 0.144239, 0.334409, 0.135131, 0.182779, 0.398488, 0.130868, 0.188786, 0.408378, 0.104624, 0.227788, 0.450725, 0.0831521, 0.248675, 0.473292, 0.0701282, 0.261892, 0.482904, 0.0317211, 0.25459, 0.70453, 0.0328944, 0.283149, 0.498366, -0.00562997, 0.29008, 0.503381, -0.0452104, 0.253758, 0.703834, -0.115845, 0.191836, 0.695755, 0.163252, -0.340606, 0.362687, 0.115341, -0.444858, 0.354608, 0.126839, -0.339682, -0.403743, 0.185936, -0.234598, 0.389712, 0.197552, -0.0475365, -0.539422, 0.183863, -0.00687087, 0.510067, 0.174007, 0.0413733, 0.550743, 0.171739, 0.107547, 0.170592, 0.166263, 0.116789, 0.254033, 0.160592, 0.132224, 0.299166, -0.114437, 0.225477, 0.448078, -0.137825, 0.188786, 0.408378, -0.167276, 0.129266, 0.29053, -0.159767, 0.144239, 0.334409, -0.138569, 0.303389, -0.657827, -0.195319, -0.0371852, 0.489311, -0.171226, 0.116789, 0.254033, -0.175568, 0.107547, 0.170592, -0.180144, 0.174276, -0.708533, -0.19923, -0.133489, 0.432895, -0.193402, -0.0318248, -0.548337, -0.165985, -0.339682, 0.36408, -0.164656, -0.344672, 0.363802, -0.11694, -0.444858, 0.355026, -0.162465, -0.350125, 0.362827, -0.0793935, -0.490791, 0.355026, -0.164382, -0.234598, -0.430071, -0.159728, 0.252372, -0.698921, -0.0763428, 0.386569, -0.603082, -0.0754823, 0.387493, -0.602386, -0.0387179, 0.409674, -0.586645, -0.000310868, 0.417807, -0.584277, -0.000271752, 0.417807, -0.584277, 0.0754473, 0.389156, -0.600854, 0.140254, 0.306346, -0.654066, 0.163721, 0.253112, -0.696135, 0.109865, 0.353574, -0.620773, 0.0382135, 0.410506, -0.585809, -0.000310868, 0.417807, -0.584137, -0.044037, 0.282317, 0.497809, -0.0820139, 0.230098, 0.70063, -0.0807623, 0.260228, 0.48165, -0.0916743, 0.248675, 0.473292, -0.109196, 0.351263, -0.623559, -0.162426, 0.245256, -0.699757)
 
@@ -553,6 +557,10 @@ fov = 40.1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.726, 1.608, 1.884)
 fov = 40.1
 
+[node name="DriverCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.916481, 0.400077, 0, -0.400077, 0.916481, 0, 1.48915, 0.0470075)
+shape = SubResource("CapsuleShape3D_5illy")
+
 [node name="lightcycle" parent="." instance=ExtResource("5_i825w")]
 
 [node name="BodyCol" type="CollisionShape3D" parent="."]
@@ -579,21 +587,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.79643e-05, 0.584442, 1.091
 [node name="TrailDestroyer" type="Node3D" parent="IDunno"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.584, 0.2)
 
-[node name="Sounds" type="Node3D" parent="."]
-
-[node name="NotPositive" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("3_uxov2")
-volume_db = -5.0
-pitch_scale = 0.79
-
-[node name="Splash" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("6_3rerk")
-unit_size = 58.56
-pitch_scale = 0.77
-
 [node name="DiscAttackCooldown" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Explode" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = ExtResource("7_l1fvc")
+volume_db = -20.0
+unit_size = 20.0
+max_db = -20.0
+pitch_scale = 0.48
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = ExtResource("8_5illy")
+volume_db = -10.0
+max_db = -10.0
+max_polyphony = 10
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="KillTimer" to="." method="_on_kill_timeout"]

@@ -54,6 +54,7 @@ func _process(delta):
 					d_dot.scale.x
 			))
 		$Tankbody.get_surface_override_material(0).set_shader_parameter("dmg_points", points_to_pass)
+		
 		turret_base.get_surface_override_material(1).set_shader_parameter(
 				"enemy_pos", get_closest_living_pos(level_instance.recognizers)
 		)

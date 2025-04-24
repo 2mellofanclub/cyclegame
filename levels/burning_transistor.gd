@@ -33,14 +33,14 @@ func _process(delta):
 		await get_tree().create_timer(0.25).timeout
 		#region Initial Spawns
 		for spawn in $Spawns/Players.get_children():
-			Spawner.spawn_player_cycle(spawn, self, "blue", "blue")
+			Spawner.spawn_player_cycle(spawn, self, "blue", "blue", "blue")
 		for spawn in $Spawns/Enemies.get_children():
 			if randi() % 2 == 0:
-				Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange")
+				Spawner.spawn_enemy_cycle(spawn, self, "yellow", "orange", "orange")
 			else:
-				Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow")
+				Spawner.spawn_enemy_cycle(spawn, self, "orange", "yellow", "yellow")
 		for spawn in $Spawns/Allies.get_children():
-			Spawner.spawn_ally_cycle(spawn, self, "green", "green")
+			Spawner.spawn_ally_cycle(spawn, self, "green", "green", "green")
 		#endregion
 		await get_tree().create_timer(3).timeout
 		$SOS.play()

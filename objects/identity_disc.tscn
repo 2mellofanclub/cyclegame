@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bquodg1chhlr8"]
+[gd_scene load_steps=10 format=4 uid="uid://bquodg1chhlr8"]
 
 [ext_resource type="Script" uid="uid://duum7u4fsvc5b" path="res://objects/identity_disc.gd" id="1_g47t8"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="2_14qee"]
@@ -75,6 +75,9 @@ shadow_mesh = SubResource("ArrayMesh_dvq7f")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g47t8"]
 points = PackedVector3Array(-0.0218582, -0.00270294, -0.116768, -0.0304523, -0.00659375, -0.118086, 0.121881, -0.00659375, -0.00761308, -0.0799731, -0.0104048, 0.0647231, -0.0914286, 0.00864286, -0.0647231, 0.0914286, 0.00864286, -0.0647231, 0.0647231, -0.0104048, 0.0799731, 0.0914286, 0.00864286, 0.0647231, 0.0532916, -0.0104048, -0.0876101, -0.0914286, 0.00864286, 0.0647231, -0.118086, -0.00659375, -0.0304523, -0.00761308, -0.00659375, 0.121881, -0.0799731, -0.0104048, -0.0647231, 0.0647231, 0.00864286, -0.0914286, 0.0685416, -0.00659375, -0.102836, 0.0876101, -0.00659375, 0.0876101, -0.102836, -0.00659375, 0.0685416, -0.0647231, 0.00864286, 0.0914286, 0.0647231, 0.00864286, 0.0914286, -0.0876101, -0.00659375, -0.0876101, -0.0647231, 0.00864286, -0.0914286, 0.0990416, -0.0104048, -0.0228154, 0.102836, -0.00659375, -0.0685416, -0.108814, 0.00421939, 0.0203694, -0.0685416, -0.00659375, 0.102836, 0.114268, -0.00659375, 0.0456785, 0.108816, 0.00421947, 0.0203697, 0.0456785, -0.00659375, 0.114268, 0.0203694, 0.00421939, 0.108814, -0.0228154, -0.0104048, 0.0990416, 0.0203697, 0.00421947, -0.108816, 0.0304523, -0.00659375, -0.118086)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_14qee"]
+height = 1.0
+
 [node name="IdentityDisc" type="Node3D"]
 script = ExtResource("1_g47t8")
 
@@ -91,8 +94,11 @@ metadata/extras = {
 collision_layer = 0
 collision_mask = 3072
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+[node name="RealCol" type="CollisionShape3D" parent="HitBox"]
 transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_g47t8")
+
+[node name="ForSureCol" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("CapsuleShape3D_14qee")
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

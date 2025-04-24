@@ -7,10 +7,11 @@ extends Node
 @onready var Recognizer = preload("res://npcs/recognizer.tscn")
 
 
-func spawn_player_cycle(spawn: Node3D, level_instance: Node, cycle_color: String, lw_color: String):
+func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color: String, cycle_color: String, lw_color: String):
 	var player_instance = Player.instantiate()
 	level_instance.add_child(player_instance)
 	level_instance.players.append(player_instance)
+	player_instance.driver_color = driver_color
 	player_instance.cycle_color = cycle_color
 	player_instance.lw_color = lw_color
 	player_instance.level_instance = level_instance
@@ -20,10 +21,11 @@ func spawn_player_cycle(spawn: Node3D, level_instance: Node, cycle_color: String
 	SignalBus.player_spawned.emit()
 
 
-func spawn_enemy_cycle(spawn: Node3D, level_instance: Node, cycle_color: String, lw_color: String):
+func spawn_enemy_cycle(spawn: Node3D, level_instance: Node, driver_color: String, cycle_color: String, lw_color: String):
 	var enemy_instance = AICycle.instantiate()
 	level_instance.add_child(enemy_instance)
 	level_instance.enemies.append(enemy_instance)
+	enemy_instance.driver_color = driver_color
 	enemy_instance.cycle_color = cycle_color
 	enemy_instance.lw_color = lw_color
 	enemy_instance.level_instance = level_instance
@@ -33,10 +35,11 @@ func spawn_enemy_cycle(spawn: Node3D, level_instance: Node, cycle_color: String,
 	SignalBus.ai_spawned.emit("enemy")
 
 
-func spawn_ally_cycle(spawn: Node3D, level_instance: Node, cycle_color: String, lw_color: String):
+func spawn_ally_cycle(spawn: Node3D, level_instance: Node, driver_color: String, cycle_color: String, lw_color: String):
 	var ally_instance = AICycle.instantiate()
 	level_instance.add_child(ally_instance)
 	level_instance.allies.append(ally_instance)
+	ally_instance.driver_color = driver_color
 	ally_instance.cycle_color = cycle_color
 	ally_instance.lw_color = lw_color
 	ally_instance.level_instance = level_instance

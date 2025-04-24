@@ -36,6 +36,10 @@ window/size/viewport_height=768
 
 project/assembly_name="grid"
 
+[global_group]
+
+cycles="these are all lightcycles"
+
 [input]
 
 steerleft={

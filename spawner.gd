@@ -29,6 +29,7 @@ func spawn_enemy_cycle(spawn: Node3D, level_instance: Node, driver_color: String
 	enemy_instance.cycle_color = cycle_color
 	enemy_instance.lw_color = lw_color
 	enemy_instance.level_instance = level_instance
+	enemy_instance.ai_type = "enemy"
 	enemy_instance.apply_materials()
 	enemy_instance.set_global_position(spawn.get_global_position())
 	enemy_instance.set_global_rotation(spawn.get_global_rotation())
@@ -43,6 +44,7 @@ func spawn_ally_cycle(spawn: Node3D, level_instance: Node, driver_color: String,
 	ally_instance.cycle_color = cycle_color
 	ally_instance.lw_color = lw_color
 	ally_instance.level_instance = level_instance
+	ally_instance.ai_type = "ally"
 	ally_instance.apply_materials()
 	ally_instance.set_global_position(spawn.get_global_position())
 	ally_instance.set_global_rotation(spawn.get_global_rotation())

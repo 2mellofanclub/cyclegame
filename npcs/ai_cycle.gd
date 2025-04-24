@@ -1,6 +1,5 @@
 extends VehicleBody3D
 
-var replace_with_group = "cycle"
 var front_steer := 1.0
 var rear_steer := 0.0
 var engine_power := 400.0
@@ -26,6 +25,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 var level_instance: Node3D
 # ai specific
+var ai_type := "ally"
 var cam_active := false
 var target_cycle := VehicleBody3D
 var target_point := Node3D
@@ -148,7 +148,7 @@ func explode():
 	if not explodable:
 		return
 	print("boom")
-	SignalBus.ai_just_fuckkin_died.emit()
+	SignalBus.ai_just_fuckkin_died.emit(ai_type)
 	explodable = false
 	steering = 0
 	engine_force = 0

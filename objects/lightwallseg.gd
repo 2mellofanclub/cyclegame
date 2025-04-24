@@ -14,7 +14,7 @@ func _ready():
 
 
 # change how and when materials are received, i.e. from mbus upon instantiation
-func _process(delta):
+func _process(_delta):
 	if Driver == null:
 		return
 	$Shell/DaGoodBox.cpoint = Driver.get_node("IDunno/TrailEater").global_position
@@ -37,7 +37,7 @@ func _process(delta):
 func _on_lightarea_body_entered(body):
 	if not hot:
 		return
-	if "take_dmg" in body:
+	if "take_dmg" in body and body.is_in_group("cycles"):
 			print("ka")
 			body.take_dmg(10000.0)
 

@@ -13,17 +13,16 @@ var recognizers = []
 @export var pulse_speed_mps := 50.0
 
 @onready var intro_cam = $CameraTwist/CameraPitch/IntroCam
-#@onready var spawn_cam = $CameraTwist/CameraPitch/IntroCam
+#@onready var spawn_cam = $
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$SkyFlash.start(randf_range(20.0, 100.0))
 	
 
 func _process(delta):
-	
-	
 	
 	if intro_cam.current:
 		$CameraTwist.rotate_y(delta * PI/10)
@@ -43,5 +42,17 @@ func _process(delta):
 			Spawner.spawn_ally_cycle(spawn, self, "green", "green", "green")
 		#endregion
 		await get_tree().create_timer(3).timeout
-		$SOS.play()
+		#$SOS.play()
 		
+
+
+# do more with this
+func _on_sky_flash_timeout() -> void:
+	$SetDressin/WorldEnvironment.environment.sky.sky_material.energy_multiplier = 2.0
+	await get_tree().create_timer(0.2).timeout
+	$SetDressin/WorldEnvironment.environment.sky.sky_material.energy_multiplier = 1.0
+	await get_tree().create_timer(0.1).timeout
+	$SetDressin/WorldEnvironment.environment.sky.sky_material.energy_multiplier = 2.0
+	await get_tree().create_timer(0.2).timeout
+	$SetDressin/WorldEnvironment.environment.sky.sky_material.energy_multiplier = 1.0
+	$SkyFlash.start(randf_range(20.0, 100.0))

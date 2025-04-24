@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvpqvgmhal68a"]
 
-[ext_resource type="Script" uid="uid://comwuyosg03by" path="res://objects/lightwallbase.gd" id="1_fk8d6"]
+[ext_resource type="Script" uid="uid://comwuyosg03by" path="res://old/lightwallbase.gd" id="1_fk8d6"]
 [ext_resource type="Material" uid="uid://y5kioappetuf" path="res://materials/slw_blue1.tres" id="2_rnecl"]
 [ext_resource type="Script" uid="uid://biucfvq0y528u" path="res://objects/da_good_box.gd" id="3_l5ux5"]
 

@@ -2,11 +2,13 @@ extends Node
 
 
 func _ready():
+	
+	$LevelController.start_main_menu()
 	#$LevelController.start_new_level("res://levels/grid.tscn")
 	#await get_tree().create_timer(30).timeout
 	#$LevelController.start_new_level("res://levels/one_v_one.tscn")
 	#$LevelController.start_new_level("res://levels/the_range.tscn")
-	$LevelController.start_new_level("res://levels/burning_transistor.tscn")
+	#$LevelController.start_new_level("res://levels/burning_transistor.tscn")
 	
 
 func _process(delta):

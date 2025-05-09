@@ -16,6 +16,12 @@ func _ready():
 func _process(delta):
 	pass
 
+func start_main_menu():
+	for child in get_children():
+		child.queue_free()
+	var main_menu = load("res://main_menu.tscn").instantiate()
+	main_menu.level_controller = self
+	add_child(main_menu)
 
 func start_new_level(level_path):
 	for child in get_children():

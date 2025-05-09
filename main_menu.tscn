@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=3 uid="uid://brdmmttp7nepu"]
+
+[ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="1_06t4h"]
+[ext_resource type="Theme" uid="uid://bt22ifw8an45e" path="res://menuthemes/main_menu.tres" id="1_fu7sn"]
+[ext_resource type="Script" uid="uid://dgtqmdr2idqwm" path="res://main_menu.gd" id="1_jix8l"]
+[ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_7vrkn"]
+
+[sub_resource type="GDScript" id="GDScript_fu7sn"]
+script/source = "extends Node3D
+
+var max_trails := 3000
+var players = []
+var enemies = []
+var allies = []
+var recognizers = []
+
+@onready var AICycle = preload(\"res://npcs/ai_cycle.tscn\")
+@onready var Recognizer = preload(\"res://npcs/recognizer.tscn\")
+
+func _ready() -> void:
+	$RecSpawnTimer.start(5)
+	$CycleSpawnTimer.start(1)
+
+
+func _on_rec_spawn_timer_timeout() -> void:
+	for rec in recognizers:
+		rec.queue_free()
+	for spawn in $RecSpawns.get_children():
+		Spawner.spawn_rec_dummy(spawn, self, \"orange\")
+	$RecSpawnTimer.start(randi_range(20, 60))
+
+
+func _on_cycle_spawn_timer_timeout() -> void:
+	for ally in allies:
+		ally.queue_free()
+	var spawns = $CycleSpawns.get_children()
+	var spawn = spawns[randi_range(0, len(spawns)-1)]
+	var colors = [\"blue\", \"orange\", \"yellow\", \"green\", \"pink\", \"godwhite\"]
+	var color = colors[randi_range(0, len(colors)-1)]
+	Spawner.spawn_ally_cycle(spawn, self, color, color, color)
+	$CycleSpawnTimer.start(randi_range(40, 100))
+"
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_06t4h"]
+top_radius = 50.0
+bottom_radius = 50.0
+height = 500.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fu7sn"]
+material = ExtResource("2_7vrkn")
+size = Vector2(100000, 100000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fu7sn"]
+data = PackedVector3Array(50000, 0, 50000, -50000, 0, 50000, 50000, 0, -50000, -50000, 0, 50000, -50000, 0, -50000, 50000, 0, -50000)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jix8l")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_fu7sn")
+text = "PLAY"
+
+[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="Button3" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "CREDITS"
+
+[node name="Button4" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="Background" type="Node3D" parent="."]
+script = SubResource("GDScript_fu7sn")
+
+[node name="SetDressin" type="Node3D" parent="Background"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Background/SetDressin"]
+environment = ExtResource("1_06t4h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Background/SetDressin"]
+transform = Transform3D(-0.990505, 0.119058, -0.0687377, 0, 0.499998, 0.866026, 0.137476, 0.857804, -0.495251, 1.18197, 0.796057, -0.920207)
+light_color = Color(0.858824, 0.882353, 1, 1)
+light_energy = 0.384
+shadow_enabled = true
+
+[node name="Tower" type="MeshInstance3D" parent="Background/SetDressin"]
+transform = Transform3D(0.743787, 0, -0.427787, 0, 1, 0, 0.668417, 0, 0.476024, 0, 250, 0)
+mesh = SubResource("CylinderMesh_06t4h")
+
+[node name="Floor" type="MeshInstance3D" parent="Background/SetDressin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2286.27, 0, -1242.38)
+visibility_range_fade_mode = 1
+mesh = SubResource("PlaneMesh_fu7sn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Background/SetDressin/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Background/SetDressin/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_fu7sn")
+
+[node name="Camera3D" type="Camera3D" parent="Background"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 165.825, 100, -3.89)
+fov = 60.0
+far = 100000.0
+
+[node name="RecSpawns" type="Node3D" parent="Background"]
+transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, -445.088, 184.409, 269.234)
+
+[node name="Node3D" type="Node3D" parent="Background/RecSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2798, -16.8271, 9.91795)
+
+[node name="Node3D2" type="Node3D" parent="Background/RecSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.18147, 0.107666, -3.8147e-06)
+
+[node name="Node3D3" type="Node3D" parent="Background/RecSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.772, -18.3041, 19.105)
+
+[node name="CycleSpawns" type="Node3D" parent="Background"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -845.14, 2, -66.4493)
+
+[node name="Node3D" type="Node3D" parent="Background/CycleSpawns"]
+
+[node name="Node3D4" type="Node3D" parent="Background/CycleSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -426.68, 0, 91.0534)
+
+[node name="Node3D3" type="Node3D" parent="Background/CycleSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 282.449, 0, 7.62939e-06)
+
+[node name="Node3D2" type="Node3D" parent="Background/CycleSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 450.616, 0, 1.52588e-05)
+
+[node name="RecSpawnTimer" type="Timer" parent="Background"]
+one_shot = true
+
+[node name="CycleSpawnTimer" type="Timer" parent="Background"]
+one_shot = true
+
+[node name="Trails" type="Node3D" parent="Background"]
+
+[connection signal="timeout" from="Background/RecSpawnTimer" to="Background" method="_on_rec_spawn_timer_timeout"]
+[connection signal="timeout" from="Background/CycleSpawnTimer" to="Background" method="_on_cycle_spawn_timer_timeout"]

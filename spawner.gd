@@ -6,6 +6,8 @@ extends Node
 @onready var AITank = preload("res://npcs/ai_tank.tscn")
 @onready var Recognizer = preload("res://npcs/recognizer.tscn")
 
+@onready var RecDummy = preload("res://npc_dummies/recognizer_dummy.tscn")
+
 
 func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color: String, cycle_color: String, lw_color: String):
 	var player_instance = Player.instantiate()
@@ -93,6 +95,18 @@ func spawn_ally_tank(spawn: Node3D, level_instance: Node, tank_color: String, sh
 
 func spawn_recognizer(spawn: Node3D, level_instance: Node, rec_color: String):
 	var enemy_instance = Recognizer.instantiate()
+	level_instance.add_child(enemy_instance)
+	level_instance.recognizers.append(enemy_instance)
+	enemy_instance.rec_color = rec_color
+	enemy_instance.enemy = true
+	enemy_instance.level_instance = level_instance
+	enemy_instance.apply_materials()
+	enemy_instance.set_global_position(spawn.get_global_position())
+	enemy_instance.set_global_rotation(spawn.get_global_rotation())
+	SignalBus.ai_spawned.emit("enemy")
+	
+func spawn_rec_dummy(spawn: Node3D, level_instance: Node, rec_color: String):
+	var enemy_instance = RecDummy.instantiate()
 	level_instance.add_child(enemy_instance)
 	level_instance.recognizers.append(enemy_instance)
 	enemy_instance.rec_color = rec_color

@@ -36,7 +36,6 @@ script = ExtResource("1_ig7tw")
 script = ExtResource("2_0xm2m")
 
 [node name="Debug" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -44,7 +43,7 @@ offset_bottom = 40.0
 
 [node name="FPS" type="RichTextLabel" parent="Debug"]
 layout_mode = 0
-offset_right = 100.0
+offset_right = 231.0
 offset_bottom = 20.0
 scroll_active = false
 script = SubResource("GDScript_0xm2m")
@@ -58,7 +57,6 @@ scroll_active = false
 script = SubResource("GDScript_1bvp3")
 
 [node name="Lightwalls" type="RichTextLabel" parent="Debug"]
-visible = false
 layout_mode = 0
 offset_top = 40.0
 offset_right = 100.0

@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://byxihy6t4ljqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pq3h3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp40y"]
+draw_center = false
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fjdb"]
+draw_center = false
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_agfg6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ig110"]
+
+[resource]
+Button/colors/font_focus_color = Color(0.752941, 0.913725, 1, 1)
+Button/colors/font_hover_color = Color(0.754249, 0.914771, 1, 1)
+Button/constants/h_separation = 20
+Button/font_sizes/font_size = 30
+Button/styles/disabled = SubResource("StyleBoxEmpty_pq3h3")
+Button/styles/focus = SubResource("StyleBoxFlat_wp40y")
+Button/styles/hover = SubResource("StyleBoxFlat_5fjdb")
+Button/styles/normal = SubResource("StyleBoxEmpty_agfg6")
+Button/styles/pressed = SubResource("StyleBoxEmpty_ig110")

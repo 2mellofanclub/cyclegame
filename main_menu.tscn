@@ -1,9 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://brdmmttp7nepu"]
+[gd_scene load_steps=12 format=3 uid="uid://brdmmttp7nepu"]
 
 [ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="1_06t4h"]
 [ext_resource type="Theme" uid="uid://bt22ifw8an45e" path="res://menuthemes/main_menu.tres" id="1_fu7sn"]
 [ext_resource type="Script" uid="uid://dgtqmdr2idqwm" path="res://main_menu.gd" id="1_jix8l"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_7vrkn"]
+[ext_resource type="Theme" uid="uid://byxihy6t4ljqe" path="res://menuthemes/back.tres" id="2_jix8l"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_jix8l"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_glbon"]
+events = [SubResource("InputEventKey_jix8l")]
 
 [sub_resource type="GDScript" id="GDScript_fu7sn"]
 script/source = "extends Node3D
@@ -62,33 +70,102 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jix8l")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Back" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+offset_left = 28.0
+offset_top = 28.0
+offset_right = 121.0
+offset_bottom = 59.0
+theme = ExtResource("2_jix8l")
+shortcut = SubResource("Shortcut_glbon")
+text = "BACK [ESC]"
+
+[node name="MainCenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="MainControls" type="VBoxContainer" parent="MainCenterContainer"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme = ExtResource("1_fu7sn")
+
+[node name="Play" type="Button" parent="MainCenterContainer/MainControls"]
+layout_mode = 2
 text = "PLAY"
 
-[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MainCenterContainer/MainControls"]
 layout_mode = 2
 text = "SETTINGS"
 
-[node name="Button3" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Credits" type="Button" parent="MainCenterContainer/MainControls"]
 layout_mode = 2
 text = "CREDITS"
 
-[node name="Button4" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="MainCenterContainer/MainControls"]
 layout_mode = 2
 text = "EXIT"
+
+[node name="Saves" type="VBoxContainer" parent="MainCenterContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_fu7sn")
+
+[node name="Modes" type="VBoxContainer" parent="MainCenterContainer"]
+visible = false
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme = ExtResource("1_fu7sn")
+
+[node name="Garage" type="Button" parent="MainCenterContainer/Modes"]
+layout_mode = 2
+text = "GARAGE"
+
+[node name="Cycle Wars" type="Button" parent="MainCenterContainer/Modes"]
+layout_mode = 2
+text = "CYCLE WARS"
+
+[node name="Data Hunt" type="Button" parent="MainCenterContainer/Modes"]
+layout_mode = 2
+text = "DATA HUNT"
+
+[node name="Survival" type="Button" parent="MainCenterContainer/Modes"]
+layout_mode = 2
+text = "SURVIVAL"
+
+[node name="CycleWarLevels" type="GridContainer" parent="MainCenterContainer"]
+visible = false
+layout_mode = 2
+
+[node name="BurningTransistor" type="Button" parent="MainCenterContainer/CycleWarLevels"]
+layout_mode = 2
+text = "BURNING TRANSISTOR"
+
+[node name="OneVOne" type="Button" parent="MainCenterContainer/CycleWarLevels"]
+layout_mode = 2
+text = "ONE V ONE"
+
+[node name="TheGrid" type="Button" parent="MainCenterContainer/CycleWarLevels"]
+layout_mode = 2
+text = "THE GRID"
+
+[node name="DataHuntLevels" type="GridContainer" parent="MainCenterContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TheRange" type="Button" parent="MainCenterContainer/DataHuntLevels"]
+layout_mode = 2
+text = "THE RANGE"
+
+[node name="SurvivalLevels" type="GridContainer" parent="MainCenterContainer"]
+visible = false
+layout_mode = 2
 
 [node name="Background" type="Node3D" parent="."]
 script = SubResource("GDScript_fu7sn")
@@ -157,5 +234,15 @@ one_shot = true
 
 [node name="Trails" type="Node3D" parent="Background"]
 
+[connection signal="pressed" from="Back" to="." method="go_back"]
+[connection signal="pressed" from="MainCenterContainer/MainControls/Play" to="." method="change_menu_state" binds= [1]]
+[connection signal="pressed" from="MainCenterContainer/MainControls/Exit" to="." method="change_menu_state" binds= [4]]
+[connection signal="pressed" from="MainCenterContainer/Modes/Cycle Wars" to="." method="change_menu_state" binds= [7]]
+[connection signal="pressed" from="MainCenterContainer/Modes/Data Hunt" to="." method="change_menu_state" binds= [8]]
+[connection signal="pressed" from="MainCenterContainer/Modes/Survival" to="." method="change_menu_state" binds= [9]]
+[connection signal="pressed" from="MainCenterContainer/CycleWarLevels/BurningTransistor" to="." method="start_level" binds= ["res://levels/burning_transistor.tscn"]]
+[connection signal="pressed" from="MainCenterContainer/CycleWarLevels/OneVOne" to="." method="start_level" binds= ["res://levels/one_v_one.tscn"]]
+[connection signal="pressed" from="MainCenterContainer/CycleWarLevels/TheGrid" to="." method="start_level" binds= ["res://levels/grid.tscn"]]
+[connection signal="pressed" from="MainCenterContainer/DataHuntLevels/TheRange" to="." method="start_level" binds= ["res://levels/the_range.tscn"]]
 [connection signal="timeout" from="Background/RecSpawnTimer" to="Background" method="_on_rec_spawn_timer_timeout"]
 [connection signal="timeout" from="Background/CycleSpawnTimer" to="Background" method="_on_cycle_spawn_timer_timeout"]

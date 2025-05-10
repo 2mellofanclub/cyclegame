@@ -40,6 +40,7 @@ func _ready():
 	$Spawn.play()
 	$SpawnTimer.start()
 	SignalBus.ai_just_fuckkin_died.connect(receive_health)
+	$HUD.update_hp(hp, max_hp)
 	
 func _process(delta):
 
@@ -201,8 +202,11 @@ func receive_health(source):
 		for child in $DamageDots.get_children():
 			child.queue_free()
 	else:
+		# heal
+		# remove random DamageDots proportional to heal
 		pass
 	hp = clamp(0.0, hp, max_hp)
+	$HUD.update_hp(hp, max_hp)
 
 
 func take_hit(shot_pos, dmg_value, ddot_rad):
@@ -219,6 +223,8 @@ func take_dmg(dmg_value):
 	if hp <= 0 or godmode:
 		return
 	hp -= float(dmg_value)
+	hp = clamp(0.0, hp, max_hp)
+	$HUD.update_hp(hp, max_hp)
 	if hp <= 0:
 		dead = true
 		controllable = false

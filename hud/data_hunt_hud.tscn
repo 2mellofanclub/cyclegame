@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4sq37b0uq6at"]
+
+[sub_resource type="GDScript" id="GDScript_ygj5h"]
+script/source = "extends Control
+
+var clock_active := false
+var ms_passed := 0
+
+func _process(delta: float) -> void:
+	if clock_active:
+		ms_passed += delta * 1000.0
+	var minutes = ms_passed / 60000
+	var seconds = (ms_passed % 60000) / 1000
+	var milliseconds = int(ms_passed % 1000)
+	var m_string = \"0\" + str(minutes) if minutes < 10 else str(minutes)
+	var s_string = \"0\" + str(seconds) if seconds < 10 else str(seconds)
+	var ms_string = str(milliseconds)
+	if milliseconds < 10:
+		ms_string = \"00\" + ms_string
+	elif milliseconds < 100:
+		ms_string = \"0\" + ms_string
+	$TimeContainer/Time.set_text(m_string + \":\" + s_string + \":\" + ms_string)
+
+
+func update_data(data_found : int, total_data : int):
+	$DataContainer/Data.set_text(\"DATA \" + str(data_found) + \"/\" + str(total_data))
+"
+
+[node name="DataHuntHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = SubResource("GDScript_ygj5h")
+
+[node name="DataContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -71.0
+offset_bottom = 33.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+
+[node name="Data" type="Label" parent="DataContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_font_sizes/font_size = 20
+text = "DATA 0/5"
+
+[node name="TimeContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 10
+
+[node name="Time" type="Label" parent="TimeContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_font_sizes/font_size = 24
+text = "00:00:00"

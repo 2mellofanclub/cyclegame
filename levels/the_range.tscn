@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dtgdeujl30rr6"]
+[gd_scene load_steps=23 format=4 uid="uid://dtgdeujl30rr6"]
 
 [ext_resource type="Script" uid="uid://bpcngkmp6fh8w" path="res://levels/the_range.gd" id="1_y7cpa"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_deyc5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://2jjok7i0q8gq" path="res://materials/floor_slw_blue1.tres" id="3_deyc5"]
 [ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="3_ws1pa"]
 [ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="5_deyc5"]
+[ext_resource type="PackedScene" uid="uid://b4sq37b0uq6at" path="res://hud/data_hunt_hud.tscn" id="7_k87hq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkext"]
 resource_name = "Material.001"
@@ -268,6 +269,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -566.392, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/DespawnBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
 shape = SubResource("BoxShape3D_05i0m")
+
+[node name="DataHuntHUD" parent="." instance=ExtResource("7_k87hq")]
+visible = false
 
 [connection signal="body_entered" from="Boxes/ExplodeBox" to="." method="_on_kill_box_body_entered"]
 [connection signal="body_entered" from="Boxes/DespawnBox" to="." method="_on_despawn_box_body_entered"]

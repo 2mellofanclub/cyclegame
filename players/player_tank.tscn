@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dlehw30vjkukd"]
+[gd_scene load_steps=32 format=4 uid="uid://dlehw30vjkukd"]
 
 [ext_resource type="Script" uid="uid://detjwulravopg" path="res://players/player_tank.gd" id="1_jtb6v"]
 [ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_vmec3"]
@@ -311,6 +311,14 @@ points = PackedVector3Array(-0.629069, -0.970893, 0.214815, 1.4365, 0.178677, 0.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vmec3"]
 points = PackedVector3Array(0.204459, 0.170259, 2.17615, -0.0399672, -0.514353, -0.953853, 0.0577498, -0.514353, -0.953853, 0.351236, 0.268148, -0.953853, -0.333453, 0.268148, -0.953853, -0.137818, -0.0742343, 2.17615, 0.0577498, -0.269783, 2.17615, -0.333453, 0.268148, 0.318248, 0.351236, 0.170259, 0.318248, -0.0399672, -0.514353, 0.318248, -0.333453, 0.121391, 0.318248, -0.186677, 0.170259, 2.17615, 0.0577498, -0.514353, 0.318248, 0.351236, 0.268148, 0.318248, -0.333453, 0.121391, -0.953853, 0.351236, 0.170259, -0.953853, -0.0399672, -0.269783, 2.17615, 0.204459, 0.072523, 2.17615, -0.137818, -0.318728, 0.318248, -0.186677, 0.0235784, 2.17615, 0.106675, -0.17197, 2.17615, -0.137818, -0.318728, -0.953853)
 
+[sub_resource type="GDScript" id="GDScript_6wn1k"]
+script/source = "extends Control
+
+func update_hp(hp : float, max_hp: float):
+	#$HPContainer/HP.set_text(\"HP: \" + str(int(hp)) + \"/\" + str(int(max_hp)))
+	$HPContainer/HP.set_text(\"HP: \" + str(int(hp)))
+"
+
 [node name="PlayerTank" type="VehicleBody3D"]
 collision_layer = 455
 mass = 100.0
@@ -466,6 +474,29 @@ stream = ExtResource("7_xlgoc")
 volume_db = -15.0
 max_db = -15.0
 pitch_scale = 0.23
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = SubResource("GDScript_6wn1k")
+
+[node name="HPContainer" type="MarginContainer" parent="HUD"]
+offset_right = 27.0
+offset_bottom = 23.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+
+[node name="HP" type="Label" parent="HUD/HPContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_font_sizes/font_size = 20
+text = "HP: 10000/10000"
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]

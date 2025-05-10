@@ -54,6 +54,8 @@ func _process(delta):
 		for spawn in $Spawns/Recognizers.get_children():
 			Spawner.spawn_recognizer(spawn, self,"orange")
 		#endregion
+		$DataHuntHUD.show()
+		$DataHuntHUD.clock_active = true
 		await get_tree().create_timer(3).timeout
 		print(enemies)
 		#$SOS.play()

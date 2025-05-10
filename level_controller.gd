@@ -24,6 +24,7 @@ func start_main_menu():
 	add_child(main_menu)
 
 func start_new_level(level_path):
+	get_parent().get_node("LoadingScreen").show()
 	for child in get_children():
 		child.queue_free()
 	players_alive = 0
@@ -32,7 +33,9 @@ func start_new_level(level_path):
 	current_level_instance = load(level_path).instantiate()
 	current_level_instance.level_controller = self
 	current_level_instance.max_trails = max_trails
+	await get_tree().create_timer(1).timeout
 	add_child(current_level_instance)
+	get_parent().get_node("LoadingScreen").hide()
 
 
 func increment_players_alive():

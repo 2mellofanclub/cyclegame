@@ -6,6 +6,10 @@ var level_controller : Node3D
 var current_menu_state : MENU_STATE
 
 
+func _ready() -> void:
+	change_menu_state(MENU_STATE.MAIN)
+
+
 func go_back():
 	match current_menu_state:
 		MENU_STATE.MODES:
@@ -27,6 +31,8 @@ func go_back():
 func change_menu_state(state : MENU_STATE):
 	current_menu_state = state
 	$Back.show()
+	#for child in $SideContainer/MarginContainer.get_children():
+		#child.hide()
 	for child in $MainCenterContainer.get_children():
 		child.hide()
 	match state:

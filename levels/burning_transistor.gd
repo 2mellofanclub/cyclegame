@@ -35,9 +35,9 @@ func _process(delta):
 			Spawner.spawn_player_cycle(spawn, self, "blue", "blue", "blue")
 		for spawn in $Spawns/Enemies.get_children():
 			if randi() % 2 == 0:
-				Spawner.spawn_enemy_cycle(spawn, self, "yellow", "orange", "orange")
+				Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange", "orange")
 			else:
-				Spawner.spawn_enemy_cycle(spawn, self, "orange", "yellow", "yellow")
+				Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow", "yellow")
 		for spawn in $Spawns/Allies.get_children():
 			Spawner.spawn_ally_cycle(spawn, self, "green", "green", "green")
 		#endregion

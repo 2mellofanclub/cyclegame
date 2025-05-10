@@ -43,7 +43,7 @@ func _ready():
 	pass
 	
 	
-func _process(delta):
+func _physics_process(delta):
 	
 	#region Materials
 	if materials_applied:

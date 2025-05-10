@@ -9,7 +9,7 @@ extends Node
 @onready var RecDummy = preload("res://npc_dummies/recognizer_dummy.tscn")
 
 
-func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color: String, cycle_color: String, lw_color: String):
+func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color=PlayerData.chosen_cycle_color, cycle_color=PlayerData.chosen_cycle_color, lw_color=PlayerData.chosen_cycle_color):
 	var player_instance = Player.instantiate()
 	level_instance.add_child(player_instance)
 	level_instance.players.append(player_instance)
@@ -53,7 +53,7 @@ func spawn_ally_cycle(spawn: Node3D, level_instance: Node, driver_color: String,
 	SignalBus.ai_spawned.emit("ally")
 
 
-func spawn_player_tank(spawn: Node3D, level_instance: Node, tank_color: String, shot_color: String):
+func spawn_player_tank(spawn: Node3D, level_instance: Node, tank_color=PlayerData.chosen_tank_color, shot_color=PlayerData.chosen_tank_color):
 	var player_instance = PlayerTank.instantiate()
 	level_instance.add_child(player_instance)
 	level_instance.players.append(player_instance)

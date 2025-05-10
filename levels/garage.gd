@@ -1,6 +1,6 @@
 extends Node3D
 
-var level_controller: Node3D
+var level_controller : Node3D
 var max_trails: int
 var in_intro := true
 var players = []
@@ -20,6 +20,10 @@ var tc_index := 0
 
 
 func _ready() -> void:
+	cc_index = PlayerData.garage_cc_index
+	tc_index = PlayerData.garage_tc_index
+	apply_color("cycle")
+	apply_color("tank")
 	switch_mode("cycle")
 
 
@@ -45,7 +49,6 @@ func switch_mode(mode : String):
 
 
 func change_color(direction : String):
-	var showpiece = $PlayerDummy if current_mode == "cycle" else $PlayerTankDummy
 	var increment = 1 if direction == "next" else -1
 	match current_mode:
 		"cycle":
@@ -54,15 +57,26 @@ func change_color(direction : String):
 				cc_index = 0
 			elif cc_index < 0:
 				cc_index = len(cycle_colors) - 1
-			$PlayerDummy.driver_color = cycle_colors[cc_index]
-			$PlayerDummy.cycle_color = cycle_colors[cc_index]
-			$PlayerDummy.lw_color = cycle_colors[cc_index]
 		"tank":
 			tc_index += increment
 			if tc_index > (len(tank_colors) - 1):
 				tc_index = 0
 			elif tc_index < 0:
 				tc_index = len(tank_colors) - 1
+	apply_color(current_mode)
+
+func apply_color(mode : String):
+	match mode:
+		"cycle":
+			$PlayerDummy.driver_color = cycle_colors[cc_index]
+			$PlayerDummy.cycle_color = cycle_colors[cc_index]
+			$PlayerDummy.lw_color = cycle_colors[cc_index]
+			PlayerData.chosen_cycle_color = cycle_colors[cc_index]
+			PlayerData.garage_cc_index = cc_index
+			$PlayerDummy.apply_materials()
+		"tank":
 			$PlayerTankDummy.tank_color = tank_colors[tc_index]
 			$PlayerTankDummy.shot_color = tank_colors[tc_index]
-	showpiece.apply_materials()
+			PlayerData.chosen_tank_color = tank_colors[tc_index]
+			PlayerData.garage_tc_index = tc_index
+			$PlayerTankDummy.apply_materials()

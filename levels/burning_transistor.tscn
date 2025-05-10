@@ -9,8 +9,8 @@
 top_radius = 500.0
 bottom_radius = 500.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_352r7"]
-radius = 500.0
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_visgt"]
+points = PackedVector3Array(95.1635, 6.93651, 507.936, -95.1635, -8.93651, -507.936, -158.705, -8.93651, -492.026, 158.705, -8.93651, 492.026, 492.026, 6.93651, -158.705, -507.936, 6.93651, -95.1635, -444.395, -8.93651, 269.779, 507.936, -8.93651, 95.1635, -95.1635, 6.93651, -507.936, 317.411, -8.93651, -412.674, -317.411, 6.93651, 412.674, 412.674, 6.93651, 317.411, -444.395, -8.93651, -269.779, 206.337, 6.93651, -476.116, -158.705, -8.93651, 492.026, -317.411, 6.93651, -412.674, 476.116, -8.93651, -206.337, -476.116, 6.93651, 206.337, -507.936, -8.93651, 95.1635, 317.411, -8.93651, 412.674, 412.674, 6.93651, -317.411, 507.936, 6.93651, 95.1635, 95.1635, -8.93651, -507.936, -95.1635, 6.93651, 507.936, 269.779, 6.93651, 444.395, 444.395, -8.93651, 269.779, -444.395, 6.93651, -269.779, -317.411, -8.93651, -412.674, -317.411, -8.93651, 412.674, -507.936, -8.93651, -95.1635, 507.936, -8.93651, -95.1635, -95.1635, -8.93651, 507.936)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_05i0m"]
 size = Vector3(5000, 100, 5000)
@@ -25,9 +25,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("CylinderMesh_2qasv")
 surface_material_override/0 = ExtResource("2_hdrvo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.935, 0)
 visible = false
-shape = SubResource("CylinderShape3D_352r7")
+shape = SubResource("ConvexPolygonShape3D_visgt")
 
 [node name="FloorLight" type="Timer" parent="."]
 

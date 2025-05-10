@@ -55,7 +55,7 @@ func _ready():
 	
 
 
-func _process(delta):
+func _physics_process(delta):
 	var lin_vel = get_linear_velocity()
 	var xz_lin_vel = lin_vel * Vector3(1, 0, 1)
 	

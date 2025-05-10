@@ -55,7 +55,7 @@ func _ready():
 	disc_right_sc.disc_owner = self
 
 
-func _process(_delta):
+func _physics_process(_delta):
 	
 	#region Cam
 	if default_cam.current:

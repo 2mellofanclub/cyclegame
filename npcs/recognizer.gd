@@ -30,7 +30,7 @@ var dot_target
 func _ready():
 	pass
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if materials_applied:
 		var points_to_pass = []
 		for d_dot in $DamageDots.get_children():

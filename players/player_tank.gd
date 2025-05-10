@@ -42,7 +42,7 @@ func _ready():
 	SignalBus.ai_just_fuckkin_died.connect(receive_health)
 	$HUD.update_hp(hp, max_hp)
 	
-func _process(delta):
+func _physics_process(delta):
 
 	#region MaterialManipulation
 	if materials_applied:

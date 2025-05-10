@@ -26,6 +26,7 @@ MaterialsBus="*res://materials_bus.gd"
 ShotBus="*res://shot_bus.gd"
 Utilities="*res://utilities.gd"
 Spawner="*res://spawner.gd"
+PlayerData="*res://player_data.gd"
 
 [display]
 
@@ -39,6 +40,12 @@ project/assembly_name="grid"
 [global_group]
 
 cycles="these are all lightcycles"
+choices=""
+tanks=""
+recognizers=""
+enemies=""
+allies=""
+ai=""
 
 [input]
 

@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://7eqw35lhkgol"]
+
+[ext_resource type="Script" uid="uid://de1clswyjkkk0" path="res://pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Theme" uid="uid://byxihy6t4ljqe" path="res://menuthemes/back.tres" id="2_nwcfo"]
+[ext_resource type="Theme" uid="uid://dmy2r643dh8yq" path="res://menuthemes/pause_menu.tres" id="3_05uyy"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_jix8l"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_05uyy"]
+events = [SubResource("InputEventKey_jix8l")]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hdmo1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00392157, 0.00392157, 0.00392157, 0.4)
+
+[node name="Back" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 48)
+offset_left = 28.0
+offset_top = 28.0
+offset_right = 121.0
+offset_bottom = 59.0
+theme = ExtResource("2_nwcfo")
+shortcut = SubResource("Shortcut_05uyy")
+shortcut_feedback = false
+text = "BACK [ESC]"
+
+[node name="PauseCenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_05uyy")
+
+[node name="Pause" type="VBoxContainer" parent="PauseCenterContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+
+[node name="Continue" type="Button" parent="PauseCenterContainer/Pause"]
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="Settings" type="Button" parent="PauseCenterContainer/Pause"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="BackToMain" type="Button" parent="PauseCenterContainer/Pause"]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="Exit" type="Button" parent="PauseCenterContainer/Pause"]
+layout_mode = 2
+text = "EXIT TO DESKTOP"
+
+[connection signal="pressed" from="Back" to="." method="go_back"]
+[connection signal="pressed" from="PauseCenterContainer/Pause/Continue" to="." method="change_menu_state" binds= [1]]
+[connection signal="pressed" from="PauseCenterContainer/Pause/Settings" to="." method="change_menu_state" binds= [2]]
+[connection signal="pressed" from="PauseCenterContainer/Pause/BackToMain" to="." method="change_menu_state" binds= [3]]
+[connection signal="pressed" from="PauseCenterContainer/Pause/Exit" to="." method="change_menu_state" binds= [4]]

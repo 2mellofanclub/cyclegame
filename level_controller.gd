@@ -1,9 +1,9 @@
 extends Node3D
 
 var current_level_instance : Node3D
-var players_alive: int
-var enemies_alive: int
-var allies_alive: int
+var players_alive : int
+var enemies_alive : int
+var allies_alive : int
 @export var max_trails := 3000
 
 
@@ -16,12 +16,16 @@ func _ready():
 func _process(delta):
 	pass
 
+
 func start_main_menu():
+	get_parent().get_node("LoadingScreen").show()
 	for child in get_children():
 		child.queue_free()
 	var main_menu = load("res://main_menu.tscn").instantiate()
 	main_menu.level_controller = self
 	add_child(main_menu)
+	get_parent().get_node("LoadingScreen").hide()
+
 
 func start_new_level(level_path):
 	get_parent().get_node("LoadingScreen").show()

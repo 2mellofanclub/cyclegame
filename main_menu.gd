@@ -8,6 +8,7 @@ var current_menu_state : MENU_STATE
 
 func _ready() -> void:
 	change_menu_state(MENU_STATE.MAIN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func go_back():

@@ -1,15 +1,23 @@
 extends Node
 
-var in_menu := true
-
 
 func _ready():
 	$LevelController.start_main_menu()
+	$PauseMenu.level_controller = $LevelController
+	SignalBus.pause_toggled.connect(toggle_pause)
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel") and not in_menu:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
+
+
+func toggle_pause():
+	if not get_tree().paused:
+		get_tree().paused = true
+		$PauseMenu.change_menu_state(0)
+		$PauseMenu.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		$PauseMenu.hide()
+		get_tree().paused = false

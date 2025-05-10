@@ -49,7 +49,7 @@ func change_menu_state(state : MENU_STATE):
 		MENU_STATE.EXIT:
 			get_tree().quit()
 		MENU_STATE.GARAGE:
-			pass
+			start_level("res://levels/garage.tscn")
 		MENU_STATE.CW_LEVELS:
 			$MainCenterContainer/CycleWarLevels.show()
 		MENU_STATE.DH_LEVELS:

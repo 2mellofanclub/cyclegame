@@ -337,6 +337,7 @@ one_shot = true
 [connection signal="pressed" from="Back" to="." method="go_back"]
 [connection signal="pressed" from="MainCenterContainer/MainControls/Play" to="." method="change_menu_state" binds= [1]]
 [connection signal="pressed" from="MainCenterContainer/MainControls/Exit" to="." method="change_menu_state" binds= [4]]
+[connection signal="pressed" from="MainCenterContainer/Modes/Garage" to="." method="change_menu_state" binds= [6]]
 [connection signal="pressed" from="MainCenterContainer/Modes/Cycle Wars" to="." method="change_menu_state" binds= [7]]
 [connection signal="pressed" from="MainCenterContainer/Modes/Data Hunt" to="." method="change_menu_state" binds= [8]]
 [connection signal="pressed" from="MainCenterContainer/Modes/Survival" to="." method="change_menu_state" binds= [9]]

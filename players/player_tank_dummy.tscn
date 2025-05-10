@@ -1,13 +1,14 @@
-[gd_scene load_steps=31 format=4 uid="uid://dlehw30vjkukd"]
+[gd_scene load_steps=32 format=4 uid="uid://cj21ro4onng2a"]
 
-[ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="3_vmec3"]
-[ext_resource type="Material" uid="uid://cvru6fsi7epv1" path="res://materials/reticle_test.tres" id="4_7o55n"]
-[ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="4_vmec3"]
-[ext_resource type="AudioStream" uid="uid://6bk7j8crvceq" path="res://sound/synth_laser_08.ogg" id="5_gc6wh"]
-[ext_resource type="Material" uid="uid://d30mq7wl3j76o" path="res://materials/sdmg_badguy_black.tres" id="5_yvy0j"]
-[ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="6_71fr4"]
-[ext_resource type="AudioStream" uid="uid://6prqoc76fnmn" path="res://sound/retro_misc_05.ogg" id="7_7o55n"]
-[ext_resource type="AudioStream" uid="uid://bxrq7r32cbpjp" path="res://sound/power_up_05.ogg" id="7_xlgoc"]
+[ext_resource type="Script" uid="uid://vf7ogaua8s3m" path="res://players/player_tank_dummy.gd" id="1_64vh3"]
+[ext_resource type="Material" uid="uid://0ppo3pptpn71" path="res://materials/badguy_black1.tres" id="2_jdt14"]
+[ext_resource type="Material" uid="uid://d31toj5xwxh0" path="res://materials/lw_orange1.tres" id="3_iplhf"]
+[ext_resource type="Material" uid="uid://cvru6fsi7epv1" path="res://materials/reticle_test.tres" id="4_he3yr"]
+[ext_resource type="Material" uid="uid://d30mq7wl3j76o" path="res://materials/sdmg_badguy_black.tres" id="5_xn4yr"]
+[ext_resource type="AudioStream" uid="uid://6bk7j8crvceq" path="res://sound/synth_laser_08.ogg" id="6_pt5kg"]
+[ext_resource type="AudioStream" uid="uid://iruds3jmbuxl" path="res://sound/retro_die_01.ogg" id="7_p8p3o"]
+[ext_resource type="AudioStream" uid="uid://6prqoc76fnmn" path="res://sound/retro_misc_05.ogg" id="8_wpukv"]
+[ext_resource type="AudioStream" uid="uid://bxrq7r32cbpjp" path="res://sound/power_up_05.ogg" id="9_pxupn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7e5w"]
 resource_name = "base"
@@ -318,10 +319,11 @@ func update_hp(hp : float, max_hp: float):
 	$HPContainer/HP.set_text(\"HP: \" + str(int(hp)))
 "
 
-[node name="PlayerTank" type="VehicleBody3D"]
-collision_layer = 455
+[node name="PlayerTankDummy" type="VehicleBody3D"]
+collision_layer = 0
 mass = 100.0
 center_of_mass_mode = 1
+script = ExtResource("1_64vh3")
 
 [node name="CTDefaultPos" type="Node3D" parent="."]
 
@@ -347,16 +349,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.251, 1.302)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000360727, -3.37362e-05)
 mesh = SubResource("ArrayMesh_8secn")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_vmec3")
-surface_material_override/1 = ExtResource("4_vmec3")
-surface_material_override/2 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("2_jdt14")
+surface_material_override/1 = ExtResource("3_iplhf")
+surface_material_override/2 = ExtResource("3_iplhf")
 
 [node name="Turretbarrel" type="MeshInstance3D" parent="TurretTwist/TurretPitch/Turretbase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344519, -4.20773)
 mesh = SubResource("ArrayMesh_0qipb")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("3_vmec3")
-surface_material_override/1 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("2_jdt14")
+surface_material_override/1 = ExtResource("3_iplhf")
 
 [node name="MuzzlePoint" type="Node3D" parent="TurretTwist/TurretPitch/Turretbase/Turretbarrel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000360966, -1.45694)
@@ -370,7 +372,7 @@ spring_length = 150.0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_7o55n")
-surface_material_override/0 = ExtResource("4_7o55n")
+surface_material_override/0 = ExtResource("4_he3yr")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="TurretTwist/TurretPitch"]
 transform = Transform3D(1, 0, 0, 0, 0.963696, 0.267003, 0, -0.267003, 0.963696, 0, 3.26691, 7.2087)
@@ -384,9 +386,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
 
 [node name="Tankbody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_7o55n")
-surface_material_override/0 = ExtResource("5_yvy0j")
-surface_material_override/1 = ExtResource("4_vmec3")
-surface_material_override/2 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("5_xn4yr")
+surface_material_override/1 = ExtResource("3_iplhf")
+surface_material_override/2 = ExtResource("3_iplhf")
 metadata/extras = {
 "kb": {}
 }
@@ -395,7 +397,7 @@ metadata/extras = {
 transform = Transform3D(0.94, 0, 0, 0, 0.94, 0, 0, 0, 0.94, 0, 1.27862, 0.818025)
 mesh = SubResource("ArrayMesh_yvy0j")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("4_vmec3")
+surface_material_override/0 = ExtResource("3_iplhf")
 
 [node name="TankBodyCol1" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_7o55n")
@@ -447,20 +449,20 @@ current = true
 
 [node name="Shot" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
-stream = ExtResource("5_gc6wh")
+stream = ExtResource("6_pt5kg")
 volume_db = -15.0
 max_db = -15.0
 
 [node name="Hit" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
-stream = ExtResource("6_71fr4")
+stream = ExtResource("7_p8p3o")
 volume_db = -10.0
 max_db = -10.0
 max_polyphony = 10
 
 [node name="Explode" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
-stream = ExtResource("7_7o55n")
+stream = ExtResource("8_wpukv")
 volume_db = -10.0
 unit_size = 20.0
 max_db = -10.0
@@ -468,12 +470,13 @@ pitch_scale = 0.48
 
 [node name="Spawn" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, 0)
-stream = ExtResource("7_xlgoc")
+stream = ExtResource("9_pxupn")
 volume_db = -15.0
 max_db = -15.0
 pitch_scale = 0.23
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

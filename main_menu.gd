@@ -47,6 +47,7 @@ func change_menu_state(state : MENU_STATE):
 		MENU_STATE.CREDITS:
 			pass
 		MENU_STATE.EXIT:
+			PlayerData.save_game()
 			get_tree().quit()
 		MENU_STATE.GARAGE:
 			start_level("res://levels/garage.tscn")

@@ -9,7 +9,8 @@ extends Node
 @onready var RecDummy = preload("res://npc_dummies/recognizer_dummy.tscn")
 
 
-func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color=PlayerData.chosen_cycle_color, cycle_color=PlayerData.chosen_cycle_color, lw_color=PlayerData.chosen_cycle_color):
+
+func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color=PlayerData.big_dict_solution["chosen_cycle_color"], cycle_color=PlayerData.big_dict_solution["chosen_cycle_color"], lw_color=PlayerData.big_dict_solution["chosen_cycle_color"]):
 	var player_instance = Player.instantiate()
 	level_instance.add_child(player_instance)
 	level_instance.players.append(player_instance)
@@ -53,7 +54,7 @@ func spawn_ally_cycle(spawn: Node3D, level_instance: Node, driver_color: String,
 	SignalBus.ai_spawned.emit("ally")
 
 
-func spawn_player_tank(spawn: Node3D, level_instance: Node, tank_color=PlayerData.chosen_tank_color, shot_color=PlayerData.chosen_tank_color):
+func spawn_player_tank(spawn: Node3D, level_instance: Node, tank_color=PlayerData.big_dict_solution["chosen_tank_color"], shot_color=PlayerData.big_dict_solution["chosen_tank_color"]):
 	var player_instance = PlayerTank.instantiate()
 	level_instance.add_child(player_instance)
 	level_instance.players.append(player_instance)
@@ -104,7 +105,8 @@ func spawn_recognizer(spawn: Node3D, level_instance: Node, rec_color: String):
 	enemy_instance.set_global_position(spawn.get_global_position())
 	enemy_instance.set_global_rotation(spawn.get_global_rotation())
 	SignalBus.ai_spawned.emit("enemy")
-	
+
+
 func spawn_rec_dummy(spawn: Node3D, level_instance: Node, rec_color: String):
 	var enemy_instance = RecDummy.instantiate()
 	level_instance.add_child(enemy_instance)

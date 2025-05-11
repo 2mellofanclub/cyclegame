@@ -97,7 +97,8 @@ func _physics_process(delta):
 		var direction = nav_agent.get_next_path_position() - global_position
 		var velocity = direction.normalized() * max_speed/2.0 * delta
 		if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
-			look_at(global_position + direction)
+			if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
+				look_at(global_position + direction)
 			move_and_collide(velocity)
 	elif move_mode == "patrol":
 		pass

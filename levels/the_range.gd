@@ -44,7 +44,8 @@ func _process(delta):
 		await get_tree().create_timer(0.25).timeout
 		#region Initial Spawns
 		for spawn in $Spawns/PlayerTanks.get_children():
-			Spawner.spawn_player_tank(spawn, self, "blue", "blue")
+			#Spawner.spawn_player_tank(spawn, self, "blue", "blue")
+			Spawner.spawn_player_tank(spawn, self)
 		for spawn in $Spawns/EnemyTanks.get_children():
 			Spawner.spawn_enemy_tank(spawn, self, "orange", "orange")
 			#if randi() % 2 == 0:

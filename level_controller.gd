@@ -1,5 +1,6 @@
 extends Node3D
 
+var current_level_path := ""
 var current_level_instance : Node3D
 var players_alive : int
 var enemies_alive : int
@@ -34,12 +35,17 @@ func start_new_level(level_path):
 	players_alive = 0
 	enemies_alive = 0
 	allies_alive = 0
+	current_level_path = level_path
 	current_level_instance = load(level_path).instantiate()
 	current_level_instance.level_controller = self
 	current_level_instance.max_trails = max_trails
 	await get_tree().create_timer(1).timeout
 	add_child(current_level_instance)
 	get_parent().get_node("LoadingScreen").hide()
+
+
+func restart_level():
+	start_new_level(current_level_path)
 
 
 func increment_players_alive():

@@ -250,11 +250,6 @@ layout_mode = 2
 theme = ExtResource("4_nlkkf")
 columns = 3
 
-[node name="TheRange" type="Button" parent="MainCenterContainer/DataHuntLevels"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-text = "THE RANGE"
-
 [node name="MarginContainer" type="MarginContainer" parent="MainCenterContainer/DataHuntLevels"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
@@ -262,10 +257,93 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
+[node name="TheRange" type="Button" parent="MainCenterContainer/DataHuntLevels/MarginContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "THE RANGE"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainCenterContainer/DataHuntLevels"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="CacheRules" type="Button" parent="MainCenterContainer/DataHuntLevels/MarginContainer2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "CACHE RULES"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MainCenterContainer/DataHuntLevels"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RoleProtocol" type="Button" parent="MainCenterContainer/DataHuntLevels/MarginContainer3"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "ROLE
+PROTOCOL
+"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MainCenterContainer/DataHuntLevels"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TankWhirl" type="Button" parent="MainCenterContainer/DataHuntLevels/MarginContainer4"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "TANK WHIRL
+"
+
+[node name="MarginContainer5" type="MarginContainer" parent="MainCenterContainer/DataHuntLevels"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="YesModem" type="Button" parent="MainCenterContainer/DataHuntLevels/MarginContainer5"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "YES, MODEM!"
+
+[node name="MarginContainer6" type="MarginContainer" parent="MainCenterContainer/DataHuntLevels"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="KillingTime" type="Button" parent="MainCenterContainer/DataHuntLevels/MarginContainer6"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "THE
+KILLING
+TIME"
+
 [node name="SurvivalLevels" type="GridContainer" parent="MainCenterContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("4_nlkkf")
+
+[node name="MarginContainer6" type="MarginContainer" parent="MainCenterContainer/SurvivalLevels"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="FightFantastic" type="Button" parent="MainCenterContainer/SurvivalLevels/MarginContainer6"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "THE FIGHT
+FANTASTIC"
 
 [node name="Background" type="Node3D" parent="."]
 script = SubResource("GDScript_fu7sn")
@@ -344,6 +422,6 @@ one_shot = true
 [connection signal="pressed" from="MainCenterContainer/CycleWarLevels/MarginContainer/BurningTransistor" to="." method="start_level" binds= ["res://levels/burning_transistor.tscn"]]
 [connection signal="pressed" from="MainCenterContainer/CycleWarLevels/MarginContainer2/OneVOne" to="." method="start_level" binds= ["res://levels/one_v_one.tscn"]]
 [connection signal="pressed" from="MainCenterContainer/CycleWarLevels/MarginContainer3/Grid" to="." method="start_level" binds= ["res://levels/grid.tscn"]]
-[connection signal="pressed" from="MainCenterContainer/DataHuntLevels/TheRange" to="." method="start_level" binds= ["res://levels/the_range.tscn"]]
+[connection signal="pressed" from="MainCenterContainer/DataHuntLevels/MarginContainer/TheRange" to="." method="start_level" binds= ["res://levels/the_range.tscn"]]
 [connection signal="timeout" from="Background/RecSpawnTimer" to="Background" method="_on_rec_spawn_timer_timeout"]
 [connection signal="timeout" from="Background/CycleSpawnTimer" to="Background" method="_on_cycle_spawn_timer_timeout"]

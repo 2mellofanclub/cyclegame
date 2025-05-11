@@ -23,6 +23,8 @@ func _ready():
 
 
 func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		SignalBus.pause_toggled.emit()
 	
 	pulse_offset -= delta * pulse_speed_mps
 	if pulse_offset < 0.0:

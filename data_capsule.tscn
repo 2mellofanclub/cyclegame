@@ -4,6 +4,12 @@
 script/source = "extends Node3D
 
 var collected = true
+
+
+
+
+func collect():
+	pass
 "
 
 [node name="DataCapsule" type="Node3D"]

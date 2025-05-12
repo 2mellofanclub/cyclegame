@@ -21,6 +21,11 @@ func _process(delta):
 		while maze == []:
 			maze = gen_maze(12, 25)
 		construct_maze(maze)
+	
+	if Input.is_action_just_pressed("toggle_music"):
+		print("baking")
+		$MazeNavRegion.bake_navigation_mesh(false)
+		
 
 
 func gen_maze(columns : int, rows : int):
@@ -134,3 +139,7 @@ func construct_maze(maze):
 						y * 12
 				)
 				
+
+
+func _on_maze_nav_region_bake_finished() -> void:
+	print("bake finished!")

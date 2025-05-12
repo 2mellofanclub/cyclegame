@@ -46,6 +46,7 @@ recognizers=""
 enemies=""
 allies=""
 ai=""
+players=""
 
 [input]
 

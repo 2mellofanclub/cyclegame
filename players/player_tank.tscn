@@ -319,7 +319,7 @@ func update_hp(hp : float, max_hp: float):
 	$HPContainer/HP.set_text(\"HP: \" + str(int(hp)))
 "
 
-[node name="PlayerTank" type="VehicleBody3D"]
+[node name="PlayerTank" type="VehicleBody3D" groups=["players", "tanks"]]
 collision_layer = 455
 mass = 100.0
 center_of_mass_mode = 1

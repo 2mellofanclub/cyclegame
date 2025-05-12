@@ -8,20 +8,25 @@ var players = []
 var enemies = []
 var allies = []
 var recognizers = []
+
+var capsules_available := 4
+var capsules_collected := 0
+
 @export var pulse_offset := 500.0
 @export var pulse_band_offset := 0.6
 @export var pulse_speed_mps := 50.0
 
 @onready var intro_cam = $CameraTwist/CameraPitch/IntroCam
 @onready var player_tank_spawn_cam = $Spawns/PlayerTanks/PlayerSpawn/SpawnCam
-@onready var maze_ab = $NavigationRegion3D/A/MazeAB
-@onready var maze_bc = $NavigationRegion3D/B/MazeBC
-@onready var maze_cd = $NavigationRegion3D/C/MazeCD
-@onready var maze_da = $NavigationRegion3D/D/MazeDA
+@onready var maze_ab = $MazeAB
+@onready var maze_bc = $MazeBC
+@onready var maze_cd = $MazeCD
+@onready var maze_da = $MazeDA
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SignalBus.data_capsule_collected.connect(increment_capsules_found)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	await get_tree().create_timer(0.5).timeout
 	maze_ab.activate(12, 25)
@@ -29,6 +34,10 @@ func _ready():
 	maze_cd.activate(12, 24)
 	maze_da.activate(12, 25)
 	await get_tree().create_timer(1).timeout
+	$DataCapsule.show()
+	$DataCapsule2.show()
+	$DataCapsule3.show()
+	$DataCapsule4.show()
 	in_intro = true
 	
 	
@@ -36,10 +45,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		SignalBus.pause_toggled.emit()
-	
-	$SpotLightPivot.rotate_y(delta * PI/4)
-	
+		SignalBus.pause_toggled.emit()	
 	
 	if intro_cam.current and in_intro:
 		$CameraTwist.rotate_y(delta * PI/10)
@@ -59,7 +65,20 @@ func _process(delta):
 		#for spawn in $Spawns/Recognizers.get_children():
 			#Spawner.spawn_recognizer(spawn, self,"orange")
 		#endregion
+		$DataHuntHUD.update_data(capsules_collected, capsules_available)
 		$DataHuntHUD.show()
 		$DataHuntHUD.clock_active = true
 		
 		
+
+
+func increment_capsules_found():
+	capsules_collected += 1
+	$DataHuntHUD.update_data(capsules_collected, capsules_available)
+	if capsules_collected >= capsules_available:
+		#lower_pillar
+		win()
+
+func win():
+	for player in players:
+		player.apply_impulse(Vector3(0, 10000, 0))

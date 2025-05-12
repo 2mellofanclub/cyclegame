@@ -477,7 +477,7 @@ points = PackedVector3Array(0.370205, 3.76132, 0.895905, -0.992756, -2.17235, -0
 [sub_resource type="SphereShape3D" id="SphereShape3D_odwck"]
 radius = 1.5
 
-[node name="Recognizer" type="RigidBody3D"]
+[node name="Recognizer" type="RigidBody3D" groups=["recognizers"]]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 100.0

@@ -50,7 +50,7 @@ theme_override_constants/margin_right = 20
 [node name="Data" type="Label" parent="DataContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_colors/font_color = Color(0.738589, 0.73859, 0.73859, 1)
 theme_override_font_sizes/font_size = 20
 text = "DATA 0/5"
 
@@ -67,6 +67,6 @@ theme_override_constants/margin_top = 10
 
 [node name="Time" type="Label" parent="TimeContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_colors/font_color = Color(0.737255, 0.737255, 0.737255, 1)
 theme_override_font_sizes/font_size = 24
 text = "00:00:00"

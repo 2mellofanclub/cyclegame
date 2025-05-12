@@ -7,3 +7,4 @@ signal ai_spawned
 signal ai_just_fuckkin_died
 signal player_became_targetable
 signal player_became_untargetable
+signal data_capsule_collected

@@ -423,5 +423,6 @@ one_shot = true
 [connection signal="pressed" from="MainCenterContainer/CycleWarLevels/MarginContainer2/OneVOne" to="." method="start_level" binds= ["res://levels/one_v_one.tscn"]]
 [connection signal="pressed" from="MainCenterContainer/CycleWarLevels/MarginContainer3/Grid" to="." method="start_level" binds= ["res://levels/grid.tscn"]]
 [connection signal="pressed" from="MainCenterContainer/DataHuntLevels/MarginContainer/TheRange" to="." method="start_level" binds= ["res://levels/the_range.tscn"]]
+[connection signal="pressed" from="MainCenterContainer/DataHuntLevels/MarginContainer2/CacheRules" to="." method="start_level" binds= ["res://levels/cache_rules.tscn"]]
 [connection signal="timeout" from="Background/RecSpawnTimer" to="Background" method="_on_rec_spawn_timer_timeout"]
 [connection signal="timeout" from="Background/CycleSpawnTimer" to="Background" method="_on_cycle_spawn_timer_timeout"]

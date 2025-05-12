@@ -1,0 +1,353 @@
+[gd_scene load_steps=29 format=3 uid="uid://cac6yqt33tcii"]
+
+[ext_resource type="Script" uid="uid://ha7x26q6duq2" path="res://levels/cache_rules.gd" id="1_u3cum"]
+[ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_y8gdx"]
+[ext_resource type="PackedScene" uid="uid://7104f46swmc2" path="res://mazestuff/maze_300x612_12.tscn" id="3_y8gdx"]
+[ext_resource type="Material" uid="uid://btfn72pdewqqe" path="res://materials/lw_white1.tres" id="4_1xdid"]
+[ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="4_jp3vr"]
+[ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="4_y8gdx"]
+[ext_resource type="PackedScene" uid="uid://b4sq37b0uq6at" path="res://hud/data_hunt_hud.tscn" id="7_jp3vr"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_75ece"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u3cum"]
+size = Vector2(612, 612)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_75ece"]
+data = PackedVector3Array(306, 0, 306, -306, 0, 306, 306, 0, -306, -306, 0, 306, -306, 0, -306, 306, 0, -306)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jp3vr"]
+size = Vector2(300, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_u3cum"]
+data = PackedVector3Array(150, 0, 150, -150, 0, 150, 150, 0, -150, -150, 0, 150, -150, 0, -150, 150, 0, -150)
+
+[sub_resource type="BoxMesh" id="BoxMesh_75ece"]
+size = Vector3(12, 20, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1hd1p"]
+data = PackedVector3Array(-6, 10, 150, 6, 10, 150, -6, -10, 150, 6, 10, 150, 6, -10, 150, -6, -10, 150, 6, 10, -150, -6, 10, -150, 6, -10, -150, -6, 10, -150, -6, -10, -150, 6, -10, -150, 6, 10, 150, 6, 10, -150, 6, -10, 150, 6, 10, -150, 6, -10, -150, 6, -10, 150, -6, 10, -150, -6, 10, 150, -6, -10, -150, -6, 10, 150, -6, -10, 150, -6, -10, -150, 6, 10, 150, -6, 10, 150, 6, 10, -150, -6, 10, 150, -6, 10, -150, 6, 10, -150, -6, -10, 150, 6, -10, 150, -6, -10, -150, 6, -10, 150, 6, -10, -150, -6, -10, -150)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_asxrv"]
+data = PackedVector3Array(-6, 10, 150, 6, 10, 150, -6, -10, 150, 6, 10, 150, 6, -10, 150, -6, -10, 150, 6, 10, -150, -6, 10, -150, 6, -10, -150, -6, 10, -150, -6, -10, -150, 6, -10, -150, 6, 10, 150, 6, 10, -150, 6, -10, 150, 6, 10, -150, 6, -10, -150, 6, -10, 150, -6, 10, -150, -6, 10, 150, -6, -10, -150, -6, 10, 150, -6, -10, 150, -6, -10, -150, 6, 10, 150, -6, 10, 150, 6, 10, -150, -6, 10, 150, -6, 10, -150, 6, 10, -150, -6, -10, 150, 6, -10, 150, -6, -10, -150, 6, -10, 150, 6, -10, -150, -6, -10, -150)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_75ece"]
+size = Vector2(300, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y8gdx"]
+data = PackedVector3Array(150, 0, 150, -150, 0, 150, 150, 0, -150, -150, 0, 150, -150, 0, -150, 150, 0, -150)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1xdid"]
+size = Vector2(300, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1xdid"]
+data = PackedVector3Array(150, 0, 150, -150, 0, 150, 150, 0, -150, -150, 0, 150, -150, 0, -150, 150, 0, -150)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y8gdx"]
+size = Vector2(300, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jp3vr"]
+data = PackedVector3Array(150, 0, 150, -150, 0, 150, 150, 0, -150, -150, 0, 150, -150, 0, -150, 150, 0, -150)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y8gdx"]
+size = Vector3(12, 20, 324)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_f622i"]
+data = PackedVector3Array(-6, 10, 162, 6, 10, 162, -6, -10, 162, 6, 10, 162, 6, -10, 162, -6, -10, 162, 6, 10, -162, -6, 10, -162, 6, -10, -162, -6, 10, -162, -6, -10, -162, 6, -10, -162, 6, 10, 162, 6, 10, -162, 6, -10, 162, 6, 10, -162, 6, -10, -162, 6, -10, 162, -6, 10, -162, -6, 10, 162, -6, -10, -162, -6, 10, 162, -6, -10, 162, -6, -10, -162, 6, 10, 162, -6, 10, 162, 6, 10, -162, -6, 10, 162, -6, 10, -162, 6, 10, -162, -6, -10, 162, 6, -10, 162, -6, -10, -162, 6, -10, 162, 6, -10, -162, -6, -10, -162)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jp3vr"]
+top_radius = 20.0
+bottom_radius = 20.0
+height = 2000.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y8gdx"]
+top_radius = 50.0
+bottom_radius = 50.0
+height = 300.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1xdid"]
+top_radius = 20.0
+bottom_radius = 50.0
+height = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y8gdx"]
+height = 10.0
+radius = 16.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_05i0m"]
+size = Vector3(5000, 100, 5000)
+
+[node name="CacheRules" type="Node3D"]
+script = ExtResource("1_u3cum")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_75ece")
+
+[node name="CenterFloor" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_u3cum")
+surface_material_override/0 = ExtResource("2_y8gdx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/CenterFloor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CenterFloor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_75ece")
+
+[node name="A" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -306, 0, -306)
+
+[node name="CornerA" type="MeshInstance3D" parent="NavigationRegion3D/A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, -150)
+mesh = SubResource("PlaneMesh_jp3vr")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_y8gdx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/A/CornerA"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/A/CornerA/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_u3cum")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/A/CornerA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -144, 10, 0)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/A/CornerA/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/A/CornerA/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1hd1p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/A/CornerA"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 10, -144)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/A/CornerA/MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/A/CornerA/MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_asxrv")
+
+[node name="MazeAB" parent="NavigationRegion3D/A" instance=ExtResource("3_y8gdx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="B" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 306, 0, -306)
+
+[node name="CornerB" type="MeshInstance3D" parent="NavigationRegion3D/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, -150)
+mesh = SubResource("PlaneMesh_75ece")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_y8gdx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/B/CornerB"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/B/CornerB/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_y8gdx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/B/CornerB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 10, 0)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/B/CornerB/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/B/CornerB/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1hd1p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/B/CornerB"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 10, -144)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/B/CornerB/MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/B/CornerB/MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_asxrv")
+
+[node name="MazeBC" parent="NavigationRegion3D/B" instance=ExtResource("3_y8gdx")]
+
+[node name="C" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 306, 0, 306)
+
+[node name="CornerC" type="MeshInstance3D" parent="NavigationRegion3D/C"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, 150)
+mesh = SubResource("PlaneMesh_1xdid")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_y8gdx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/C/CornerC"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/C/CornerC/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1xdid")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/C/CornerC"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 10, 144)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/C/CornerC/MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/C/CornerC/MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_asxrv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/C/CornerC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 10, 0)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/C/CornerC/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/C/CornerC/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1hd1p")
+
+[node name="MazeCD" parent="NavigationRegion3D/C" instance=ExtResource("3_y8gdx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="D" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -306, 0, 306)
+
+[node name="CornerD" type="MeshInstance3D" parent="NavigationRegion3D/D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 150)
+mesh = SubResource("PlaneMesh_y8gdx")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_y8gdx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/D/CornerD"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/D/CornerD/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jp3vr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/D/CornerD"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -144, 10, 0)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/D/CornerD/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/D/CornerD/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1hd1p")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="NavigationRegion3D/D/CornerD"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 10, 0)
+mesh = SubResource("BoxMesh_75ece")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/D/CornerD/MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/D/CornerD/MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1hd1p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/D/CornerD"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24, 10, 144)
+mesh = SubResource("BoxMesh_y8gdx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/D/CornerD/MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/D/CornerD/MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_f622i")
+
+[node name="MazeDA" parent="NavigationRegion3D/D" instance=ExtResource("3_y8gdx")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Beam" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
+mesh = SubResource("CylinderMesh_jp3vr")
+skeleton = NodePath("../Tower")
+surface_material_override/0 = ExtResource("4_1xdid")
+
+[node name="Tower" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="TowerBase" type="MeshInstance3D" parent="NavigationRegion3D/Tower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
+mesh = SubResource("CylinderMesh_y8gdx")
+skeleton = NodePath("../..")
+
+[node name="TowerCap" type="MeshInstance3D" parent="NavigationRegion3D/Tower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 302, 0)
+mesh = SubResource("CylinderMesh_1xdid")
+
+[node name="WinTrigger" type="Area3D" parent="NavigationRegion3D/Tower"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Tower/WinTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 308, 0)
+shape = SubResource("CylinderShape3D_y8gdx")
+
+[node name="CameraTwist" type="Node3D" parent="."]
+
+[node name="CameraPitch" type="Node3D" parent="CameraTwist"]
+
+[node name="IntroCam" type="Camera3D" parent="CameraTwist/CameraPitch"]
+transform = Transform3D(1, 0, 0, 0, 0.964169, 0.265287, 0, -0.265287, 0.964169, 0, 547.583, 1344.77)
+current = true
+fov = 50.0
+
+[node name="SetDressin" type="Node3D" parent="."]
+transform = Transform3D(78.9063, 0, -61.4313, 0, 100, 0, 61.4313, 0, 78.9063, -142.92, 41.5013, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SetDressin"]
+environment = ExtResource("4_y8gdx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SetDressin"]
+transform = Transform3D(-0.990505, 0.119058, -0.0687377, 0, 0.499998, 0.866026, 0.137476, 0.857804, -0.495251, 1.18197, 0.796057, -0.920207)
+light_color = Color(0.858824, 0.882353, 1, 1)
+light_energy = 0.384
+shadow_enabled = true
+
+[node name="Trails" type="Node3D" parent="."]
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="Spawns"]
+
+[node name="Enemies" type="Node3D" parent="Spawns"]
+
+[node name="Allies" type="Node3D" parent="Spawns"]
+
+[node name="PlayerTanks" type="Node3D" parent="Spawns"]
+
+[node name="PlayerSpawn" type="Node3D" parent="Spawns/PlayerTanks"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -501, 1, 501)
+
+[node name="SpawnCam" type="Camera3D" parent="Spawns/PlayerTanks/PlayerSpawn"]
+transform = Transform3D(-0.675462, -0.0977421, 0.730889, 0, 0.991176, 0.132551, -0.737395, 0.0895327, -0.669501, 5.736, 2.6, -5.649)
+
+[node name="EnemyTanks" type="Node3D" parent="Spawns"]
+
+[node name="EnemySpawn" type="Node3D" parent="Spawns/EnemyTanks"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 500, 0.5, -500)
+
+[node name="EnemySpawn2" type="Node3D" parent="Spawns/EnemyTanks"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 500, 0.5, 500)
+
+[node name="EnemySpawn3" type="Node3D" parent="Spawns/EnemyTanks"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -500, 0.5, -500)
+
+[node name="AllyTanks" type="Node3D" parent="Spawns"]
+
+[node name="SOS" parent="." instance=ExtResource("4_jp3vr")]
+volume_db = -22.0
+pitch_scale = 0.68
+autoplay = false
+
+[node name="Boxes" type="Node3D" parent="."]
+
+[node name="ExplodeBox" type="Area3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.0609, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/ExplodeBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -168.668, 0)
+shape = SubResource("BoxShape3D_05i0m")
+
+[node name="DespawnBox" type="Area3D" parent="Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -566.392, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxes/DespawnBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+shape = SubResource("BoxShape3D_05i0m")
+
+[node name="SpotLightPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -456, 98.787, 456)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SpotLightPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -34, -1.01328e-06)
+spot_range = 200.0
+spot_attenuation = 0.0
+spot_angle = 20.0
+
+[node name="DataHuntHUD" parent="." instance=ExtResource("7_jp3vr")]
+visible = false
+
+[connection signal="body_entered" from="Boxes/ExplodeBox" to="." method="_on_kill_box_body_entered"]
+[connection signal="body_entered" from="Boxes/DespawnBox" to="." method="_on_despawn_box_body_entered"]

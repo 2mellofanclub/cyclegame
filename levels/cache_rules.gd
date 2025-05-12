@@ -3,7 +3,7 @@ extends Node3D
 
 var level_controller: Node3D
 var max_trails: int
-var in_intro := true
+var in_intro := false
 var players = []
 var enemies = []
 var allies = []
@@ -12,36 +12,40 @@ var recognizers = []
 @export var pulse_band_offset := 0.6
 @export var pulse_speed_mps := 50.0
 
-@onready var IntroCam = $CameraTwist/CameraPitch/IntroCam
-@onready var PlayerTankSpawnCam = $Spawns/PlayerTanks/PlayerSpawn/SpawnCam
+@onready var intro_cam = $CameraTwist/CameraPitch/IntroCam
+@onready var player_tank_spawn_cam = $Spawns/PlayerTanks/PlayerSpawn/SpawnCam
+@onready var maze_ab = $NavigationRegion3D/A/MazeAB
+@onready var maze_bc = $NavigationRegion3D/B/MazeBC
+@onready var maze_cd = $NavigationRegion3D/C/MazeCD
+@onready var maze_da = $NavigationRegion3D/D/MazeDA
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	await get_tree().create_timer(0.5).timeout
+	maze_ab.activate(12, 25)
+	maze_bc.activate(12, 25)
+	maze_cd.activate(12, 24)
+	maze_da.activate(12, 25)
+	await get_tree().create_timer(1).timeout
+	in_intro = true
+	
+	
 
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		SignalBus.pause_toggled.emit()
 	
+	$SpotLightPivot.rotate_y(delta * PI/4)
 	
-	pulse_offset -= delta * pulse_speed_mps
-	if pulse_offset < 0.0:
-		pulse_offset = 500.0
-	$BaseNav/LightfloorCross.get_surface_override_material(1).set_shader_parameter(
-			"pulse_offset", pulse_offset
-	)
-	$BaseNav/LightfloorCross.get_surface_override_material(1).set_shader_parameter(
-			"pulse_band_offset", pulse_band_offset
-	)
 	
-	if IntroCam.current:
+	if intro_cam.current and in_intro:
 		$CameraTwist.rotate_y(delta * PI/10)
-	if in_intro and Input.is_anything_pressed():
+	if in_intro and Input.is_action_just_pressed("interact"):
+		player_tank_spawn_cam.current = true
 		in_intro = false
-		PlayerTankSpawnCam.current = true
-		await get_tree().create_timer(0.25).timeout
 		#region Initial Spawns
 		for spawn in $Spawns/PlayerTanks.get_children():
 			#Spawner.spawn_player_tank(spawn, self, "blue", "blue")
@@ -52,11 +56,10 @@ func _process(delta):
 				#Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange")
 			#else:
 				#Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow")
-		for spawn in $Spawns/Recognizers.get_children():
-			Spawner.spawn_recognizer(spawn, self,"orange")
+		#for spawn in $Spawns/Recognizers.get_children():
+			#Spawner.spawn_recognizer(spawn, self,"orange")
 		#endregion
 		$DataHuntHUD.show()
 		$DataHuntHUD.clock_active = true
-		#await get_tree().create_timer(3).timeout
-		#$SOS.play()
+		
 		

@@ -27,8 +27,8 @@ var recognizers = []
 @onready var Recognizer = preload(\"res://npcs/recognizer.tscn\")
 
 func _ready() -> void:
-	$RecSpawnTimer.start(5)
-	$CycleSpawnTimer.start(1)
+	$RecSpawnTimer.start(3)
+	$CycleSpawnTimer.start(0.5)
 
 
 func _on_rec_spawn_timer_timeout() -> void:

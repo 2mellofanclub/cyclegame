@@ -2,7 +2,7 @@ extends Node3D
 
 
 var level_controller: Node3D
-var max_trails: int
+var max_trails := 3000
 var in_intro := true
 var players = []
 var enemies = []

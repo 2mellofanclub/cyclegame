@@ -31,6 +31,12 @@ center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, -0.25)
 script = ExtResource("1_iwmfg")
 
+[node name="HuntTargetR" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -4)
+
+[node name="HuntTargetL" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -4)
+
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
 
 [node name="FRay" type="RayCast3D" parent="."]
@@ -239,9 +245,14 @@ volume_db = -10.0
 max_db = -10.0
 max_polyphony = 10
 
+[node name="HuntCooldown" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="timeout" from="QTCooldown" to="." method="_on_qt_cooldown_timeout"]
 [connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
 [connection signal="timeout" from="KillTimer" to="." method="_on_kill_timeout"]
+[connection signal="timeout" from="HuntCooldown" to="." method="_on_hunt_cooldown_timeout"]
 
 [editable path="sapientblockman"]
 [editable path="sapientblockman/Armature/Skeleton3D/IdiscLeft/IdentityDisc"]

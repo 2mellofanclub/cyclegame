@@ -30,6 +30,8 @@ var cam_active := false
 var target_cycle := VehicleBody3D
 var target_point := Node3D
 var move_mode := "patrol"
+var hunt_available = true
+var backoff_dist = 4.0
 
 @onready var cam_twist = $CamTwist
 @onready var cam_pitch = $CamTwist/CamPitch
@@ -55,7 +57,7 @@ func _ready():
 	disc_right_sc.disc_owner = self
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	
 	#region Cam
 	if default_cam.current:
@@ -76,16 +78,16 @@ func _physics_process(_delta):
 		
 	if xz_lin_vel.length() > deadly_impact_th:
 		if $ImpactRay.is_colliding():
-			explode()
-	if xz_lin_vel.length() < kill_speed:
-		if $KillTimer.is_stopped():
-			$KillTimer.start()
-	else:
-		if not $KillTimer.is_stopped():
-			$KillTimer.stop()
+			take_dmg(10000.0)
+	#if xz_lin_vel.length() < kill_speed:
+		#if $KillTimer.is_stopped():
+			#$KillTimer.start()
+	#else:
+		#if not $KillTimer.is_stopped():
+			#$KillTimer.stop()
 			
 	#region LW
-	if (lin_vel * Vector3(1, 0, 1)).length() > lw_on_th:
+	if (lin_vel * Vector3(1, 0, 1)).length() > lw_on_th or move_mode == "hunt":
 		lw_active = true
 	elif (lin_vel * Vector3(1, 0, 1)).length() < lw_off_th:
 		lw_active = false
@@ -97,13 +99,47 @@ func _physics_process(_delta):
 	#endregion
 	
 	#region Steering
-	#botbot
-	engine_force = 400 if (xz_lin_vel.length() < 80) else 0
+	var player_instance = level_instance.players[0] if len(level_instance.players) > 0 else null
+	var player_location
+	var player_targetable
+	var player_r_hunt_target_pos
+	var player_l_hunt_target_pos
+	var player_r_hunt_target_distance
+	var player_l_hunt_target_distance
+	if player_instance:
+		player_location = player_instance.global_position
+		player_targetable = player_instance.targetable
+		player_r_hunt_target_pos = player_instance.get_node("HuntTargetR").global_position
+		player_l_hunt_target_pos = player_instance.get_node("HuntTargetL").global_position
+		player_r_hunt_target_distance = player_r_hunt_target_pos.distance_to(global_position)
+		player_l_hunt_target_distance = player_l_hunt_target_pos.distance_to(global_position)
+	#engine_force = 400 if (xz_lin_vel.length() < 80) else 0
 	match move_mode:
 		"hunt":
-			pass
+			engine_force = 0
+			if player_instance == null:
+				move_mode = "patrol"
+			elif player_l_hunt_target_distance <= backoff_dist or player_r_hunt_target_distance <= backoff_dist:
+				move_mode = "patrol"
+				hunt_available = false
+				$HuntCooldown.start()
+			else:
+				if player_r_hunt_target_distance < player_l_hunt_target_distance:
+					nav_agent.target_position = player_r_hunt_target_pos
+				else:
+					nav_agent.target_position = player_l_hunt_target_pos
+				var direction = nav_agent.get_next_path_position() - global_position
+				var velocity = direction.normalized() * max_speed * delta
+				if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
+					if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
+						look_at(global_position + direction)
+				move_and_collide(velocity)
 		"patrol":
-			pass
+			engine_force = 400 if (xz_lin_vel.length() < 80) else 0
+			if player_targetable:
+				if player_l_hunt_target_distance > backoff_dist and player_r_hunt_target_distance > backoff_dist:
+					move_mode = "hunt"
+			
 	
 	avoid_lightwall(xz_lin_vel)
 	#endregion
@@ -154,7 +190,7 @@ func explode():
 	engine_force = 0
 	$IDunno/TrailEater.translate(Vector3(0, 100, 0))
 	# i'm something of an animator myself
-	if get_linear_velocity().length() < 30:
+	if get_linear_velocity().length() < 30 and not move_mode == "hunt":
 		set_linear_velocity(Vector3.ZERO)
 		$Explode.play()
 		$lightcycle/Frontwheel.hide()
@@ -287,10 +323,14 @@ func _unhandled_input(event):
 			pitch_input = -1 * event.relative.y * mouse_sens
 
 func _on_kill_timeout() -> void:
-	explode()
+	take_dmg(10000.0)
 
 func _on_qt_cooldown_timeout() -> void:
 	qt_available = true
 
 func _on_despawn_timeout() -> void:
 	queue_free()
+
+
+func _on_hunt_cooldown_timeout() -> void:
+	hunt_available = true

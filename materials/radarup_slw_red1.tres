@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b5fwqcx4r2w3u"]
+
+[ext_resource type="Shader" uid="uid://bgpnppevvvg3h" path="res://materials/radarup.gdshader" id="1_vo2oe"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vo2oe")
+shader_parameter/enemy_pos = Vector3(0, 0, 0)
+shader_parameter/emission = Color(0.92549, 0, 0.0196078, 1)
+shader_parameter/albedo = Color(0, 0, 0, 1)

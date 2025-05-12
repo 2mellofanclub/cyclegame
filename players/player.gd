@@ -25,6 +25,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 var level_instance: Node3D
 # player specific
+var targetable = true
 var qt_cam_inverter := 1.0
 var disc_attack_available := true
 var right_disc_out := false

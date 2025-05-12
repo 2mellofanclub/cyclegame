@@ -147,6 +147,9 @@ func _on_maze_nav_region_bake_finished() -> void:
 "
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_f6lrd"]
+agent_height = 5.0
+agent_radius = 4.0
+agent_max_climb = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_opxe0"]
 size = Vector2(300, 612)

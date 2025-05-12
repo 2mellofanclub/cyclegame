@@ -9,9 +9,9 @@ var allies = []
 var recognizers = []
 
 var current_mode := "cycle"
-var cycle_colors := ["blue", "orange", "yellow", "green", "pink", "godwhite"]
+var cycle_colors := ["blue", "orange", "yellow", "red", "green", "pink", "godwhite"]
 var cc_index := 0
-var tank_colors := ["blue", "orange", "green"]
+var tank_colors := ["blue", "orange", "yellow", "red", "green", "pink",]
 var tc_index := 0
 var lazy_susan := false
 

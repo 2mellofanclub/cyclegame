@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bn46thvb2ixv8"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bdoetfj61x6eh"]
 
 [resource]
 resource_local_to_scene = true
@@ -7,6 +7,6 @@ diffuse_mode = 2
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(0.927281, 0, 0.0191339, 1)
-emission_energy_multiplier = 10.0
+emission_energy_multiplier = 16.0
 rim_enabled = true
 disable_receive_shadows = true

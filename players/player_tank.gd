@@ -19,7 +19,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 # player specific 
 var controllable := false
-var targetable := false
+var targetable := true
 var godmode := false
 
 @onready var cam_twist = $CamTwist

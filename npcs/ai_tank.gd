@@ -95,7 +95,7 @@ func _physics_process(delta):
 	if move_mode == "hunt" and player_location != null:
 		nav_agent.target_position = player_location
 		var direction = nav_agent.get_next_path_position() - global_position
-		var velocity = direction.normalized() * max_speed/2.0 * delta
+		var velocity = direction.normalized() * max_speed/2.0 * delta + Vector3(0,0.01,0)
 		if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
 			if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
 				look_at(global_position + direction)

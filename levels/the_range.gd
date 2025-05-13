@@ -57,6 +57,8 @@ func _process(delta):
 		#endregion
 		$DataHuntHUD.show()
 		$DataHuntHUD.clock_active = true
+		for player in players:
+			player.targetable = false
 		#await get_tree().create_timer(3).timeout
 		#$SOS.play()
 		

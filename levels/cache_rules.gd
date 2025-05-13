@@ -9,8 +9,9 @@ var enemies = []
 var allies = []
 var recognizers = []
 
-var capsules_available := 4
+var capsules_available := 0
 var capsules_collected := 0
+var made_it_to_center = false
 
 @export var pulse_offset := 500.0
 @export var pulse_band_offset := 0.6
@@ -34,10 +35,9 @@ func _ready():
 	maze_cd.activate(12, 24)
 	maze_da.activate(12, 25)
 	await get_tree().create_timer(1).timeout
-	$DataCapsule.show()
-	$DataCapsule2.show()
-	$DataCapsule3.show()
-	$DataCapsule4.show()
+	capsules_available = $DataCapsules.get_child_count()
+	for child in $DataCapsules.get_children():
+		child.show()
 	in_intro = true
 	
 	
@@ -45,7 +45,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		SignalBus.pause_toggled.emit()	
+		SignalBus.pause_toggled.emit()
 	
 	if intro_cam.current and in_intro:
 		$CameraTwist.rotate_y(delta * PI/10)
@@ -75,10 +75,20 @@ func _process(delta):
 func increment_capsules_found():
 	capsules_collected += 1
 	$DataHuntHUD.update_data(capsules_collected, capsules_available)
-	if capsules_collected >= capsules_available:
-		#lower_pillar
-		win()
+
 
 func win():
 	for player in players:
-		player.apply_impulse(Vector3(0, 10000, 0))
+		player.apply_impulse(Vector3(randi_range(-1000, 1000), 20000, randi_range(-1000, 1000)))
+
+
+func _on_center_trigger_body_entered(body: Node3D) -> void:
+	if body.is_in_group("players"):
+		made_it_to_center = true
+		if capsules_collected >= capsules_available:
+			$NavigationRegion3D/Pillar.lower()
+
+
+func _on_win_trigger_body_entered(body: Node3D) -> void:
+	if body.is_in_group("players"):
+		win()

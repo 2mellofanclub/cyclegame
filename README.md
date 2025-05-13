@@ -1,6 +1,10 @@
 # cyclegame
 
-how far is charm from jank?
+Now with tanks!
+
+Made in Godot and Blender
+
+Work-in-progress
 
 ![a lightcycle with its glowing blue light trail swerving across a dark blue landscape of grey shapes. green and orange tails are also visible in the distance.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot8.png)
 

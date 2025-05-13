@@ -15,9 +15,7 @@ Work-in-progress
 
 ![a lighttank with green highlights blasts three enemy tanks, exposing their glowing orange interior](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot37.png)
 
-
 ![a lightcycle with blue highlights and a glowing blue trail drives across an empty landscape. other trails are visible in the distance, and there are faint clouds in the sky](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot41.png)
 
-![a lightcycle with its glowing blue light trail swerving across a dark blue landscape of grey shapes. green and orange trails are also visible in the distance.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot8.png)
-
+![helicopter view of a square platform in a dark expanse. the edges are lined with mazes, and theres a tower in the middle, with a pillar of pale light shooting into the sky from the top.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot44.png)
 

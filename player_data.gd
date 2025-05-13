@@ -7,10 +7,11 @@ var big_dict_solution = {
 	"garage_tc_index" : 0,
 	
 	"highscores" : {
-		"burning_transistor" : 0
+		"burning_transistor" : 0,
+		"cache_rules" : 0,
+		"one_v_one" : 0,
 	}
 }
-
 var save_path = "user://savegame.save"
 
 func save_game():

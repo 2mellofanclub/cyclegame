@@ -18,4 +18,3 @@ Work-in-progress
 ![a lightcycle with blue highlights and a glowing blue trail drives across an empty landscape. other trails are visible in the distance, and there are faint clouds in the sky](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot41.png)
 
 ![helicopter view of a square platform in a dark expanse. the edges are lined with mazes, and theres a tower in the middle, with a pillar of pale light shooting into the sky from the top.](https://github.com/2mellofanclub/cyclegame/blob/main/screenshots/screenshot44.png)
-

@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dafvan80dn320"]
+[gd_scene load_steps=15 format=3 uid="uid://dafvan80dn320"]
 
 [ext_resource type="Script" uid="uid://bbfij4sxrnctn" path="res://levels/one_v_one.gd" id="1_rioro"]
 [ext_resource type="Material" uid="uid://c5rh67bs67dbf" path="res://materials/floor2.tres" id="2_rioro"]
-[ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="3_0cylr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xw411"]
 material = ExtResource("2_rioro")
@@ -122,11 +121,6 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29.62,
 [node name="AllyTanks" type="Node3D" parent="Spawns"]
 
 [node name="Recognizers" type="Node3D" parent="Spawns"]
-
-[node name="SOS" parent="." instance=ExtResource("3_0cylr")]
-volume_db = -22.0
-pitch_scale = 0.68
-autoplay = false
 
 [node name="NPCs" type="Node3D" parent="."]
 

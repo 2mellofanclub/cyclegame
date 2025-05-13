@@ -3,7 +3,7 @@ extends Node3D
 
 var level_controller: Node3D
 var max_trails: int
-var in_intro := true
+var in_intro := false
 var players = []
 var enemies = []
 var recognizers = []
@@ -16,7 +16,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#region Initial Spawns
 	for spawn in $Spawns/Players.get_children():
-		Spawner.spawn_player_cycle(spawn, self, "blue", "blue", "blue")
+		Spawner.spawn_player_cycle(spawn, self)
 	for spawn in $Spawns/Enemies.get_children():
 		if randi() % 2 == 0:
 			Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange", "orange")
@@ -26,10 +26,13 @@ func _ready():
 		Spawner.spawn_ally_cycle(spawn, self, "green", "green", "green")
 	#endregion
 	await get_tree().create_timer(3).timeout
-	$SOS.play()
 
 
-func _process(delta):
+
+func _physics_process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		SignalBus.pause_toggled.emit()
+	
 	if ft_active:
 		$FunkyTown.gravity_direction = -1 * global_basis.y
 

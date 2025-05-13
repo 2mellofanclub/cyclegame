@@ -1,10 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://cac6yqt33tcii"]
+[gd_scene load_steps=33 format=3 uid="uid://cac6yqt33tcii"]
 
 [ext_resource type="Script" uid="uid://ha7x26q6duq2" path="res://levels/cache_rules.gd" id="1_u3cum"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_y8gdx"]
 [ext_resource type="PackedScene" uid="uid://7104f46swmc2" path="res://mazestuff/maze_300x612_12.tscn" id="3_y8gdx"]
 [ext_resource type="Material" uid="uid://btfn72pdewqqe" path="res://materials/lw_white1.tres" id="4_1xdid"]
-[ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="4_jp3vr"]
 [ext_resource type="Environment" uid="uid://d2cy41mcxrya4" path="res://environments/panorama_test_black.tres" id="4_y8gdx"]
 [ext_resource type="PackedScene" uid="uid://b4sq37b0uq6at" path="res://hud/data_hunt_hud.tscn" id="7_jp3vr"]
 [ext_resource type="PackedScene" uid="uid://b5hcemts7dvpa" path="res://objects/data_capsule.tscn" id="8_1hd1p"]
@@ -364,11 +363,6 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -500, 0.5, -500)
 
 [node name="AllyTanks" type="Node3D" parent="Spawns"]
-
-[node name="SOS" parent="." instance=ExtResource("4_jp3vr")]
-volume_db = -22.0
-pitch_scale = 0.68
-autoplay = false
 
 [node name="Boxes" type="Node3D" parent="."]
 

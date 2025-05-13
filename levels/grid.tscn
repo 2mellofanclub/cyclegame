@@ -1,10 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://cyde73xt2w162"]
+[gd_scene load_steps=45 format=3 uid="uid://cyde73xt2w162"]
 
 [ext_resource type="Script" uid="uid://c1cmxcje2ud7c" path="res://levels/grid.gd" id="1_2miq5"]
 [ext_resource type="NavigationMesh" uid="uid://cfudicjrnistd" path="res://navmeshes/the_grid.tres" id="2_d7dct"]
 [ext_resource type="PackedScene" uid="uid://bsou8sywu3dj5" path="res://objects/ramp.tscn" id="2_iiu8i"]
 [ext_resource type="PackedScene" uid="uid://bm2iawxbkla2q" path="res://objects/bounds.tscn" id="4_bghhw"]
-[ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="5_fqc2p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dujx"]
 albedo_color = Color(0.00392157, 0, 0.0784314, 1)
@@ -456,11 +455,6 @@ transform = Transform3D(-0.86292, 0, 0.505341, 0, 1, 0, -0.505341, 0, -0.86292, 
 [node name="AllyTanks" type="Node3D" parent="Spawns"]
 
 [node name="Recognizers" type="Node3D" parent="Spawns"]
-
-[node name="SOS" parent="." instance=ExtResource("5_fqc2p")]
-volume_db = -22.0
-pitch_scale = 0.68
-autoplay = false
 
 [node name="Boxes" type="Node3D" parent="."]
 

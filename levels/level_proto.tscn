@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://ey0bxai0u3jw"]
+[gd_scene load_steps=13 format=4 uid="uid://ey0bxai0u3jw"]
 
 [ext_resource type="Script" uid="uid://cxno4emquekyv" path="res://levels/level_proto.gd" id="1_tlrxs"]
 [ext_resource type="Material" uid="uid://72qpaeos0n2n" path="res://materials/floor_dark1.tres" id="2_a715s"]
 [ext_resource type="Material" uid="uid://2jjok7i0q8gq" path="res://materials/floor_slw_blue1.tres" id="3_l40dc"]
-[ext_resource type="PackedScene" uid="uid://bsw1jkrbaf653" path="res://sound/bgm.tscn" id="5_enl8r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkext"]
 resource_name = "Material.001"
@@ -162,11 +161,6 @@ transform = Transform3D(-0.675462, -0.0977421, 0.730889, 0, 0.991176, 0.132551, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32, 0.5, -19.473)
 
 [node name="AllyTanks" type="Node3D" parent="Spawns"]
-
-[node name="SOS" parent="." instance=ExtResource("5_enl8r")]
-volume_db = -22.0
-pitch_scale = 0.68
-autoplay = false
 
 [node name="Boxes" type="Node3D" parent="."]
 

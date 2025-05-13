@@ -44,5 +44,5 @@ func _process(delta):
 		PlayerTankSpawnCam.current = true
 		await get_tree().create_timer(0.25).timeout
 		await get_tree().create_timer(3).timeout
-		$SOS.play()
+	
 		

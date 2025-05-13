@@ -46,8 +46,8 @@ func _process(delta):
 			Spawner.spawn_ally_cycle(spawn, self, "green", "green", "green")
 		#endregion
 		await get_tree().create_timer(3).timeout
-		#$SOS.play()
-		
+
+
 
 
 # do more with this

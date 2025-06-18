@@ -30,10 +30,10 @@ func _ready():
 	SignalBus.data_capsule_collected.connect(increment_capsules_found)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	await get_tree().create_timer(0.5).timeout
-	maze_ab.activate(12, 25)
-	maze_bc.activate(12, 25)
-	maze_cd.activate(12, 24)
-	maze_da.activate(12, 25)
+	maze_ab.activate(6, 12)
+	maze_bc.activate(6, 12)
+	maze_cd.activate(6, 11)
+	maze_da.activate(6, 12)
 	await get_tree().create_timer(1).timeout
 	capsules_available = $DataCapsules.get_child_count()
 	for child in $DataCapsules.get_children():

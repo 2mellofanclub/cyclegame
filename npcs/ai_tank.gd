@@ -97,11 +97,24 @@ func _physics_process(delta):
 		nav_agent.target_position = player_location
 		path_target_tracker.look_at(nav_agent.get_next_path_position())
 		var tracker_y_delta = path_target_tracker.rotation_degrees.y
-		$FrontLeft.engine_force = 10 * clamp(70 - (tracker_y_delta * 1.5), -70, 70)
-		$BackLeft.engine_force = 10 * clamp(70 - (tracker_y_delta * 1.5), -70, 70)
-		$FrontRight.engine_force = 10 *clamp(70 + (tracker_y_delta * 1.5), -70, 70)
-		$BackRight.engine_force = 10 * clamp(70 + (tracker_y_delta * 1.5), -70, 70)
-		print($BackRight.engine_force)
+		engine_force = 400
+		if get_linear_velocity().length() > max_speed:
+			engine_force = 0
+		if nav_agent.distance_to_target() < 50.0:
+			engine_force = clamp(nav_agent.distance_to_target() * -10, -500, 0)
+		if tracker_y_delta < 0:
+			angular_velocity = Vector3(0, -PI/3, 0)
+		if tracker_y_delta > 0:
+			angular_velocity = Vector3(0, PI/3, 0)
+	#if move_mode == "hunt" and player_location != null:
+		#nav_agent.target_position = player_location
+		#path_target_tracker.look_at(nav_agent.get_next_path_position())
+		#var tracker_y_delta = path_target_tracker.rotation_degrees.y
+		#$FrontLeft.engine_force = clamp(300 - (tracker_y_delta * 6.7), -300, 300)
+		#$BackLeft.engine_force = clamp(300 - (tracker_y_delta * 6.7), -300, 300)
+		#$FrontRight.engine_force = clamp(300 + (tracker_y_delta * 6.7), -300, 300)
+		#$BackRight.engine_force = clamp(300 + (tracker_y_delta * 6.7), -300, 300)
+		#print($BackRight.engine_force)
 	#if move_mode == "hunt" and player_location != null:
 		#nav_agent.target_position = player_location
 		#var direction = nav_agent.get_next_path_position() - global_position

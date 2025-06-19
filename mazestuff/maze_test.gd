@@ -139,7 +139,6 @@ func construct_maze(maze):
 						y * 12
 				)
 		await get_tree().create_timer(0.01).timeout
-				
 
 
 func _on_maze_nav_region_bake_finished() -> void:

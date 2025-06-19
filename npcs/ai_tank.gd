@@ -100,29 +100,15 @@ func _physics_process(delta):
 		engine_force = 400
 		if get_linear_velocity().length() > max_speed:
 			engine_force = 0
-		if nav_agent.distance_to_target() < 50.0:
-			engine_force = clamp(nav_agent.distance_to_target() * -10, -500, 0)
+		if nav_agent.distance_to_target() < 40.0:
+			if get_linear_velocity().length() > 10:
+				engine_force = clamp(nav_agent.distance_to_target() * -20, -400, 0)
+			else:
+				engine_force = 0
 		if tracker_y_delta < 0:
 			angular_velocity = Vector3(0, -PI/3, 0)
 		if tracker_y_delta > 0:
 			angular_velocity = Vector3(0, PI/3, 0)
-	#if move_mode == "hunt" and player_location != null:
-		#nav_agent.target_position = player_location
-		#path_target_tracker.look_at(nav_agent.get_next_path_position())
-		#var tracker_y_delta = path_target_tracker.rotation_degrees.y
-		#$FrontLeft.engine_force = clamp(300 - (tracker_y_delta * 6.7), -300, 300)
-		#$BackLeft.engine_force = clamp(300 - (tracker_y_delta * 6.7), -300, 300)
-		#$FrontRight.engine_force = clamp(300 + (tracker_y_delta * 6.7), -300, 300)
-		#$BackRight.engine_force = clamp(300 + (tracker_y_delta * 6.7), -300, 300)
-		#print($BackRight.engine_force)
-	#if move_mode == "hunt" and player_location != null:
-		#nav_agent.target_position = player_location
-		#var direction = nav_agent.get_next_path_position() - global_position
-		#var velocity = direction.normalized() * max_speed/2.0 * delta + Vector3(0,0.01,0)
-		#if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
-			#if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
-				#look_at(global_position + direction)
-			#move_and_collide(velocity)
 	elif move_mode == "patrol":
 		pass
 	else:

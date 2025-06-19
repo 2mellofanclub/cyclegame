@@ -21,10 +21,11 @@ func activate(columns=6, rows=12):
 	for child in $MazeNavRegion/MazeBlocks.get_children():
 		child.queue_free()
 	var maze = []
+	# gen_maze() returns [] if it failed to generate a valid maze
 	while maze == []:
 		maze = gen_maze(columns, rows)
-	construct_maze(maze)
-	$MazeNavRegion.bake_navigation_mesh(false)
+	await construct_maze(maze)
+	$MazeNavRegion.bake_navigation_mesh()
 	
 
 
@@ -156,7 +157,6 @@ func construct_maze(maze):
 						0,
 						(y * 24) + 12
 				)
-		
 		await get_tree().create_timer(0.01).timeout
 
 
@@ -166,6 +166,8 @@ func _on_maze_nav_region_bake_finished() -> void:
 "
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_f6lrd"]
+resource_local_to_scene = true
+border_size = 0.01
 agent_height = 5.0
 agent_radius = 4.0
 agent_max_climb = 0.5

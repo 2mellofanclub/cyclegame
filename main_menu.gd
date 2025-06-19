@@ -7,7 +7,7 @@ var current_menu_state : MENU_STATE
 
 
 func _ready() -> void:
-	change_menu_state(MENU_STATE.MAIN)
+	change_menu_state(MENU_STATE.MAIN, true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
@@ -29,7 +29,9 @@ func go_back():
 			change_menu_state(MENU_STATE.MODES)
 
 
-func change_menu_state(state : MENU_STATE):
+func change_menu_state(state : MENU_STATE, silent = false):
+	if not silent:
+		$Press.play()
 	current_menu_state = state
 	$Back.show()
 	#for child in $SideContainer/MarginContainer.get_children():

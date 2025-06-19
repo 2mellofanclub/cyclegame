@@ -28,13 +28,14 @@ var made_it_to_center = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.data_capsule_collected.connect(increment_capsules_found)
+	SignalBus.data_capsule_collected.connect(spawn_rec_wave)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	await get_tree().create_timer(0.5).timeout
 	maze_ab.activate(6, 12)
 	maze_bc.activate(6, 12)
 	maze_cd.activate(6, 11)
 	maze_da.activate(6, 12)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.1).timeout
 	capsules_available = $DataCapsules.get_child_count()
 	for child in $DataCapsules.get_children():
 		child.show()
@@ -68,13 +69,23 @@ func _process(delta):
 		$DataHuntHUD.update_data(capsules_collected, capsules_available)
 		$DataHuntHUD.show()
 		$DataHuntHUD.clock_active = true
-		
-		
+
+
+
 
 
 func increment_capsules_found():
 	capsules_collected += 1
 	$DataHuntHUD.update_data(capsules_collected, capsules_available)
+
+
+func spawn_rec_wave():
+	# this sucks ass since we assume there's only one!
+	$Spawns/Recognizers.look_at(players[0].global_position)
+	$Spawns/Recognizers.rotation *= Vector3(0, 1, 0)
+	for spawn in $Spawns/Recognizers.get_children():
+		Spawner.spawn_recognizer(spawn, self, "orange")
+	
 
 
 func win():

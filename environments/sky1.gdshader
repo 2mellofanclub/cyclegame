@@ -10,6 +10,6 @@ void sky() {
 	// Called for every visible pixel in the sky background, as well as all pixels
 	// in the radiance cubemap.
 	COLOR = texture(sky_tex, SKY_COORDS).rgb * 3.0;
-	
-	
+
+
 }

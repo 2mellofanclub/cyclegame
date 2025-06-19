@@ -312,6 +312,26 @@ mass = 100.0
 center_of_mass_mode = 1
 script = ExtResource("1_1xmg7")
 
+[node name="FrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, -2.5)
+use_as_traction = true
+wheel_radius = 1.0
+
+[node name="BackLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8, 0, 2)
+use_as_traction = true
+wheel_radius = 1.0
+
+[node name="BackRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.8, 0, 2)
+use_as_traction = true
+wheel_radius = 1.0
+
+[node name="FrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.8, 0, -2.5)
+use_as_traction = true
+wheel_radius = 1.0
+
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
 path_desired_distance = 2.0
 target_desired_distance = 20.0

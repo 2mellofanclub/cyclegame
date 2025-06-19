@@ -34,6 +34,7 @@ var ai_damage_mult := 0.8
 @onready var turret_barrel = $TurretTwist/TurretPitch/Turretbase/Turretbarrel
 @onready var muzzle_point = $TurretTwist/TurretPitch/Turretbase/Turretbarrel/MuzzlePoint
 @onready var nav_agent = $NavAgent
+@onready var path_target_tracker = $PathTargetTracker
 @onready var RBTankShot = load("res://destruction/rb_tank_shot.tscn")
 @onready var TankDestruction = load("res://destruction/tank_destruction.tscn")
 @onready var tank_destruction_instance = TankDestruction.instantiate()
@@ -94,12 +95,21 @@ func _physics_process(delta):
 	#region Steering
 	if move_mode == "hunt" and player_location != null:
 		nav_agent.target_position = player_location
-		var direction = nav_agent.get_next_path_position() - global_position
-		var velocity = direction.normalized() * max_speed/2.0 * delta + Vector3(0,0.01,0)
-		if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
-			if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
-				look_at(global_position + direction)
-			move_and_collide(velocity)
+		path_target_tracker.look_at(nav_agent.get_next_path_position())
+		var tracker_y_delta = path_target_tracker.rotation_degrees.y
+		$FrontLeft.engine_force = 10 * clamp(70 - (tracker_y_delta * 1.5), -70, 70)
+		$BackLeft.engine_force = 10 * clamp(70 - (tracker_y_delta * 1.5), -70, 70)
+		$FrontRight.engine_force = 10 *clamp(70 + (tracker_y_delta * 1.5), -70, 70)
+		$BackRight.engine_force = 10 * clamp(70 + (tracker_y_delta * 1.5), -70, 70)
+		print($BackRight.engine_force)
+	#if move_mode == "hunt" and player_location != null:
+		#nav_agent.target_position = player_location
+		#var direction = nav_agent.get_next_path_position() - global_position
+		#var velocity = direction.normalized() * max_speed/2.0 * delta + Vector3(0,0.01,0)
+		#if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
+			#if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
+				#look_at(global_position + direction)
+			#move_and_collide(velocity)
 	elif move_mode == "patrol":
 		pass
 	else:

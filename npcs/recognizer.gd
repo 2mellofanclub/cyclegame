@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 		"hunt":
 			var cruise_target = player_location * Vector3(1, 0, 1) + Vector3(0.0, cruising_alt, 0.0)
 			var direction = global_position.direction_to(cruise_target)
-			var velocity = direction.normalized() * max_speed/2.0 * delta
+			var velocity = direction.normalized() * max_speed * delta
 			Utilities.look_at_xz(self, (cruise_target + direction))
 			move_and_collide(velocity)
 			if player_xz_distance < move_in_xz_distance:

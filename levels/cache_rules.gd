@@ -59,14 +59,6 @@ func _process(delta):
 		for spawn in $Spawns/PlayerTanks.get_children():
 			#Spawner.spawn_player_tank(spawn, self, "blue", "blue")
 			Spawner.spawn_player_tank(spawn, self)
-		for spawn in $Spawns/EnemyTanks.get_children():
-			Spawner.spawn_enemy_tank(spawn, self, "orange", "orange")
-			#if randi() % 2 == 0:
-				#Spawner.spawn_enemy_cycle(spawn, self, "orange", "orange")
-			#else:
-				#Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow")
-		#for spawn in $Spawns/Recognizers.get_children():
-			#Spawner.spawn_recognizer(spawn, self,"orange")
 		#endregion
 		$DataHuntHUD.update_data(capsules_collected, capsules_available)
 		$DataHuntHUD.show()

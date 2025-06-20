@@ -19,7 +19,7 @@ var twist_input := 0.0
 var pitch_input := 0.0
 # ai specific
 var enemy := false
-var targeting := false
+var targeting := true
 var move_mode := "hunt"
 var max_targeting_dist := 150.0
 var max_firing_dist := 80.0
@@ -74,10 +74,8 @@ func _physics_process(delta):
 		player_aim_target_distance = player_aim_target_pos.distance_to(global_position)
 	  
 	#region GunControl
-	if targeting:
-		if not player_location:
-			pass
-		elif player_aim_target_distance > max_targeting_dist:
+	if targeting and player_location:
+		if player_aim_target_distance > max_targeting_dist:
 			pass
 		else:
 			turret_twist.look_at(player_aim_target_pos)
@@ -88,7 +86,7 @@ func _physics_process(delta):
 			$TurretBaseCol.global_rotation = turret_pitch.get_child(0).global_rotation
 			$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
 			$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
-			if player_aim_target_distance < max_firing_dist and player_targetable:
+			if player_targetable:
 				shoot("cannon1")
 	#endregion
 	

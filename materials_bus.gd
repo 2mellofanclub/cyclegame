@@ -44,6 +44,7 @@ const MATERIALS = {
 	"lw_white1" : preload("res://materials/lw_white1.tres"),
 	"slw_white1" : preload("res://materials/slw_white1.tres"),
 	#
+	"floor_dark1" : preload("res://materials/floor_dark1.tres")
 }
 const LC_STYLES = {
 	"blue" : {

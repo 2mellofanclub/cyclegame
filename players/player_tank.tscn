@@ -381,6 +381,10 @@ spring_length = 3.0
 [node name="Camera3D" type="Camera3D" parent="TurretTwist/TurretPitch/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22248, 1.08016)
 
+[node name="AudioListener3D" type="AudioListener3D" parent="TurretTwist/TurretPitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.249, -1.302)
+current = true
+
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
 
@@ -442,10 +446,6 @@ one_shot = true
 [node name="ShotCooldown" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
-
-[node name="AudioListener3D" type="AudioListener3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
-current = true
 
 [node name="Shot" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)

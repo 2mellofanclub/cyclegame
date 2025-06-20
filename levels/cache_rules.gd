@@ -27,6 +27,10 @@ var made_it_to_center = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$NavigationRegion3D/A.level_instance = self
+	$NavigationRegion3D/B.level_instance = self
+	$NavigationRegion3D/C.level_instance = self
+	$NavigationRegion3D/D.level_instance = self
 	SignalBus.data_capsule_collected.connect(increment_capsules_found)
 	SignalBus.data_capsule_collected.connect(spawn_rec_wave)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -37,8 +41,6 @@ func _ready():
 	maze_da.activate(6, 12)
 	await get_tree().create_timer(0.1).timeout
 	capsules_available = $DataCapsules.get_child_count()
-	for child in $DataCapsules.get_children():
-		child.show()
 	in_intro = true
 	
 	

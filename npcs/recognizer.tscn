@@ -492,6 +492,7 @@ libraries = {
 [node name="NavAgent" type="NavigationAgent3D" parent="."]
 path_max_distance = 100.01
 avoidance_enabled = true
+height = 11.0
 radius = 5.0
 use_3d_avoidance = true
 avoidance_layers = 2

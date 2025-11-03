@@ -8,7 +8,7 @@ func _ready():
 	SignalBus.pause_toggled.connect(toggle_pause)
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 

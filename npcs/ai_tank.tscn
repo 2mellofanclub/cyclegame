@@ -379,7 +379,7 @@ mesh = SubResource("ArrayMesh_0qipb")
 skeleton = NodePath("")
 
 [node name="MuzzlePoint" type="Node3D" parent="TurretTwist/TurretPitch/Turretbase/Turretbarrel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8)
 
 [node name="Tankbody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_ets37")

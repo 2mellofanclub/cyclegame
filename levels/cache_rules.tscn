@@ -53,7 +53,8 @@ func _on_capsule_body_exited(body: Node3D) -> void:
 	$Corner.set_surface_override_material(6, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	$Corner.set_surface_override_material(7, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	for spawn in $CornerSpawns.get_children():
-		Spawner.spawn_enemy_tank(spawn, level_instance, colors.pick_random(), colors.pick_random())
+		var color = colors.pick_random()
+		Spawner.spawn_enemy_tank(spawn, level_instance, color, color)
 
 
 func _on_maze_enter_body_exited(body: Node3D) -> void:
@@ -363,7 +364,8 @@ func _on_capsule_body_exited(body: Node3D) -> void:
 	$Corner.set_surface_override_material(6, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	$Corner.set_surface_override_material(7, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	for spawn in $CornerSpawns.get_children():
-		Spawner.spawn_enemy_tank(spawn, level_instance, colors.pick_random(), colors.pick_random())
+		var color = colors.pick_random()
+		Spawner.spawn_enemy_tank(spawn, level_instance, color, color)
 
 
 func _on_maze_enter_body_exited(body: Node3D) -> void:
@@ -414,7 +416,8 @@ func _on_capsule_body_exited(body: Node3D) -> void:
 	$Corner.set_surface_override_material(6, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	$Corner.set_surface_override_material(7, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	for spawn in $CornerSpawns.get_children():
-		Spawner.spawn_enemy_tank(spawn, level_instance, colors.pick_random(), colors.pick_random())
+		var color = colors.pick_random()
+		Spawner.spawn_enemy_tank(spawn, level_instance, color, color)
 
 
 func _on_maze_enter_body_exited(body: Node3D) -> void:
@@ -474,7 +477,8 @@ func _on_capsule_body_exited(body: Node3D) -> void:
 	$Corner.set_surface_override_material(6, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	$Corner.set_surface_override_material(7, MaterialsBus.MATERIALS[\"lw_pink1\"])
 	for spawn in $CornerSpawns.get_children():
-		Spawner.spawn_enemy_tank(spawn, level_instance, colors.pick_random(), colors.pick_random())
+		var color = colors.pick_random()
+		Spawner.spawn_enemy_tank(spawn, level_instance, color, color)
 
 
 func _on_maze_enter_body_exited(body: Node3D) -> void:

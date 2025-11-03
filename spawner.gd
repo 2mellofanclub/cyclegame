@@ -21,6 +21,7 @@ func spawn_player_cycle(spawn: Node3D, level_instance: Node, driver_color=Player
 	player_instance.apply_materials()
 	player_instance.set_global_position(spawn.get_global_position())
 	player_instance.set_global_rotation(spawn.get_global_rotation())
+	player_instance.controllable = true
 	SignalBus.player_spawned.emit()
 
 
@@ -67,12 +68,14 @@ func spawn_player_tank(spawn: Node3D, level_instance: Node, tank_color=PlayerDat
 	SignalBus.player_spawned.emit()
 
 
-func spawn_enemy_tank(spawn: Node3D, level_instance: Node, tank_color: String, shot_color: String):
+func spawn_enemy_tank(spawn: Node3D, level_instance: Node, tank_color: String, shot_color: String, main_shot="cannon1", sub_shot="machinegun1"):
 	var enemy_instance = AITank.instantiate()
 	level_instance.add_child(enemy_instance)
 	level_instance.enemies.append(enemy_instance)
 	enemy_instance.tank_color = tank_color
 	enemy_instance.shot_color = shot_color
+	enemy_instance.main_shot = main_shot
+	enemy_instance.sub_shot = sub_shot
 	enemy_instance.enemy = true
 	enemy_instance.level_instance = level_instance
 	enemy_instance.apply_materials()

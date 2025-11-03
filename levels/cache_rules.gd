@@ -39,7 +39,6 @@ func _ready():
 	maze_bc.activate(6, 12)
 	maze_cd.activate(6, 11)
 	maze_da.activate(6, 12)
-	await get_tree().create_timer(0.1).timeout
 	capsules_available = $DataCapsules.get_child_count()
 	in_intro = true
 	

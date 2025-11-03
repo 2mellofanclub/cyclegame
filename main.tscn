@@ -8,7 +8,7 @@
 [sub_resource type="GDScript" id="GDScript_0xm2m"]
 script/source = "extends RichTextLabel
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	set_text(\"FRAMES: \" + str(Engine.get_frames_per_second()))
 	
 "

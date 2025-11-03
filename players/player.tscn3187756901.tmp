@@ -411,6 +411,7 @@ points = PackedVector3Array(-6.70552e-05, 1.78814e-07, 0.545768, -0.106503, 1.78
 [node name="Player" type="VehicleBody3D" groups=["cycles", "players"]]
 collision_layer = 3527
 collision_mask = 3073
+axis_lock_angular_x = true
 axis_lock_angular_z = true
 center_of_mass_mode = 1
 script = ExtResource("1_5i27b")

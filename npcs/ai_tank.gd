@@ -21,6 +21,8 @@ var pitch_input := 0.0
 var enemy := false
 var targeting := true
 var move_mode := "hunt"
+var main_shot := "cannon1"
+var sub_shot := "machinegun1"
 var max_targeting_dist := 150.0
 var max_firing_dist := 80.0
 var ai_cooldown_mult := 1.5
@@ -87,7 +89,7 @@ func _physics_process(delta):
 			$TurretBarrelCol.global_position = turret_pitch.get_child(0).get_child(0).global_position
 			$TurretBarrelCol.global_rotation = turret_pitch.get_child(0).get_child(0).global_rotation
 			if player_targetable:
-				shoot("cannon1")
+				shoot(main_shot)
 	#endregion
 	
 	#region Steering

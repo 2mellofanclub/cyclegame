@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://cep8clgoejl77"]
+
+[ext_resource type="Script" uid="uid://cxsyegng6ytvf" path="res://miscjunk/panel_test.gd" id="1_xpxof"]
+
+[node name="PanelTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xpxof")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 8.0
+offset_right = 182.0
+offset_bottom = 98.0
+mouse_default_cursor_shape = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+text = "Here comes the sun
+do-dun-do-doo"
+
+[connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]
+[connection signal="gui_input" from="Panel/PanelContainer" to="." method="_on_panel_container_gui_input"]
+[connection signal="mouse_entered" from="Panel/PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/PanelContainer" to="." method="_on_panel_container_mouse_exited"]

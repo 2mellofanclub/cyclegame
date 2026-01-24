@@ -1,6 +1,6 @@
 extends VehicleBody3D
 
-class_name PlayerBase
+class_name CycleBase
 
 var front_steer := 1.0
 var rear_steer := 0.0

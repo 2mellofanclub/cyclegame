@@ -1,4 +1,4 @@
-extends PlayerBase
+extends CycleBase
 
 # ai specific
 var ai_type := "ally"

@@ -1,4 +1,4 @@
-extends PlayerBase
+extends CycleBase
 
 # player specific
 var targetable = true

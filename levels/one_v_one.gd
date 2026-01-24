@@ -30,9 +30,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		SignalBus.pause_toggled.emit()
-	
 	if ft_active:
 		$FunkyTown.gravity_direction = -1 * global_basis.y
 

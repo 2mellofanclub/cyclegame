@@ -7,10 +7,13 @@ var current_menu_state : MENU_STATE
 
 
 func go_back():
+	print("goback")
 	match current_menu_state:
 		MENU_STATE.PAUSE:
+			print("menustateispause")
 			change_menu_state(MENU_STATE.CONTINUE)
 		MENU_STATE.SETTINGS:
+			print("menustateisettings")
 			change_menu_state(MENU_STATE.PAUSE)
 	
 func change_menu_state(state: MENU_STATE):
@@ -21,14 +24,15 @@ func change_menu_state(state: MENU_STATE):
 		MENU_STATE.PAUSE:
 			$PauseCenterContainer/Pause.show()
 		MENU_STATE.CONTINUE:
-			SignalBus.pause_toggled.emit()
+			print("continue")
+			SignalBus.game_unpaused.emit()
 		MENU_STATE.RESTART:
-			SignalBus.pause_toggled.emit()
+			SignalBus.game_unpaused.emit()
 			level_controller.restart_level()
 		MENU_STATE.SETTINGS:
 			pass
 		MENU_STATE.MAIN:
-			SignalBus.pause_toggled.emit()
+			SignalBus.game_unpaused.emit()
 			level_controller.start_main_menu()
 		MENU_STATE.EXIT:
 			PlayerData.save_game()

@@ -1,6 +1,8 @@
 extends Node
 
-signal pause_toggled
+#available to everyone, whether emitting or connecting to
+signal game_paused
+signal game_unpaused
 signal player_spawned
 signal player_just_fuckkin_died
 signal ai_spawned

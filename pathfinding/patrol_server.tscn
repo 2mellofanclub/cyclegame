@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bln05ftmq046a"]
+
+[ext_resource type="Script" uid="uid://c7hkyh1wvdm25" path="res://pathfinding/patrol_server.gd" id="1_f7tal"]
+
+[sub_resource type="GDScript" id="GDScript_f7tal"]
+script/source = "extends Area3D
+
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if \"patrol_route\" in body:
+		# access NPCs stored route, with this node's name as key giving next node's name as value
+		body.next_patrol_pos = get_parent().get_node(body.patrol_route[self.name]).global_position
+"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f7tal"]
+height = 3.0
+radius = 10.0
+
+[node name="PatrolServer" type="Node3D"]
+script = ExtResource("1_f7tal")
+
+[node name="A" type="Area3D" parent="."]
+script = SubResource("GDScript_f7tal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_f7tal")
+
+[connection signal="body_entered" from="A" to="A" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="A" to="." method="_on_a_body_shape_entered"]

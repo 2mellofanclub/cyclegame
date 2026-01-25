@@ -43,7 +43,7 @@ func _ready():
 	#$HUD.update_hp(hp, max_hp)
 	pass
 	
-func _process(delta):
+func _process(_delta):
 
 	#region MaterialManipulation
 	if materials_applied:

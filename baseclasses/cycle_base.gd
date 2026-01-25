@@ -51,7 +51,7 @@ func _ready():
 	disc_right_sc.disc_owner = self
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
 

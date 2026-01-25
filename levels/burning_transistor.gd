@@ -13,6 +13,7 @@ var recognizers = []
 @export var pulse_speed_mps := 50.0
 
 @onready var intro_cam = $CameraTwist/CameraPitch/IntroCam
+@onready var nav_points = $NavigationRegion3D/NavPoints.get_children()
 #@onready var spawn_cam = $
 
 
@@ -40,6 +41,14 @@ func _process(delta):
 				Spawner.spawn_enemy_cycle(spawn, self, "yellow", "yellow", "yellow")
 		for spawn in $Spawns/Allies.get_children():
 			Spawner.spawn_ally_cycle(spawn, self, "green", "green", "green")
+		#endregion
+		#region Route Assignment
+		for enemy in enemies:
+			enemy.patrol_route = $PatrolServer.get_random_route()
+			enemy.next_patrol_pos = $PatrolServer.get_closest_patrol_pos(enemy.global_position)
+		for ally in allies:
+			ally.patrol_route = $PatrolServer.get_random_route()
+			ally.next_patrol_pos = $PatrolServer.get_closest_patrol_pos(ally.global_position)
 		#endregion
 		await get_tree().create_timer(3).timeout
 

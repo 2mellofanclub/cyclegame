@@ -1,11 +1,15 @@
 extends CycleBase
 
 # ai specific
+enum MOVE_MODE {PATROL, HUNT, STANDBY, AVOID}
+
 var ai_type := "ally"
 var cam_active := false
-var target_cycle := VehicleBody3D
-var target_point := Node3D
-var move_mode := "patrol"
+var current_move_mode := MOVE_MODE.PATROL
+var patrol_route := {}
+var next_patrol_pos : Vector3
+var target_cycle : VehicleBody3D
+var target_point : Node3D
 var hunt_available = true
 var backoff_dist = 4.0
 
@@ -46,7 +50,7 @@ func _physics_process(delta):
 			#$KillTimer.stop()
 			
 	#region LW
-	if (lin_vel * Vector3(1, 0, 1)).length() > lw_on_th or move_mode == "hunt":
+	if (lin_vel * Vector3(1, 0, 1)).length() > lw_on_th or current_move_mode == MOVE_MODE.HUNT:
 		lw_active = true
 	elif (lin_vel * Vector3(1, 0, 1)).length() < lw_off_th:
 		lw_active = false
@@ -73,13 +77,13 @@ func _physics_process(delta):
 		player_r_hunt_target_distance = player_r_hunt_target_pos.distance_to(global_position)
 		player_l_hunt_target_distance = player_l_hunt_target_pos.distance_to(global_position)
 	#engine_force = 400 if (xz_lin_vel.length() < 80) else 0
-	match move_mode:
-		"hunt":
+	match current_move_mode:
+		MOVE_MODE.HUNT:
 			engine_force = 0
 			if player_instance == null:
-				move_mode = "patrol"
+				current_move_mode = MOVE_MODE.PATROL
 			elif player_l_hunt_target_distance <= backoff_dist or player_r_hunt_target_distance <= backoff_dist:
-				move_mode = "patrol"
+				current_move_mode = MOVE_MODE.PATROL
 				hunt_available = false
 				$HuntCooldown.start()
 			else:
@@ -87,18 +91,18 @@ func _physics_process(delta):
 					nav_agent.target_position = player_r_hunt_target_pos
 				else:
 					nav_agent.target_position = player_l_hunt_target_pos
-				var direction = nav_agent.get_next_path_position() - global_position
-				var velocity = direction.normalized() * max_speed * delta
-				if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
-					if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
-						look_at(global_position + direction)
-				move_and_collide(velocity)
-		"patrol":
-			engine_force = 400 if (xz_lin_vel.length() < 80) else 0
-			if player_targetable:
-				if player_l_hunt_target_distance > backoff_dist and player_r_hunt_target_distance > backoff_dist:
-					move_mode = "hunt"
+		MOVE_MODE.PATROL:
+			nav_agent.target_position = next_patrol_pos
 			
+			#if player_targetable:
+				#if player_l_hunt_target_distance > backoff_dist and player_r_hunt_target_distance > backoff_dist:
+					#current_move_mode = MOVE_MODE.HUNT
+	var direction = nav_agent.get_next_path_position() - global_position
+	var velocity = direction.normalized() * max_speed * delta
+	if not nav_agent.is_navigation_finished() and nav_agent.distance_to_target() > 27.0:
+		if global_position.distance_to(nav_agent.get_next_path_position()) > 2.0:
+			look_at(global_position + direction)
+	move_and_collide(velocity)
 	
 	avoid_lightwall(xz_lin_vel)
 	#endregion
